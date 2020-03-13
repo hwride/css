@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Flexbox notes</title>
+	<link rel="stylesheet" type="text/css" href="index.css">
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+		h1 {
+			margin-top: 0;
+			margin-bottom: 10px;
+		}
+		h3 {
+			margin-top: 20px;
+			margin-bottom: 5px;
+		}
+		h4 {
+			margin: 0;
+		}
+		ul {
+			margin: 0 0 5px 0;
+		}
+		table {
+			border-collapse: collapse;
+		}
+		table, th, td {
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+<h1>Flexbox</h1>
+<p>Browser support: IE10 & above</p>
+
+<div>
+	<h3>What flexbox can control</h3>
+	<ul>
+		<li>Direction - The direction elements are laid out.</li>
+		<li>Alignment - horizontal and vertical alignment of elements.</li>
+		<li>Flexibility - what proportion of size elements take up, whether they can grow or shrink.</li>
+		<li>Ordering - the order of elements, this can be changed.</li>
+	</ul>
+</div>
+
+<div>
+	<h3>Flexbox axis</h3>
+	Flexbox has two axis which it applies some of its properties to:
+	<table>
+		<thead>
+		<tr>
+			<th></th>
+			<th><code>flex-direction: row</code></th>
+			<th><code>flex-direction: column</code></th>
+			<th>Properties that apply to this axis</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<th>Main axis</th>
+			<td>Horizontal</td>
+			<td>Vertical</td>
+			<td><code>justify-*</code></td>
+		</tr>
+		<tr>
+			<th>Cross axis</th>
+			<td>Vertical</td>
+			<td>Horizontal</td>
+			<td><code>align-*</code></td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
+<div>
+	<h3>CSS rules</h3>
+	<h4>Flexbox containers</h4>
+	<ul>
+		<li>
+			<code>display</code>
+			<ul>
+				<li><code>display: flex</code> - Element behaves like a block element and lays content out according to the
+					flexbox model.</li>
+				<li><code>display: inline-flex</code> - Element behaves like an inline element and lays content out according to
+					the flexbox model.</li>
+			</ul>
+		</li>
+		<li><code>flex-direction: row, column, row-reverse, column-reverse</code></li>
+		<li><code>flex-wrap: wrap</code></li>
+		<li><code>flex-flow: &lt;flex-direction&gt; &lt;flex-wrap&gt;</code> - Shorthand property</li>
+		<li>
+			<code>justify</code>
+			<ul>
+				<li><code>justify-content</code></li>
+				<li><code>justify-items</code></li>
+			</ul>
+		</li>
+		<li>
+			<code>align</code>
+			<ul>
+				<li><code>align-content</code></li>
+				<li><code>align-items</code></li>
+			</ul>
+		</li>
+		<li><code>place-[content|items]: &lt;align-value&gt; &lt;justify-value&gt;</code> - A shorthand for setting both justify and align.</li>
+	</ul>
+
+	<h4>Flexbox items</h4>
+	<ul>
+		<li><code>flex-grow: 1</code> - If extra space is left in the container, the proportion this flex item should take.</li>
+		<li><code>flex-shrink: 1</code> - If items are overflowing, the proportion this flex item should shrink</li>
+		<li><code>flex-basis: 200px</code> - The initial size for the flex item.</li>
+		<li><code>flex: &lt;flex-grow&gt; &lt;flex-shrink&gt; &lt;flex-basis&gt;</code> - Shorthand property. Can leave out arguments.</li>
+		<li><code>justify-self</code> - As above but for an item.</li>
+		<li><code>align-self</code> - As above but for an item.</li>
+		<li><code>place-self</code> - As above but for an item.</li>
+	</ul>
+</div>
+
+<div>
+	<h3>Questions</h3>
+	<ul>
+		<li>How does flexbox affect its child items if nothing is changed except <code>display: flex</code>?</li>
+		<li>How does <code>flex-shrink</code> work with <code>flex-wrap</code>? If items can wrap and still be inside the
+			container then it will have no effect. But if an item is larger than actual flex container then having
+			<code>flex-shrink</code> set will allow the item to shrink down to the container width. But wrap apparently takes
+			priority over shrink.</li>
+	</ul>
+</div>
+</body>
+</html>
