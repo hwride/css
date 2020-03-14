@@ -40,10 +40,11 @@ const setupUpdateStyleOnElementChange = function(elChangeSelector, elToStyleSele
 
 /* Setup */
 addControlTitle('Flex container')
-generateSelect('flex-direction', [ 'row', 'column', 'row-reverese', 'column-reverse' ])
+generateSelect('flex-direction', [ '', 'row', 'column', 'row-reverese', 'column-reverse' ])
 setupUpdateStyleOnElementChange('.flex-direction-select', '.flex-container', 'flex-direction')
 
 generateSelect('justify-content', [
+	'',
 	'center',
 	'flex-start',
 	'flex-end',
@@ -54,6 +55,7 @@ generateSelect('justify-content', [
 setupUpdateStyleOnElementChange('.justify-content-select', '.flex-container', 'justify-content')
 
 generateSelect('align-items', [
+	'',
 	'center',
 	'flex-start',
 	'flex-end',
