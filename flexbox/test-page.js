@@ -43,6 +43,9 @@ addControlTitle('Flex container')
 generateSelect('flex-direction', [ '', 'row', 'column', 'row-reverse', 'column-reverse' ])
 setupUpdateStyleOnElementChange('.flex-direction-select', '.flex-container', 'flex-direction')
 
+generateSelect('flex-wrap', [ '', 'wrap', 'nowrap' ])
+setupUpdateStyleOnElementChange('.flex-wrap-select', '.flex-container', 'flex-wrap')
+
 generateSelect('justify-content', [
 	'',
 	'center',
