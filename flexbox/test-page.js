@@ -92,7 +92,7 @@ generateStyleChangingSelect('<code>align-content</code>', '.flex-container', 'al
 	'space-between',
 	'space-around',
 	'stretch'
-], 'Control space between flex lines on the cross axis')
+], 'Control space between flex lines on the cross axis, only applicable when there are multiple lines')
 
 // Flex inputs.
 addControlTitle('Flex items')
