@@ -1,4 +1,7 @@
 /* Utility functions */
+let id = 0;
+const getUniqueClass = () => 'class' + (++id)
+
 const addToControls = (content) => {
 	document.querySelector('.controls').appendChild(content)
 }
@@ -20,9 +23,9 @@ const setupUpdateStyleOnElementChange = function(elChangeSelector, elToStyleSele
 
 const generateStyleChangingSelect = (title, elToStyleSelector, propToStyle, values) => {
 	const label = document.createElement('label')
-	const className = title + '-select'
+	const className = getUniqueClass()
 	label.innerHTML = `
-	<code>${title}</code>:
+	${title}:
 	<select class="${className}">
 		${values.map(value => `<option>${value}</option>`).join('\n')}
 	</select>
@@ -32,8 +35,9 @@ const generateStyleChangingSelect = (title, elToStyleSelector, propToStyle, valu
 	setupUpdateStyleOnElementChange('.' + className, elToStyleSelector, propToStyle)
 };
 
-const generateStyleChangingTextInput = (title, className, elToStyleSelector, propToStyle) => {
+const generateStyleChangingTextInput = (title, elToStyleSelector, propToStyle) => {
 	const label = document.createElement('label')
+	const className = getUniqueClass()
 	label.innerHTML = `
 	${title}:
 	<input type="text" class="${className}" />
@@ -45,7 +49,7 @@ const generateStyleChangingTextInput = (title, className, elToStyleSelector, pro
 
 /* Setup */
 addControlTitle('Flex container')
-generateStyleChangingSelect('flex-direction', '.flex-container', 'flex-direction', [
+generateStyleChangingSelect('<code>flex-direction</code>', '.flex-container', 'flex-direction', [
 	'',
 	'row',
 	'column',
@@ -53,9 +57,9 @@ generateStyleChangingSelect('flex-direction', '.flex-container', 'flex-direction
 	'column-reverse'
 ])
 
-generateStyleChangingSelect('flex-wrap', '.flex-container', 'flex-wrap', [ '', 'wrap', 'nowrap' ])
+generateStyleChangingSelect('<code>flex-wrap</code>', '.flex-container', 'flex-wrap', [ '', 'wrap', 'nowrap' ])
 
-generateStyleChangingSelect('justify-content', '.flex-container', 'justify-content', [
+generateStyleChangingSelect('<code>justify-content</code>', '.flex-container', 'justify-content', [
 	'',
 	'center',
 	'flex-start',
@@ -65,7 +69,7 @@ generateStyleChangingSelect('justify-content', '.flex-container', 'justify-conte
 	'space-evenly'
 ])
 
-generateStyleChangingSelect('align-items', '.flex-container', 'align-items', [
+generateStyleChangingSelect('<code>align-items</code>', '.flex-container', 'align-items', [
 	'',
 	'center',
 	'flex-start',
@@ -74,8 +78,31 @@ generateStyleChangingSelect('align-items', '.flex-container', 'align-items', [
 	'baseline'
 ])
 
+generateStyleChangingSelect('<code>align-content</code>', '.flex-container', 'align-content', [
+	'',
+	'center',
+	'flex-start',
+	'flex-end',
+	'space-between',
+	'space-around',
+	'stretch'
+])
+
 // Flex inputs.
 addControlTitle('Flex items')
-generateStyleChangingTextInput('a <code>flex</code>', 'a-flex-input', '.a', 'flex')
-generateStyleChangingTextInput('b <code>flex</code>', 'b-flex-input', '.b', 'flex')
-generateStyleChangingTextInput('c <code>flex</code>', 'c-flex-input', '.c', 'flex')
+generateStyleChangingTextInput('a <code>flex</code>', '.a', 'flex')
+generateStyleChangingTextInput('b <code>flex</code>', '.b', 'flex')
+generateStyleChangingTextInput('c <code>flex</code>', '.c', 'flex')
+
+const alignSelfValues = [
+	'',
+	'center',
+	'flex-start',
+	'flex-end',
+	'space-between',
+	'space-around',
+	'stretch'
+]
+generateStyleChangingSelect('a <code>align-self</code>', '.a', 'align-self', alignSelfValues)
+generateStyleChangingSelect('b <code>align-self</code>', '.b', 'align-self', alignSelfValues)
+generateStyleChangingSelect('c <code>align-self</code>', '.c', 'align-self', alignSelfValues)
