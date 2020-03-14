@@ -9,26 +9,6 @@ const addControlTitle = (titleName) => {
 	addToControls(title)
 }
 
-const generateSelect = (title, values) => {
-	const label = document.createElement('label')
-	const className = title + '-select'
-	label.innerHTML = `
-	<code>${title}</code>:
-	<select class="${className}">
-		${values.map(value => `<option>${value}</option>`).join('\n')}
-	</select>
-`;
-	addToControls(label)
-};
-
-const generateTextInput = (title, className) => {
-	const label = document.createElement('label')
-	label.innerHTML = `
-	${title}:
-	<input type="text" class="${className}" />
-`;
-	addToControls(label)
-}
 const setupUpdateStyleOnElementChange = function(elChangeSelector, elToStyleSelector, styleName) {
 	const update = function() {
 		const value = document.querySelector(elChangeSelector).value;
@@ -38,15 +18,44 @@ const setupUpdateStyleOnElementChange = function(elChangeSelector, elToStyleSele
 	update();
 }
 
+const generateStyleChangingSelect = (title, elToStyleSelector, propToStyle, values) => {
+	const label = document.createElement('label')
+	const className = title + '-select'
+	label.innerHTML = `
+	<code>${title}</code>:
+	<select class="${className}">
+		${values.map(value => `<option>${value}</option>`).join('\n')}
+	</select>
+`;
+	addToControls(label)
+
+	setupUpdateStyleOnElementChange('.' + className, elToStyleSelector, propToStyle)
+};
+
+const generateStyleChangingTextInput = (title, className, elToStyleSelector, propToStyle) => {
+	const label = document.createElement('label')
+	label.innerHTML = `
+	${title}:
+	<input type="text" class="${className}" />
+`;
+	addToControls(label)
+
+	setupUpdateStyleOnElementChange('.' + className, elToStyleSelector, propToStyle)
+}
+
 /* Setup */
 addControlTitle('Flex container')
-generateSelect('flex-direction', [ '', 'row', 'column', 'row-reverse', 'column-reverse' ])
-setupUpdateStyleOnElementChange('.flex-direction-select', '.flex-container', 'flex-direction')
+generateStyleChangingSelect('flex-direction', '.flex-container', 'flex-direction', [
+	'',
+	'row',
+	'column',
+	'row-reverse',
+	'column-reverse'
+])
 
-generateSelect('flex-wrap', [ '', 'wrap', 'nowrap' ])
-setupUpdateStyleOnElementChange('.flex-wrap-select', '.flex-container', 'flex-wrap')
+generateStyleChangingSelect('flex-wrap', '.flex-container', 'flex-wrap', [ '', 'wrap', 'nowrap' ])
 
-generateSelect('justify-content', [
+generateStyleChangingSelect('justify-content', '.flex-container', 'justify-content', [
 	'',
 	'center',
 	'flex-start',
@@ -55,9 +64,8 @@ generateSelect('justify-content', [
 	'space-around',
 	'space-evenly'
 ])
-setupUpdateStyleOnElementChange('.justify-content-select', '.flex-container', 'justify-content')
 
-generateSelect('align-items', [
+generateStyleChangingSelect('align-items', '.flex-container', 'align-items', [
 	'',
 	'center',
 	'flex-start',
@@ -65,13 +73,9 @@ generateSelect('align-items', [
 	'stretch',
 	'baseline'
 ])
-setupUpdateStyleOnElementChange('.align-items-select', '.flex-container', 'align-items')
 
 // Flex inputs.
 addControlTitle('Flex items')
-generateTextInput('a <code>flex</code>', 'a-flex-input')
-setupUpdateStyleOnElementChange('.a-flex-input', '.a', 'flex')
-generateTextInput('b <code>flex</code>', 'b-flex-input')
-setupUpdateStyleOnElementChange('.b-flex-input', '.b', 'flex')
-generateTextInput('c <code>flex</code>', 'c-flex-input')
-setupUpdateStyleOnElementChange('.c-flex-input', '.c', 'flex')
+generateStyleChangingTextInput('a <code>flex</code>', 'a-flex-input', '.a', 'flex')
+generateStyleChangingTextInput('b <code>flex</code>', 'b-flex-input', '.b', 'flex')
+generateStyleChangingTextInput('c <code>flex</code>', 'c-flex-input', '.c', 'flex')
