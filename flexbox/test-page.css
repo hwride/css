@@ -1,0 +1,28 @@
+.a {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-content: center;
+
+	background: yellow;
+	width: 300px;
+	height: 300px;
+}
+
+label {
+	display: block;
+}
+
+.flex-item {
+	width: 75px;
+	height: 75px;
+}
+.aa {
+	background: dodgerblue;
+}
+.ab {
+	background: salmon;
+}
+.ac {
+	background: lightgreen;
+}
