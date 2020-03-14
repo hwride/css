@@ -21,7 +21,7 @@ const setupUpdateStyleOnElementChange = function(elChangeSelector, elToStyleSele
 	update();
 }
 
-const generateStyleChangingSelect = (title, elToStyleSelector, propToStyle, values) => {
+const generateStyleChangingSelect = (title, elToStyleSelector, propToStyle, values, description) => {
 	const label = document.createElement('label')
 	const className = getUniqueClass()
 	label.innerHTML = `
@@ -30,6 +30,11 @@ const generateStyleChangingSelect = (title, elToStyleSelector, propToStyle, valu
 		${values.map(value => `<option>${value}</option>`).join('\n')}
 	</select>
 `;
+	if(description) {
+		label.innerHTML += `
+		<p class="description">${description}</p>
+`
+	}
 	addToControls(label)
 
 	setupUpdateStyleOnElementChange('.' + className, elToStyleSelector, propToStyle)
@@ -67,7 +72,7 @@ generateStyleChangingSelect('<code>justify-content</code>', '.flex-container', '
 	'space-between',
 	'space-around',
 	'space-evenly'
-])
+], 'Align items on the main axis')
 
 generateStyleChangingSelect('<code>align-items</code>', '.flex-container', 'align-items', [
 	'',
@@ -76,7 +81,7 @@ generateStyleChangingSelect('<code>align-items</code>', '.flex-container', 'alig
 	'flex-end',
 	'stretch',
 	'baseline'
-])
+], 'Align items on the cross axis')
 
 generateStyleChangingSelect('<code>align-content</code>', '.flex-container', 'align-content', [
 	'',
@@ -86,14 +91,26 @@ generateStyleChangingSelect('<code>align-content</code>', '.flex-container', 'al
 	'space-between',
 	'space-around',
 	'stretch'
-])
+], 'Control space between flex lines on the cross axis')
 
 // Flex inputs.
 addControlTitle('Flex items')
-generateStyleChangingTextInput('a <code>flex</code>', '.a', 'flex')
-generateStyleChangingTextInput('b <code>flex</code>', '.b', 'flex')
-generateStyleChangingTextInput('c <code>flex</code>', '.c', 'flex')
+const flexHeader = document.createElement('code')
+flexHeader.innerText = 'flex: <flex-grow> <flex-shrink> <flex-basis>'
+addToControls(flexHeader)
+generateStyleChangingTextInput('a', '.a', 'flex')
+generateStyleChangingTextInput('b', '.b', 'flex')
+generateStyleChangingTextInput('c', '.c', 'flex')
 
+const br = document.createElement('br')
+addToControls(br)
+const alignSelfHeader = document.createElement('code')
+alignSelfHeader.innerText = 'align-self'
+addToControls(alignSelfHeader)
+const alignSelfDescription = document.createElement('p')
+alignSelfDescription.className = 'description'
+alignSelfDescription.innerText = 'Align a single item on the cross axis'
+addToControls(alignSelfDescription)
 const alignSelfValues = [
 	'',
 	'center',
@@ -103,6 +120,6 @@ const alignSelfValues = [
 	'space-around',
 	'stretch'
 ]
-generateStyleChangingSelect('a <code>align-self</code>', '.a', 'align-self', alignSelfValues)
-generateStyleChangingSelect('b <code>align-self</code>', '.b', 'align-self', alignSelfValues)
-generateStyleChangingSelect('c <code>align-self</code>', '.c', 'align-self', alignSelfValues)
+generateStyleChangingSelect('a', '.a', 'align-self', alignSelfValues)
+generateStyleChangingSelect('b', '.b', 'align-self', alignSelfValues)
+generateStyleChangingSelect('c', '.c', 'align-self', alignSelfValues)
