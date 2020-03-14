@@ -53,6 +53,7 @@ const generateStyleChangingTextInput = (title, elToStyleSelector, propToStyle) =
 }
 
 /* Setup */
+// Flex container.
 addControlTitle('Flex container')
 generateStyleChangingSelect('<code>flex-direction</code>', '.flex-container', 'flex-direction', [
 	'',
