@@ -70,8 +70,8 @@ setupUpdateStyleOnElementChange('.align-items-select', '.flex-container', 'align
 // Flex inputs.
 addControlTitle('Flex items')
 generateTextInput('a <code>flex</code>', 'a-flex-input')
-setupUpdateStyleOnElementChange('.a-flex-input', '.aa', 'flex')
+setupUpdateStyleOnElementChange('.a-flex-input', '.a', 'flex')
 generateTextInput('b <code>flex</code>', 'b-flex-input')
-setupUpdateStyleOnElementChange('.b-flex-input', '.ab', 'flex')
+setupUpdateStyleOnElementChange('.b-flex-input', '.b', 'flex')
 generateTextInput('c <code>flex</code>', 'c-flex-input')
-setupUpdateStyleOnElementChange('.c-flex-input', '.ac', 'flex')
+setupUpdateStyleOnElementChange('.c-flex-input', '.c', 'flex')

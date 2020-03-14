@@ -3,7 +3,7 @@ h3 {
 	margin-bottom: 5px;
 }
 
-.a {
+.flex-container {
 	display: flex;
 	background: yellow;
 	width: 300px;
@@ -14,12 +14,12 @@ label {
 	display: block;
 }
 
-.aa {
+.a {
 	background: dodgerblue;
 }
-.ab {
+.b {
 	background: salmon;
 }
-.ac {
+.c {
 	background: lightgreen;
 }
