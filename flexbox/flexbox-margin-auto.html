@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Flexbox margin: auto</title>
+	<style>
+		h1 {
+			margin-top: 5px;
+			margin-bottom: 10px;
+			font-size: 35px;
+		}
+		.example-description {
+			margin-bottom: 5px;
+		}
+		.css-prop {
+			font-size: .8em;
+		}
+
+		.flex-container {
+			display: flex;
+			background: yellow;
+			margin-bottom: 10px;
+			width: 800px;
+			padding: 5px;
+		}
+		.flex-item {
+			width: 120px;
+		}
+
+		.a {
+			background: dodgerblue;
+		}
+		.b {
+			background: salmon;
+		}
+		.c {
+			background: lightgreen;
+		}
+
+		.margin-left-auto {
+			margin-left: auto;
+		}
+		.margin-right-auto {
+			margin-right: auto;
+		}
+	</style>
+</head>
+<body>
+<h1>Flexbox margin: auto</h1>
+<p>
+	On the cross axis of a flexbox <code>align-self</code> can control the alignment of individual items. There is no
+	equivalent <code>justify-self</code> property. Instead you can achieve this by setting <code>margin: auto</code> on
+	the items. Free space is essentially divided up between <code>margin: auto</code>s.
+</p>
+
+<h2>Examples</h2>
+<div>
+	<p class="example-description">Adding left margin to the rightmost element pushes it to the right:</p>
+	<div class="flex-container">
+		<div class="flex-item a">a</div>
+		<div class="flex-item b">b</div>
+		<div class="flex-item c margin-left-auto">c
+			<div class="css-prop">margin-left: auto</div>
+		</div>
+	</div>
+
+	<p class="example-description">Adding both margins centers the element in the free space:</p>
+	<div class="flex-container">
+		<div class="flex-item a">a</div>
+		<div class="flex-item b">b</div>
+		<div class="flex-item c margin-left-auto margin-right-auto">c
+			<div class="css-prop">margin-left: auto</div>
+			<div class="css-prop">margin-right: auto</div>
+		</div>
+	</div>
+
+	<p class="example-description">Multiple elements with margins will divide the free space between them:</p>
+	<div class="flex-container">
+		<div class="flex-item a margin-left-auto">b
+			<div class="css-prop">margin-left: auto</div>
+		</div>
+		<div class="flex-item b">b</div>
+		<div class="flex-item c margin-left-auto margin-right-auto">c
+			<div class="css-prop">margin-left: auto</div>
+			<div class="css-prop">margin-right: auto</div>
+		</div>
+	</div>
+
+	<p class="example-description">It doesn't matter which element the margin is assigned to:</p>
+	<div class="flex-container">
+		<div class="flex-item a margin-left-auto">b
+			<div class="css-prop">margin-left: auto</div>
+		</div>
+		<div class="flex-item b margin-right-auto">b
+			<div class="css-prop">margin-right: auto</div>
+		</div>
+		<div class="flex-item c margin-right-auto">c
+			<div class="css-prop">margin-right: auto</div>
+		</div>
+	</div>
+
+	<p class="example-description">If two elements have a margin in the same space the each get a share of the divided
+		space, they don't combine together:
+	</p>
+	<div class="flex-container">
+		<div class="flex-item a margin-left-auto">b
+			<div class="css-prop">margin-left: auto</div>
+		</div>
+		<div class="flex-item b margin-right-auto">b
+			<div class="css-prop">margin-right: auto</div>
+		</div>
+		<div class="flex-item c margin-left-auto margin-right-auto">c
+			<div class="css-prop">margin-left: auto</div>
+			<div class="css-prop">margin-right: auto</div>
+		</div>
+	</div>
+</div>
+</body>
+<script src="util-functions.js"></script>
+<script src="setup.js"></script>
+</html>
