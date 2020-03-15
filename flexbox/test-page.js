@@ -103,8 +103,7 @@ generateStyleChangingTextInput('a', '.a', 'flex')
 generateStyleChangingTextInput('b', '.b', 'flex')
 generateStyleChangingTextInput('c', '.c', 'flex')
 
-const br = document.createElement('br')
-addToControls(br)
+addToControls(document.createElement('br'))
 const alignSelfHeader = document.createElement('code')
 alignSelfHeader.innerText = 'align-self'
 addToControls(alignSelfHeader)
@@ -124,3 +123,11 @@ const alignSelfValues = [
 generateStyleChangingSelect('a', '.a', 'align-self', alignSelfValues)
 generateStyleChangingSelect('b', '.b', 'align-self', alignSelfValues)
 generateStyleChangingSelect('c', '.c', 'align-self', alignSelfValues)
+
+addToControls(document.createElement('br'))
+const heightHeader = document.createElement('code')
+heightHeader.innerText = 'height'
+addToControls(heightHeader)
+generateStyleChangingTextInput('a', '.a', 'height')
+generateStyleChangingTextInput('b', '.b', 'height')
+generateStyleChangingTextInput('c', '.c', 'height')
