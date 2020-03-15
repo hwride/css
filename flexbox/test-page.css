@@ -27,7 +27,7 @@ body {
 }
 
 /* Controls */
-.controls-properties {
+.property-controls {
 	margin-left: 20px;
 }
 
@@ -48,4 +48,9 @@ label {
 .flex-item-controls .select-label {
 	display: inline-block;
 	min-width: 20px
+}
+
+.preset-controls .select-label {
+	display: inline-block;
+	min-width: 100px
 }

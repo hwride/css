@@ -30,9 +30,9 @@ const generateStyleChangingSelect = (sectionSelector, title, elToStyleSelector, 
 	setupUpdateStyleOnElementChange('.' + className, elToStyleSelector, propToStyle)
 };
 
-const generateStyleChangingTextInput = (sectionSelector, title, elToStyleSelector, propToStyle) => {
+const generateStyleChangingTextInput = (sectionSelector, title, elToStyleSelector, propToStyle, inputClassName) => {
 	const label = document.createElement('label')
-	const className = getUniqueClass()
+	const className = inputClassName ? inputClassName : getUniqueClass()
 	label.innerHTML = `
 	<span class="select-label">${title}</span>
 	<input type="text" class="${className}" />
@@ -40,4 +40,16 @@ const generateStyleChangingTextInput = (sectionSelector, title, elToStyleSelecto
 	document.querySelector(sectionSelector).appendChild(label)
 
 	setupUpdateStyleOnElementChange('.' + className, elToStyleSelector, propToStyle)
+}
+
+const addPresetButton = (title, onClick) => {
+	const label = document.createElement('label')
+	const button = document.createElement('button')
+	button.innerText = 'Set'
+	label.innerHTML = `
+	<span class="select-label">${title}</span>
+`;
+	label.appendChild(button)
+	document.querySelector('.preset-controls').appendChild(label)
+	button.addEventListener('click', onClick)
 }
