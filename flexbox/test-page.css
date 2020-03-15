@@ -6,16 +6,29 @@ h3 {
 body {
 	display: flex;
 }
-.controls {
-	margin-left: 20px;
-}
 
+/* Flex test area */
 .flex-container {
 	display: flex;
 	background: yellow;
 	width: 300px;
 	height: 300px;
 	padding: 20px;
+}
+
+.a {
+	background: dodgerblue;
+}
+.b {
+	background: salmon;
+}
+.c {
+	background: lightgreen;
+}
+
+/* Controls */
+.controls {
+	margin-left: 20px;
 }
 
 label {
@@ -27,12 +40,12 @@ label {
 	font-size: .8em;
 }
 
-.a {
-	background: dodgerblue;
+.flex-container-controls .select-label {
+	display: inline-block;
+	min-width: 150px
 }
-.b {
-	background: salmon;
-}
-.c {
-	background: lightgreen;
+
+.flex-item-controls .select-label {
+	display: inline-block;
+	min-width: 20px
 }

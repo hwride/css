@@ -6,12 +6,6 @@ const addToControls = (content) => {
 	document.querySelector('.controls').appendChild(content)
 }
 
-const addControlTitle = (titleName) => {
-	const title = document.createElement('h3')
-	title.innerText = titleName
-	addToControls(title)
-}
-
 const setupUpdateStyleOnElementChange = function(elChangeSelector, elToStyleSelector, styleName) {
 	const update = function() {
 		const value = document.querySelector(elChangeSelector).value;
@@ -21,11 +15,11 @@ const setupUpdateStyleOnElementChange = function(elChangeSelector, elToStyleSele
 	update();
 }
 
-const generateStyleChangingSelect = (title, elToStyleSelector, propToStyle, values, description) => {
+const generateStyleChangingSelect = (sectionSelector, title, elToStyleSelector, propToStyle, values, description) => {
 	const label = document.createElement('label')
 	const className = getUniqueClass()
 	label.innerHTML = `
-	${title}:
+	<span class="select-label">${title}</span>
 	<select class="${className}">
 		${values.map(value => `<option>${value}</option>`).join('\n')}
 	</select>
@@ -35,27 +29,26 @@ const generateStyleChangingSelect = (title, elToStyleSelector, propToStyle, valu
 		<p class="description">${description}</p>
 `
 	}
-	addToControls(label)
+	document.querySelector(sectionSelector).appendChild(label)
 
 	setupUpdateStyleOnElementChange('.' + className, elToStyleSelector, propToStyle)
 };
 
-const generateStyleChangingTextInput = (title, elToStyleSelector, propToStyle) => {
+const generateStyleChangingTextInput = (sectionSelector, title, elToStyleSelector, propToStyle) => {
 	const label = document.createElement('label')
 	const className = getUniqueClass()
 	label.innerHTML = `
-	${title}:
+	<span class="select-label">${title}</span>
 	<input type="text" class="${className}" />
 `;
-	addToControls(label)
+	document.querySelector(sectionSelector).appendChild(label)
 
 	setupUpdateStyleOnElementChange('.' + className, elToStyleSelector, propToStyle)
 }
 
 /* Setup */
 // Flex container.
-addControlTitle('Flex container')
-generateStyleChangingSelect('<code>flex-direction</code>', '.flex-container', 'flex-direction', [
+generateStyleChangingSelect('.flex-container-controls', '<code>flex-direction</code>', '.flex-container', 'flex-direction', [
 	'',
 	'row',
 	'column',
@@ -63,9 +56,9 @@ generateStyleChangingSelect('<code>flex-direction</code>', '.flex-container', 'f
 	'column-reverse'
 ])
 
-generateStyleChangingSelect('<code>flex-wrap</code>', '.flex-container', 'flex-wrap', [ '', 'wrap', 'nowrap' ])
+generateStyleChangingSelect('.flex-container-controls', '<code>flex-wrap</code>', '.flex-container', 'flex-wrap', [ '', 'wrap', 'nowrap' ])
 
-generateStyleChangingSelect('<code>justify-content</code>', '.flex-container', 'justify-content', [
+generateStyleChangingSelect('.flex-container-controls', '<code>justify-content</code>', '.flex-container', 'justify-content', [
 	'',
 	'center',
 	'flex-start',
@@ -75,7 +68,7 @@ generateStyleChangingSelect('<code>justify-content</code>', '.flex-container', '
 	'space-evenly'
 ], 'Align items on the main axis')
 
-generateStyleChangingSelect('<code>align-items</code>', '.flex-container', 'align-items', [
+generateStyleChangingSelect('.flex-container-controls', '<code>align-items</code>', '.flex-container', 'align-items', [
 	'',
 	'center',
 	'flex-start',
@@ -84,7 +77,7 @@ generateStyleChangingSelect('<code>align-items</code>', '.flex-container', 'alig
 	'baseline'
 ], 'Align items on the cross axis')
 
-generateStyleChangingSelect('<code>align-content</code>', '.flex-container', 'align-content', [
+generateStyleChangingSelect('.flex-container-controls', '<code>align-content</code>', '.flex-container', 'align-content', [
 	'',
 	'center',
 	'flex-start',
@@ -95,22 +88,22 @@ generateStyleChangingSelect('<code>align-content</code>', '.flex-container', 'al
 ], 'Control space between flex lines on the cross axis, only applicable when there are multiple lines')
 
 // Flex inputs.
-addControlTitle('Flex items')
+const flexInputControlsEl = document.querySelector('.flex-item-controls')
 const flexHeader = document.createElement('code')
 flexHeader.innerText = 'flex: <flex-grow> <flex-shrink> <flex-basis>'
-addToControls(flexHeader)
-generateStyleChangingTextInput('a', '.a', 'flex')
-generateStyleChangingTextInput('b', '.b', 'flex')
-generateStyleChangingTextInput('c', '.c', 'flex')
+flexInputControlsEl.appendChild(flexHeader)
+generateStyleChangingTextInput('.flex-item-controls', 'a', '.a', 'flex')
+generateStyleChangingTextInput('.flex-item-controls', 'b', '.b', 'flex')
+generateStyleChangingTextInput('.flex-item-controls', 'c', '.c', 'flex')
 
-addToControls(document.createElement('br'))
+flexInputControlsEl.appendChild(document.createElement('br'))
 const alignSelfHeader = document.createElement('code')
 alignSelfHeader.innerText = 'align-self'
-addToControls(alignSelfHeader)
+flexInputControlsEl.appendChild(alignSelfHeader)
 const alignSelfDescription = document.createElement('p')
 alignSelfDescription.className = 'description'
 alignSelfDescription.innerText = 'Align a single item on the cross axis'
-addToControls(alignSelfDescription)
+flexInputControlsEl.appendChild(alignSelfDescription)
 const alignSelfValues = [
 	'',
 	'center',
@@ -120,14 +113,14 @@ const alignSelfValues = [
 	'space-around',
 	'stretch'
 ]
-generateStyleChangingSelect('a', '.a', 'align-self', alignSelfValues)
-generateStyleChangingSelect('b', '.b', 'align-self', alignSelfValues)
-generateStyleChangingSelect('c', '.c', 'align-self', alignSelfValues)
+generateStyleChangingSelect('.flex-item-controls', 'a', '.a', 'align-self', alignSelfValues)
+generateStyleChangingSelect('.flex-item-controls', 'b', '.b', 'align-self', alignSelfValues)
+generateStyleChangingSelect('.flex-item-controls', 'c', '.c', 'align-self', alignSelfValues)
 
-addToControls(document.createElement('br'))
+flexInputControlsEl.appendChild(document.createElement('br'))
 const heightHeader = document.createElement('code')
 heightHeader.innerText = 'height'
-addToControls(heightHeader)
-generateStyleChangingTextInput('a', '.a', 'height')
-generateStyleChangingTextInput('b', '.b', 'height')
-generateStyleChangingTextInput('c', '.c', 'height')
+flexInputControlsEl.appendChild(heightHeader)
+generateStyleChangingTextInput('.flex-item-controls', 'a', '.a', 'height')
+generateStyleChangingTextInput('.flex-item-controls', 'b', '.b', 'height')
+generateStyleChangingTextInput('.flex-item-controls', 'c', '.c', 'height')
