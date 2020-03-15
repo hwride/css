@@ -138,19 +138,24 @@ function addPresetControls() {
 		})
 	})
 
-	addPresetButton('Flex grow', () => {
+	addPresetButton('Vertical and horizontal center', () => {
+		setComponentValue('.justify-content-select', 'center')
+		setComponentValue('.align-items-select', 'center')
+	})
+
+	addPresetButton('<code>flex-grow</code>', () => {
 		setFlex('a', '1 0 0')
 		setFlex('b', '3 0 0')
 		setFlex('c', '2 0 0')
 	})
 
-	addPresetButton('Flex shrink', () => {
+	addPresetButton('<code>flex-shrink</code>', () => {
 		setFlex('a', '0 1 200px')
 		setFlex('b', '0 2 200px')
 		setFlex('c', '0 1 200px')
 	})
 
-	addPresetButton('Flex wrap', () => {
+	addPresetButton('<code>flex-wrap</code>', () => {
 		setFlex('a', '0 0 140px')
 		setFlex('b', '0 0 150px')
 		setFlex('c', '0 0 160px')
