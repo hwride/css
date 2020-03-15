@@ -42,15 +42,16 @@ label {
 
 .flex-container-controls .select-label {
 	display: inline-block;
-	min-width: 150px
+	min-width: 150px;
 }
 
 .flex-item-controls .select-label {
 	display: inline-block;
-	min-width: 20px
+	min-width: 20px;
 }
 
 .preset-controls .select-label {
 	display: inline-block;
-	min-width: 100px
+	min-width: 150px;
+	max-width: 150px;
 }

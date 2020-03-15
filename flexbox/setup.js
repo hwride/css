@@ -95,17 +95,23 @@ function addFlexItemPropertyControls() {
 }
 
 function addPresetControls() {
-	const setFlexGrow = (shape, value) => {
+	// Utils.
+	const setComponentValue = (selector, value) => {
+		const input = document.querySelector(selector)
+		input.value = value
+		input.dispatchEvent(new Event('change'))
+	}
+
+	const setFlex = (shape, value) => {
 		const inputClassName = {
 			'a': '.flex-a-input',
 			'b': '.flex-b-input',
 			'c': '.flex-c-input'
 		}[shape]
-		const input = document.querySelector(inputClassName)
-		input.value = value
-		input.dispatchEvent(new Event('change'))
-	};
+		setComponentValue(inputClassName, value)
+	}
 
+	// Actual preset button controls.
 	addPresetButton('Reset', () => {
 		const controlInputClasses = [
 			'.flex-dir-select',
@@ -129,9 +135,29 @@ function addPresetControls() {
 			input.dispatchEvent(new Event('change'))
 		})
 	})
+
 	addPresetButton('Flex grow', () => {
-		setFlexGrow('a', '1 0 0')
-		setFlexGrow('b', '3 0 0')
-		setFlexGrow('c', '2 0 0')
+		setFlex('a', '1 0 0')
+		setFlex('b', '3 0 0')
+		setFlex('c', '2 0 0')
+	})
+
+	addPresetButton('Flex wrap', () => {
+		setFlex('a', '0 0 140px')
+		setFlex('b', '0 0 150px')
+		setFlex('c', '0 0 160px')
+		setComponentValue('.flex-wrap-select', 'wrap')
+	})
+
+	addPresetButton('<code>align-items</code> and <code>align-content</code>', () => {
+		setFlex('a', '0 0 140px')
+		setFlex('b', '0 0 150px')
+		setFlex('c', '0 0 160px')
+		setComponentValue('.flex-wrap-select', 'wrap')
+		setComponentValue('.height-a-input', '100px')
+		setComponentValue('.height-b-input', '50px')
+		setComponentValue('.height-c-input', '125px')
+		setComponentValue('.align-items-select', 'center')
+		setComponentValue('.align-content-select', 'space-around')
 	})
 }
