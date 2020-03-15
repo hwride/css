@@ -11,12 +11,11 @@ const setupUpdateStyleOnElementChange = function(elChangeSelector, elToStyleSele
 	update();
 }
 
-const generateStyleChangingSelect = (sectionSelector, title, elToStyleSelector, propToStyle, values, description) => {
+const generateStyleChangingSelect = (sectionSelector, selectorClassName, title, elToStyleSelector, propToStyle, values, description) => {
 	const label = document.createElement('label')
-	const className = getUniqueClass()
 	label.innerHTML = `
 	<span class="select-label">${title}</span>
-	<select class="${className}">
+	<select class="${selectorClassName}">
 		${values.map(value => `<option>${value}</option>`).join('\n')}
 	</select>
 `;
@@ -27,19 +26,18 @@ const generateStyleChangingSelect = (sectionSelector, title, elToStyleSelector, 
 	}
 	document.querySelector(sectionSelector).appendChild(label)
 
-	setupUpdateStyleOnElementChange('.' + className, elToStyleSelector, propToStyle)
+	setupUpdateStyleOnElementChange('.' + selectorClassName, elToStyleSelector, propToStyle)
 };
 
-const generateStyleChangingTextInput = (sectionSelector, title, elToStyleSelector, propToStyle, inputClassName) => {
+const generateStyleChangingTextInput = (sectionSelector, inputClassName, title, elToStyleSelector, propToStyle) => {
 	const label = document.createElement('label')
-	const className = inputClassName ? inputClassName : getUniqueClass()
 	label.innerHTML = `
 	<span class="select-label">${title}</span>
-	<input type="text" class="${className}" />
+	<input type="text" class="${inputClassName}" />
 `;
 	document.querySelector(sectionSelector).appendChild(label)
 
-	setupUpdateStyleOnElementChange('.' + className, elToStyleSelector, propToStyle)
+	setupUpdateStyleOnElementChange('.' + inputClassName, elToStyleSelector, propToStyle)
 }
 
 const addPresetButton = (title, onClick) => {

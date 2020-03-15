@@ -14,7 +14,7 @@ function addPropertyControls() {
 
 function addFlexContainerPropertyControls() {
 // Flex container.
-	generateStyleChangingSelect('.flex-container-controls', '<code>flex-direction</code>', '.flex-container', 'flex-direction', [
+	generateStyleChangingSelect('.flex-container-controls', 'flex-dir-select', '<code>flex-direction</code>', '.flex-container', 'flex-direction', [
 		'',
 		'row',
 		'column',
@@ -22,9 +22,9 @@ function addFlexContainerPropertyControls() {
 		'column-reverse'
 	])
 
-	generateStyleChangingSelect('.flex-container-controls', '<code>flex-wrap</code>', '.flex-container', 'flex-wrap', ['', 'wrap', 'nowrap'])
+	generateStyleChangingSelect('.flex-container-controls', 'flex-wrap-select', '<code>flex-wrap</code>', '.flex-container', 'flex-wrap', ['', 'wrap', 'nowrap'])
 
-	generateStyleChangingSelect('.flex-container-controls', '<code>justify-content</code>', '.flex-container', 'justify-content', [
+	generateStyleChangingSelect('.flex-container-controls', 'justify-content-select', '<code>justify-content</code>', '.flex-container', 'justify-content', [
 		'',
 		'center',
 		'flex-start',
@@ -34,7 +34,7 @@ function addFlexContainerPropertyControls() {
 		'space-evenly'
 	], 'Align items on the main axis')
 
-	generateStyleChangingSelect('.flex-container-controls', '<code>align-items</code>', '.flex-container', 'align-items', [
+	generateStyleChangingSelect('.flex-container-controls', 'align-items-select', '<code>align-items</code>', '.flex-container', 'align-items', [
 		'',
 		'center',
 		'flex-start',
@@ -43,7 +43,7 @@ function addFlexContainerPropertyControls() {
 		'baseline'
 	], 'Align items on the cross axis')
 
-	generateStyleChangingSelect('.flex-container-controls', '<code>align-content</code>', '.flex-container', 'align-content', [
+	generateStyleChangingSelect('.flex-container-controls', 'align-content-select', '<code>align-content</code>', '.flex-container', 'align-content', [
 		'',
 		'center',
 		'flex-start',
@@ -60,9 +60,9 @@ function addFlexItemPropertyControls() {
 	const flexHeader = document.createElement('code')
 	flexHeader.innerText = 'flex: <flex-grow> <flex-shrink> <flex-basis>'
 	flexInputControlsEl.appendChild(flexHeader)
-	generateStyleChangingTextInput('.flex-item-controls', 'a', '.a', 'flex', 'flex-a-input')
-	generateStyleChangingTextInput('.flex-item-controls', 'b', '.b', 'flex', 'flex-b-input')
-	generateStyleChangingTextInput('.flex-item-controls', 'c', '.c', 'flex', 'flex-c-input')
+	generateStyleChangingTextInput('.flex-item-controls', 'flex-a-input', 'a', '.a', 'flex')
+	generateStyleChangingTextInput('.flex-item-controls', 'flex-b-input', 'b', '.b', 'flex')
+	generateStyleChangingTextInput('.flex-item-controls', 'flex-c-input', 'c', '.c', 'flex')
 
 	flexInputControlsEl.appendChild(document.createElement('br'))
 	const alignSelfHeader = document.createElement('code')
@@ -81,17 +81,17 @@ function addFlexItemPropertyControls() {
 		'space-around',
 		'stretch'
 	]
-	generateStyleChangingSelect('.flex-item-controls', 'a', '.a', 'align-self', alignSelfValues)
-	generateStyleChangingSelect('.flex-item-controls', 'b', '.b', 'align-self', alignSelfValues)
-	generateStyleChangingSelect('.flex-item-controls', 'c', '.c', 'align-self', alignSelfValues)
+	generateStyleChangingSelect('.flex-item-controls', 'align-self-a-select', 'a', '.a', 'align-self', alignSelfValues)
+	generateStyleChangingSelect('.flex-item-controls', 'align-self-b-select', 'b', '.b', 'align-self', alignSelfValues)
+	generateStyleChangingSelect('.flex-item-controls', 'align-self-c-select', 'c', '.c', 'align-self', alignSelfValues)
 
 	flexInputControlsEl.appendChild(document.createElement('br'))
 	const heightHeader = document.createElement('code')
 	heightHeader.innerText = 'height'
 	flexInputControlsEl.appendChild(heightHeader)
-	generateStyleChangingTextInput('.flex-item-controls', 'a', '.a', 'height')
-	generateStyleChangingTextInput('.flex-item-controls', 'b', '.b', 'height')
-	generateStyleChangingTextInput('.flex-item-controls', 'c', '.c', 'height')
+	generateStyleChangingTextInput('.flex-item-controls', 'height-a-input', 'a', '.a', 'height')
+	generateStyleChangingTextInput('.flex-item-controls', 'height-b-input', 'b', '.b', 'height')
+	generateStyleChangingTextInput('.flex-item-controls', 'height-c-input', 'c', '.c', 'height')
 }
 
 function addPresetControls() {
@@ -107,9 +107,27 @@ function addPresetControls() {
 	};
 
 	addPresetButton('Reset', () => {
-		setFlexGrow('a', '')
-		setFlexGrow('b', '')
-		setFlexGrow('c', '')
+		const controlInputClasses = [
+			'.flex-dir-select',
+			'.flex-wrap-select',
+			'.justify-content-select',
+			'.align-items-select',
+			'.align-content-select',
+			'.align-self-a-select',
+			'.align-self-b-select',
+			'.align-self-c-select',
+			'.flex-a-input',
+			'.flex-b-input',
+			'.flex-c-input',
+			'.height-a-input',
+			'.height-b-input',
+			'.height-c-input'
+		]
+		controlInputClasses.forEach(className => {
+			const input = document.querySelector(className)
+			input.value = ''
+			input.dispatchEvent(new Event('change'))
+		})
 	})
 	addPresetButton('Flex grow', () => {
 		setFlexGrow('a', '1 0 0')
