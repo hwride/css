@@ -94,6 +94,13 @@ function addFlexItemPropertyControls() {
 	generateStyleChangingTextInput('.flex-item-controls', 'height-a-input', 'a', '.a', 'height')
 	generateStyleChangingTextInput('.flex-item-controls', 'height-b-input', 'b', '.b', 'height')
 	generateStyleChangingTextInput('.flex-item-controls', 'height-c-input', 'c', '.c', 'height')
+
+	// order
+	flexInputControlsEl.appendChild(document.createElement('br'))
+	addCodeHeader('order')
+	generateStyleChangingTextInput('.flex-item-controls', 'order-a-input', 'a', '.a', 'order')
+	generateStyleChangingTextInput('.flex-item-controls', 'order-b-input', 'b', '.b', 'order')
+	generateStyleChangingTextInput('.flex-item-controls', 'order-c-input', 'c', '.c', 'order')
 }
 
 function addPresetControls() {
@@ -129,7 +136,10 @@ function addPresetControls() {
 			'.flex-c-input',
 			'.height-a-input',
 			'.height-b-input',
-			'.height-c-input'
+			'.height-c-input',
+			'.order-a-input',
+			'.order-b-input',
+			'.order-c-input'
 		]
 		controlInputClasses.forEach(className => {
 			const input = document.querySelector(className)
@@ -172,5 +182,11 @@ function addPresetControls() {
 		setComponentValue('.flex-wrap-select', 'wrap')
 		setComponentValue('.align-items-select', 'center')
 		setComponentValue('.align-content-select', 'space-around')
+	})
+
+	addPresetButton('<code>order</code>', () => {
+		setComponentValue('.order-c-input', '1')
+		setComponentValue('.order-a-input', '2')
+		setComponentValue('.order-b-input', '3')
 	})
 }
