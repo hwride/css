@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title>z-index test</title>
+    <link href="../common.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <script type='text/javascript' src="https://code.jquery.com/jquery-2.1.1.js"></script>
+</head>
+<body>
+<h1>z-index</h1>
+<p>
+    Some examples of how the stacking context and z-index work. Note:
+    <ul>
+        <li>
+            elements with a higher number appear in the DOM after elements with a lower number, e.g. .d4 is after .d3
+        </li>
+        <li>
+            child elements have an extra number appending to them, e.g. <code>.d11</code> is the first child of
+            <code>.d1</code>
+        </li>
+    </ul>
+</p>
+<h2>Default stacking without z-index</h2>
+<div class="test-container test-container-without-z-index">
+    <div class="d1">
+        position absolute
+    </div>
+    <div class="d2">
+        float: left
+    </div>
+    <div class="d3">
+        float: right
+    </div>
+    <div class="d4">
+        position: static
+    </div>
+</div>
+
+<h2 class="with-z-index">With z-index</h2>
+<div class="test-container test-container-with-z-index">
+    <div class="d1">
+        <div class="d11"></div>
+        <div class="d12"></div>
+    </div>
+    <div class="d2">
+        <div class="d21"></div>
+        <div class="d22"></div>
+    </div>
+    <div class="d3"></div>
+    <div class="d4"></div>
+</div>
+
+<script type="text/javascript">
+    // Add class labels to all divs.
+    $('.test-container div').each(function(i, el) {
+        $(el).prepend('<b>.' + el.className + '</b>');
+    });
+
+    // Add z-index to all divs.
+    $('.test-container-without-z-index div').each(function(i, el) {
+        $(el).append('<br/>z-index: ' + $(el).css('z-index'));
+    });
+    $('.test-container-with-z-index div').each(function(i, el) {
+        $(el).append(' z-index: ' + $(el).css('z-index'));
+    });
+</script>
+</body>
+</html>

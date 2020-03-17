@@ -1,0 +1,146 @@
+.test-container div {
+    border: 1px dotted black;
+    /* Setting this changes the z order in which things appear. As setting opacity creates a new stacking context. */
+    /*opacity: 0.95;*/
+    text-align: center;
+}
+
+.d1 {
+    background: #6495ed;
+}
+.d2 {
+    background: seagreen;
+}
+.d3 {
+    background: coral;
+}
+.d4 {
+    background: indianred;
+}
+
+h2.with-z-index {
+    clear: both;
+    margin-top: 4em;
+}
+
+/**************************
+ * Without z-index tests. *
+ **************************/
+.test-container-without-z-index {
+    width: 500px;
+    font-family: monospace;
+    font-size: 14px;
+
+    position: relative;
+}
+.test-container-without-z-index .d1 {
+    height: 75px;
+    width: 275px;
+
+    position: absolute;
+    top: 120px;
+    left: 145px;
+}
+.test-container-without-z-index .d2 {
+    height: 150px;
+    width: 150px;
+    margin-left: 10px;
+    margin-top: 15px;
+
+    float: left;
+}
+.test-container-without-z-index .d3 {
+    height: 165px;
+    width: 130px;
+    margin-top: 16px;
+    margin-right: 8px;
+
+    float: right;
+}
+.test-container-without-z-index .d4 {
+    height: 125px;
+    width: 500px;
+
+    position: static;
+    margin-top: 32px;
+}
+
+
+/***********************
+ * With z-index tests. *
+ ***********************/
+.test-container-with-z-index {
+    /* Make relative as all child divs will be absolutely positioned. */
+    position: relative;
+    font-family: monospace;
+    font-size: 14px;
+}
+.test-container-with-z-index div {
+    width: 250px;
+    height: 250px;
+    /* z-index only has an effect if an element is positioned. */
+    position: absolute;
+
+    /* Center text. */
+    display: inline-block;
+    line-height: 250px;
+}
+
+.test-container-with-z-index div > div {
+    height: 125px;
+    width: 125px;
+    line-height: 125px;
+}
+
+.test-container-with-z-index .d1 {
+    /* .d1 is placed above d2 because it has a higher z-index and is in the same stacking context. */
+    z-index: 1;
+}
+.test-container-with-z-index .d11 {
+    background: dodgerblue;
+    top: 85px;
+    left: 190px;
+    z-index: 1;
+}
+.test-container-with-z-index .d12 {
+    background: bisque;
+    top: 175px;
+    left: 80px;
+    /* .d12 appears above .d1 even though it has a lower z-index because children always appear above their parents when
+    the parent has a z-index set. TODO: Does this relate to the creation of a new stacking context? Consider. */
+    /* .d12 is placed above .d2 and .d3 even though it has a lower z-index. This is because d12's parent d1 has a
+    integer z-index which creates a new stacking context. All children in a new stacking context are treated the same as
+    the parent outside of that context. If you set .d1's z-index to auto you can see the difference. */
+    z-index: -1;
+}
+
+.test-container-with-z-index .d2 {
+    top: 150px;
+    left: 150px;
+}
+.test-container-with-z-index .d21 {
+    background: lawngreen;
+    top: -145px;
+    left: 95px;
+    /* If a parent has a z-index of auto it does not establish a new stacking context and its children will use the
+    existing stacking context. In this case that is the root stacking context. This is why .d21 appears above .d11
+    even though its parent does not, auto is a special case. */
+    z-index: 2;
+}
+.test-container-with-z-index .d22 {
+    background: green;
+    top: 60px;
+    left: 210px;
+    z-index: 1;
+}
+
+.test-container-with-z-index .d3 {
+    top: 290px;
+    left: 175px;
+    z-index: 0;
+}
+
+.test-container-with-z-index .d4 {
+    top: 450px;
+    left: 125px;
+}
