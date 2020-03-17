@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Response images with max-width</title>
+	<link rel="stylesheet" type="text/css" href="../common.css">
+	<style>
+		.container {
+			width: 150px;
+		}
+
+		.container-b .a {
+			width: 200px;
+			max-width: 100%;
+		}
+	</style>
+</head>
+<body>
+<h1>Response images with max-width</h1>
+<div class="main-content">
+	<p class="example-description">
+		A child with <code>width</code> greater than its container's <code>width</code> overflows:
+	</p>
+	<div class="container">
+		<div class="css-prop">width: 150px</div>
+		<img src="lemur.png" />
+	</div>
+
+	<p class="example-description">
+		Setting <code>max-width: 100%</code> causes a child to become no bigger than its parent:
+	</p>
+	<div class="container container-b">
+		<div class="css-prop">width: 150px</div>
+		<img src="lemur.png" style="max-width: 100%" />
+	</div>
+
+	<p class="example-description">
+		But if the parent is bigger than the child, the child will expand to its actual <code>width</code>:
+	</p>
+	<div class="container" style="width: 500px">
+		<div class="css-prop">width: 500px</div>
+		<img src="lemur.png" style="max-width: 100%" />
+	</div>
+
+	<p class="example-description">
+		Why not set <code>width: 100%</code> instead? Because the the image will stretch and be too large and distorted in
+		big containers:
+	</p>
+	<div class="container" style="width: 500px">
+		<div class="css-prop">width: 500px</div>
+		<img src="lemur.png" style="width: 100%" />
+	</div>
+</div>
+</body>
+</html>
