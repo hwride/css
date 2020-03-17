@@ -15,20 +15,9 @@ h3 {
 /* Flex test area */
 .flex-container {
 	display: flex;
-	background: yellow;
 	width: 300px;
 	height: 300px;
 	padding: 20px;
-}
-
-.a {
-	background: dodgerblue;
-}
-.b {
-	background: salmon;
-}
-.c {
-	background: lightgreen;
 }
 
 /* Controls */

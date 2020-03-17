@@ -3,38 +3,15 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Flexbox - margin: auto</title>
+	<link rel="stylesheet" type="text/css" href="../common.css">
 	<style>
-		h1 {
-			margin-top: 5px;
-			margin-bottom: 10px;
-			font-size: 35px;
-		}
-		.example-description {
-			margin-bottom: 5px;
-		}
-		.css-prop {
-			font-size: .8em;
-		}
-
 		.flex-container {
 			display: flex;
-			background: yellow;
 			margin-bottom: 10px;
 			width: 800px;
-			padding: 5px;
 		}
 		.flex-item {
 			width: 120px;
-		}
-
-		.a {
-			background: dodgerblue;
-		}
-		.b {
-			background: salmon;
-		}
-		.c {
-			background: lightgreen;
 		}
 
 		.margin-left-auto {
@@ -56,7 +33,7 @@
 <h2>Examples</h2>
 <div>
 	<p class="example-description">Adding left margin to the rightmost element pushes it to the right:</p>
-	<div class="flex-container">
+	<div class="flex-container container">
 		<div class="flex-item a">a</div>
 		<div class="flex-item b">b</div>
 		<div class="flex-item c margin-left-auto">c
@@ -65,7 +42,7 @@
 	</div>
 
 	<p class="example-description">Adding both margins centers the element in the free space:</p>
-	<div class="flex-container">
+	<div class="flex-container container">
 		<div class="flex-item a">a</div>
 		<div class="flex-item b">b</div>
 		<div class="flex-item c margin-left-auto margin-right-auto">c
@@ -75,7 +52,7 @@
 	</div>
 
 	<p class="example-description">Multiple elements with margins will divide the free space between them:</p>
-	<div class="flex-container">
+	<div class="flex-container container">
 		<div class="flex-item a margin-left-auto">b
 			<div class="css-prop">margin-left: auto</div>
 		</div>
@@ -87,7 +64,7 @@
 	</div>
 
 	<p class="example-description">It doesn't matter which element the margin is assigned to:</p>
-	<div class="flex-container">
+	<div class="flex-container container">
 		<div class="flex-item a margin-left-auto">b
 			<div class="css-prop">margin-left: auto</div>
 		</div>
@@ -102,7 +79,7 @@
 	<p class="example-description">If two elements have a margin in the same space the each get a share of the divided
 		space, they don't combine together:
 	</p>
-	<div class="flex-container">
+	<div class="flex-container container">
 		<div class="flex-item a margin-left-auto">b
 			<div class="css-prop">margin-left: auto</div>
 		</div>
@@ -116,6 +93,4 @@
 	</div>
 </div>
 </body>
-<script src="util-functions.js"></script>
-<script src="setup.js"></script>
 </html>
