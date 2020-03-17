@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Containing box</title>
+    <link rel="stylesheet" type="text/css" href="../common.css">
+</head>
+<body>
+<h1>Containing box</h1>
+<h2>position: static, relative & sticky</h2>
+<p class="example-description">
+    For elements with a <code>position</code> of <code>static</code>, <code>relative</code> or <code>sticky</code> the
+    containing block is formed by the edge of the content box of the nearest ancestor that is either a block container
+    or establishes a formatting context. Note here:
+    <ul>
+        <li>block c has a <code>width</code> the size of the content box</li>
+    </ul>
+</p>
+
+<div class="a" style="width: 800px; padding: 30px;">a
+    <div class="css-prop">width: 800px; padding: 30px;</div>
+
+    <div class="b" style="width: 75%;">b
+        <div class="css-prop">width: 75%;</div>
+    </div>
+    <div class="c" style="position: relative; top: 100%; left: 0; width: 100%;">c
+        <div class="css-prop">position: relative; top: 100%; left: 0; width: 100%;</div>
+    </div>
+</div>
+
+<h2>position: absolute</h2>
+<p class="example-description">
+    For elements with a <code>position</code> of <code>absolute</code>, the containing block is formed by the edge of
+    the padding box of the nearest ancestor that has a position other than <code>static</code>. Note here:
+<ul>
+    <li>even though c is a child of b, it's containing box is formed by a</li>
+    <li>block c has a <code>width</code> the size of the padding box</li>
+    <li>block c is positioned to the edge of the padding box when we set <code>left: 0</code></li>
+</ul>
+
+<div class="a" style="position: relative; width: 800px; padding: 30px;">a
+    <div class="css-prop">position: relative; width: 800px; padding: 30px;</div>
+
+    <div class="b" style="width: 600px;">b
+        <div class="css-prop">width: 600px;</div>
+
+        <div class="c" style="position: absolute; top: 100%; left: 0; width: 100%;">c
+            <div class="css-prop">position: absolute; top: 100%; left: 0; width: 100%;</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

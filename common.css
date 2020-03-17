@@ -3,6 +3,10 @@ h1 {
 	margin-bottom: 10px;
 	font-size: 35px;
 }
+h2 {
+	margin-top: 15px;
+	margin-bottom: 5px;
+}
 .example-description {
 	margin-bottom: 5px;
 }
@@ -24,4 +28,7 @@ h1 {
 }
 .c {
 	background: lightgreen;
+}
+.d {
+	background: darkorange;
 }
