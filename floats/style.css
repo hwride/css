@@ -38,20 +38,59 @@
 	float: right;
 }
 
-.example-float-left-right-multiple .a {
+.example-floats-and-floats .a {
 	float: left;
+	height: 60px;
 }
-.example-float-left-right-multiple .b {
+.example-floats-and-floats .b {
 	float: right;
 }
-.example-float-left-right-multiple .c {
+.example-floats-and-floats .c {
+	float: left;
+	height: 50px;
+}
+.example-floats-and-floats .d {
 	float: left;
 }
-.example-float-left-right-multiple .d {
-	float: left;
-}
-.example-float-left-right-multiple .e {
+.example-floats-and-floats .e {
 	float: right;
+}
+
+.example-floats-and-floats-wide .container {
+	width: 600px;
+}
+
+.example-div-interaction-1 .a {
+	float: left;
+}
+.example-div-interaction-1 .b {
+	height: 50px;
+	width: 150px;
+}
+.example-div-interaction-1 .c {
+	float: right;
+}
+.example-div-interaction-1 .d {
+	float: left;
+}
+.example-div-interaction-1 .e {
+	float: right;
+}
+
+.example-div-interaction-2 .a {
+	float: left;
+}
+.example-div-interaction-2 .b {
+	float: right;
+}
+.example-div-interaction-2 .c {
+	height: 30px;
+}
+.example-div-interaction-2 .d {
+	float: left;
+}
+.example-div-interaction-2 .e {
+	float: left;
 }
 
 /* Floats and line boxes */

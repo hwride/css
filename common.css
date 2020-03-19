@@ -10,6 +10,9 @@ h2 {
 h2 {
 	font-size: 1.3em;
 }
+ul {
+	margin-top: 0;
+}
 
 .example-description {
 	margin-bottom: 5px;
@@ -34,7 +37,7 @@ h2 {
 	background: lightgreen;
 }
 .d {
-	background: darkorange;
+	background: aquamarine;
 }
 .e {
 	background: hotpink;
