@@ -38,6 +38,7 @@
 	float: right;
 }
 
+/* Floats interacting with other floats */
 .example-floats-and-floats .a {
 	float: left;
 	height: 60px;
@@ -60,6 +61,7 @@
 	width: 600px;
 }
 
+/* Floats and block boxes */
 .example-div-interaction-1 .a {
 	float: left;
 }
@@ -98,6 +100,9 @@
 	display: inline-block;
 	width: 75px;
 	height: 20px;
+}
+.example-line-box-inline-box .c {
+	float: left;
 }
 
 /* Clearing floats */

@@ -55,15 +55,15 @@
 	<h2>Floats and line boxes</h2>
 	<div class="example-container">
 		<p class="example-description">
-			Line boxes flow around floats. Block boxes ignore floats. See here the block container is behind the float but the
-			line boxes flow around it:
+			Line boxes flow around floats:
 		</p>
 		<div class="container">
 			<div class="a">a<div class="css-prop">width: 110px; float: left;</div></div>
-			<div class="b">
+			<div class="b">b<br/>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla luctus aliquam dolor, eu lacinia lorem placerat
 				vulputate.
 			</div>
+		</div>
 		</div>
 	</div>
 
@@ -85,8 +85,8 @@
 	<h2>Floats and block boxes</h2>
 	<div class="example-container example-div-interaction-1">
 		<p class="example-description">
-			Block boxes force following <code>floats</code> below them. Also note here the order of the floats on the second
-			line.
+			Block boxes force following floats below them, but blocks ignore floats. Note how here the block element is behind
+			the float. Also note the order of the floats on the second line.
 		</p>
 		<div class="container">
 			<div class="a">a<div class="css-prop">float: left;</div></div>
