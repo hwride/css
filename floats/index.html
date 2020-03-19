@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Floats</title>
+	<link rel="stylesheet" type="text/css" href="../common.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<h1>Floats</h1>
+<div class="main-content">
+	<h2>Floating left and right</h2>
+	<div class="example-container example-float-left-right">
+		<p class="example-description">
+			Floating an element moves it to the side of a container. It also takes it out of flow, which is why the parent
+			box doesn't expand to contain it.
+		</p>
+		<div class="container container-a">
+			<div class="a">a<div class="css-prop">float: left;</div></div>
+			<div class="b">b<div class="css-prop">float: right;</div></div>
+		</div>
+	</div>
+
+	<div class="example-container example-float-left-right-multiple">
+		<p class="example-description">
+			Example with multiple floats. Note how they will appear out of order on the same line if floated in different
+			directions.
+		</p>
+		<div class="container">
+			<div class="a">a<div class="css-prop">float: left;</div></div>
+			<div class="b">b<div class="css-prop">float: right;</div></div>
+			<div class="c">c<div class="css-prop">float: left;</div></div>
+			<div class="d">d<div class="css-prop">float: left;</div></div>
+			<div class="e">e<div class="css-prop">float: right;</div></div>
+		</div>
+	</div>
+
+	<h2>Floats and line boxes</h2>
+	<div class="example-container">
+		<p class="example-description">
+			Line boxes flow around floats. Block boxes ignore floats. See here the block container is behind the float but the
+			line boxes flow around it:
+		</p>
+		<div class="container">
+			<div class="a">a<div class="css-prop">width: 110px; float: left;</div></div>
+			<div class="b">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla luctus aliquam dolor, eu lacinia lorem placerat
+				vulputate.
+			</div>
+		</div>
+	</div>
+
+	<div class="example-container example-line-box-inline-box">
+		<p class="example-description">Same example with <code>display: inline-block</code>:</p>
+		<div class="container">
+			<div class="a">a<div class="css-prop">width: 110px; float: left;</div></div>
+			<div class="b"></div>
+			<div class="b"></div>
+			<div class="b"></div>
+			<div class="b"></div>
+			<div class="b"></div>
+			<div class="b"></div>
+			<div class="b"></div>
+			<div class="b"></div>
+		</div>
+	</div>
+
+	<h2>Clearing floats</h2>
+	<div class="example-container-clear">
+		<p class="example-description">
+			You can stop an element being next to a float with <code>clear: left/right/both</code>. Note that you can only
+			clear in a block formatting context, i.e. you can't clear inline elements.
+		</p>
+		<div class="container example-clear-left">
+			<div class="a">a<div class="css-prop">float: left;</div></div>
+			<div class="b">b<div class="css-prop">float: right;</div></div>
+			<div class="c">
+				<div class="css-prop">clear: left;</div>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+				vulputate.
+			</div>
+		</div>
+
+		<div class="container example-clear-right">
+			<div class="a">a<div class="css-prop">float: left;</div></div>
+			<div class="b">b<div class="css-prop">float: right;</div></div>
+			<div class="c">
+				<div class="css-prop">clear: right;</div>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+				vulputate.
+			</div>
+		</div>
+
+		<div class="container example-clear-right">
+			<div class="a">a<div class="css-prop">float: left;</div></div>
+			<div class="b">b<div class="css-prop">float: right;</div></div>
+			<div class="c">
+				<div class="css-prop">clear: both;</div>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. vulputate.
+			</div>
+		</div>
+	</div>
+
+	<h2>Containing floats</h2>
+	<div class="example-container">
+		<p class="example-description">
+			A <code>float</code> is taken out of regular flow, so parents won't automatically expand to contain them:</p>
+		<div class="container">
+			<div class="a">a<div class="css-prop">float: left;</div></div>
+		</div>
+	</div>
+
+	<p class="example-description">You can solve this in a few ways:</p>
+	<div class="example-container">
+		<div class="example-container example-clearfix">
+			<p class="example-description">
+				<strong>Clearfix</strong><br/>
+				Using the clearfix hack. This involves adding an element after the <code>float</code> and setting it to clear
+				the <code>float</code>:</p>
+			<div class="container">
+				<div class="a">a<div class="css-prop">float: left;</div></div>
+			</div>
+		</div>
+
+		<div class="example-container example-clear-overflow">
+			<p class="example-description">
+				<strong>overflow: auto</strong><br/>
+				Creating a new block formatting context using <code>overflow: auto</code> (a new BFC will contain everything
+				inside it):</p>
+			<div class="container">
+				<div class="css-prop">overflow: auto;</div>
+				<div class="a">a<div class="css-prop">float: left;</div></div>
+			</div>
+		</div>
+
+		<div class="example-container example-clear-flow-root">
+			<p class="example-description">
+				<strong>display: flow-root</strong><br/>
+				Creating a new block formatting context using the new and not as widely supported <code>display: flow-root</code>.
+				This is a more semantic approach, and also won't result in undesired scrollbars from setting <code>overflow</code>
+				when you don't really want overflow.
+			</p>
+			<div class="container">
+				<div class="css-prop">display: flow-root;</div>
+				<div class="a">a<div class="css-prop">float: left;</div></div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

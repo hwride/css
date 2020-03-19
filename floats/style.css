@@ -1,0 +1,97 @@
+/** Utility classes **/
+/* Do this so overflowing floats don't mess up following examples. */
+.example-container {
+	overflow: auto;
+}
+.container {
+	width: 300px;
+}
+.a {
+	float: left;
+}
+.float-left {
+	float: left;
+}
+.float-right {
+	float: right;
+}
+.clear-left {
+	clear: left;
+}
+.clear-right {
+	clear: right;
+}
+.clear-both {
+	clear: both;
+}
+
+.inline-block {
+	display: inline-block;
+}
+
+/** Example styles **/
+/* Floating left and right */
+.example-float-left-right .a {
+	float: left;
+}
+.example-float-left-right .b {
+	float: right;
+}
+
+.example-float-left-right-multiple .a {
+	float: left;
+}
+.example-float-left-right-multiple .b {
+	float: right;
+}
+.example-float-left-right-multiple .c {
+	float: left;
+}
+.example-float-left-right-multiple .d {
+	float: left;
+}
+.example-float-left-right-multiple .e {
+	float: right;
+}
+
+/* Floats and line boxes */
+.example-line-box-inline-box .b {
+	display: inline-block;
+	width: 75px;
+	height: 20px;
+}
+
+/* Clearing floats */
+.example-container-clear .container {
+	display: inline-block;
+	vertical-align: top;
+}
+.example-container-clear .b {
+	height: 75px;
+	float: right;
+}
+
+.example-clear-left .c {
+	clear: left;
+}
+.example-clear-right .c {
+	clear: right;
+}
+.example-clear-right .c {
+	clear: both;
+}
+
+/* Containing floats */
+.example-clearfix .container::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.example-clear-overflow .container {
+	overflow: auto;
+}
+
+.example-clear-flow-root .container {
+	display: flow-root;
+}
