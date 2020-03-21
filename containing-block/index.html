@@ -9,45 +9,84 @@
 <h2>position: static, relative & sticky</h2>
 <p class="example-description">
     For elements with a <code>position</code> of <code>static</code>, <code>relative</code> or <code>sticky</code> the
-    containing block is formed by the edge of the content box of the nearest ancestor that is either a block container
-    or establishes a formatting context. Note here:
-    <ul>
-        <li>block c has a <code>width</code> the size of the content box</li>
-    </ul>
+    containing block is formed by the edge of the content box of the nearest block container ancestor.
 </p>
 
 <div class="a" style="width: 800px; padding: 30px;">a
     <div class="css-prop">width: 800px; padding: 30px;</div>
 
-    <div class="b" style="width: 75%;">b
+    <div class="b" style="width: 75%;">aa
         <div class="css-prop">width: 75%;</div>
     </div>
-    <div class="c" style="position: relative; top: 100%; left: 0; width: 100%;">c
-        <div class="css-prop">position: relative; top: 100%; left: 0; width: 100%;</div>
+    <div class="c" style="position: relative; width: 75%">ab
+        <div class="css-prop">position: relative; width: 75%</div>
     </div>
 </div>
 
 <h2>position: absolute</h2>
 <p class="example-description">
-    For elements with a <code>position</code> of <code>absolute</code>, the containing block is formed by the edge of
-    the padding box of the nearest ancestor that has a position other than <code>static</code>. Note here:
-<ul>
-    <li>even though c is a child of b, it's Containing block is formed by a</li>
-    <li>block c has a <code>width</code> the size of the padding box</li>
-    <li>block c is positioned to the edge of the padding box when we set <code>left: 0</code></li>
-</ul>
+    For elements with a <code>position</code> of <code>absolute</code>, the containing block is formed by the nearest
+    ancestor that has a position of <code>absolute</code>, <code>relative</code> or <code>fixed</code>.
 
-<div class="a" style="position: relative; width: 800px; padding: 30px;">a
-    <div class="css-prop">position: relative; width: 800px; padding: 30px;</div>
+    For the following examples the block we're testing is green, semi transparent and set
+    to <code>top: 0; bottom: 0; left: 0; right: 0;</code>.
+</p>
+
+<div class="example-abs-block">
+    <h3>position: absolute with block ancestor</h3>
+    <p class="example-description">
+        The containing block is the edge of the padding box of the ancestor.
+    </p>
+
+    <div class="a" style="position: relative; width: 800px; padding: 30px;">a
+        <div class="css-prop">position: relative; width: 800px; padding: 30px;</div>
 
     <div class="b" style="width: 600px;">b
         <div class="css-prop">width: 600px;</div>
 
-        <div class="c" style="position: absolute; top: 100%; left: 0; width: 100%;">c
-            <div class="css-prop">position: absolute; top: 100%; left: 0; width: 100%;</div>
+            <div class="c" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; opacity: 0.5;"></div>
         </div>
     </div>
 </div>
 
+<h3>position: absolute with inline ancestor</h3>
+<p class="example-description">
+    The containing block is the bounding box around the padding boxes of the first and last inline boxes generated for
+    the ancestor. This example seems to show the containing block is simply the padding box around the ancestor block
+    though?
+
+    The <a href="http://test.csswg.org/suites/css21_dev/20110323/html4/containing-block-031.htm">W3 test page</a> seem
+    to be failing for this as well, perhaps a bug is here?
+</p>
+
+<span class="a" style="position: relative; width: 800px; padding: 0 30px 0 30px;">
+    <span class="css-prop">position: relative; padding: 30px;</span>
+    <span class="e" style="padding: 0 20px 0 20px"><span class="css-prop">padding: 20px;</span></span>
+
+    <span class="b">
+        bbbbbbbbbb
+
+        <span class="c" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; opacity: 0.5;"></span>
+    </span>
+    <span class="d">dddddddd</span>
+</span>
+
+<p class="example-description">
+    If the inline element is split across multiple lines the containing block is undefined. On Chrome 80 the containing
+    box appears to be the height of all line boxes, and the width up to the last line box. On Firefox 72 it appears to
+    be the first line box.
+</p>
+<div style="width: 250px">
+    <span class="a" style="position: relative; padding: 0 30px 0 30px;">
+        <span class="e" style="padding: 0 20px 0 20px"><span class="css-prop">padding: 20px;</span></span>
+
+        <span class="b">
+            bbbbbbbbbbbbb
+            <span class="c" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; opacity: 0.5;"></span>
+        </span>
+        <span class="d">cccccccccccc</span>
+    </span>
+</div>
+<div style="height: 100px;"></div>
 </body>
 </html>
