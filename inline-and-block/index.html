@@ -1,0 +1,212 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Inline and block</title>
+    <link rel="stylesheet" type="text/css" href="../common.css">
+    <style>
+        .example {
+            font-family: monospace;
+        }
+
+        .a {
+            padding: 10px;
+        }
+
+        /* BFC */
+        .block-size-properties-example .c {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            border: 5px solid red;
+            padding: 5px;
+        }
+
+        /* IFC */
+        .small-container-example .a {
+            width: 200px;
+        }
+
+        .line-box-height-example .d {
+            font-size: 1.5em;
+        }
+
+        .inline-size-properties-example .d {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            border: 5px solid red;
+            padding: 5px;
+        }
+
+        .atomic-inline-level-box-example-inline, .atomic-inline-level-box-example-inline-block {
+            display: inline-block;
+            vertical-align: top;
+        }
+        .atomic-inline-level-box-example-inline-block .c {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<h1>Inline and block</h1>
+<h2>Block formatting context</h2>
+<ul>
+    <li>In a <strong>block formatting context</strong> child <strong>block-level boxes</strong> are laid out vertically,
+        one after the other.</li>
+    <li>A <strong>block container</strong> forms a <strong>block formatting context</strong> if it contains all
+        <strong>block-level boxes</strong>.</li>
+    <li>If an element is a <strong>block container</strong> and a <strong>block-level items</strong> then it is known as
+    a <strong>block box</strong>.</li>
+</ul>
+<p class="example-description">
+    E.g. here <code>a</code> forms a block formatting context:
+</p>
+
+<div class="example a">div a
+    <div class="b">div aa</div>
+    <div class="c">div ab</div>
+</div>
+
+<h3>Width, height, margin, padding and border</h3>
+<p class="example-description">
+    Width, height, margin, border and padding apply in all direction to block-level elements. Here <code>ab</code> has
+    has them all applied:
+</p>
+
+<div class="example a block-size-properties-example">div a
+    <div class="b">div aa</div>
+    <div class="c">div ab</div>
+    <div class="d">div ab</div>
+</div>
+
+<h3>Anonymous block boxes</h3>
+<p class="example-description">
+    If a block container has a mix of inline and block elements as its children, the inline elements will be wrapped
+    in <strong>anonymous block boxes</strong>, and a block formatting context will be formed.  E.g. here <code>a</code>
+    forms a block formatting context and <code>ab</code> is wrapped in an anonymous block box:
+</p>
+
+<div class="example a">div a
+    <div class="b">div aa</div>
+    <span class="c">span ab</span>
+</div>
+
+<h2>Inline formatting context</h2>
+<p class="example-description">
+    A block container forms an <strong>inline formatting context</strong> if it contains all inline children. Inline
+    children are laid out horizontally, one after the other. E.g. here <code>a</code> forms an inline formatting context:
+</p>
+<div class="example a">div a
+    <span class="b">span aa</span>
+    <span class="c">span ab</span>
+</div>
+
+<h3>Line boxes</h3>
+<p class="example-description">
+    The box that surrounds a line of inline boxes is known as the <strong>line box</strong>. When several inline boxes
+    cannot fit horizontally within a single line box, more vertically stacked line boxes are created to fit them.
+</p>
+<div class="example line-box-example">
+    <div class="a">div a
+        <span class="b">span aa</span>
+        <span class="c">span ab</span>
+        <span class="d">span ac</span>
+        <span class="e">span ad</span>
+    </div>
+</div>
+
+<p class="example-description">
+    Line boxes are at least as tall as their largest inline box and can vary in height.
+</p>
+<div class="example small-container-example line-box-height-example">
+    <div class="a">div a
+        <span class="b">span aa</span>
+        <span class="c">span ab</span>
+        <span class="d">span ac</span>
+        <span class="e">span ad</span>
+    </div>
+</div>
+
+<p class="example-description">
+    When an inline box exceeds the width of a line box it is split into several boxes across several line boxes. If the
+    inline box cannot be split, or is prevented from splitting by e.g. whitespace rules, then it overflows the line box.
+</p>
+<div class="example small-container-example">
+    <div class="a">div a
+        <span class="b">span aa</span>
+        <span class="c">span ab</span>
+        <span class="d">span ac cannotbesplitsooverflowsssssssssssss more text</span>
+        <span class="e">span ad</span>
+    </div>
+</div>
+
+<h3>Width, height, margins, border and padding</h3>
+<p class="example-description">
+    Width, height and vertical margins do not apply to inline-level elements. But horizontal margins, and border and
+    padding in all directions do apply. Here <code>ac</code> has all properties applied, notice how it ignores
+    width, height and vertical margins:
+</p>
+<div class="example small-container-example inline-size-properties-example">
+    <div class="a">div a
+        <span class="b">span aa</span>
+        <span class="c">span ab</span>
+        <span class="d">span ac</span>
+        <span class="e">span ad</span>
+    </div>
+</div>
+
+<h3>Nested inline-level boxes</h3>
+<p class="example-description">
+    The contents of a regular inline-level box will participate in the same inline formatting context as its parent.
+    E.g. here <code>aba</code> is a grandchild of <code>a</code> but it still participates in its inline formatting
+    context:
+</p>
+<div class="example small-container-example">
+    <div class="a">div a
+        <span class="b">span aa</span>
+        <span class="d">span ab
+            <span class="c">span aba</span>
+        </span>
+        <span class="e">span ac</span>
+    </div>
+</div>
+
+<h3>Anonymous inline boxes</h3>
+<p class="example-description">
+    Any text directly inside a block container is wrapped in an <strong>anonymous inline box</strong>.
+</p>
+<div class="example small-container-example">
+    <div class="a">div a
+        Some text
+        <span class="b">span aa</span>
+        some more text
+    </div>
+</div>
+
+<h3>Atomic inline-level box</h3>
+<div>
+    <p class="example-description">
+        If an inline-level box's contents does not participate in the inline formatting context of its parent then it is
+        an <strong>atomic inline-level box</strong>. E.g. notice here how text does not flow between lines for the
+        <code>display: inline-block</code> element:
+    </p>
+    <div class="example small-container-example atomic-inline-level-box-example-inline">
+        <div class="a">div a
+            <span class="b">span aa</span>
+            <span class="c">span ab some more text here</span>
+            <span class="d">span ac</span>
+            <span class="e">span ad</span>
+        </div>
+    </div>
+
+    <div class="example small-container-example atomic-inline-level-box-example-inline-block">
+        <div class="a">div a
+            <span class="b">span aa</span>
+            <span class="c">span ab <code>display: inline-block</code></span>
+            <span class="d">span ac</span>
+            <span class="e">span ad</span>
+        </div>
+    </div>
+</div>
+</body>
+</html>
