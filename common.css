@@ -4,24 +4,27 @@ h1 {
 	font-size: 2em;
 }
 h2 {
-	margin-top: 15px;
-	margin-bottom: 5px;
-}
-h2 {
-	font-size: 1.3em;
+	font-size: 1.4em;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 h3 {
-	font-size: 1.1em;
+	font-size: 1.2em;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 h4 {
 	font-size: 1em;
+	margin-top: 15px;
+	margin-bottom: 0;
 }
 ul {
 	margin-top: 0;
 }
 
 .example-description {
-	margin-bottom: 5px;
+	margin-top: 0;
+	margin-bottom: 10px;
 }
 .css-prop {
 	font-size: .8em;
