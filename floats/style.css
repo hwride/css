@@ -105,6 +105,11 @@
 	float: left;
 }
 
+.example-line-box-middle-float .inner {
+	float: right;
+	width: 100px;
+}
+
 /* Clearing floats */
 .example-container-clear .container {
 	display: inline-block;
