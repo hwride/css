@@ -65,6 +65,8 @@
     The containing block is the bounding box around the padding boxes of the first and last inline boxes generated for
     the ancestor.
 </p>
+
+<h4>Parent is containing block</h4>
 <p class="example-description">
     Here is an example where the the parent is the containing block:
 </p>
@@ -80,6 +82,7 @@
     <span class="d">dddddddd</span>
 </span>
 
+<h4>Grandparent is containing block</h4>
 <p class="example-description">
     Here is an example where the grandparent is the containing block and has its own padding and multiple children:
 </p>
@@ -103,6 +106,7 @@
     to be failing for this as well, perhaps there is a bug?
 </p>
 
+<h4>Containing block split over multiple lines</h4>
 <p class="example-description">
     If the inline element is split across multiple lines the containing block is undefined. On Chrome 80 the containing
     box appears to be the height of all line boxes, and the width up to the last line box. On Firefox 72 it appears to
