@@ -55,7 +55,7 @@
         one after the other.</li>
     <li>A <strong>block container</strong> forms a <strong>block formatting context</strong> if it contains all
         <strong>block-level boxes</strong>.</li>
-    <li>If an element is a <strong>block container</strong> and a <strong>block-level items</strong> then it is known as
+    <li>If an element is a <strong>block container</strong> and a <strong>block-level item</strong> then it is known as
     a <strong>block box</strong>.</li>
 </ul>
 <p class="example-description">
@@ -67,9 +67,9 @@
     <div class="c">div ab</div>
 </div>
 
-<h3>Width, height, margin, padding and border</h3>
+<h3>Width, height, padding, margin and border</h3>
 <p class="example-description">
-    Width, height, margin, border and padding apply in all direction to block-level elements. Here <code>ab</code> has
+    Width, height, padding, margin, and border apply in all direction to block-level elements. Here <code>ab</code> has
     has them all applied:
 </p>
 
@@ -106,7 +106,7 @@
     The box that surrounds a line of inline boxes is known as the <strong>line box</strong>. When several inline boxes
     cannot fit horizontally within a single line box, more vertically stacked line boxes are created to fit them.
 </p>
-<div class="example line-box-example">
+<div class="example small-container-example line-box-example">
     <div class="a">div a
         <span class="b">span aa</span>
         <span class="c">span ab</span>
@@ -140,7 +140,7 @@
     </div>
 </div>
 
-<h3>Width, height, margins, border and padding</h3>
+<h3>Width, height, padding, margin and border</h3>
 <p class="example-description">
     Width, height and vertical margins do not apply to inline-level elements. But horizontal margins, and border and
     padding in all directions do apply. Here <code>ac</code> has all properties applied, notice how it ignores
@@ -173,7 +173,8 @@
 
 <h3>Anonymous inline boxes</h3>
 <p class="example-description">
-    Any text directly inside a block container is wrapped in an <strong>anonymous inline box</strong>.
+    Any text directly inside a block container is wrapped in an <strong>anonymous inline box</strong>. E.g. here "Some
+    text" and "some more text" are wrapped in anonymous inline boxes.
 </p>
 <div class="example small-container-example">
     <div class="a">div a
