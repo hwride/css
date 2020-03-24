@@ -3,6 +3,17 @@
 <head>
     <title>Containing block</title>
     <link rel="stylesheet" type="text/css" href="../common.css">
+    <style>
+        .absolute-test-el {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            outline: 2px dashed red;
+            opacity: 0.5;
+        }
+    </style>
 </head>
 <body>
 <h1>Containing block</h1>
@@ -28,7 +39,7 @@
     For elements with a <code>position</code> of <code>absolute</code>, the containing block is formed by the nearest
     ancestor that has a position of <code>absolute</code>, <code>relative</code> or <code>fixed</code>.
 
-    For the following examples the block we're testing is green, semi transparent and set
+    For the following examples the block we're testing is green, semi transparent, has a dashed red border and set
     to <code>top: 0; bottom: 0; left: 0; right: 0;</code>.
 </p>
 
@@ -44,7 +55,7 @@
     <div class="b" style="width: 600px;">b
         <div class="css-prop">width: 600px;</div>
 
-            <div class="c" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; opacity: 0.5;"></div>
+            <div class="c absolute-test-el"></div>
         </div>
     </div>
 </div>
@@ -52,13 +63,26 @@
 <h3>position: absolute with inline ancestor</h3>
 <p class="example-description">
     The containing block is the bounding box around the padding boxes of the first and last inline boxes generated for
-    the ancestor. This example seems to show the containing block is simply the padding box around the ancestor block
-    though?
-
-    The <a href="http://test.csswg.org/suites/css21_dev/20110323/html4/containing-block-031.htm">W3 test page</a> seem
-    to be failing for this as well, perhaps a bug is here?
+    the ancestor.
+</p>
+<p class="example-description">
+    Here is an example where the the parent is the containing block:
 </p>
 
+<span class="a" style="width: 800px; padding: 0 30px 0 30px;">
+    <span class="css-prop">position: relative; padding: 30px;</span>
+    <span class="e" style="padding: 0 20px 0 20px"><span class="css-prop">padding: 20px;</span></span>
+
+    <span class="b" style="position: relative; padding: 0 30px 0 30px;">
+        <span class="css-prop">position: relative; padding: 30px;</span>
+        <span class="c absolute-test-el"></span>
+    </span>
+    <span class="d">dddddddd</span>
+</span>
+
+<p class="example-description">
+    Here is an example where the grandparent is the containing block and has its own padding and multiple children:
+</p>
 <span class="a" style="position: relative; width: 800px; padding: 0 30px 0 30px;">
     <span class="css-prop">position: relative; padding: 30px;</span>
     <span class="e" style="padding: 0 20px 0 20px"><span class="css-prop">padding: 20px;</span></span>
@@ -66,15 +90,23 @@
     <span class="b">
         bbbbbbbbbb
 
-        <span class="c" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; opacity: 0.5;"></span>
+        <span class="c absolute-test-el"></span>
     </span>
     <span class="d">dddddddd</span>
 </span>
+<p class="example-description">
+    It seems to show the containing block is around the padding box around the ancestor, as opposed to the padding
+    boxes of its children. Does "first and the last inline boxes generated for that element" not actually refer to the
+    children but to the ancestor itself?
+
+    The <a href="http://test.csswg.org/suites/css21_dev/20110323/html4/containing-block-031.htm">W3 test page</a> seem
+    to be failing for this as well, perhaps there is a bug?
+</p>
 
 <p class="example-description">
     If the inline element is split across multiple lines the containing block is undefined. On Chrome 80 the containing
     box appears to be the height of all line boxes, and the width up to the last line box. On Firefox 72 it appears to
-    be the first line box.
+    be the first line box. See:
 </p>
 <div style="width: 250px">
     <span class="a" style="position: relative; padding: 0 30px 0 30px;">
@@ -82,7 +114,7 @@
 
         <span class="b">
             bbbbbbbbbbbbb
-            <span class="c" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; opacity: 0.5;"></span>
+            <span class="c absolute-test-el"></span>
         </span>
         <span class="d">cccccccccccc</span>
     </span>
