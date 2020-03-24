@@ -29,7 +29,7 @@ h2.with-z-index {
 .test-container-without-z-index {
     width: 500px;
     font-family: monospace;
-    font-size: 14px;
+    font-size: 12px;
 
     position: relative;
 }
@@ -73,7 +73,7 @@ h2.with-z-index {
     /* Make relative as all child divs will be absolutely positioned. */
     position: relative;
     font-family: monospace;
-    font-size: 14px;
+    font-size: 12px;
 }
 .test-container-with-z-index div {
     width: 250px;
