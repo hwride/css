@@ -1,0 +1,15 @@
+.css-testing-component {
+	display: flex;
+	height: 250px;
+}
+.css-testing-component_input-wrapper {
+	display: flex;
+	flex-direction: column;
+}
+.css-test-component__html,
+.css-test-component__css {
+	flex: 1;
+}
+.css-testing-component_iframe {
+	border: 1px solid gray;
+}

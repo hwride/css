@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CSS testing component</title>
+	<link rel="stylesheet" type="text/css" href="css-testing-component.css">
+</head>
+<body>
+<h1>CSS testing component</h1>
+<div class="content"></div>
+</body>
+<script src="css-testing-component.js"></script>
+<script>
+createCSSTestingComponent({
+	parent: document.querySelector('.content'),
+	defaultHTML: `
+<div class="my-div">
+</div>
+`.trim(),
+	defaultCSS: `
+.my-div {
+  background: dodgerblue;
+  height: 50px;
+}
+`.trim()
+})
+</script>
+</html>
