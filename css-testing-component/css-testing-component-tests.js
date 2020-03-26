@@ -4,7 +4,6 @@ runTests({
 		testHeight
 	],
 	teardown,
-	// Setup the basic example at the end for testing.
 	afterAll
 })
 
