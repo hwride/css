@@ -5,11 +5,15 @@ runTests({
 	],
 	teardown,
 	// Setup the basic example at the end for testing.
-	afterAll: testBasic
+	afterAll
 })
 
 function teardown() {
 	document.querySelector('.content').innerHTML = ''
+}
+
+function afterAll() {
+	window.cssTestingComponent = createCSSTestingComponent(getDefaultOptions())
 }
 
 function getDefaultOptions(overrides) {
