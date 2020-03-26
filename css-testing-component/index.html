@@ -11,18 +11,56 @@
 </body>
 <script src="css-testing-component.js"></script>
 <script>
-createCSSTestingComponent({
-	parent: document.querySelector('.content'),
-	defaultHTML: `
+testBasic()
+
+function testBasic() {
+	const options = {
+		parent: document.querySelector('.content'),
+		defaultHTML: `
 <div class="my-div">
 </div>
 `.trim(),
-	defaultCSS: `
+		defaultCSS: `
 .my-div {
   background: dodgerblue;
   height: 50px;
 }
 `.trim()
-})
+	}
+	const cssTestingComponent = createCSSTestingComponent(options)
+	const iframe = cssTestingComponent.querySelector('.css-testing-component_iframe')
+
+	// iframe HTML should be correct
+	assert(getIframeHTML(cssTestingComponent) === options.defaultHTML)
+
+	// iframe style should be correct
+	assert(getIframeCSS(cssTestingComponent) === options.defaultCSS)
+
+	// should update on change of HTML text area
+	const htmlTextArea = document.querySelector('.css-test-component__html')
+	const newHTMLValue = '<span>Test</span>'
+	htmlTextArea.value = newHTMLValue
+	htmlTextArea.dispatchEvent(new Event('input'))
+	assert(getIframeHTML(cssTestingComponent) === newHTMLValue)
+
+	// should update on change of CSS text area
+	const cssTextArea = document.querySelector('.css-test-component__css')
+	const newCSSValue = 'span { color: dodgerblue; }'
+	cssTextArea.value = newCSSValue
+	cssTextArea.dispatchEvent(new Event('input'))
+	assert(getIframeCSS(cssTestingComponent) === newCSSValue)
+}
+
+function assert(boolean) {
+	if(!boolean) throw new Error('Assert failed')
+}
+function getIframeHTML(cssTestingComponent) {
+	const iframe = cssTestingComponent.querySelector('.css-testing-component_iframe')
+	return iframe.contentWindow.document.querySelector('body').innerHTML
+}
+function getIframeCSS(cssTestingComponent) {
+	const iframe = cssTestingComponent.querySelector('.css-testing-component_iframe')
+	return iframe.contentWindow.document.querySelector('head style').innerHTML
+}
 </script>
 </html>

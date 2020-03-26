@@ -11,7 +11,7 @@
  * @param options.defaultCSS Default CSS that should be used.
  */
 function createCSSTestingComponent(options) {
-	create()
+	return create()
 
 	function create() {
 		const cssTestingComponentEl = createCSSTestComponentWrapper(options.parent)
@@ -23,6 +23,8 @@ function createCSSTestingComponent(options) {
 		cssTestingComponentEl.prepend(inputWrapperEl)
 		inputWrapperEl.append(createHTMLTextArea(iframeEl))
 		inputWrapperEl.append(createCSSTextArea(iframeEl))
+
+		return cssTestingComponentEl
 	}
 
 	/* Utility functions */
