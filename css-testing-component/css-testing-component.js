@@ -33,6 +33,14 @@ function createCSSTestingComponent(options) {
 		const iframeEl = document.createElement('iframe')
 		iframeEl.className = 'css-testing-component_iframe'
 		cssTestingComponentEl.appendChild(iframeEl)
+		const iframeResetStylesTag = iframeEl.contentWindow.document.createElement('style')
+		iframeResetStylesTag.dataset.name = 'reset'
+		iframeResetStylesTag.innerHTML = `
+  body {
+    margin: 0;
+  }
+`
+		iframeEl.contentWindow.document.querySelector('head').append(iframeResetStylesTag)
 		return iframeEl
 	}
 
@@ -46,12 +54,12 @@ function createCSSTestingComponent(options) {
 		return cssTestingComponentEl
 	}
 
-	function createHTMLTextArea(iframe) {
+	function createHTMLTextArea(iframeEl) {
 		const htmlTextAreaEl = createTextArea('css-test-component__html')
 		if(options.defaultHTML) htmlTextAreaEl.innerHTML = options.defaultHTML
 
 		const updateIframeHTMLContent = () =>
-			iframe.contentWindow.document.querySelector('body').innerHTML = htmlTextAreaEl.value
+			iframeEl.contentWindow.document.querySelector('body').innerHTML = htmlTextAreaEl.value
 		htmlTextAreaEl.addEventListener('input', updateIframeHTMLContent)
 
 		// Update for the first time.
@@ -60,15 +68,16 @@ function createCSSTestingComponent(options) {
 		return htmlTextAreaEl
 	}
 
-	function createCSSTextArea(iframe) {
+	function createCSSTextArea(iframeEl) {
 		const cssTextAreaEl = createTextArea('css-test-component__css')
 		if(options.defaultCSS) cssTextAreaEl.innerHTML = options.defaultCSS
 
 		// Create a style tag inside the iframe we will update with our styles.
-		const iframeStyleTag = iframe.contentWindow.document.createElement('style')
-		iframe.contentWindow.document.querySelector('head').append(iframeStyleTag)
+		const iframeCustomStyleTag = iframeEl.contentWindow.document.createElement('style')
+		iframeCustomStyleTag.dataset.name = 'custom'
+		iframeEl.contentWindow.document.querySelector('head').append(iframeCustomStyleTag)
 
-		const updateIframeCSSContent = () => iframeStyleTag.innerHTML = cssTextAreaEl.value
+		const updateIframeCSSContent = () => iframeCustomStyleTag.innerHTML = cssTextAreaEl.value
 		cssTextAreaEl.addEventListener('input', updateIframeCSSContent)
 
 		// Add initial content to iframe.

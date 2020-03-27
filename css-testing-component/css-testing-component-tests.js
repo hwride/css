@@ -41,7 +41,7 @@ function testBasic() {
 	assert(getIframeHTML(cssTestingComponent) === options.defaultHTML)
 
 	// iframe style should be correct
-	assert(getIframeCSS(cssTestingComponent) === options.defaultCSS)
+	assert(getIframeCustomCSS(cssTestingComponent) === options.defaultCSS)
 
 	// should update on change of HTML text area
 	const htmlTextArea = document.querySelector('.css-test-component__html')
@@ -55,7 +55,7 @@ function testBasic() {
 	const newCSSValue = 'span { color: dodgerblue; }'
 	cssTextArea.value = newCSSValue
 	cssTextArea.dispatchEvent(new Event('input'))
-	assert(getIframeCSS(cssTestingComponent) === newCSSValue)
+	assert(getIframeCustomCSS(cssTestingComponent) === newCSSValue)
 }
 
 function testHeight() {
@@ -69,9 +69,9 @@ function getIframeHTML(cssTestingComponent) {
 	const iframe = cssTestingComponent.querySelector('.css-testing-component_iframe')
 	return iframe.contentWindow.document.querySelector('body').innerHTML
 }
-function getIframeCSS(cssTestingComponent) {
+function getIframeCustomCSS(cssTestingComponent) {
 	const iframe = cssTestingComponent.querySelector('.css-testing-component_iframe')
-	return iframe.contentWindow.document.querySelector('head style').innerHTML
+	return iframe.contentWindow.document.querySelector('head style[data-name="custom"]').innerHTML
 }
 
 /* Mini test framework functions */
