@@ -1,6 +1,5 @@
 .css-testing-component {
 	display: flex;
-	height: 250px;
 }
 .css-testing-component_input-wrapper {
 	display: flex;
@@ -8,8 +7,13 @@
 }
 .css-test-component__html,
 .css-test-component__css {
-	flex: 1;
+	border: 1px solid gray;
+	border-right: none; /* Stop double border. */
 }
+.css-test-component__css {
+	border-top: none; /* Stop double border. */
+}
+
 .css-testing-component_iframe {
 	border: 1px solid gray;
 }
