@@ -9,6 +9,7 @@
 .css-test-component__css {
 	border: 1px solid gray;
 	border-right: none; /* Stop double border. */
+	resize: none;
 }
 .css-test-component__css {
 	border-top: none; /* Stop double border. */
