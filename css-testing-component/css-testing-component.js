@@ -7,8 +7,8 @@
  * Create a CSS test component.
  *
  * @param options.parent Parent element to append the CSS test component to.
- * @param options.defaultHTML Default HTML that should be used.
- * @param options.defaultCSS Default CSS that should be used.
+ * @param options.html Default HTML that should be used.
+ * @param options.css Default CSS that should be used.
  * @param options.htmlHeight Height of HTML text area. Defaults to lines + 1.
  * @param options.cssHeight Height of HTML text area. Defaults to lines + 1.
  */
@@ -63,7 +63,7 @@ function createCSSTestingComponent(options) {
 
 	function createHTMLTextArea(iframeEl) {
 		const htmlTextAreaEl = createTextArea('css-test-component__html')
-		const html = options.defaultHTML ? options.defaultHTML.trim() : ''
+		const html = options.html ? options.html.trim() : ''
 		htmlTextAreaEl.innerHTML = html
 
 		// Set height of text area.
@@ -81,7 +81,7 @@ function createCSSTestingComponent(options) {
 
 	function createCSSTextArea(iframeEl) {
 		const cssTextAreaEl = createTextArea('css-test-component__css')
-		const css = options.defaultCSS ? options.defaultCSS.trim() : ''
+		const css = options.css ? options.css.trim() : ''
 		cssTextAreaEl.innerHTML = css
 
 		// Set height of text area.

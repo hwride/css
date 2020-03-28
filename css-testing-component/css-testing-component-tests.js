@@ -21,10 +21,10 @@ function afterAll() {
 function getDefaultOptions(overrides) {
 	return {
 		parent: document.querySelector('.content'),
-		defaultHTML: `
+		html: `
 <div class="my-div"></div>
 `,
-		defaultCSS: `
+		css: `
 .my-div {
   background: dodgerblue;
   height: 50px;
@@ -41,10 +41,10 @@ function testBasic() {
 	const cssTestingComponent = createCSSTestingComponent(options)
 
 	// iframe HTML should be correct
-	assert(getIframeHTML(cssTestingComponent) === options.defaultHTML.trim())
+	assert(getIframeHTML(cssTestingComponent) === options.html.trim())
 
 	// iframe style should be correct
-	assert(getIframeCustomCSS(cssTestingComponent) === options.defaultCSS.trim())
+	assert(getIframeCustomCSS(cssTestingComponent) === options.css.trim())
 
 	// if default HTML or CSS is provided and no text area height is provided should default to lines + 1 em height.
 	const htmlTextArea = getHTMLTextArea(cssTestingComponent)
@@ -77,7 +77,7 @@ function testTextAreHeights() {
 	const options = getDefaultOptions({
 		htmlHeight: '3em',
 		cssHeight: '6em',
-		defaultCSS: `
+		css: `
 .my-div {
   background: dodgerblue;
   height: 50px;
