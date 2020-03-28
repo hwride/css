@@ -151,3 +151,76 @@ createCSSTestingComponent({
   width: 10em;
 }
 `})
+
+/* Block percentage width and height */
+/* These examples do not seem to work properly in the iframe. The 100% height stretches to the whole iframe even when
+the containing block has a height of auto. Leaving the code in case this can be debugged later. */
+/* createCSSTestingComponent({
+	parent: document.querySelector('.example-block-percent'),
+	html: `<div class="block">
+  <div></div>
+</div>`,
+	css: `
+.block {
+  background: dodgerblue;
+  width: 230px;
+  height: 100px;
+}
+.block > div {
+  background: red;
+  width: 50%;
+  height: 75%;
+}
+`})
+
+createCSSTestingComponent({
+	parent: document.querySelector('.example-block-percent-revert-auto'),
+	html: `<div class="block">
+  <div></div>
+  <div></div>
+  <div></div>
+</div>`,
+	css: `
+.block {
+  background: dodgerblue;
+}
+.block > div:nth-child(1) {
+  background: red;
+  height: 50px;
+}
+.block > div:nth-child(2) {
+  background: green;
+  height: 100%;
+}
+.block > div:nth-child(3) {
+  background: gold;
+  height: 20px;
+  width: 50%;
+}
+`})
+
+createCSSTestingComponent({
+	parent: document.querySelector('.example-block-percent-revert-auto-grandparent-fixed'),
+	html: `<div class="grandparent">
+  <div class="parent">
+    <div class="child"></div>
+  </div>
+</div>`,
+	css: `
+.block {
+  background: dodgerblue;
+}
+.grandparent {
+  background: red;
+  height: 100px;
+}
+.parent {
+  background: green;
+  height: auto;
+}
+.child {
+  background: gold;
+  height: 100%;
+}
+`})
+*/
