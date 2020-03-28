@@ -101,7 +101,6 @@ function createCSSTestingComponent(options) {
 		const textArea = document.createElement('textarea')
 		textArea.className = className
 		textArea.cols = 60
-		textArea.rows = 5
 		return textArea
 	}
 }
