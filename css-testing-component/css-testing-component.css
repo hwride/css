@@ -1,7 +1,9 @@
 .css-testing-component {
 	display: flex;
 }
-.css-testing-component_input-wrapper {
+
+/* Text areas */
+.css-testing-component__input-wrapper {
 	display: flex;
 	flex-direction: column;
 }
@@ -15,6 +17,20 @@
 	border-top: none; /* Stop double border. */
 }
 
-.css-testing-component_iframe {
+/* iframe */
+/* The iframe will not behave as a flex item and fit the height of its flex container (because it's a replaced
+element?).
+
+Fixing this by wrapping it in another element which will behave like a flex item, then position the iframe so it covers
+that. */
+.css-testing-component__iframe-wrapper {
+	position: relative;
+	width: 250px;
 	border: 1px solid gray;
+}
+.css-testing-component__iframe {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	border: none;
 }

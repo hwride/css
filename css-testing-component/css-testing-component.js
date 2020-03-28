@@ -9,25 +9,25 @@
  * @param options.parent Parent element to append the CSS test component to.
  * @param options.defaultHTML Default HTML that should be used.
  * @param options.defaultCSS Default CSS that should be used.
- * @param options.htmlHeight Height of HTML text area.
- * @param options.cssHeight Height of HTML text area.
+ * @param options.htmlHeight Height of HTML text area. Defaults to lines + 1.
+ * @param options.cssHeight Height of HTML text area. Defaults to lines + 1.
  */
 function createCSSTestingComponent(options) {
-	setDefaults(options)
 	return create()
-
-	function setDefaults(options) {
-		if(!options.htmlHeight) options.htmlHeight = '50px';
-		if(!options.cssHeight) options.cssHeight = '50px';
-	}
 
 	function create() {
 		const cssTestingComponentEl = createCSSTestComponentWrapper(options.parent, options.height)
-		const iframeEl = createIframe(cssTestingComponentEl)
-		const inputWrapperEl = document.createElement('div')
 
-		// Create inputs.
-		inputWrapperEl.className = 'css-testing-component_input-wrapper'
+		// Create iframe.
+		const iframeWrapperEl = document.createElement('div')
+		iframeWrapperEl.className = 'css-testing-component__iframe-wrapper'
+		cssTestingComponentEl.append(iframeWrapperEl)
+		const iframeEl = createIframe(cssTestingComponentEl)
+		iframeWrapperEl.append(iframeEl)
+
+		// Create input text areas.
+		const inputWrapperEl = document.createElement('div')
+		inputWrapperEl.className = 'css-testing-component__input-wrapper'
 		cssTestingComponentEl.prepend(inputWrapperEl)
 		inputWrapperEl.append(createHTMLTextArea(iframeEl))
 		inputWrapperEl.append(createCSSTextArea(iframeEl))
@@ -38,7 +38,7 @@ function createCSSTestingComponent(options) {
 	/* Utility functions */
 	function createIframe(cssTestingComponentEl) {
 		const iframeEl = document.createElement('iframe')
-		iframeEl.className = 'css-testing-component_iframe'
+		iframeEl.className = 'css-testing-component__iframe'
 		cssTestingComponentEl.appendChild(iframeEl)
 		const iframeResetStylesTag = iframeEl.contentWindow.document.createElement('style')
 		iframeResetStylesTag.dataset.name = 'reset'
@@ -63,9 +63,11 @@ function createCSSTestingComponent(options) {
 
 	function createHTMLTextArea(iframeEl) {
 		const htmlTextAreaEl = createTextArea('css-test-component__html')
-		if(options.htmlHeight) htmlTextAreaEl.style.flex = `1 0 ${options.htmlHeight}`
+		const html = options.defaultHTML ? options.defaultHTML.trim() : ''
+		htmlTextAreaEl.innerHTML = html
 
-		if(options.defaultHTML) htmlTextAreaEl.innerHTML = options.defaultHTML.trim()
+		// Set height of text area.
+		htmlTextAreaEl.style.flex = `1 0 ${getTextAreaHeight(options.htmlHeight, html)}`
 
 		const updateIframeHTMLContent = () =>
 			iframeEl.contentWindow.document.querySelector('body').innerHTML = htmlTextAreaEl.value
@@ -79,9 +81,11 @@ function createCSSTestingComponent(options) {
 
 	function createCSSTextArea(iframeEl) {
 		const cssTextAreaEl = createTextArea('css-test-component__css')
-		if(options.cssHeight) cssTextAreaEl.style.flex = `1 0 ${options.cssHeight}`
+		const css = options.defaultCSS ? options.defaultCSS.trim() : ''
+		cssTextAreaEl.innerHTML = css
 
-		if(options.defaultCSS) cssTextAreaEl.innerHTML = options.defaultCSS.trim()
+		// Set height of text area.
+		cssTextAreaEl.style.flex = `1 0 ${getTextAreaHeight(options.cssHeight, css)}`
 
 		// Create a style tag inside the iframe we will update with our styles.
 		const iframeCustomStyleTag = iframeEl.contentWindow.document.createElement('style')
@@ -95,6 +99,19 @@ function createCSSTestingComponent(options) {
 		updateIframeCSSContent()
 
 		return cssTextAreaEl
+	}
+
+	function getTextAreaHeight(optionHeight, initialText) {
+		const initialTextLines = initialText.split('\n').length
+		let defaultHeight
+		if(optionHeight != null) {
+			defaultHeight = optionHeight
+		} else if(initialTextLines) {
+			defaultHeight = `${initialTextLines + 1}em`
+		} else {
+			defaultHeight = '0'
+		}
+		return defaultHeight
 	}
 
 	function createTextArea(className) {
