@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Width, height and margins</title>
+    <link rel="stylesheet" type="text/css" href="../common.css">
+    <link rel="stylesheet" type="text/css" href="../css-testing-component/css-testing-component.css">
+    <style>
+        .done {
+            color: forestgreen;
+        }
+        table, th, td {
+            border-collapse: collapse;
+            border: 1px solid black;
+        }
+        td {
+            max-width: 15em;
+        }
+        .yes {
+            color: green;
+        }
+        .no {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<h1>Width, height and margins</h1>
+<h2>Comparison of box model properties</h2>
+<table>
+    <thead>
+    <tr>
+        <th rowspan="2">Property</th>
+        <th colspan="4">Supported values</th>
+        <th rowspan="2">Can have negative value?</th>
+        <th rowspan="2">Notes</th>
+    </tr>
+    <tr>
+        <th><code>length</code></th>
+        <th><code>&lt;percentage&gt;</code></th>
+        <th><code>auto</code></th>
+        <th>Other</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>margin</code></td>
+        <td class="yes">Yes</td>
+        <td class="yes">Yes</td>
+        <td class="yes">Yes</td>
+        <td></td>
+        <td class="yes">Yes</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><code>border</code></td>
+        <td class="yes">Yes</td>
+        <td class="no">No</td>
+        <td class="no">No</td>
+        <td><code>thin</code>, <code>medium</code>, <code>thick</code></td>
+        <td class="no">No</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><code>padding</code></td>
+        <td class="yes">Yes</td>
+        <td class="yes">Yes</td>
+        <td class="no">No</td>
+        <td></td>
+        <td class="no">No</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><code>width</code></td>
+        <td class="yes">Yes</td>
+        <td class="yes">Yes</td>
+        <td class="yes">Yes</td>
+        <td></td>
+        <td class="no">No</td>
+        <td><code>width</code> refers to the content area of an element, this is the area inside the padding.</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Block</h2>
+<h3>Questions</h3>
+<ul>
+    <li>The block width equation is based off the size of the containing block, but how does that block get its size if
+        it's <code>width: auto</code>?</li>
+    <li>How do negative margins work?</li>
+</ul>
+<h3>Width and horizontal margins</h3>
+<p class="example-description">
+    For block elements the equation that must be balanced is:
+    <code>margin + border + padding + width = width of containing block</code>.
+    This essentially happens by replacing <code>auto</code> values appropriately.
+</p>
+<p class="example-description">
+    If all fixed values add up to a size greater than the size of the containing block then the block will overflow.
+</p>
+
+<h4>One auto value resolves from the equation</h4>
+<p class="example-description">
+    If there is exactly 1 property with a value of <code>auto</code> its actual value follows from the equation. E.g.
+    here <code>margin-left</code> is <code>auto</code> so it shrinks and <code>margin-right</code> stays at
+    <code>50px</code>. If you make width<code>auto</code> and <code>margin-right: 50px</code> then the width will
+    shrink.
+</p>
+<div class="example-block-one-auto"></div>
+
+<h4>Over-constrained values changes a margin to auto</h4>
+<p class="example-description">
+    If all of the values have a computed value other than <code>auto</code> they are "over-constrained". In this case
+    <code>margin-right</code> (if <code>ltr</code>) is changed to <code>auto</code> to make the equation balance. See
+    below how the actual value for <code>margin-right</code> is less than the <code>50px</code> it is set to.
+</p>
+<div class="example-block-over-constrained"></div>
+
+<h4>Total width > containing block changes autos to zero</h4>
+<p class="example-description">
+    If <code>margin + border + padding + width > width of containing block</code> then <code>auto</code> values become
+    zero until the equation is balanced. First <code>margin</code> is set to zero, if the equation still
+    doesn't balance then <code>width</code> is set to zero. Here both <code>margin</code> and <code>width</code> end
+    up being zero.
+</p>
+<div class="example-block-border-padding-width-large"></div>
+
+<h4>Width overrides other autos</h4>
+<p class="example-description">
+    If <code>width</code> is <code>auto</code> any other <code>auto</code> values become zero and <code>width</code>
+    follows from the equation. Notice here how there are no margins:
+</p>
+<div class="example-block-width-auto"></div>
+
+<h4>Auto is shared between margins</h4>
+<p class="example-description">
+    If <code>margin-left</code> and <code>margin-right</code> are <code>auto</code> the element centers itself in the
+    containing block.
+</p>
+<div class="example-block-margin-auto"></div>
+
+<!-- Relative positioning: see 9.4.3 for values of left and right -->
+</body>
+<script src="../css-testing-component/css-testing-component.js"></script>
+<script src="index.js"></script>
+</html>
