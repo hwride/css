@@ -44,6 +44,7 @@ function testBasic() {
 	assert(getIframeHTML(cssTestingComponent) === options.html.trim())
 
 	// iframe style should be correct
+	assert(getIframeResetCSS(cssTestingComponent).includes('margin: 0'))
 	assert(getIframeCustomCSS(cssTestingComponent) === options.css.trim())
 
 	// if default HTML or CSS is provided and no text area height is provided should default to lines + 1 em height.
@@ -99,13 +100,17 @@ function addTestTitle(title) {
 	document.querySelector('.content').appendChild(titleEl)
 }
 
+function getIframeDocument(cssTestingComponent) {
+	return cssTestingComponent.querySelector('.css-testing-component__iframe').contentWindow.document
+}
 function getIframeHTML(cssTestingComponent) {
-	const iframe = cssTestingComponent.querySelector('.css-testing-component__iframe')
-	return iframe.contentWindow.document.querySelector('body').innerHTML
+	return getIframeDocument(cssTestingComponent).querySelector('body').innerHTML
+}
+function getIframeResetCSS(cssTestingComponent) {
+	return getIframeDocument(cssTestingComponent).querySelector('head style[data-name="reset"]').innerHTML
 }
 function getIframeCustomCSS(cssTestingComponent) {
-	const iframe = cssTestingComponent.querySelector('.css-testing-component__iframe')
-	return iframe.contentWindow.document.querySelector('head style[data-name="custom"]').innerHTML
+	return getIframeDocument(cssTestingComponent).querySelector('head style[data-name="custom"]').innerHTML
 }
 function getHTMLTextArea(cssTestingComponent) {
 	return cssTestingComponent.querySelector('.css-test-component__html')

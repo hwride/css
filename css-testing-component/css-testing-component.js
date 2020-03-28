@@ -23,8 +23,7 @@ function createCSSTestingComponent(options) {
 		const iframeWrapperEl = document.createElement('div')
 		iframeWrapperEl.className = 'css-testing-component__iframe-wrapper'
 		cssTestingComponentEl.append(iframeWrapperEl)
-		const iframeEl = createIframe(cssTestingComponentEl)
-		iframeWrapperEl.append(iframeEl)
+		const iframeEl = createIframe(iframeWrapperEl)
 
 		// Create input text areas.
 		const inputWrapperEl = document.createElement('div')
