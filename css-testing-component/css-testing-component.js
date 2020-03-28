@@ -9,14 +9,15 @@
  * @param options.parent Parent element to append the CSS test component to.
  * @param options.html Default HTML that should be used.
  * @param options.css Default CSS that should be used.
- * @param options.htmlHeight Height of HTML text area. Defaults to lines + 1.
+ * @param options.htmlHeight Height of HTML text area. Defaults to lines + 1. The iframe height will be equal to the
+ * height of both text areas.
  * @param options.cssHeight Height of HTML text area. Defaults to lines + 1.
  */
 function createCSSTestingComponent(options) {
 	return create()
 
 	function create() {
-		const cssTestingComponentEl = createCSSTestComponentWrapper(options.parent, options.height)
+		const cssTestingComponentEl = createCSSTestComponentWrapper(options.parent)
 
 		// Create iframe.
 		const iframeWrapperEl = document.createElement('div')
@@ -51,10 +52,9 @@ function createCSSTestingComponent(options) {
 		return iframeEl
 	}
 
-	function createCSSTestComponentWrapper(parent, height) {
+	function createCSSTestComponentWrapper(parent) {
 		const cssTestingComponentEl = document.createElement('div')
 		cssTestingComponentEl.className = 'css-testing-component'
-		if(height) cssTestingComponentEl.style.height = height
 		// We need to append our iframe to the actual DOM before iframe.contentWindow is defined, which we need to edit its
 		// content. That's why we ask for a parent element as input.
 		parent.append(cssTestingComponentEl)
