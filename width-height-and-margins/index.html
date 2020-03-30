@@ -37,6 +37,7 @@
     <li><a href="#inline">Inline</a>
         <ul>
             <li><a href="#inline-width">Width and horizontal margins</a>
+            <li><a href="#inline-height">Height and vertical margins</a>
         </ul>
     </li>
 </ul>
@@ -227,7 +228,7 @@
     <h4>% height reverts to auto if the containing block has no set height</h4>
     <p class="example-description">
         When a element has a percent height and it's containing block has no set height then the element reverts to an
-        <code>auto</code>height. This does not apply to width where percent still takes an effect. Note the height and width
+        <code>auto</code> height. This does not apply to width where percent still takes an effect. Note the height and width
         of the final two blocks:
     </p>
     <div class="block" style="background: dodgerblue; width: 600px; padding: 10px; font-family: monospace; font-size: .9em;">
@@ -256,15 +257,31 @@
 
     <h4>Width</h4>
     <p class="example-description">
-        <code>width</code> does not apply for inline elements.
+        The <code>width</code> property does not apply for inline elements.
     </p>
     <div class="example-inline-width"></div>
 
-    <h4>Horizontal margin</h4>
+    <h4>Margin, padding and border</h4>
     <p class="example-description">
-        Horizontal <code>margin</code> does apply for inline elements. If <code>auto</code> goes it to 0.
+        Horizontal <code>margin</code>, <code>padding</code> and <code>border</code> does apply for inline elements.
+        If horizontal <code>margin</code> is <code>auto</code> it becomes zero as on the second element here.
     </p>
     <div class="example-inline-margin"></div>
+
+    <h3 id="inline-height">Height and vertical margins</h3>
+    <h4>Height</h4>
+    <p class="example-description">
+        The <code>height</code> property does not apply for inline elements. Height is based on the font, this can be
+        seen on the second element here.
+    </p>
+    <div class="example-inline-height"></div>
+
+    <h4>Margin, padding and border</h4>
+    <p class="example-description">
+        Vertical <code>padding</code> and <code>border</code> apply to inline elements but have no effect on the size
+        of lines, so may overlap other lines. Vertical <code>margin</code> is ignored.
+    </p>
+    <div class="example-inline-vertical-props"></div>
 </div>
 
 <!-- Relative positioning: see 9.4.3 for values of left and right -->
