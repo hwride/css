@@ -4,7 +4,8 @@
 	overflow: auto;
 }
 .container {
-	width: 300px;
+	/* Size in em to handle cross platform font size differences making the floats different widths. */
+	width: 15em;
 }
 .a {
 	float: left;
