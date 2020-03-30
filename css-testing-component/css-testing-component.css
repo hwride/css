@@ -1,6 +1,10 @@
 .css-testing-component {
 	display: flex;
 }
+.css-testing-component textarea {
+	/* Turn off iOS border radius. */
+	border-radius: 0;
+}
 
 /* Text areas */
 .css-testing-component__input-wrapper {
