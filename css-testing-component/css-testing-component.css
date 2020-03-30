@@ -4,6 +4,7 @@
 .css-testing-component textarea {
 	/* Turn off iOS border radius. */
 	border-radius: 0;
+	-webkit-border-radius: 0;
 }
 
 /* Text areas */
