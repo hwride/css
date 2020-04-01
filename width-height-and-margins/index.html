@@ -40,6 +40,11 @@
             <li><a href="#inline-height">Height and vertical margins</a>
         </ul>
     </li>
+    <li><a href="#absolute">Absolute</a>
+        <ul>
+            <li><a href="#absolute-width">Width and horizontal margins</a>
+        </ul>
+    </li>
 </ul>
 
 <h2>Comparison of box model properties</h2>
@@ -102,6 +107,15 @@
         <td class="yes">Yes</td>
         <td></td>
         <td class="no">No</td>
+        <td><code>height</code> refers to the content area of an element, this is the area inside the padding.</td>
+    </tr>
+    <tr>
+        <td><code>top</code><br /><code>right</code><br /><code>bottom</code><br /><code>left</code></td>
+        <td class="yes">Yes</td>
+        <td class="yes">Yes</td>
+        <td class="yes">Yes</td>
+        <td></td>
+        <td class="yes">Yes</td>
         <td><code>height</code> refers to the content area of an element, this is the area inside the padding.</td>
     </tr>
     </tbody>
@@ -284,9 +298,58 @@
     <div class="example-inline-vertical-props"></div>
 </div>
 
+<div id="absolute">
+    <h2>Absolute</h2>
+    <h3 id="absolute-width">Width and horizontal margins</h3>
+
+    <p class="example-description">
+        The <strong>static position</strong> of an element refers to the position it would have had if it had been laid
+        out in normal flow.
+    </p>
+    <p class="example-description">
+        The equation that is balanced for <code>absolute</code> elements is:
+        <code>left + margin + border + padding + width + right = width of static-position containing block</code>.
+    </p>
+
+    <h4>Left, right or width are auto</h4>
+    <p class="example-description">
+        In this case the following rules apply:
+    </p>
+    <ol>
+        <li><code>auto</code> values for <code>margin-left</code> and <code>margin-right</code> become zero.</li>
+        <li>If there are multiple <code>auto</code>s including <code>width</code> then <code>width</code>
+        becomes shrink-to-fit.</li>
+        <li>If there are still multiple <code>auto</code>s then <code>left</code> (if <code>ltr</code>) gets
+            set to the static position.</li>
+        <li>The final <code>auto</code> gets set according to the equation. This can include becoming negative for
+            <code>left</code> or <code>right</code>. <code>width</code> can't go below shrink to fit.</li>
+    </ol>
+    <div class="example-absolute-width-left-right-width-auto"></div>
+
+    <!--
+        Can you make width smaller than its content if width is auto?
+        Negative margins - think this might apply for the non auto left,right,width example
+    -->
+
+    <h4>None of left, width and right are auto</h4>
+    <p class="example-description">
+        In this case the following rules apply:
+    </p>
+    <ol>
+        <li>If both horizontal margins are <code>auto</code> they get assigned equal value to solve the equation.</li>
+        <li>Unless this could make a margin negative, in which case <code>margin-left</code> (if <code>ltr</code>) is
+            set to zero and solve for right.</li>
+        <li>If one margin is <code>auto</code> then solve for that margin.</li>
+        <li>If the values are over-constrained <code>margin-right</code> (if <code>ltr</code>) becomes <code>auto</code>.</li>
+    </ol>
+    <div class="example-absolute-width-no-auto"></div>
+
+</div>
+
 <!-- Relative positioning: see 9.4.3 for values of left and right -->
 </body>
 <script src="../css-testing-component/css-testing-component.js"></script>
 <script src="block.js"></script>
 <script src="inline.js"></script>
+<script src="absolute.js"></script>
 </html>
