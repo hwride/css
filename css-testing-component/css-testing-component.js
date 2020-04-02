@@ -163,7 +163,7 @@ function createCSSTestingComponent(options) {
 			buttonEl.innerText = buttonOptions.label
 			buttonsEl.appendChild(buttonEl)
 
-			// Create event listener to update CSS code on button click.
+			// Create event listener to update HTML and CSS text areas on button click.
 			let buttonHTML = buttonOptions.reset ? options.initialHTML : buttonOptions.html
 			let buttonCSS = buttonOptions.reset ? options.initialCSS : buttonOptions.css
 			buttonEl.addEventListener('click', () => {
