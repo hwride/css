@@ -13,7 +13,7 @@
 }
 
 /* Text areas */
-.css-testing-component__input-wrapper {
+.css-testing-component__text-areas {
 	display: flex;
 	flex-direction: column;
 }
@@ -43,4 +43,11 @@ that. */
 	height: 100%;
 	width: 100%;
 	border: none;
+}
+
+/* Buttons */
+.css-testing-component__buttons {
+	padding-left: 10px;
+	flex-direction: column;
+	display: flex;
 }

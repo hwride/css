@@ -9,6 +9,8 @@
  * @param options.parent Parent element to append the CSS test component to.
  * @param options.html Default HTML that should be used.
  * @param options.css Default CSS that should be used.
+ * @param {[{label, html, css}]} options.buttons Buttons which can switch content in the component. If a button has
+ * reset: true instead of html and css it will be a reset button. A default label is supplied with the reset button.
  * @param options.htmlHeight Height of HTML text area. Defaults to lines + 1. The iframe height will be equal to the
  * height of both text areas.
  * @param options.cssHeight Height of HTML text area. Defaults to lines + 1.
@@ -19,6 +21,9 @@ function createCSSTestingComponent(options) {
 
 	function create() {
 		return new Promise(function(resolve) {
+			const initialHTML = options.html ? options.html.trim() : ''
+			const initialCSS = options.css ? options.css.trim() : ''
+
 			const cssTestingComponentEl = createCSSTestComponentWrapper(options.parent)
 
 			// Create iframe.
@@ -29,7 +34,7 @@ function createCSSTestingComponent(options) {
 
 			// Create input text areas.
 			const inputWrapperEl = document.createElement('div')
-			inputWrapperEl.className = 'css-testing-component__input-wrapper'
+			inputWrapperEl.className = 'css-testing-component__text-areas'
 			cssTestingComponentEl.prepend(inputWrapperEl)
 
 			// For some reason setting the iframe content doesn't work properly on Firefox 74 unless you tick the event queue
@@ -38,9 +43,23 @@ function createCSSTestingComponent(options) {
 				addResetStylesToIframe(iframeEl)
 
 				// Creating the text areas adds inital HTML and CSS to the iframe.
-				inputWrapperEl.append(createHTMLTextArea(iframeEl))
-				inputWrapperEl.append(createCSSTextArea(iframeEl))
+				const htmlTextArea = createHTMLTextArea(iframeEl, initialHTML)
+				inputWrapperEl.append(htmlTextArea)
+				const cssTextArea = createCSSTextArea(iframeEl, initialCSS)
+				inputWrapperEl.append(cssTextArea)
 				resolve(cssTestingComponentEl)
+
+				// Create buttons.
+				if(options.buttons) {
+					const buttonsEl = createButtons({
+						buttons: options.buttons,
+						initialHTML,
+						initialCSS,
+						htmlTextArea,
+						cssTextArea
+					})
+					cssTestingComponentEl.append(buttonsEl)
+				}
 			}, 0)
 		})
 	}
@@ -73,13 +92,12 @@ function createCSSTestingComponent(options) {
 		return cssTestingComponentEl
 	}
 
-	function createHTMLTextArea(iframeEl) {
+	function createHTMLTextArea(iframeEl, initialHTML) {
 		const htmlTextAreaEl = createTextArea('css-test-component__html')
-		const html = options.html ? options.html.trim() : ''
-		htmlTextAreaEl.innerHTML = html
+		htmlTextAreaEl.innerHTML = initialHTML
 
 		// Set height of text area.
-		htmlTextAreaEl.style.flex = `1 0 ${getTextAreaHeight(options.htmlHeight, html)}`
+		htmlTextAreaEl.style.flex = `1 0 ${getTextAreaHeight(options.htmlHeight, initialHTML)}`
 
 		const updateIframeHTMLContent = () =>
 			iframeEl.contentWindow.document.querySelector('body').innerHTML = htmlTextAreaEl.value
@@ -91,13 +109,12 @@ function createCSSTestingComponent(options) {
 		return htmlTextAreaEl
 	}
 
-	function createCSSTextArea(iframeEl) {
+	function createCSSTextArea(iframeEl, initialCSS) {
 		const cssTextAreaEl = createTextArea('css-test-component__css')
-		const css = options.css ? options.css.trim() : ''
-		cssTextAreaEl.innerHTML = css
+		cssTextAreaEl.innerHTML = initialCSS
 
 		// Set height of text area.
-		cssTextAreaEl.style.flex = `1 0 ${getTextAreaHeight(options.cssHeight, css)}`
+		cssTextAreaEl.style.flex = `1 0 ${getTextAreaHeight(options.cssHeight, initialCSS)}`
 
 		// Create a style tag inside the iframe we will update with our styles.
 		const iframeCustomStyleTag = iframeEl.contentWindow.document.createElement('style')
@@ -131,5 +148,34 @@ function createCSSTestingComponent(options) {
 		textArea.className = className
 		textArea.cols = 60
 		return textArea
+	}
+
+	function createButtons(options) {
+		const buttonsEl = document.createElement('div')
+		buttonsEl.className = 'css-testing-component__buttons'
+
+		options.buttons.forEach(buttonOptions => {
+			// Default reset button label.
+			if(buttonOptions.reset && !buttonOptions.label) buttonOptions.label = 'Reset';
+
+			// Create button element.
+			const buttonEl = document.createElement('button')
+			buttonEl.innerText = buttonOptions.label
+			buttonsEl.appendChild(buttonEl)
+
+			// Create event listener to update CSS code on button click.
+			let buttonHTML = buttonOptions.reset ? options.initialHTML : buttonOptions.html
+			let buttonCSS = buttonOptions.reset ? options.initialCSS : buttonOptions.css
+			buttonEl.addEventListener('click', () => {
+				if(buttonHTML) updateTextAreaContent(options.htmlTextArea, buttonHTML)
+				if(buttonCSS) updateTextAreaContent(options.cssTextArea, buttonCSS)
+			})
+		})
+		return buttonsEl
+	}
+
+	function updateTextAreaContent(textArea, newContent) {
+		textArea.value = newContent
+		textArea.dispatchEvent(new Event('input'))
 	}
 }

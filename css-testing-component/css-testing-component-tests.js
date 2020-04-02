@@ -2,7 +2,8 @@ runTests({
 	tests: [
 		testBasic,
 		testUpdate,
-		testTextAreHeights
+		testTextAreHeights,
+		testButtons
 	]
 })
 
@@ -81,6 +82,30 @@ async function testTextAreHeights() {
 	assert(getCSSTextArea(cssTestingComponent).style.flexBasis === options.cssHeight)
 }
 
+async function testButtons() {
+	addTestTitle('Text buttons')
+	const options = getDefaultOptions({
+		buttons: [{
+			reset: true
+		}, {
+			label: 'Change to green',
+			html: '<div>I am button one contents</div>',
+			css: 'div { background: green; }'
+		}]
+	})
+	const cssTestingComponent = await createCSSTestingComponent(options)
+
+	// Test button 1.
+	clickButton(cssTestingComponent, 1)
+	assert(getHTMLTextArea(cssTestingComponent).value === options.buttons[1].html)
+	assert(getCSSTextArea(cssTestingComponent).value === options.buttons[1].css)
+
+	// Test reset.
+	clickButton(cssTestingComponent, 0)
+	assert(getHTMLTextArea(cssTestingComponent).value === options.html.trim())
+	assert(getCSSTextArea(cssTestingComponent).value === options.css.trim())
+}
+
 /* Utility functions */
 function addTestTitle(title) {
 	const titleEl = document.createElement('h3')
@@ -105,6 +130,10 @@ function getHTMLTextArea(cssTestingComponent) {
 }
 function getCSSTextArea(cssTestingComponent) {
 	return cssTestingComponent.querySelector('.css-test-component__css')
+}
+function clickButton(cssTestingComponent, index) {
+	const button = cssTestingComponent.querySelectorAll('.css-testing-component__buttons button')[index]
+	button.dispatchEvent(new Event('click'))
 }
 
 /* Mini test framework functions */
