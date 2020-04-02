@@ -167,8 +167,8 @@ function createCSSTestingComponent(options) {
 			let buttonHTML = buttonOptions.reset ? options.initialHTML : buttonOptions.html
 			let buttonCSS = buttonOptions.reset ? options.initialCSS : buttonOptions.css
 			buttonEl.addEventListener('click', () => {
-				if(buttonHTML) updateTextAreaContent(options.htmlTextArea, buttonHTML)
-				if(buttonCSS) updateTextAreaContent(options.cssTextArea, buttonCSS)
+				if(buttonHTML) updateTextAreaContent(options.htmlTextArea, buttonHTML.trim())
+				if(buttonCSS) updateTextAreaContent(options.cssTextArea, buttonCSS.trim())
 			})
 		})
 		return buttonsEl
