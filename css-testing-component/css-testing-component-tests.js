@@ -3,20 +3,8 @@ runTests({
 		testBasic,
 		testUpdate,
 		testTextAreHeights
-	],
-	teardown,
-	afterAll
+	]
 })
-
-function teardown() {
-	document.querySelector('.content').innerHTML = ''
-}
-
-function afterAll() {
-	testBasic()
-	testUpdate()
-	testTextAreHeights()
-}
 
 function getDefaultOptions(overrides) {
 	return {
@@ -35,10 +23,10 @@ function getDefaultOptions(overrides) {
 }
 
 /* Tests */
-function testBasic() {
+async function testBasic() {
 	addTestTitle('Basic')
 	const options = getDefaultOptions()
-	const cssTestingComponent = createCSSTestingComponent(options)
+	const cssTestingComponent = await createCSSTestingComponent(options)
 
 	// iframe HTML should be correct
 	assert(getIframeHTML(cssTestingComponent) === options.html.trim())
@@ -54,9 +42,9 @@ function testBasic() {
 	assert(cssTextArea.style.flexBasis === '5em')
 }
 
-function testUpdate() {
+async function testUpdate() {
 	addTestTitle('Update of text areas')
-	const cssTestingComponent = createCSSTestingComponent(getDefaultOptions())
+	const cssTestingComponent = await createCSSTestingComponent(getDefaultOptions())
 
 	// should update on change of HTML text area
 	const htmlTextArea = getHTMLTextArea(cssTestingComponent)
@@ -73,7 +61,7 @@ function testUpdate() {
 	assert(getIframeCustomCSS(cssTestingComponent) === newCSSValue)
 }
 
-function testTextAreHeights() {
+async function testTextAreHeights() {
 	addTestTitle('Text area heights')
 	const options = getDefaultOptions({
 		htmlHeight: '3em',
@@ -88,7 +76,7 @@ function testTextAreHeights() {
   margin: 20px;
 }`
 	})
-	const cssTestingComponent = createCSSTestingComponent(options)
+	const cssTestingComponent = await createCSSTestingComponent(options)
 	assert(getHTMLTextArea(cssTestingComponent).style.flexBasis === options.htmlHeight)
 	assert(getCSSTextArea(cssTestingComponent).style.flexBasis === options.cssHeight)
 }
@@ -121,10 +109,15 @@ function getCSSTextArea(cssTestingComponent) {
 
 /* Mini test framework functions */
 function runTests(options) {
-	options.tests.forEach(test => {
-		test()
+	// Support async tests if the test function returns a Promise.
+	options.tests.reduce(async (lastTestPromise, nextTest) => {
+		await lastTestPromise
+		const testReturnVal = nextTest()
+		const testPromise = testReturnVal instanceof Promise ? testReturnVal : Promise.resolve()
+		await testPromise
 		if(options.teardown) options.teardown()
-	})
+	}, Promise.resolve())
+
 	if(options.afterAll) options.afterAll()
 }
 

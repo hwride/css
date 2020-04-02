@@ -12,27 +12,37 @@
  * @param options.htmlHeight Height of HTML text area. Defaults to lines + 1. The iframe height will be equal to the
  * height of both text areas.
  * @param options.cssHeight Height of HTML text area. Defaults to lines + 1.
+ * @return Promise which resolves with the CSS testing component element when it is ready for use.
  */
 function createCSSTestingComponent(options) {
 	return create()
 
 	function create() {
-		const cssTestingComponentEl = createCSSTestComponentWrapper(options.parent)
+		return new Promise(function(resolve) {
+			const cssTestingComponentEl = createCSSTestComponentWrapper(options.parent)
 
-		// Create iframe.
-		const iframeWrapperEl = document.createElement('div')
-		iframeWrapperEl.className = 'css-testing-component__iframe-wrapper'
-		cssTestingComponentEl.append(iframeWrapperEl)
-		const iframeEl = createIframe(iframeWrapperEl)
+			// Create iframe.
+			const iframeWrapperEl = document.createElement('div')
+			iframeWrapperEl.className = 'css-testing-component__iframe-wrapper'
+			cssTestingComponentEl.append(iframeWrapperEl)
+			const iframeEl = createIframe(iframeWrapperEl)
 
-		// Create input text areas.
-		const inputWrapperEl = document.createElement('div')
-		inputWrapperEl.className = 'css-testing-component__input-wrapper'
-		cssTestingComponentEl.prepend(inputWrapperEl)
-		inputWrapperEl.append(createHTMLTextArea(iframeEl))
-		inputWrapperEl.append(createCSSTextArea(iframeEl))
+			// Create input text areas.
+			const inputWrapperEl = document.createElement('div')
+			inputWrapperEl.className = 'css-testing-component__input-wrapper'
+			cssTestingComponentEl.prepend(inputWrapperEl)
 
-		return cssTestingComponentEl
+			// For some reason setting the iframe content doesn't work properly on Firefox 74 unless you tick the event queue
+			// once. For this reason set all initial iframe content here.
+			setTimeout(() => {
+				addResetStylesToIframe(iframeEl)
+
+				// Creating the text areas adds inital HTML and CSS to the iframe.
+				inputWrapperEl.append(createHTMLTextArea(iframeEl))
+				inputWrapperEl.append(createCSSTextArea(iframeEl))
+				resolve(cssTestingComponentEl)
+			}, 0)
+		})
 	}
 
 	/* Utility functions */
@@ -40,6 +50,10 @@ function createCSSTestingComponent(options) {
 		const iframeEl = document.createElement('iframe')
 		iframeEl.className = 'css-testing-component__iframe'
 		cssTestingComponentEl.appendChild(iframeEl)
+		return iframeEl
+	}
+
+	function addResetStylesToIframe(iframeEl) {
 		const iframeResetStylesTag = iframeEl.contentWindow.document.createElement('style')
 		iframeResetStylesTag.dataset.name = 'reset'
 		iframeResetStylesTag.innerHTML = `
@@ -48,7 +62,6 @@ function createCSSTestingComponent(options) {
   }
 `
 		iframeEl.contentWindow.document.querySelector('head').append(iframeResetStylesTag)
-		return iframeEl
 	}
 
 	function createCSSTestComponentWrapper(parent) {
