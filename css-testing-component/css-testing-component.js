@@ -129,7 +129,7 @@ function createCSSTestingComponent(options) {
 	}
 
 	function createCSSTextArea(iframeEl, initialCSS) {
-		const cssTextAreaEl = createTextArea('css-test-component__css')
+		const cssTextAreaEl = createTextArea('css-testing-component__css')
 		cssTextAreaEl.innerHTML = initialCSS
 
 		// Set height of text area.

@@ -143,7 +143,7 @@ function getHTMLTextArea(cssTestingComponent) {
 	return cssTestingComponent.querySelector('.css-testing-component__html')
 }
 function getCSSTextArea(cssTestingComponent) {
-	return cssTestingComponent.querySelector('.css-test-component__css')
+	return cssTestingComponent.querySelector('.css-testing-component__css')
 }
 function clickButton(cssTestingComponent, index) {
 	const button = cssTestingComponent.querySelectorAll('.css-testing-component__buttons button')[index]

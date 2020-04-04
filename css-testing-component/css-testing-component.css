@@ -24,12 +24,12 @@
 	flex-direction: column;
 }
 .css-testing-component__html,
-.css-test-component__css {
+.css-testing-component__css {
 	border: 1px solid gray;
 	border-right: none; /* Stop double border. */
 	resize: none;
 }
-.css-test-component__css {
+.css-testing-component__css {
 	border-top: none; /* Stop double border. */
 }
 
@@ -60,6 +60,6 @@ that. */
 }
 
 /* Description */
-.css-test-component__description {
+.css-testing-component__description {
 	max-width: 70ch;
 }
