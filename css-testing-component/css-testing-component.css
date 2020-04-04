@@ -1,6 +1,8 @@
 .css-testing-component {
 	display: flex;
+	flex-direction: column; /* Row 1 = text area, iframe and buttons, row 2 = description */
 }
+
 /* Fix iOS styles. */
 .css-testing-component textarea {
 	margin: 0;
@@ -10,6 +12,10 @@
 
 	-webkit-box-shadow: none;
 	box-shadow: none !important;
+}
+
+.css-testing-component__input-and-iframe-row {
+	display: flex;
 }
 
 /* Text areas */
@@ -51,4 +57,9 @@ that. */
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
+}
+
+/* Description */
+.css-test-component__description {
+	max-width: 70ch;
 }

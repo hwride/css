@@ -3,14 +3,21 @@
 	rendered in an iframe. The iframe will update automatically when the text is changed.
  */
 
+// Could re-write this to define all HTML upfront as a string, may be easier to read.
+
 /**
  * Create a CSS test component.
  *
  * @param options.parent Parent element to append the CSS test component to.
  * @param options.html Default HTML that should be used.
  * @param options.css Default CSS that should be used.
- * @param {[{label, html, css}]} options.buttons Buttons which can switch content in the component. If a button has
- * reset: true instead of html and css it will be a reset button. A default label is supplied with the reset button.
+ * @param options.description Default description to be displayed.
+ * @param {[{label, description, html, css}]} options.buttons Buttons which can switch content in the component.
+ *
+ * If description is provided it will be displayed when the button is clicked.
+ *
+ * If a button has reset: true instead of html and css it will be a reset button. A default label is supplied with the
+ * reset button.
  * @param options.htmlHeight Height of HTML text area. Defaults to lines + 1. The iframe height will be equal to the
  * height of both text areas.
  * @param options.cssHeight Height of HTML text area. Defaults to lines + 1.
@@ -23,19 +30,29 @@ function createCSSTestingComponent(options) {
 		return new Promise(function(resolve) {
 			const initialHTML = options.html ? options.html.trim() : ''
 			const initialCSS = options.css ? options.css.trim() : ''
+			const initialDescription = options.description ? options.description : ''
 
 			const cssTestingComponentEl = createCSSTestComponentWrapper(options.parent)
+
+			// Create top row containing input text areas, iframe and buttons.
+			const inputAndIframeRow = document.createElement('div')
+			inputAndIframeRow.className = 'css-testing-component__input-and-iframe-row'
+			cssTestingComponentEl.append(inputAndIframeRow)
 
 			// Create iframe.
 			const iframeWrapperEl = document.createElement('div')
 			iframeWrapperEl.className = 'css-testing-component__iframe-wrapper'
-			cssTestingComponentEl.append(iframeWrapperEl)
+			inputAndIframeRow.append(iframeWrapperEl)
 			const iframeEl = createIframe(iframeWrapperEl)
 
 			// Create input text areas.
 			const inputWrapperEl = document.createElement('div')
 			inputWrapperEl.className = 'css-testing-component__text-areas'
-			cssTestingComponentEl.prepend(inputWrapperEl)
+			inputAndIframeRow.prepend(inputWrapperEl)
+
+			// Create description row.
+			const descriptionEl = createDescription(options.description)
+			cssTestingComponentEl.append(descriptionEl)
 
 			// For some reason setting the iframe content doesn't work properly on Firefox 74 unless you tick the event queue
 			// once. For this reason set all initial iframe content here.
@@ -43,10 +60,10 @@ function createCSSTestingComponent(options) {
 				addResetStylesToIframe(iframeEl)
 
 				// Creating the text areas adds inital HTML and CSS to the iframe.
-				const htmlTextArea = createHTMLTextArea(iframeEl, initialHTML)
-				inputWrapperEl.append(htmlTextArea)
-				const cssTextArea = createCSSTextArea(iframeEl, initialCSS)
-				inputWrapperEl.append(cssTextArea)
+				const htmlTextAreaEl = createHTMLTextArea(iframeEl, initialHTML)
+				inputWrapperEl.append(htmlTextAreaEl)
+				const cssTextAreaEl = createCSSTextArea(iframeEl, initialCSS)
+				inputWrapperEl.append(cssTextAreaEl)
 				resolve(cssTestingComponentEl)
 
 				// Create buttons.
@@ -55,10 +72,12 @@ function createCSSTestingComponent(options) {
 						buttons: options.buttons,
 						initialHTML,
 						initialCSS,
-						htmlTextArea,
-						cssTextArea
+						initialDescription,
+						htmlTextAreaEl,
+						cssTextAreaEl,
+						descriptionEl
 					})
-					cssTestingComponentEl.append(buttonsEl)
+					inputAndIframeRow.append(buttonsEl)
 				}
 			}, 0)
 		})
@@ -150,11 +169,11 @@ function createCSSTestingComponent(options) {
 		return textArea
 	}
 
-	function createButtons(options) {
+	function createButtons({ buttons, initialHTML, initialCSS, initialDescription, htmlTextAreaEl, cssTextAreaEl, descriptionEl }) {
 		const buttonsEl = document.createElement('div')
 		buttonsEl.className = 'css-testing-component__buttons'
 
-		options.buttons.forEach(buttonOptions => {
+		buttons.forEach(buttonOptions => {
 			// Default reset button label.
 			if(buttonOptions.reset && !buttonOptions.label) buttonOptions.label = 'Reset';
 
@@ -164,14 +183,23 @@ function createCSSTestingComponent(options) {
 			buttonsEl.appendChild(buttonEl)
 
 			// Create event listener to update HTML and CSS text areas on button click.
-			let buttonHTML = buttonOptions.reset ? options.initialHTML : buttonOptions.html
-			let buttonCSS = buttonOptions.reset ? options.initialCSS : buttonOptions.css
+			const buttonHTML = buttonOptions.reset ? initialHTML : buttonOptions.html
+			const buttonCSS = buttonOptions.reset ? initialCSS : buttonOptions.css
+			const buttonDescription = buttonOptions.reset ? initialDescription : buttonOptions.description
 			buttonEl.addEventListener('click', () => {
-				if(buttonHTML) updateTextAreaContent(options.htmlTextArea, buttonHTML.trim())
-				if(buttonCSS) updateTextAreaContent(options.cssTextArea, buttonCSS.trim())
+				if(buttonHTML) updateTextAreaContent(htmlTextAreaEl, buttonHTML.trim())
+				if(buttonCSS) updateTextAreaContent(cssTextAreaEl, buttonCSS.trim())
+				if(buttonDescription) descriptionEl.innerHTML = buttonDescription
 			})
 		})
 		return buttonsEl
+	}
+
+	function createDescription(initialDescription) {
+		const descriptionEl = document.createElement('div')
+		descriptionEl.className = 'css-testing-component__description'
+		if(initialDescription) descriptionEl.innerHTML = initialDescription
+		return descriptionEl
 	}
 
 	function updateTextAreaContent(textArea, newContent) {

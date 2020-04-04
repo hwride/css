@@ -85,25 +85,32 @@ async function testTextAreHeights() {
 async function testButtons() {
 	addTestTitle('Text buttons')
 	const options = getDefaultOptions({
+		description: 'This is the default description',
 		buttons: [{
 			reset: true
 		}, {
 			label: 'Change to green',
+			description: 'You can supply description text which will be displayed when the button is clicked',
 			html: '<div>I am button one contents</div>',
 			css: 'div { background: green; }'
 		}]
 	})
 	const cssTestingComponent = await createCSSTestingComponent(options)
 
+	// Initial description should be there.
+	assert(getDescription(cssTestingComponent) === options.description)
+
 	// Test button 1.
 	clickButton(cssTestingComponent, 1)
 	assert(getHTMLTextArea(cssTestingComponent).value === options.buttons[1].html)
 	assert(getCSSTextArea(cssTestingComponent).value === options.buttons[1].css)
+	assert(getDescription(cssTestingComponent) === options.buttons[1].description)
 
 	// Test reset.
 	clickButton(cssTestingComponent, 0)
 	assert(getHTMLTextArea(cssTestingComponent).value === options.html.trim())
 	assert(getCSSTextArea(cssTestingComponent).value === options.css.trim())
+	assert(getDescription(cssTestingComponent) === options.description)
 }
 
 /* Utility functions */
@@ -134,6 +141,9 @@ function getCSSTextArea(cssTestingComponent) {
 function clickButton(cssTestingComponent, index) {
 	const button = cssTestingComponent.querySelectorAll('.css-testing-component__buttons button')[index]
 	button.dispatchEvent(new Event('click'))
+}
+function getDescription(cssTestingComponent) {
+	return cssTestingComponent.querySelector('.css-testing-component__description').innerHTML
 }
 
 /* Mini test framework functions */
