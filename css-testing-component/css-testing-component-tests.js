@@ -133,7 +133,7 @@ function getIframeCustomCSS(cssTestingComponent) {
 	return getIframeDocument(cssTestingComponent).querySelector('head style[data-name="custom"]').innerHTML
 }
 function getHTMLTextArea(cssTestingComponent) {
-	return cssTestingComponent.querySelector('.css-test-component__html')
+	return cssTestingComponent.querySelector('.css-testing-component__html')
 }
 function getCSSTextArea(cssTestingComponent) {
 	return cssTestingComponent.querySelector('.css-test-component__css')
