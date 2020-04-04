@@ -1,8 +1,8 @@
 /* Width and vertical margins */
 const absWidthBaseHTML = `<div>
-	<div class="absolute-parent">
-		<div class="absolute"></div>
-	</div>  
+  <div class="absolute-parent">
+    <div class="absolute"></div>
+  </div>  
 </div>`
 const getAbsWidthCss = (({ left, right, margin, border, padding, width }) => `
 .absolute-parent {
