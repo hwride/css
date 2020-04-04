@@ -43,6 +43,7 @@
     <li><a href="#absolute">Absolute</a>
         <ul>
             <li><a href="#absolute-width">Width and horizontal margins</a>
+            <li><a href="#absolute-height">Height and vertical margins</a>
         </ul>
     </li>
 </ul>
@@ -343,6 +344,41 @@
         <li>If the values are over-constrained <code>margin-right</code> (if <code>ltr</code>) becomes <code>auto</code>.</li>
     </ol>
     <div class="example-absolute-width-no-auto"></div>
+
+
+    <h3 id="absolute-height">Height and vertical margins</h3>
+    <p class="example-description">
+        Most of the logic for calculating the vertical properties of <code>absolute</code> elements is similar that of
+        the horizontal ones. The equation that must be satisfied is the same but with <code>top</code>,
+        <code>bottom</code> and<code>height</code>:
+        <code>top + margin + border + padding + width + bottom = height of static-position containing block</code>.
+    </p>
+
+    <h4>Top, right or height are auto</h4>
+    <p class="example-description">
+        Basically the same rules apply as for the horizontal properties but for the corresponding vertical properties.
+        See the examples for more details:
+    </p>
+    <div class="example-absolute-height-top-bottom-height-auto"></div>
+
+    <!--
+        Top, height and bottom auto
+            Auto margins become 0
+            All auto: set top to static, height is
+            1 auto: solve for that auto
+
+        // Height different for cases 1 and 3?
+            In those cases height should be:
+                If only inline-level children height = distance between top and bottom line box.
+                If only block level-children height = distance between margin edges of top and bottom child box.
+                If any descendants are floating the height is increased to contain them. This only includes floats in
+                the same block formatting context (e.g. not floats inside absolutely position descendants).
+
+        Else
+            Both margins auto: center
+            One margin auto: solve for that margin
+            If over-constrained: bottom becomes auto
+    -->
 
 </div>
 
