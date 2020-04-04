@@ -7,6 +7,7 @@ const absWidthBaseHTML = `<div>
 const getAbsWidthCss = (({ left, right, margin, border, padding, width }) => `
 .absolute-parent {
   background: gold;
+  position: relative;
   height: 100px;
   margin-top: 20px;
 }
@@ -29,7 +30,7 @@ createCSSTestingComponent({
 		margin: '0 auto 0 50px'
 	}),
 	description: 'Notice <code>margin-right</code> becomes zero because it is <code>auto</code>.',
-	cssHeight: '18em',
+	cssHeight: '20em',
 	buttons: [{
 		label: 'Left is auto - rules 1, 4',
 		reset: true
@@ -116,7 +117,7 @@ createCSSTestingComponent({
 		right: '10px',
 		width: '50px'
 	}),
-	cssHeight: '18em',
+	cssHeight: '20em',
 	buttons: [{
 		label: 'Both margins are auto - rule 1',
 		reset: true
