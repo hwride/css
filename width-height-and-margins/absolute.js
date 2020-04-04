@@ -1,5 +1,5 @@
 /* Width and vertical margins */
-const absWidthBaseHTML = `<div>
+const absBaseHTML = `<div>
   <div class="absolute-parent">
     <div class="absolute"></div>
   </div>  
@@ -105,14 +105,9 @@ we solve for <code>right</code>.`,
 	}]
 })
 
-const absWidthNoAutoHTML = `<div>
-	<div class="absolute-parent">
-		<div class="absolute"></div>
-	</div>  
-</div>`
 createCSSTestingComponent({
 	parent: document.querySelector('.example-absolute-width-no-auto'),
-	html: absWidthNoAutoHTML,
+	html: absBaseHTML,
 	css: getAbsWidthCss({
 		left: '10px',
 		right: '10px',
@@ -125,7 +120,7 @@ createCSSTestingComponent({
 	}, {
 		label: 'Negative margin - right - rule 2',
 		description: 'Note how <code>margin-left</code> is zero and <code>margin-right</code> expands.',
-		html: absWidthNoAutoHTML,
+		html: absBaseHTML,
 		css: getAbsWidthCss({
 			left: '0',
 			right: '200px',
@@ -133,7 +128,7 @@ createCSSTestingComponent({
 		})}, {
 		label: 'Left margin is auto - rule 3',
 		description: 'Note how <code>margin-left</code> expands as it\'s auto.',
-		html: absWidthNoAutoHTML,
+		html: absBaseHTML,
 		css: getAbsWidthCss({
 			left: '0',
 			right: '0',
@@ -141,8 +136,10 @@ createCSSTestingComponent({
 			margin: '0 10px 0 auto'
 		})}, {
 		label: 'Over-constrained - rule 4',
-		description: 'Note how <code>margin-right</code> expands even though it was set to a fixed value, due to rule 4.',
-		html: absWidthNoAutoHTML,
+		description: `Note how <code>margin-right</code> expands even though it was set to a fixed value, due to rule 4.
+Looking in dev tools for Chrome 80 and Firefox 74 both still actually list <code>margin-right</code> as
+<code>10px</code>, although the resulting effect appears to be the same as if it was <code>auto</code>.`,
+		html: absBaseHTML,
 		css: getAbsWidthCss({
 			left: '0',
 			right: '0',
@@ -232,50 +229,6 @@ require taking height below shrink-to-fit, but note it won't go below that.`,
 			height: 'auto'
 		})
 	}, {
-		label: 'Height is shrink-to-fit contains floated content',
-		description: `Shrink-to-fit <code>height</code> will expand to include any floated content in the same block
-formatting context (e.g. not any floats inside absolutely position descendants).`,
-		html: `<div>
-	<div class="absolute-parent">
-		<div class="absolute">
-			<div class="floated"></div>
-		</div>
-	</div>  
-</div>`,
-		css: getAbsHeightCss({
-			top: 'auto',
-			bottom: '50px',
-			height: 'auto'
-		}) + `
-.floated {
-  background: green;
-  width: 30px;
-  height: 30px;
-  float: left;
-}`
-	}, {
-		label: 'Height is auto and not shrink-to-fit does not contain floated content',
-		description: `But if the <code>height</code> is <code>auto</code> but not shrink-to-fit it will not contain floated 
-content.`,
-		html: `<div>
-	<div class="absolute-parent">
-		<div class="absolute">
-			<div class="floated"></div>
-		</div>
-	</div>  
-</div>`,
-		css: getAbsHeightCss({
-			top: '150px',
-			bottom: '150px',
-			height: 'auto'
-		}) + `
-.floated {
-  background: green;
-  width: 30px;
-  height: 30px;
-  float: left;
-}`
-	}, {
 		label: 'Top and bottom are auto - rules 1, 3, 4',
 		description: `<code>top</code> gets set to the static position and we solve for <code>bottom</code>.`,
 		html: absBaseHTML,
@@ -293,5 +246,132 @@ and we solve for <code>bottom</code>.`,
 			bottom: 'auto',
 			height: 'auto'
 		})
+	}, {
+		label: 'Height is shrink-to-fit with block descendants',
+		description: `Note the vertical margins are contained.`,
+		html: `<div>
+  <div class="absolute-parent">
+    <div class="absolute">
+      <div class="block-child"></div>
+      <div class="block-child"></div>
+    </div>
+  </div>  
+</div>`,
+		css: getAbsHeightCss({
+			top: 'auto',
+			bottom: '50px',
+			height: 'auto'
+		}) + `
+.block-child {
+  background: green;
+  height: 20px;
+  margin: 20px 0 20px 0;
+}`
+	}, {
+		label: 'Height is shrink-to-fit with inline descendants',
+		description: `Note all line boxes are contained and vertical margins are ignored.`,
+		html: `<div>
+  <div class="absolute-parent">
+    <div class="absolute">
+      <span class="inline-child">Inline child 1</span>
+      <span class="inline-child">Inline child 2</span>
+    </div>
+  </div>  
+</div>`,
+		css: getAbsHeightCss({
+			top: 'auto',
+			bottom: '50px',
+			height: 'auto'
+		}) + `
+.inline-child {
+  background: green;
+  margin: 40px 0 40px 0;
+}`
+	}, {
+		label: 'Height is shrink-to-fit contains floated content',
+		description: `Shrink-to-fit <code>height</code> will expand to include any floated content in the same block
+formatting context (e.g. not any floats inside absolutely positioned descendants).`,
+		html: `<div>
+  <div class="absolute-parent">
+    <div class="absolute">
+      <div class="floated"></div>
+    </div>
+  </div>  
+</div>`,
+		css: getAbsHeightCss({
+			top: 'auto',
+			bottom: '50px',
+			height: 'auto'
+		}) + `
+.floated {
+  background: green;
+  width: 30px;
+  height: 30px;
+  float: left;
+}`
+	}, {
+		label: 'Height is auto and not shrink-to-fit does not contain floated content',
+		description: `But if the <code>height</code> is <code>auto</code> but not shrink-to-fit it will not contain floated 
+content.`,
+		html: `<div>
+  <div class="absolute-parent">
+    <div class="absolute">
+      <div class="floated"></div>
+    </div>
+  </div>  
+</div>`,
+		css: getAbsHeightCss({
+			top: '150px',
+			bottom: '150px',
+			height: 'auto'
+		}) + `
+.floated {
+  background: green;
+  width: 30px;
+  height: 30px;
+  float: left;
+}`
 	}]
+})
+
+createCSSTestingComponent({
+	parent: document.querySelector('.example-absolute-height-no-auto'),
+	html: absBaseHTML,
+	css: getAbsHeightCss({
+		top: '10px',
+		bottom: '10px',
+		height: '50px'
+	}),
+	cssHeight: '20em',
+	description: 'Unlike for regular block boxes vertical margins can center <code>absolute</code> elements.',
+	buttons: [{
+		label: 'Both margins are auto - rule 1',
+		reset: true
+	}, {
+		label: 'Negative margin - bottom - rule 2',
+		description: 'Note how <code>margin-top</code> is zero and <code>margin-bottom</code> expands.',
+		html: absBaseHTML,
+		css: getAbsHeightCss({
+			top: '0',
+			bottom: '200px',
+			height: '150px'
+		})}, {
+		label: 'Top margin is auto - rule 3',
+		description: 'Note how <code>margin-top</code> expands as it\'s auto.',
+		html: absBaseHTML,
+		css: getAbsHeightCss({
+			top: '0',
+			bottom: '0',
+			height: '150px',
+			margin: 'auto 0 10px 0'
+		})}, {
+		label: 'Over-constrained - rule 4',
+		description: 'Note how <code>margin-bottom</code> expands even though it was set to a fixed value, due to rule 4.',
+		html: absBaseHTML,
+		css: getAbsHeightCss({
+			top: '0',
+			bottom: '0',
+			height: '150px',
+			margin: '10px 0 10px 0'
+		})}]
 })

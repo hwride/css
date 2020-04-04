@@ -327,11 +327,6 @@
     </ol>
     <div class="example-absolute-width-left-right-width-auto"></div>
 
-    <!--
-        Can you make width smaller than its content if width is auto?
-        Negative margins - think this might apply for the non auto left,right,width example
-    -->
-
     <h4>None of left, width and right are auto</h4>
     <p class="example-description">
         In this case the following rules apply:
@@ -348,38 +343,21 @@
 
     <h3 id="absolute-height">Height and vertical margins</h3>
     <p class="example-description">
-        Most of the logic for calculating the vertical properties of <code>absolute</code> elements is similar that of
-        the horizontal ones. The equation that must be satisfied is the same but with <code>top</code>,
-        <code>bottom</code> and<code>height</code>:
+        The logic for calculating the vertical properties of <code>absolute</code> elements is basically the same as
+        for the the horizontal ones. The equation that must be satisfied is the same but with <code>top</code>,
+        <code>bottom</code> and <code>height</code>:
         <code>top + margin + border + padding + width + bottom = height of static-position containing block</code>.
     </p>
 
     <h4>Top, right or height are auto</h4>
     <p class="example-description">
-        Basically the same rules apply as for the horizontal properties but for the corresponding vertical properties.
-        See the examples for more details:
+        As basically the same logic applies as for the horizontal properties I won't repeat it here. See the examples
+        for more details, and note the extra examples at the bottom concerning floated content.
     </p>
     <div class="example-absolute-height-top-bottom-height-auto"></div>
 
-    <!--
-        Top, height and bottom auto
-            Auto margins become 0
-            All auto: set top to static, height is
-            1 auto: solve for that auto
-
-        // Height different for cases 1 and 3?
-            In those cases height should be:
-                If only inline-level children height = distance between top and bottom line box.
-                If only block level-children height = distance between margin edges of top and bottom child box.
-                If any descendants are floating the height is increased to contain them. This only includes floats in
-                the same block formatting context (e.g. not floats inside absolutely position descendants).
-
-        Else
-            Both margins auto: center
-            One margin auto: solve for that margin
-            If over-constrained: bottom becomes auto
-    -->
-
+    <h4>None of left, width and right are auto</h4>
+    <div class="example-absolute-height-no-auto"></div>
 </div>
 
 <!-- Relative positioning: see 9.4.3 for values of left and right -->
