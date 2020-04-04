@@ -9,7 +9,8 @@ const getAbsWidthCss = (({ left, right, margin, border, padding, width }) => `
   background: gold;
   position: relative;
   height: 100px;
-  margin-top: 20px;
+  width: 200px;
+  margin: 25px;
 }
 .absolute {
   background: dodgerblue;
@@ -45,24 +46,21 @@ createCSSTestingComponent({
 		})
 	}, {
 		label: 'Left is auto and forced negative - rules 1, 4',
-		description: `Note that when <code>left</code> is forced negative no left scroll is applied in response to the 
-overflow. A scrollbar does appears when <code>right</code> is forced to be negative though.`,
+		description: `Note this causes the element to overflow the container.`,
 		html: absBaseHTML,
 		css: getAbsWidthCss({
 			left: 'auto',
 			right: '50px',
-			width: '250px'
+			width: '140px'
 		})
 	}, {
 		label: 'Right is auto and forced negative - rules 1, 4',
-		description: `Note that when <code>right</code> is forced negative a scroll appears in response to the overflow.
-Specifically note as well it is the viewport that is scrolling, not the containing block. A scroll does not appear when 
-<code>left</code> is forced to be negative.`,
+		description: `Note this causes the element to overflow the container.`,
 		html: absBaseHTML,
 		css: getAbsWidthCss({
 			left: '50px',
 			right: 'auto',
-			width: '250px'
+			width: '140px'
 		})
 	}, {
 		label: 'Width can\'t go below shrink-to-fit - rule 1, 4',
@@ -70,8 +68,8 @@ Specifically note as well it is the viewport that is scrolling, not the containi
 require taking width below shrink-to-fit, but note it won't go below that.`,
 		html: absBaseHTML,
 		css: getAbsWidthCss({
-			left: '150px',
-			right: '150px',
+			left: '110px',
+			right: '110px',
 			margin: '0 50px 0 50px',
 			width: 'auto'
 		})
@@ -118,8 +116,8 @@ createCSSTestingComponent({
 		label: 'Both margins are auto - rule 1',
 		reset: true
 	}, {
-		label: 'Negative margin - right - rule 2',
-		description: 'Note how <code>margin-left</code> is zero and <code>margin-right</code> expands.',
+		label: 'Both margins are auto, one is negative - rule 2',
+		description: 'Note how <code>margin-left</code> is zero and <code>margin-right</code> is negative.',
 		html: absBaseHTML,
 		css: getAbsWidthCss({
 			left: '0',
@@ -132,7 +130,7 @@ createCSSTestingComponent({
 		css: getAbsWidthCss({
 			left: '0',
 			right: '0',
-			width: '150px',
+			width: '100px',
 			margin: '0 10px 0 auto'
 		})}, {
 		label: 'Over-constrained - rule 4',
@@ -143,7 +141,7 @@ Looking in dev tools for Chrome 80 and Firefox 74 both still actually list <code
 		css: getAbsWidthCss({
 			left: '0',
 			right: '0',
-			width: '150px',
+			width: '100px',
 			margin: '0 10px 0 10px'
 		})}]
 })
@@ -153,8 +151,8 @@ const getAbsHeightCss = (({ top, bottom, margin, border, padding, height }) => `
 .absolute-parent {
   background: gold;
   position: relative;
-  height: 250px;
-  margin-top: 20px;
+  height: 200px;
+  margin: 25px;
 }
 .absolute {
   background: dodgerblue;
@@ -190,23 +188,19 @@ createCSSTestingComponent({
 		})
 	}, {
 		label: 'Top is auto and forced negative - rules 1, 4',
-		description: `Note that when <code>top</code> is forced negative no top scroll is applied in response to the
-overflow. A scrollbar does appears when <code>bottom</code> is forced to be negative though.`,
 		html: absBaseHTML,
 		css: getAbsHeightCss({
 			top: 'auto',
 			bottom: '50px',
-			height: '250px'
+			height: '140px'
 		})
 	}, {
 		label: 'Bottom is auto and forced negative - rules 1, 4',
-		description: `Note that when <code>right</code> is forced negative a scroll appears in response to the overflow.
-This does not happen when <code>left</code> is forced to be negative.`,
 		html: absBaseHTML,
 		css: getAbsHeightCss({
 			top: '50px',
 			bottom: 'auto',
-			height: '450px'
+			height: '140px'
 		})
 	}, {
 		label: 'Height can\'t go below shrink-to-fit - rule 1, 4',
@@ -214,8 +208,8 @@ This does not happen when <code>left</code> is forced to be negative.`,
 require taking height below shrink-to-fit, but note it won't go below that.`,
 		html: absBaseHTML,
 		css: getAbsHeightCss({
-			top: '150px',
-			bottom: '150px',
+			top: '110px',
+			bottom: '110px',
 			margin: '50px 0 50px 0',
 			height: 'auto'
 		})
@@ -348,13 +342,14 @@ createCSSTestingComponent({
 		label: 'Both margins are auto - rule 1',
 		reset: true
 	}, {
-		label: 'Negative margin - bottom - rule 2',
-		description: 'Note how <code>margin-top</code> is zero and <code>margin-bottom</code> expands.',
+		label: 'Both margins are auto - horizontal rule 2 doesn\'t apply',
+		description: `Note how here <code>margin-top</code> and <code>margin-bottom</code> are both negative and equal.
+Where as for width <code>margin-left</code> would have been forced to zero.`,
 		html: absBaseHTML,
 		css: getAbsHeightCss({
 			top: '0',
-			bottom: '200px',
-			height: '150px'
+			bottom: '0',
+			height: '200px'
 		})}, {
 		label: 'Top margin is auto - rule 3',
 		description: 'Note how <code>margin-top</code> expands as it\'s auto.',
