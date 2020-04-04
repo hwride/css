@@ -93,6 +93,9 @@ async function testButtons() {
 			description: 'You can supply description text which will be displayed when the button is clicked',
 			html: '<div>I am button one contents</div>',
 			css: 'div { background: green; }'
+		}, {
+			label: 'No description',
+			html: '<div>Should show no description</div>'
 		}]
 	})
 	const cssTestingComponent = await createCSSTestingComponent(options)
@@ -111,6 +114,10 @@ async function testButtons() {
 	assert(getHTMLTextArea(cssTestingComponent).value === options.html.trim())
 	assert(getCSSTextArea(cssTestingComponent).value === options.css.trim())
 	assert(getDescription(cssTestingComponent) === options.description)
+
+	// Test a button showing no description.
+	clickButton(cssTestingComponent, 2)
+	assert(getDescription(cssTestingComponent) === '')
 }
 
 /* Utility functions */

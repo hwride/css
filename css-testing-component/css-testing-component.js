@@ -187,9 +187,11 @@ function createCSSTestingComponent(options) {
 			const buttonCSS = buttonOptions.reset ? initialCSS : buttonOptions.css
 			const buttonDescription = buttonOptions.reset ? initialDescription : buttonOptions.description
 			buttonEl.addEventListener('click', () => {
+				// Note HTML and CSS don't have to be provided to allow a button to change only one field but leave the last
+				// value there. This is not the same for description where we want an empty description to be cleared.
 				if(buttonHTML) updateTextAreaContent(htmlTextAreaEl, buttonHTML.trim())
 				if(buttonCSS) updateTextAreaContent(cssTextAreaEl, buttonCSS.trim())
-				if(buttonDescription) descriptionEl.innerHTML = buttonDescription
+				descriptionEl.innerHTML = buttonDescription ? buttonDescription : ''
 			})
 		})
 		return buttonsEl
