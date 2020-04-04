@@ -4,12 +4,6 @@ const absWidthBaseHTML = `<div>
 		<div class="absolute"></div>
 	</div>  
 </div>`
-const absWidthBaseCSS = `
-.absolute-parent {
-  background: gold;
-  height: 100px;
-  margin-top: 20px;
-}`
 const getAbsWidthCss = (({ left, right, margin, border, padding, width }) => `
 .absolute-parent {
   background: gold;
