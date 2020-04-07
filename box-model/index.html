@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Box model</title>
+    <link rel="stylesheet" type="text/css" href="../common.css">
+    <style>
+        :root {
+            --text-padding-size: 4px;
+        }
+        .minor-note {
+            font-style: italic;
+        }
+
+        .box-model div {
+            display: inline-block;
+            border: 1px solid black;
+            text-align: center;
+            margin: var(--text-padding-size) 20px 20px 20px;
+            padding-top: var(--text-padding-size);
+        }
+        .content {
+            width: 250px;
+            height: 50px;
+            border: 1px solid black;
+            line-height: 50px;
+            vertical-align: middle;
+        }
+        div.content, div.margin {
+            border-style: dashed;
+        }
+        .content, .padding {
+            background: cornflowerblue;
+        }
+        .border {
+            background: indianred;
+        }
+    </style>
+</head>
+<body>
+<h1>Box model</h1>
+<p class="example-description">
+    Reference: <a href="https://www.w3.org/TR/CSS22/box.html">CSS 2.2 Box model</a>
+</p>
+<p class="example-description">
+    In CSS the <strong>document tree</strong> contains <strong>elements</strong>. These elements generate rectangular
+    <strong>boxes</strong>. These boxes are laid out according to the <strong>visual formatting model</strong>. Each
+    box is made up of the following <strong>areas</strong>:
+</p>
+
+<div class="box-model">
+    <div class="margin">
+        Margin <span class="minor-note">(transparent)</span> <br/>
+        <div class="border">
+            Border <br/>
+            <div class="padding">
+                Padding <br/>
+                <div class="content">Content</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p class="example-description">
+    Whenever you see a box referenced that includes all the above areas, including the margins.
+</p>
+</body>
+</html>
