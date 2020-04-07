@@ -65,7 +65,7 @@ createCSSTestingComponent({
 	}, {
 		label: 'Width can\'t go below shrink-to-fit - rule 1, 4',
 		description: `To make the equation satisfy by modifying the <code>width</code> <code>auto</code> here would 
-require taking width below shrink-to-fit, but note it won't go below that.`,
+require taking width below shrink-to-fit, it won't go below that on Chrome 80 and Firefox 74 but it does on iOS.`,
 		html: absBaseHTML,
 		css: getAbsWidthCss({
 			left: '110px',
@@ -205,7 +205,8 @@ createCSSTestingComponent({
 	}, {
 		label: 'Height can\'t go below shrink-to-fit - rule 1, 4',
 		description: `To make the equation satisfy by modifying the <code>height</code> <code>auto</code> here would
-require taking height below shrink-to-fit, but note it won't go below that.`,
+require taking height below shrink-to-fit, but note it won't go below that on Chrome, Firefox or iOS. This is different 
+to <code>width</code> which did go below shrink-to-fit on iOS.`,
 		html: absBaseHTML,
 		css: getAbsHeightCss({
 			top: '110px',
@@ -357,7 +358,7 @@ Where as for width <code>margin-left</code> would have been forced to zero.`,
 		css: getAbsHeightCss({
 			top: '0',
 			bottom: '0',
-			height: '150px',
+			height: '100px',
 			margin: 'auto 0 10px 0'
 		})}, {
 		label: 'Over-constrained - rule 4',
@@ -366,7 +367,7 @@ Where as for width <code>margin-left</code> would have been forced to zero.`,
 		css: getAbsHeightCss({
 			top: '0',
 			bottom: '0',
-			height: '150px',
+			height: '100px',
 			margin: '10px 0 10px 0'
 		})}]
 })
