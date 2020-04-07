@@ -3,25 +3,37 @@
 <head>
 	<meta charset="UTF-8">
 	<title>CSS testing</title>
+	<style>
+		.minimal-header {
+			font-size: medium;
+			font-weight: normal;
+			margin-bottom: 0;
+		}
+		ul {
+			margin-top: 5px;
+		}
+	</style>
 </head>
 <body>
 <h1>CSS testing</h1>
+<h2 class="minimal-header">The box model and visual formatting model</h2>
 <ul>
 	<li><a href="inline-and-block/index.html">Inline and block</a></li>
 	<li><a href="floats/index.html">Floats</a></li>
 	<li><a href="collapsing-margins/index.html">Collapsing margins</a></li>
-	<li><a href="containing-block/index.html">Containing box</a></li>
+	<li><a href="containing-block/index.html">Containing block</a></li>
 	<li><a href="width-height-and-margins/index.html">Width, height and margins</a></li>
-	<li><a href="z-index/index.html">z-index</a></li>
-	<li>
-		Flexbox
-		<ul>
-			<li><a href="flexbox/general-test-page/index.html">General test page</a></li>
-			<li><a href="flexbox/flexbox-margin-auto.html">Main axis alignment of individual items with <code>margin: auto</code></a></li>
-		</ul>
-	</li>
+	<li><a href="z-index/index.html">Layered presentation - z-index</a></li>
+</ul>
+
+<h2 class="minimal-header">Flexbox</h2>
+<ul>
+	<li><a href="flexbox/general-test-page/index.html">General test page</a></li>
+	<li><a href="flexbox/flexbox-margin-auto.html">Main axis alignment of individual items with margin: auto</a></li>
+</ul>
+
+<h2 class="minimal-header">Other</h2>
+<ul>
 	<li><a href="response-images/max-width.html">Response images with max-width</a></li>
 	<li><a href="css-testing-component/index.html">CSS testing component</a></li>
 </ul>
-</body>
-</html>
