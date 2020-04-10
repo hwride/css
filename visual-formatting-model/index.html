@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Width, height and margins</title>
+    <title>Visual formatting model</title>
     <link rel="stylesheet" type="text/css" href="../common.css">
     <link rel="stylesheet" type="text/css" href="../css-testing-component/css-testing-component.css">
     <style>
@@ -25,60 +25,79 @@
 <p class="example-description">
     Reference: <a href="https://www.w3.org/TR/CSS22/visuren.html">CSS 2.2 Visual formatting model</a>
 </p>
+
+<ol>
+    <li>
+        <a href="#box-generation">Box generation</a>
+        <ol>
+            <li><a href="#box-generation-terms">Terms</a></li>
+            <li><a href="#display-properties">Display properties</a></li>
+        </ol>
+    </li>
+    <li>
+        <a href="##positioning-schemes">Positioning schemes</a>
+        <ol>
+            <li><a href="#display-forced-block-level">Forced block-level display values</a></li>
+        </ol>
+    </li>
+</ol>
+
+<h2 id="box-generation">Box generation</h2>
 <p class="example-description">
     The <code>display</code> property controls the type of box that an element generates. See the tables below for
     definitions of the different types of boxes and what <code>display</code> values end up generating.
 </p>
 
-<h2>Terms</h2>
+<h3 id="box-generation-terms">Terms</h3>
 <table style="width: 90%; text-align: left;">
     <tbody>
         <tr>
             <th style="width: 24ch;">Block-level element</th>
-            <td>Generates a principal block-level box</td>
+            <td>Generates a principal <b>block-level box</b>.</td>
         </tr>
         <tr>
             <th>Block-level box</th>
-            <td>Participates in a block formatting context</td>
+            <td>Participates in a <b>block formatting context</b>.</td>
         </tr>
         <tr>
             <th>Block container box</th>
-            <td>All block-level boxes except tables or the principal box of a replaced elements. <br/>
-                Establishes a block or inline formatting context if all children are block or inline boxes.</td>
+            <td>All <b>block-level boxes</b> except tables or the <b>principal box</b> of a replaced elements. <br/>
+                Establishes a <b>block</b> or <b>inline formatting context</b> if all children are <b>block-level</b> or
+                <b>inline-level boxes</b>.</td>
         </tr>
         <tr>
             <th>Block container element</th>
-            <td>Element whose principal block is a block container</td>
+            <td>Element whose <b>principal box</b> is a <b>block container</b>.</td>
         </tr>
         <tr>
             <th>Block box</th>
-            <td>Box that = block-level AND a block container</td>
+            <td>Box that = <b>block-level</b> AND a <b>block container</b>.</td>
         </tr>
         <tr>
             <th>Anonymous block box</th>
-            <td>Box that wraps any inline boxes in a block container with mixed children</td>
+            <td>Box that wraps any <b>inline-level boxes</b> in a <b>block container</b> with mixed children.</td>
         </tr>
         <tr>
             <th>Inline-level element</th>
-            <td>Do not form new blocks of content but lines</td>
+            <td>Do not form new blocks of content but lines.</td>
         </tr>
         <tr>
             <th>Inline-level box</th>
-            <td>Participate in an inline formatting context</td>
+            <td>Participate in an <b>inline formatting context</b>.</td>
         </tr>
         <tr>
             <th>Inline box</th>
-            <td>Inline-level and whose contents participates in its containing inline formatting context</td>
+            <td><b>Inline-level</b> and whose contents participates in its containing <b>inline formatting context</b>.</td>
         </tr>
         <tr>
             <th>Atomic inline-level box</th>
-            <td>Inline-level boxes that aren't inline boxes, i.e. contents doesn't participate in its containing
-            inline formatting context.</td>
+            <td><b>Inline-level boxes</b> that aren't <b>inline boxes</b>, i.e. contents doesn't participate in its
+                containing <b>inline formatting context</b>.</td>
         </tr>
     </tbody>
 </table>
 
-<h2>Display properties</h2>
+<h3 id="display-properties">Display properties</h3>
 <table>
     <thead>
     <tr>
@@ -101,7 +120,7 @@
         <td class="no">No</td>
         <td class="no">No</td>
         <td class="no">No</td>
-        <td>Generates a principal block box</td>
+        <td>Generates a <b>principal block box</b>.</td>
     </tr>
     <tr>
         <td><code>inline</code></td>
@@ -111,7 +130,7 @@
         <td class="yes">Yes</td>
         <td class="yes">Yes</td>
         <td class="no">No</td>
-        <td>Generates <span style="text-decoration: underline">one or more</span> inline boxes</td>
+        <td>Generates <span style="text-decoration: underline">one or more</span> <b>inline boxes</b>.</td>
     </tr>
     <tr>
         <td><code>inline-block</code></td>
@@ -121,7 +140,7 @@
         <td class="yes">Yes</td>
         <td class="no">No</td>
         <td class="yes">Yes</td>
-        <td>Generates a principal inline-level block container</td>
+        <td>Generates a principal <b>inline-level</b> <b>block container</b>.</td>
     </tr>
     <tr>
         <td><code>list-item</code></td>
@@ -131,7 +150,7 @@
         <td class="no">No</td>
         <td class="no">No</td>
         <td class="no">No</td>
-        <td>Generates a marker box</td>
+        <td>Generates a marker box.</td>
     </tr>
     <tr>
         <td><code>table</code></td>
@@ -141,7 +160,7 @@
         <td class="no">No</td>
         <td class="no">No</td>
         <td class="no">No</td>
-        <td>Behaves according to table rules</td>
+        <td>Behaves according to table rules.</td>
     </tr>
     <tr>
         <td><code>inline-table</code></td>
@@ -151,18 +170,36 @@
         <td class="yes">Yes</td>
         <td class="no">No</td>
         <td class="yes">Yes</td>
-        <td>Behaves according to table rules</td>
+        <td>Behaves according to table rules.</td>
+    </tr>
+    <tr>
+        <td><code>none</code></td>
+        <td class="no">No</td>
+        <td class="no">No</td>
+        <td class="no">No</td>
+        <td class="no">No</td>
+        <td class="no">No</td>
+        <td class="no">No</td>
+        <td>Displays nothing and does not affect page in any way.</td>
     </tr>
     </tbody>
 </table>
 
-<h2>Positioning schemes</h2>
+<h2 id="#positioning-schemes">Positioning schemes</h2>
+<p class="example-description">
+    CSS 2.2 lays out boxes in three positioning schemes: normal flow, floats and absolute positioning. Additionally
+    a box can be relatively positioned in some of these schemes.
+</p>
+<p class="example-description">
+    The <code>position</code> and <code>float</code>properties determine how a box is positioned. See the table below for details:
+</p>
 <table>
     <thead>
     <tr>
         <th>Positioning scheme</th>
-        <th style="min-width: 18ch">Property</th>
-        <th>Supports <code>position: relative</code>?</th>
+        <th>Supported <code>position</code> values</th>
+        <th>Supported <code>float</code> values</th>
+        <th>Supported <code>display</code> values</th>
         <th>In flow?</th>
         <th>Establishes formatting context (for children)?</th>
         <th>Notes</th>
@@ -172,75 +209,101 @@
     <tr>
         <td>Normal flow</td>
         <td>
-            <code>position: static</code><br/>
+            <code>static</code><br/>
+            <code>relative</code>
+        </td>
+        <td>
+            <code>none</code> (if set to <code>left</code> or <code>right</code> becomes a float)
+        </td>
+        <td>
+            All
         </td>
         <td class="yes">Yes</td>
-        <td class="yes">Yes</td>
-        <td>Block or inline</td>
-        <td>Boxes in normal flow <span style="text-decoration: underline;">belong to</span> a formatting context of
-            table, block or inline (in CSS 2.2).</td>
+        <td>Block, inline or table</td>
+        <td>
+            Boxes in <b>normal flow</b> <span style="text-decoration: underline;">belong to</span> (as opposed to
+            establish) a <b>formatting context</b> of block, inline or table (in CSS 2.2).<br/>
+            <br/>
+            First laid out in <b>normal flow</b>, then positioned relatively if set.
+        </td>
     </tr>
     <tr>
         <td>Floats</td>
         <td>
-            <code>float: left | right</code><br/>
+            <code>static</code><br/>
+            <code>relative</code>
         </td>
-        <td class="yes">Yes</td>
+        <td>
+            <code>left</code><br/>
+            <code>right</code>
+        </td>
+        <td>
+            Basically forced to be <b>block-level</b> (see <a href="#display-forced-block-level">table below</a>).
+        </td>
         <td><span class="no">No</span> (or so it claims, but line boxes flow around it)</td>
         <td>Block</td>
-        <td>First laid out in normal flow, then shifted to the left or right. Line boxes flow along side.</td>
+        <td>
+            First laid out in <b>normal flow</b>, then shifted to the left or right. Line boxes flow along side.
+            Finally positioned relatively if set.
+        </td>
     </tr>
     <tr>
         <td>Absolute positioning</td>
         <td>
-            <code>position: absolute</code><br/>
-            <code>position: fixed</code><br/>
+            <code>absolute</code><br/>
+            <code>fixed</code>
+        </td>
+        <td>
+            Forced to <code>none</code>.
+        </td>
+        <td>
+            Basically forced to be <b>block-level</b> (see <a href="#display-forced-block-level">table below</a>).
         </td>
         <td class="no">No</td>
-        <td class="no">No</td>
         <td>Block</td>
-        <td>Removed from normal flow entirely and positioned relative to containing block.</td>
+        <td>
+            Removed from <b>normal flow</b> entirely and positioned relative to <b>containing block</b>.<br/>
+            <br/>
+            <code>fixed</code> position is the same but its <b>containing block</b> is the viewport.
+        </td>
     </tr>
     </tbody>
 </table>
 
-<!--
-    Display: Controls the type of box an element generates
-        block
-        inline
-        inline-block
-        list-item
-        table
-        none: No box, affects nothing in the page.
-
-    Positioning schemes:
-        Normal
-            Flow: Boxes in normal flow belong to a formatting context - e.g. block, inline or table.
-            Child context:
-                block formatting context
-                    block boxes with overflow != visible
-                    block containers that aren't block boxes (overflow doesn't matter??)
-                inline formatting context
-                    block containers that contain all inline children
-
-        Float: Box is laid out in normal flow, then taken out of flow and shifted left or right.
-            float: left|right
-            Flow: Apparently out of flow, although line boxes flow around floats so that doesn't seem entirely true.
-            Child context: block formatting context
-
-        Relative: Box is laid out in normal flow then shifted relative to that position.
-            Flow: No additional effect.
-            position: relative
-
-        Absolute: Box positioned explicitly relative to its containing block.
-            position: absolute
-            Flow: removed from normal flow entirely.
-            Child context: block formatting context
-
-            Fixed: Absolute positioning, but the containing block is always the viewport.
-                position: fixed
-
-    Root element
--->
+<h3 id="display-forced-block-level">Forced block-level display values</h3>
+<table>
+        <thead>
+        <tr>
+            <th>Initial value</th>
+            <th>Final value</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <code>block</code><br/>
+                <code>table</code><br/>
+                <code>table-cell</code><br/>
+                <code>list-item</code><br/>
+                <code>none</code>
+            </td>
+            <td>As specified</td>
+        </tr>
+        <tr>
+            <td>
+                <code>inline</code><br/>
+                <code>inline-block</code><br/>
+                <code>table</code> descendants except <code>table-cell</code><br/>
+            </td>
+            <td><code>block</code></td>
+        </tr>
+        <tr>
+            <td>
+                <code>inline-table</code><br/>
+            </td>
+            <td><code>table</code></td>
+        </tr>
+        </tbody>
+    </table>
 </body>
 </html>
