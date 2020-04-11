@@ -181,7 +181,7 @@
 			<p class="example-description">
 				<strong>Clearfix</strong><br/>
 				Using the clearfix hack. This involves adding an element after the <code>float</code> and setting it to clear
-				the <code>float</code>:</p>
+				the <code>float</code>.</p>
 			<div class="container">
 				<div class="a">a<div class="css-prop">float: left;</div></div>
 			</div>
@@ -190,8 +190,9 @@
 		<div class="example-container example-clear-overflow">
 			<p class="example-description">
 				<strong>overflow: auto</strong><br/>
-				Creating a new block formatting context using <code>overflow: auto</code> (a new BFC will contain everything
-				inside it):</p>
+				Creating a new block formatting context using <code>overflow: auto</code>. This works because the spec says
+				that if an element establishes a new block formatting context it must not overlap the margins of any floats
+				in the same block formatting context.</p>
 			<div class="container">
 				<div class="css-prop">overflow: auto;</div>
 				<div class="a">a<div class="css-prop">float: left;</div></div>
