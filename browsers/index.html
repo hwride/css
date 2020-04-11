@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Browser information</title>
+    <link rel="stylesheet" type="text/css" href="../common.css">
+    <style>
+        .chromium {
+            color: #06c;
+        }
+    </style>
+</head>
+<body>
+<h1>Browser information</h1>
+<p class="example-description">Time of writing: 11 April 2020</p>
+
+<table style="text-align: left;">
+    <tbody>
+        <tr>
+            <th>Browser</th>
+            <th>Company</th>
+            <th>Browser engine</th>
+            <th>Javascript engine</th>
+            <th>Based on <span class="chromium">Chromium</span>?</th>
+            <th>Open source?</th>
+            <th>Usage desktop</th>
+            <th>Usage mobile</th>
+            <th>Notes</th>
+        </tr>
+        <tr>
+            <td>Google Chrome</td>
+            <td>Google</td>
+            <td>Blink</td>
+            <td>V8</td>
+            <td class="yes">Yes</td>
+            <td class="no">No</td>
+            <td>69%</td>
+            <td>62%</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Safari</td>
+            <td>Apple</td>
+            <td>WebKit</td>
+            <td>JavaScriptCore</td>
+            <td class="no">No</td>
+            <td class="no">No</td>
+            <td>8.7%</td>
+            <td>20%</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Firefox</td>
+            <td>Mozilla</td>
+            <td>Gecko</td>
+            <td>SpiderMonkey</td>
+            <td class="no">No</td>
+            <td class="yes">Yes</td>
+            <td>9.2%</td>
+            <td>0.4%</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Samsung Internet</td>
+            <td>Samsung Electronics</td>
+            <td>Blink</td>
+            <td>V8</td>
+            <td class="yes">Yes</td>
+            <td class="no">No</td>
+            <td>0%</td>
+            <td>6.3%</td>
+            <td>Mobile web browser.</td>
+        </tr>
+        <tr>
+            <td>Edge</td>
+            <td>Microsoft</td>
+            <td>Blink</td>
+            <td>V8</td>
+            <td class="yes">Yes</td>
+            <td>No (but Microsoft contribute to Chromium)</td>
+            <td>4.5%</td>
+            <td>0%</td>
+            <td>Edge was rebuilt to use <span class="chromium">Chromium</span> and released January, 2020. It used
+                to use EdgeHTML for its browser engine (a fork of Trident) and Chakra for its Javascript engine).</td>
+        </tr>
+        <tr>
+            <td>Internet Explorer</td>
+            <td>Microsoft</td>
+            <td>Trident (since IE 4)</td>
+            <td>Chakra</td>
+            <td class="no">No</td>
+            <td class="no">No</td>
+            <td>4.4%</td>
+            <td>0%</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Opera</td>
+            <td>Opera Software</td>
+            <td>Blink</td>
+            <td>V8</td>
+            <td class="yes">Yes</td>
+            <td class="yes">Yes</td>
+            <td>2.3%</td>
+            <td>1%</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="chromium">Chromium</td>
+            <td>Google</td>
+            <td>Blink</td>
+            <td>V8</td>
+            <td>N/A</td>
+            <td class="yes">Yes</td>
+            <td>0.08%</td>
+            <td>0%</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Node.js</td>
+            <td>OpenJS Foundation</td>
+            <td>N/A</td>
+            <td>V8</td>
+            <td>N/A</td>
+            <td class="yes">Yes</td>
+            <td>N/A</td>
+            <td>N/A</td>
+            <td>Not a browser, but worth noting it also uses V8.</td>
+        </tr>
+    </tbody>
+</table>
+
+<p class="example-description" style="margin-top: 20px;">
+    Reference/useful links:
+</p>
+<ul>
+    <li><a href="https://en.wikipedia.org/wiki/Comparison_of_browser_engines">Comparison of browser engines</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Usage_share_of_web_browsers">Usage share of web browsers</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/List_of_ECMAScript_engines">List of ECMAScript engines</a></li>
+</ul>
+</body>
+<script src="../nav.js"></script>
+<script>createNav()</script>
+</html>

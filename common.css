@@ -31,11 +31,24 @@ ul {
 	font-family: monospace;
 }
 
+/* Make tables have a solid black border by default. */
+table, th, td {
+	border-collapse: collapse;
+	border: 1px solid black;
+}
+
+/* Some predefined colours. */
+.yes {
+	color: green;
+}
+.no {
+	color: red;
+}
+
 .container {
 	background: gold;
 	padding: 5px;
 }
-
 .a {
 	background: dodgerblue;
 }
