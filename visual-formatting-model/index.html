@@ -4,21 +4,7 @@
     <title>Visual formatting model</title>
     <link rel="stylesheet" type="text/css" href="../common.css">
     <link rel="stylesheet" type="text/css" href="../css-testing-component/css-testing-component.css">
-    <style>
-        table, th, td {
-            border-collapse: collapse;
-            border: 1px solid black;
-        }
-        td {
-            max-width: 15em;
-        }
-        .yes {
-            color: green;
-        }
-        .no {
-            color: red;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="./index.css">
 </head>
 <body>
 <h1>Visual formatting model</h1>
@@ -35,9 +21,17 @@
         </ol>
     </li>
     <li>
-        <a href="##positioning-schemes">Positioning schemes</a>
+        <a href="#positioning-schemes">Positioning schemes</a>
         <ol>
             <li><a href="#display-forced-block-level">Forced block-level display values</a></li>
+        </ol>
+    </li>
+    <li>
+        <a href="#normal-flow">Normal flow</a>
+        <ol>
+            <li><a href="#normal-flow-block-formatting-context">Block formatting contexts</a></li>
+            <li><a href="#normal-flow-inline-formatting-context">Inlineformatting contexts</a></li>
+            <li><a href="#normal-flow-new-formatting-context">New formatting contexts</a></li>
         </ol>
     </li>
 </ol>
@@ -49,10 +43,10 @@
 </p>
 
 <h3 id="box-generation-terms">Terms</h3>
-<table style="min-width: 1300px; text-align: left;">
+<table style="text-align: left;">
     <tbody>
         <tr>
-            <th style="width: 24ch;">Block-level element</th>
+            <th>Block-level element</th>
             <td>Generates a principal <b>block-level box</b>.</td>
         </tr>
         <tr>
@@ -93,6 +87,10 @@
             <th>Atomic inline-level box</th>
             <td><b>Inline-level boxes</b> that aren't <b>inline boxes</b>, i.e. contents doesn't participate in its
                 containing <b>inline formatting context</b>.</td>
+        </tr>
+        <tr>
+            <th>Line box</th>
+            <td>Contains <b>inline-level</b> boxes in a single line. More are created when the line is too wide.</td>
         </tr>
     </tbody>
 </table>
@@ -185,13 +183,14 @@
     </tbody>
 </table>
 
-<h2 id="#positioning-schemes">Positioning schemes</h2>
+<h2 id="positioning-schemes">Positioning schemes</h2>
 <p class="example-description">
     CSS 2.2 lays out boxes in three positioning schemes: normal flow, floats and absolute positioning. Additionally
     a box can be relatively positioned in some of these schemes.
 </p>
 <p class="example-description">
-    The <code>position</code> and <code>float</code>properties determine how a box is positioned. See the table below for details:
+    The <code>position</code> and <code>float</code> properties determine how a box is positioned. See the table below
+    for details:
 </p>
 <table>
     <thead>
@@ -219,7 +218,7 @@
             All
         </td>
         <td class="yes">Yes</td>
-        <td>Block, inline or table</td>
+        <td>Possibly block, inline or table. See <a href="#normal-flow-new-formatting-context">table below</a>.</td>
         <td>
             Boxes in <b>normal flow</b> <span style="text-decoration: underline;">belong to</span> (as opposed to
             establish) a <b>formatting context</b> of block, inline or table (in CSS 2.2).<br/>
@@ -305,5 +304,90 @@
         </tr>
         </tbody>
     </table>
+
+<h2 id="normal-flow">Normal flow</h2>
+<h3 id="normal-flow-block-formatting-context">Block formatting context</h3>
+<div class="formatting-context-container">
+    <div class="formatting-context-container__description">
+        <p class="example-description">
+            A <b>block formatting context</b>:
+        </p>
+        <ul>
+            <li>Lays boxes out vertically from the top of a <b>containing block</b>.</li>
+            <li>Margin space between blocks can collapse.</li>
+            <li>Each boxes left edge touches the left edge of its <b>containing block</b> (with the exception where there is a left
+                floated element and the box establishes a new block formatting context).</li>
+        </ul>
+    </div>
+    <img src="block-formatting-context.png" />
+</div>
+
+<h4>Block container vs new block formatting context</h4>
+<p class="example-description">
+    A block's <b>containing block</b> is its nearest <b>block container</b> ancestor. This <b>containing block</b> may
+    or may not establish a new <b>block formatting context</b>. What are the practical differences if it does or doesn't?
+</p>
+<ul>
+    <li>Margins don't collapse across <b>block formatting contexts</b>.</li>
+    <li>
+        Floats
+        <ul>
+            <li>A new <b>block formatting context</b> won't overlap margins with a float.</li>
+            <li>Floats only interact with elements in the same <b>block formatting context</b>, including clearing.</li>
+        </ul>
+    </li>
+</ul>
+
+<h3 id="normal-flow-inline-formatting-context">Inline formatting context</h3>
+<div class="formatting-context-container">
+    <div class="formatting-context-container__description">
+        <p class="example-description">
+            An <b>inline formatting context</b>:
+        </p>
+        <ul>
+            <li>Lays boxes out horizontally from the top of a <b>containing block</b>.</li>
+            <li>The area that contains <b>inline-level</b> boxes in a line is the <b>line box</b>.</li>
+            <li>Boxes can be aligned vertically with the <b>line box</b>.</li>
+            <li>The width of a <b>line box</b> is determined by the <b>containing block</b> and any floats.</li>
+            <li>Each <b>line boxes</b> left edge touches the left edge of its <b>containing block</b> (with the exception where
+                there is a left floated element which pushes the <b>line box</b> out of the way).</li>
+            <li>The height of a <b>line box</b> is determined by line height calculations and can vary between lines.</li>
+            <li>If multiple <b>inline-level boxes</b> can't fit in a line more lines are created which the boxes spill
+            into.</li>
+            <li>A single <b>inline-level boxes</b> will be split across lines if it can be split (e.g. multiple words in
+                a single <b>inline-level box</b>) can be split.</li>
+        </ul>
+    </div>
+    <img src="inline-formatting-context.png" />
+</div>
+
+<h3 id="normal-flow-new-formatting-context">When are new formatting contexts established in normal flow</h3>
+<table>
+    <thead>
+    <tr>
+        <th>Formatting context</th>
+        <th>Established by</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            Block
+        </td>
+        <td>
+            <b>Block box</b> with <code>overflow</code> other than <code>auto</code>.<br/>
+            <b>Block containers</b> that aren't <b>block-level</b>.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Inline
+        </td>
+        <td>
+            <b>Block container</b> that contains only <b>inline-level</b> children.
+        </td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

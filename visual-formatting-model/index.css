@@ -1,0 +1,19 @@
+table, th, td {
+	border-collapse: collapse;
+	border: 1px solid black;
+}
+.yes {
+	color: green;
+}
+.no {
+	color: red;
+}
+
+.formatting-context-container {
+	display: flex;
+	align-items: flex-start;
+}
+.formatting-context-container__description {
+	max-width: 850px;
+	margin-right: 20px;
+}
