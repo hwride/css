@@ -19,7 +19,8 @@ function addFlexContainerPropertyControls() {
 		'column',
 		'row-reverse',
 		'column-reverse'
-	])
+	], 'For <code>row</code> the main axis is horizontal and the cross axis is vertical, ' +
+		'for <code>column</code> this is reversed')
 
 	generateStyleChangingSelect('.flex-container-controls', 'flex-wrap-select', '<code>flex-wrap</code>', '.flex-container', 'flex-wrap', ['', 'wrap', 'nowrap'])
 
