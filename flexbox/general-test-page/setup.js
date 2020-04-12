@@ -13,7 +13,6 @@ function addPropertyControls() {
 }
 
 function addFlexContainerPropertyControls() {
-// Flex container.
 	generateStyleChangingSelect('.flex-container-controls', 'flex-dir-select', '<code>flex-direction</code>', '.flex-container', 'flex-direction', [
 		'',
 		'row',
@@ -23,6 +22,10 @@ function addFlexContainerPropertyControls() {
 	])
 
 	generateStyleChangingSelect('.flex-container-controls', 'flex-wrap-select', '<code>flex-wrap</code>', '.flex-container', 'flex-wrap', ['', 'wrap', 'nowrap'])
+
+	const flexFlowInfo = document.createElement('code')
+	flexFlowInfo.innerText = 'flex-flow: <flex-direction> <flex-wrap>'
+	document.querySelector('.flex-container-controls').appendChild(flexFlowInfo)
 
 	generateStyleChangingSelect('.flex-container-controls', 'justify-content-select', '<code>justify-content</code>', '.flex-container', 'justify-content', [
 		'',
