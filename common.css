@@ -22,6 +22,12 @@ ul {
 	margin-top: 0;
 }
 
+body {
+	margin-left: 20px;
+	margin-right: 20px;
+	max-width: 1600px;
+}
+
 .example-description {
 	margin-top: 0;
 	margin-bottom: 10px;
