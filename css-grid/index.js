@@ -7,8 +7,10 @@ createCSSTestingComponent({
 	css: `
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(4, 50px);
-  grid-template-rows: repeat(4, 50px);
+  width: 200px;
+  height: 200px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
 }
 .grid-container > div {
   background: dodgerblue;
