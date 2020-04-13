@@ -39,8 +39,9 @@ async function testBasic() {
 	// if default HTML or CSS is provided and no text area height is provided should default to lines + 1 em height.
 	const htmlTextArea = getHTMLTextArea(cssTestingComponent)
 	const cssTextArea = getCSSTextArea(cssTestingComponent)
-	assert(htmlTextArea.style.flexBasis === '2em')
-	assert(cssTextArea.style.flexBasis === '5em')
+	const getLineCount = text => text.trim().split('\n').length
+	assert(htmlTextArea.rows === getLineCount(options.html))
+	assert(cssTextArea.rows === getLineCount(options.css))
 }
 
 async function testUpdate() {
@@ -65,8 +66,8 @@ async function testUpdate() {
 async function testTextAreHeights() {
 	addTestTitle('Text area heights')
 	const options = getDefaultOptions({
-		htmlHeight: '3em',
-		cssHeight: '6em',
+		htmlTextAreaRows: 3,
+		cssTextAreaRows: 3,
 		css: `
 .my-div {
   background: dodgerblue;
@@ -78,8 +79,8 @@ async function testTextAreHeights() {
 }`
 	})
 	const cssTestingComponent = await createCSSTestingComponent(options)
-	assert(getHTMLTextArea(cssTestingComponent).style.flexBasis === options.htmlHeight)
-	assert(getCSSTextArea(cssTestingComponent).style.flexBasis === options.cssHeight)
+	assert(getHTMLTextArea(cssTestingComponent).rows === options.htmlTextAreaRows)
+	assert(getCSSTextArea(cssTestingComponent).rows === options.cssTextAreaRows)
 }
 
 async function testButtons() {

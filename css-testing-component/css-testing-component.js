@@ -18,9 +18,10 @@
  *
  * If a button has reset: true instead of html and css it will be a reset button. A default label is supplied with the
  * reset button.
- * @param options.htmlHeight Height of HTML text area. Defaults to lines + 1. The iframe height will be equal to the
- * height of both text areas.
- * @param options.cssHeight Height of HTML text area. Defaults to lines + 1.
+ * @param options.htmlTextAreaRows Number of rows for the HTML text area. Defaults to the lines in the HTML. The iframe height
+ * will be equal to the height of both text areas.
+ * @param options.cssTextAreaRows Number of rows for the CSS text area. Defaults to the lines in the CSS. The iframe height
+ * will be equal to the height of both text areas.
  * @return Promise which resolves with the CSS testing component element when it is ready for use.
  */
 function createCSSTestingComponent(options) {
@@ -112,11 +113,7 @@ function createCSSTestingComponent(options) {
 	}
 
 	function createHTMLTextArea(iframeEl, initialHTML) {
-		const htmlTextAreaEl = createTextArea('css-testing-component__html')
-		htmlTextAreaEl.innerHTML = initialHTML
-
-		// Set height of text area.
-		htmlTextAreaEl.style.flex = `1 0 ${getTextAreaHeight(options.htmlHeight, initialHTML)}`
+		const htmlTextAreaEl = createTextArea('css-testing-component__html', options.htmlTextAreaRows, initialHTML)
 
 		const updateIframeHTMLContent = () =>
 			iframeEl.contentWindow.document.querySelector('body').innerHTML = htmlTextAreaEl.value
@@ -129,11 +126,7 @@ function createCSSTestingComponent(options) {
 	}
 
 	function createCSSTextArea(iframeEl, initialCSS) {
-		const cssTextAreaEl = createTextArea('css-testing-component__css')
-		cssTextAreaEl.innerHTML = initialCSS
-
-		// Set height of text area.
-		cssTextAreaEl.style.flex = `1 0 ${getTextAreaHeight(options.cssHeight, initialCSS)}`
+		const cssTextAreaEl = createTextArea('css-testing-component__css', options.cssTextAreaRows, initialCSS)
 
 		// Create a style tag inside the iframe we will update with our styles.
 		const iframeCustomStyleTag = iframeEl.contentWindow.document.createElement('style')
@@ -149,23 +142,20 @@ function createCSSTestingComponent(options) {
 		return cssTextAreaEl
 	}
 
-	function getTextAreaHeight(optionHeight, initialText) {
-		const initialTextLines = initialText.split('\n').length
-		let defaultHeight
-		if(optionHeight != null) {
-			defaultHeight = optionHeight
-		} else if(initialTextLines) {
-			defaultHeight = `${initialTextLines + 1}em`
-		} else {
-			defaultHeight = '0'
-		}
-		return defaultHeight
-	}
-
-	function createTextArea(className) {
+	function createTextArea(className, configuredTextAreaRows, defaultContent) {
 		const textArea = document.createElement('textarea')
 		textArea.className = className
 		textArea.cols = 60
+		let textAreaRows
+		if(configuredTextAreaRows != null) {
+			textAreaRows = configuredTextAreaRows
+		} else if(defaultContent) {
+			textAreaRows = defaultContent.split('\n').length
+		} else {
+			textAreaRows = 3
+		}
+		textArea.rows = textAreaRows
+		textArea.innerHTML = defaultContent
 		return textArea
 	}
 

@@ -31,7 +31,6 @@ createCSSTestingComponent({
 		margin: '0 auto 0 50px'
 	}),
 	description: 'Notice <code>margin-right</code> becomes zero because it is <code>auto</code>.',
-	cssHeight: '20em',
 	buttons: [{
 		label: 'Left is auto - rules 1, 4',
 		reset: true
@@ -111,7 +110,6 @@ createCSSTestingComponent({
 		right: '10px',
 		width: '50px'
 	}),
-	cssHeight: '20em',
 	buttons: [{
 		label: 'Both margins are auto - rule 1',
 		reset: true
@@ -173,7 +171,6 @@ createCSSTestingComponent({
 		margin: '0 50px 0 auto'
 	}),
 	description: 'Notice <code>margin-bottom</code> becomes zero because it is <code>auto</code>.',
-	cssHeight: '20em',
 	buttons: [{
 		label: 'Top is auto - rules 1, 4',
 		reset: true
@@ -337,7 +334,6 @@ createCSSTestingComponent({
 		bottom: '10px',
 		height: '50px'
 	}),
-	cssHeight: '20em',
 	description: 'Unlike for regular block boxes vertical margins can center <code>absolute</code> elements.',
 	buttons: [{
 		label: 'Both margins are auto - rule 1',
