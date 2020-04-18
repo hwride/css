@@ -10,6 +10,11 @@
 <ul>
     <li><a href="#parts-of-the-grid">Parts of the grid</a></li>
     <li><a href="#simple-grid">Simple grid</a></li>
+    <li><a href="#grid-tracks">Grid tracks</a>
+        <ul>
+            <li><a href="#explicit-grid-examples">Explicit grid examples</a></li>
+        </ul>
+    </li>
 </ul>
 
 <h2 id="parts-of-the-grid">Parts of the grid</h2>
@@ -17,6 +22,63 @@
 
 <h2 id="simple-grid">Simple grid</h2>
 <div class="example-simple-grid"></div>
+
+<h2 id="grid-tracks">Grid tracks</h2>
+<p class="example-description">
+    Grid tracks define where content in the grid can be placed, essentially the rows and columns of the grid. There are
+    two types of grid:
+</p>
+<ul>
+    <li><b>Explicit grid</b>: Grid tracks that are specifically defined. They will always take up their defined space.</li>
+    <li><b>Implicit grid</b>: Grid tracks that are created on demand when the explicit grid is full.</li>
+</ul>
+
+<p class="example-description">
+    The following things can be configured for grid tracks:
+</p>
+<ul>
+    <li><b>Properties</b>
+        <ul>
+            <li>Explicit grid
+                <ul>
+                    <li><code>grid-template-columns: &lt;column-defs&gt;</code></li>
+                    <li><code>grid-template-rows: &lt;column-defs&gt;</code></li>
+                </ul>
+            </li>
+            <li>Implicit grid
+                <ul>
+                    <li><code>grid-auto-columns: &lt;column-defs&gt;</code></li>
+                    <li><code>grid-auto-rows: &lt;column-defs&gt;</code></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li><b>Track size</b>
+        <ul>
+            <li>Fixed: e.g. <code>px</code>.</li>
+            <li>Flexible
+                <ul>
+                    <li>
+                        <code>fr</code> is a special grid unit which means 1 fraction of available space.
+                        <code>%</code> can also be used.
+                    </li>
+                    <li><code>minmax(&lt;min&gt;, &lt;max&gt;)</code> allows tracks to adjust based on content size, but
+                    not go above or below a certain range.</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li><b>Other utility functions</b>
+        <ul>
+            <li>The <code>repeat</code> utility function: allows you to repeat track listings a number of times, e.g.
+                <code>repeat(3, 1fr)</code>.</li>
+        </ul>
+    </li>
+</ul>
+
+<h3 id="explicit-grid-examples">Explicit grid examples</h3>
+<div class="example-grid-tracks"></div>
+
 </body>
 <script src="../css-testing-component/css-testing-component.js"></script>
 <script src="./index.js"></script>
