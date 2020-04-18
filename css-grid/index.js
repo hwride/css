@@ -144,5 +144,19 @@ createCSSTestingComponent({
 .grid-container > div:nth-child(2) {
   width: 20px;
 }`
+	}, {
+		label: 'Gutters',
+		html: getGridWithItems(9),
+		css: `
+.grid-container {
+  display: grid;
+  grid-template-columns: 30px 40px 10px;
+  grid-template-rows: 20px 40px 40px;
+  grid-gap: 20px;
+}
+.grid-container > div {
+  background: dodgerblue;
+  border: 1px solid black;
+}`
 	}]
 })
