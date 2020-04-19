@@ -35,13 +35,6 @@ async function testBasic() {
 	// iframe style should be correct
 	assert(getIframeResetCSS(cssTestingComponent).includes('margin: 0'))
 	assert(getIframeCustomCSS(cssTestingComponent) === options.css.trim())
-
-	// if default HTML or CSS is provided and no text area height is provided should default to lines + 1 em height.
-	const htmlTextArea = getHTMLTextArea(cssTestingComponent)
-	const cssTextArea = getCSSTextArea(cssTestingComponent)
-	const getLineCount = text => text.trim().split('\n').length
-	assert(htmlTextArea.rows === getLineCount(options.html))
-	assert(cssTextArea.rows === getLineCount(options.css))
 }
 
 async function testUpdate() {
@@ -49,25 +42,21 @@ async function testUpdate() {
 	const cssTestingComponent = await createCSSTestingComponent(getDefaultOptions())
 
 	// should update on change of HTML text area
-	const htmlTextArea = getHTMLTextArea(cssTestingComponent)
 	const newHTMLValue = '<span>Test</span>'
-	htmlTextArea.value = newHTMLValue
-	htmlTextArea.dispatchEvent(new Event('input'))
+	setHTMLTextAreaValue(cssTestingComponent, newHTMLValue)
 	assert(getIframeHTML(cssTestingComponent) === newHTMLValue)
 
 	// should update on change of CSS text area
-	const cssTextArea = getCSSTextArea(cssTestingComponent)
 	const newCSSValue = 'span { color: dodgerblue; }'
-	cssTextArea.value = newCSSValue
-	cssTextArea.dispatchEvent(new Event('input'))
+	setCSSTextAreaValue(cssTestingComponent, newCSSValue)
 	assert(getIframeCustomCSS(cssTestingComponent) === newCSSValue)
 }
 
 async function testTextAreHeights() {
 	addTestTitle('Text area heights')
 	const options = getDefaultOptions({
-		htmlTextAreaRows: 3,
-		cssTextAreaRows: 3,
+		htmlMaxLines: 3,
+		cssMaxLines: 3,
 		css: `
 .my-div {
   background: dodgerblue;
@@ -79,8 +68,8 @@ async function testTextAreHeights() {
 }`
 	})
 	const cssTestingComponent = await createCSSTestingComponent(options)
-	assert(getHTMLTextArea(cssTestingComponent).rows === options.htmlTextAreaRows)
-	assert(getCSSTextArea(cssTestingComponent).rows === options.cssTextAreaRows)
+	assert(cssTestingComponent.htmlEditor.getOption('maxLines') === options.htmlMaxLines)
+	assert(cssTestingComponent.cssEditor.getOption('maxLines') === options.cssMaxLines)
 }
 
 async function testButtons() {
@@ -106,14 +95,14 @@ async function testButtons() {
 
 	// Test button 1.
 	clickButton(cssTestingComponent, 1)
-	assert(getHTMLTextArea(cssTestingComponent).value === options.buttons[1].html)
-	assert(getCSSTextArea(cssTestingComponent).value === options.buttons[1].css)
+	assert(getHTMLTextAreaValue(cssTestingComponent) === options.buttons[1].html)
+	assert(getCSSTextAreaValue(cssTestingComponent) === options.buttons[1].css)
 	assert(getDescription(cssTestingComponent) === options.buttons[1].description)
 
 	// Test reset.
 	clickButton(cssTestingComponent, 0)
-	assert(getHTMLTextArea(cssTestingComponent).value === options.html.trim())
-	assert(getCSSTextArea(cssTestingComponent).value === options.css.trim())
+	assert(getHTMLTextAreaValue(cssTestingComponent) === options.html.trim())
+	assert(getCSSTextAreaValue(cssTestingComponent) === options.css.trim())
 	assert(getDescription(cssTestingComponent) === options.description)
 
 	// Test a button showing no description.
@@ -129,7 +118,7 @@ function addTestTitle(title) {
 }
 
 function getIframeDocument(cssTestingComponent) {
-	return cssTestingComponent.querySelector('.css-testing-component__iframe').contentWindow.document
+	return cssTestingComponent.el.querySelector('.css-testing-component__iframe').contentWindow.document
 }
 function getIframeHTML(cssTestingComponent) {
 	return getIframeDocument(cssTestingComponent).querySelector('body').innerHTML
@@ -140,18 +129,24 @@ function getIframeResetCSS(cssTestingComponent) {
 function getIframeCustomCSS(cssTestingComponent) {
 	return getIframeDocument(cssTestingComponent).querySelector('head style[data-name="custom"]').innerHTML
 }
-function getHTMLTextArea(cssTestingComponent) {
-	return cssTestingComponent.querySelector('.css-testing-component__html')
+function getHTMLTextAreaValue(cssTestingComponent) {
+	return cssTestingComponent.htmlEditor.getValue()
 }
-function getCSSTextArea(cssTestingComponent) {
-	return cssTestingComponent.querySelector('.css-testing-component__css')
+function setHTMLTextAreaValue(cssTestingComponent, value) {
+	return cssTestingComponent.htmlEditor.setValue(value, -1)
+}
+function getCSSTextAreaValue(cssTestingComponent) {
+	return cssTestingComponent.cssEditor.getValue()
+}
+function setCSSTextAreaValue(cssTestingComponent, value) {
+	return cssTestingComponent.cssEditor.setValue(value, -1)
 }
 function clickButton(cssTestingComponent, index) {
-	const button = cssTestingComponent.querySelectorAll('.css-testing-component__buttons button')[index]
+	const button = cssTestingComponent.el.querySelectorAll('.css-testing-component__buttons button')[index]
 	button.dispatchEvent(new Event('click'))
 }
 function getDescription(cssTestingComponent) {
-	return cssTestingComponent.querySelector('.css-testing-component__description').innerHTML
+	return cssTestingComponent.el.querySelector('.css-testing-component__description').innerHTML
 }
 
 /* Mini test framework functions */

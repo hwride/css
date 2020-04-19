@@ -19,18 +19,17 @@
 }
 
 /* Text areas */
-.css-testing-component__text-areas {
+.css-testing-component__editors {
 	display: flex;
 	flex-direction: column;
 }
-.css-testing-component__html,
-.css-testing-component__css {
+.css-testing-component__editor {
 	border: 1px solid gray;
-	border-right: none; /* Stop double border. */
-	resize: none;
+	border-right: none; /* Stop double border with iframe. */
+	width: 50ch;
 }
-.css-testing-component__css {
-	border-top: none; /* Stop double border. */
+.css-testing-component__editor:first-child {
+	border-bottom: none; /* Stop double border between editors. */
 }
 
 /* iframe */

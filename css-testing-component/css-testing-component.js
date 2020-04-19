@@ -1,9 +1,14 @@
 /*
 	Component which can be used for testing/demoing CSS on a page. Shoes two text areas with HTML and CSS which are
 	rendered in an iframe. The iframe will update automatically when the text is changed.
- */
 
-// Could re-write this to define all HTML upfront as a string, may be easier to read.
+	Note ensure you import the following:
+	- lib/ace/src-noconflict/ace.js
+	- css-testing-component.css
+	- css-testing-component.js
+
+	Then call: createCSSTestingComponent(options)
+ */
 
 /**
  * Create a CSS test component.
@@ -18,13 +23,14 @@
  *
  * If a button has reset: true instead of html and css it will be a reset button. A default label is supplied with the
  * reset button.
- * @param options.htmlTextAreaRows Number of rows for the HTML text area. Defaults to the lines in the HTML. The iframe height
- * will be equal to the height of both text areas.
- * @param options.cssTextAreaRows Number of rows for the CSS text area. Defaults to the lines in the CSS. The iframe height
- * will be equal to the height of both text areas.
- * @return Promise which resolves with the CSS testing component element when it is ready for use.
+ * @param options.htmlMaxLines Maximum number of lines the HTML area can take. Otherwise defaults to initial content.
+ * @param options.cssMaxLines Maximum number of lines the CSS area can take. Otherwise defaults to initial content. The
+ * iframe height will be equal to the height of both text areas.
+ * @return Promise which resolves with some CSS testing component objects.
  */
 function createCSSTestingComponent(options) {
+	const CURSOR_START_POSITION = -1 // -1 = start of text
+
 	return create()
 
 	function create() {
@@ -48,7 +54,7 @@ function createCSSTestingComponent(options) {
 
 			// Create input text areas.
 			const inputWrapperEl = document.createElement('div')
-			inputWrapperEl.className = 'css-testing-component__text-areas'
+			inputWrapperEl.className = 'css-testing-component__editors'
 			inputAndIframeRow.prepend(inputWrapperEl)
 
 			// Create description row.
@@ -61,11 +67,13 @@ function createCSSTestingComponent(options) {
 				addResetStylesToIframe(iframeEl)
 
 				// Creating the text areas adds inital HTML and CSS to the iframe.
-				const htmlTextAreaEl = createHTMLTextArea(iframeEl, initialHTML)
-				inputWrapperEl.append(htmlTextAreaEl)
-				const cssTextAreaEl = createCSSTextArea(iframeEl, initialCSS)
-				inputWrapperEl.append(cssTextAreaEl)
-				resolve(cssTestingComponentEl)
+				const htmlEditor = createHTMLEditor(inputWrapperEl, iframeEl, initialHTML, options.htmlMaxLines)
+				const cssEditor = createCSSEditor(inputWrapperEl, iframeEl, initialCSS, options.cssMaxLines)
+				resolve({
+					htmlEditor,
+					cssEditor,
+					el: cssTestingComponentEl
+				})
 
 				// Create buttons.
 				if(options.buttons) {
@@ -74,8 +82,8 @@ function createCSSTestingComponent(options) {
 						initialHTML,
 						initialCSS,
 						initialDescription,
-						htmlTextAreaEl,
-						cssTextAreaEl,
+						htmlEditor,
+						cssEditor,
 						descriptionEl
 					})
 					inputAndIframeRow.append(buttonsEl)
@@ -112,54 +120,53 @@ function createCSSTestingComponent(options) {
 		return cssTestingComponentEl
 	}
 
-	function createHTMLTextArea(iframeEl, initialHTML) {
-		const htmlTextAreaEl = createTextArea('css-testing-component__html', options.htmlTextAreaRows, initialHTML)
+	function createEditor(parentEl, iframeEl, modeHighlighting, initialContent, maxLines, onChange) {
+		// Create tag and add to DOM. ace.js requires the element to be in the DOM when you initialise it.
+		const editorEl = document.createElement('div')
+		editorEl.className = 'css-testing-component__editor'
+		parentEl.append(editorEl)
 
-		const updateIframeHTMLContent = () =>
-			iframeEl.contentWindow.document.querySelector('body').innerHTML = htmlTextAreaEl.value
-		htmlTextAreaEl.addEventListener('input', updateIframeHTMLContent)
+		// Setup editor.
+		var editor = ace.edit(editorEl);
+		editor.setOptions({
+			maxLines: maxLines != null ? maxLines : 50,
+			highlightActiveLine: false
+		})
+		editor.setTheme("ace/theme/chrome")
+		editor.session.setMode(modeHighlighting)
+		editor.session.setUseWorker(false) // Disable syntax checking and warnings.
+
+		// Set initial content.
+		editor.setValue(initialContent, CURSOR_START_POSITION)
+
+		// Trigger change callback on change.
+		const triggerOnChange = () => onChange(editor.getValue())
+		editor.session.on('change', triggerOnChange)
 
 		// Update for the first time.
-		updateIframeHTMLContent()
+		triggerOnChange()
 
-		return htmlTextAreaEl
+		return editor
 	}
 
-	function createCSSTextArea(iframeEl, initialCSS) {
-		const cssTextAreaEl = createTextArea('css-testing-component__css', options.cssTextAreaRows, initialCSS)
+	function createHTMLEditor(parentEl, iframeEl, initialHTML, maxLines) {
+		return createEditor(parentEl, iframeEl, 'ace/mode/html', initialHTML, maxLines, newValue => {
+			iframeEl.contentWindow.document.querySelector('body').innerHTML = newValue
+		})
+	}
 
+	function createCSSEditor(parentEl, iframeEl, initialCSS, maxLines) {
 		// Create a style tag inside the iframe we will update with our styles.
 		const iframeCustomStyleTag = iframeEl.contentWindow.document.createElement('style')
 		iframeCustomStyleTag.dataset.name = 'custom'
 		iframeEl.contentWindow.document.querySelector('head').append(iframeCustomStyleTag)
 
-		const updateIframeCSSContent = () => iframeCustomStyleTag.innerHTML = cssTextAreaEl.value
-		cssTextAreaEl.addEventListener('input', updateIframeCSSContent)
-
-		// Add initial content to iframe.
-		updateIframeCSSContent()
-
-		return cssTextAreaEl
+		return createEditor(parentEl, iframeEl, 'ace/mode/css', initialCSS, maxLines, newValue => {
+			iframeCustomStyleTag.innerHTML = newValue
+		})
 	}
 
-	function createTextArea(className, configuredTextAreaRows, defaultContent) {
-		const textArea = document.createElement('textarea')
-		textArea.className = className
-		textArea.cols = 60
-		let textAreaRows
-		if(configuredTextAreaRows != null) {
-			textAreaRows = configuredTextAreaRows
-		} else if(defaultContent) {
-			textAreaRows = defaultContent.split('\n').length
-		} else {
-			textAreaRows = 3
-		}
-		textArea.rows = textAreaRows
-		textArea.innerHTML = defaultContent
-		return textArea
-	}
-
-	function createButtons({ buttons, initialHTML, initialCSS, initialDescription, htmlTextAreaEl, cssTextAreaEl, descriptionEl }) {
+	function createButtons({ buttons, initialHTML, initialCSS, initialDescription, htmlEditor, cssEditor, descriptionEl }) {
 		const buttonsEl = document.createElement('div')
 		buttonsEl.className = 'css-testing-component__buttons'
 
@@ -179,8 +186,8 @@ function createCSSTestingComponent(options) {
 			buttonEl.addEventListener('click', () => {
 				// Note HTML and CSS don't have to be provided to allow a button to change only one field but leave the last
 				// value there. This is not the same for description where we want an empty description to be cleared.
-				if(buttonHTML) updateTextAreaContent(htmlTextAreaEl, buttonHTML.trim())
-				if(buttonCSS) updateTextAreaContent(cssTextAreaEl, buttonCSS.trim())
+				if(buttonHTML) htmlEditor.setValue(buttonHTML.trim(), CURSOR_START_POSITION)
+				if(buttonCSS) cssEditor.setValue(buttonCSS.trim(), CURSOR_START_POSITION)
 				descriptionEl.innerHTML = buttonDescription ? buttonDescription : ''
 			})
 		})
@@ -192,10 +199,5 @@ function createCSSTestingComponent(options) {
 		descriptionEl.className = 'css-testing-component__description'
 		if(initialDescription) descriptionEl.innerHTML = initialDescription
 		return descriptionEl
-	}
-
-	function updateTextAreaContent(textArea, newContent) {
-		textArea.value = newContent
-		textArea.dispatchEvent(new Event('input'))
 	}
 }
