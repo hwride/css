@@ -22,6 +22,8 @@
                     <li><a href="#named-grid-lines">Named grid lines</a></li>
                 </ul>
             </li>
+            <li><a href="#template-areas">Template areas</a></li>
+            <li><a href="#interaction-named-lines-areas">Interaction between named lines and areas</a></li>
         </ul>
     </li>
 </ul>
@@ -172,6 +174,65 @@
 <h5>Examples</h5>
 <div class="example-grid-named-lines"></div>
 
+<h3 id="template-areas">Template areas</h3>
+<p class="example-description">
+    You can define how items will be placed in a grid using a string template syntax. See below for details:
+</p>
+<table>
+    <tbody>
+        <tr>
+            <td style="white-space: nowrap"><code>grid-area: grid-area-name</code></td>
+            <td>Grid items are given a name with the <code>grid-area</code> property.</td>
+        </tr>
+        <tr>
+            <td style="white-space: nowrap"><code>grid-template-areas:<br/>
+                &nbsp;&nbsp;"grid-area-name &nbsp;&nbsp;grid-area-name&nbsp;&nbsp;"<br/>
+                &nbsp;&nbsp;"grid-area-name-2 grid-area-name-2"<br/>
+            </code></td>
+            <td>The grid container then has a template defined which references these named areas. Each row is a new
+            quoted line. Each name in a line is a column.</td>
+        </tr>
+        <tr>
+            <td style="white-space: nowrap"><code>grid-template:<br/>
+                &nbsp;&nbsp;"grid-area-name grid-area-name" 40px<br/>
+                &nbsp;&nbsp;&nbsp;1fr &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1fr</code></td>
+            <td>
+                An alternative to <code>grid-template-areas</code> which allows you also specify the row and column
+                definitions. The row definitions are at the end of each row and the column definitions are below each
+                column.
+            </td>
+        </tr>
+        <tr>
+            <td style="white-space: nowrap"><code>grid: &lt;grid-template&gt;</code></td>
+            <td>
+                Exactly the same as <code>grid-template</code>, but also resets implicit grid properties (for auto
+                placement).
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br/>
+<p class="example-description">Notes:</p>
+<ul>
+    <li>Whitespace is ignored in the template and can be used for spacing names so they line up.</li>
+    <li>Empty cells are specified with a "<code>.</code>".</li>
+    <li>You can currently only specify rectangular shapes.</li>
+</ul>
+<div class="example-template-areas"></div>
+
+<h3 id="interaction-named-lines-areas">Interaction between named lines and areas</h3>
+<p class="example-description">
+    If you define a named grid area then you will automatically get corresponding named lines generated for that area.
+    E.g. if you have an area named <code>header</code> then the you will get the following line names automatically
+    generated for both columns and rows: <code>header-start</code> and <code>header-end</code>.
+</p>
+<p class="example-description">
+    The same applies in reverse as well. If you have lines with the same name that form an area then the corresponding
+    named area is automatically generated and can be used to place grid items. The lines must start with the same name
+    and end in <code>-start</code> and <code>-end</code>.
+</p>
+<div class="example-interaction-named-lines-areas"></div>
+
 </body>
 <script src="../css-testing-component/lib/ace/src-noconflict/ace.js"></script>
 <script src="../css-testing-component/css-testing-component.js"></script>
@@ -179,6 +240,8 @@
 <script src="simple.js"></script>
 <script src="grid-tracks.js"></script>
 <script src="grid-lines.js"></script>
+<script src="template-areas.js"></script>
+<script src="interaction-named-lines-areas.js"></script>
 <script src="../nav.js"></script>
 <script>createNav()</script>
 </html>
