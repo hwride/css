@@ -15,6 +15,15 @@
             <li><a href="#explicit-grid-examples">Explicit grid examples</a></li>
         </ul>
     </li>
+    <li><a href="#placing-items">Placing items</a>
+        <ul>
+            <li><a href="#grid-lines">Grid lines</a>
+                <ul>
+                    <li><a href="#named-grid-lines">Named grid lines</a></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
 </ul>
 
 <h2 id="parts-of-the-grid">Parts of the grid</h2>
@@ -83,6 +92,85 @@
 
 <h3 id="explicit-grid-examples">Explicit grid examples</h3>
 <div class="example-grid-tracks"></div>
+
+<h2 id="placing-items">Placing items</h2>
+<h3 id="grid-lines">Grid lines</h3>
+<p class="example-description">
+    Whenever you explicitly place items on a grid you specify their position using grid lines. Relevant properties:
+</p>
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <code>grid-column-start: 1</code><br/>
+                <code>grid-column-end: 3</code><br/>
+                <code>grid-column: &lt;grid-column-start&gt; / &lt;grid-column-end&gt;</code>
+            </td>
+            <td>Column positions for a grid item.</td>
+        </tr>
+        <tr>
+            <td>
+                <code>grid-row-start: 1</code><br/>
+                <code>grid-row-end: 3</code><br/>
+                <code>grid-row: &lt;grid-row-start&gt; / &lt;grid-row-end&gt;</code>
+            </td>
+            <td>Row positions for a grid item.</td>
+        </tr>
+        <tr>
+            <!-- Using spacer spans to align text. This should work as font is fixed width. -->
+            <td><code>grid-area: &lt;grid-row-start&gt; / &lt;grid-column-start&gt; / <br/>
+                <span style="display:inline-block; width: 11ch;"></span>&lt;grid-row-end&gt;
+                <span style="display:inline-block; width: 1ch;"></span> / &lt;grid-column-endt&gt;</code></td>
+            <td>Shorthand property for entire grid item area.</td>
+        </tr>
+        <tr>
+            <td><code>grid-row: 2 / span 4</code></td>
+            <td><code>span</code> tells specifies that an item should span the given number of tracks.</td>
+        </tr>
+        <tr>
+            <td><code>grid-column: -1 / -2</code></td>
+            <td>Negative numbers start from the end track.</td>
+        </tr>
+    </tbody>
+</table>
+<br />
+<p class="example-description">
+    Other notes:
+</p>
+<ul>
+    <li>If you don't specify an end it defaults to <code>span 1</code>.</li>
+</ul>
+<h4>Examples</h4>
+<div class="example-grid-lines"></div>
+
+<h4 id="named-grid-lines">Named grid lines</h4>
+<p class="example-description">
+    Grid lines can be given names and referenced elsewhere by their names.
+</p>
+<ul>
+    <li>
+        Line names are defined like this: <code>grid-template-columns: [line-name-1] 1fr [line-name-2] 2fr [line-name-3]</code> <br/>
+        And referenced line this: <code>grid-column: line-name-1 line-name-3</code>
+    </li>
+    <li>You can give a line multiple names: <code>[line-name-1 line-name-2]</code></li>
+</ul>
+
+<p class="example-description">
+    The <b>same line names can be used for multiple lines</b>. Note:
+</p>
+<ul>
+    <li>When there are multiple lines with a given name the first found line is used.</li>
+    <li>When <code>span</code> is used with a line name it will apply only to lines with a matching name.</li>
+    <li>You can reference lines with a particular name by index: <code>grid-row-end: line-name 3</code></li>
+    <li>Using <code>repeat</code> with a line name will cause multiple lines to use the given name.</li>
+</ul>
+
+<p class="example-description">
+    <b>Template and line name auto-detection</b> occurs if lines are named in a specific way. See the later section for
+    details.
+</p>
+<h5>Examples</h5>
+<div class="example-grid-named-lines"></div>
 
 </body>
 <script src="../css-testing-component/lib/ace/src-noconflict/ace.js"></script>
