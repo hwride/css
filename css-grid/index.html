@@ -4,6 +4,7 @@
     <title>CSS Grid</title>
     <link rel="stylesheet" type="text/css" href="../common.css">
     <link rel="stylesheet" type="text/css" href="../css-testing-component/css-testing-component.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body>
 <h1>CSS Grid</h1>
@@ -27,6 +28,7 @@
             <li><a href="#automatic-placement">Automatic placement with the implicit grid</a></li>
         </ul>
     </li>
+    <li><a href="#aligning">Aligning items and tracks</a></li>
 </ul>
 
 <h2 id="parts-of-the-grid">Parts of the grid</h2>
@@ -291,6 +293,92 @@
 
 <div class="example-auto-placement"></div>
 
+<h2 id="aligning">Aligning items and tracks</h2>
+<p class="example-description">
+    In CSS grid you can align items in grid areas, and grid tracks within the grid. Alignment applies when the item or
+    track is smaller than the area or grid. There are two axis to be aware of:
+</p>
+<ul>
+    <li><b>The block axis</b>: this is in the direction blocks are laid out (normally top to bottom).</li>
+    <li><b>The inline axis</b>: this is in the direction inline boxes are laid out (normally left to right).</li>
+</ul>
+
+<p class="example-description">
+    The following properties apply:
+</p>
+<table>
+    <thead>
+        <tr>
+            <th>Property</th>
+            <th>Applies to</th>
+            <th>Axis</th>
+            <th>Individual or all</th>
+            <th>Default</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code><span class="block-axis">align</span>-<span class="individual-items">self</span></code></td>
+            <td rowspan="7">Items in grid areas</td>
+            <td rowspan="2"><span class="block-axis">Block</span></td>
+            <td><span class="individual-items">Individual</span></td>
+            <td rowspan="6"><code>stretch</code><br/>
+                <code>start</code> if the item has an intrinsic aspect ratio</td>
+            <td rowspan="6"></td>
+        </tr>
+        <tr>
+            <td><code><span class="block-axis">align</span>-<span class="all-items">items</span></code></td>
+            <td><span class="all-items">All</span></td>
+        </tr>
+        <tr>
+            <td><code><span class="inline-axis">justify</span>-<span class="individual-items">self</span></code></td>
+            <td rowspan="2"><span class="inline-axis">Inline</span></td>
+            <td><span class="individual-items">Individual</span></td>
+        </tr>
+        <tr>
+            <td><code><span class="inline-axis">justify</span>-<span class="all-items">items</span></code></td>
+            <td><span class="all-items">All</span></td>
+        </tr>
+        <tr>
+            <td><code><span class="both-axis">place</span>-<span class="individual-items">self</span></code></td>
+            <td rowspan="2"><span class="both-axis">Block and inline</span></td>
+            <td><span class="individual-items">Individual</span></td>
+        </tr>
+        <tr>
+            <td><code><span class="both-axis">place</span>-<span class="all-items">items</span></code></td>
+            <td><span class="all-items">All</span></td>
+        </tr>
+        <tr>
+            <td><code>margin</code></td>
+            <td>Block or inline</td>
+            <td>Individual</td>
+            <td><code>0</code></td>
+            <td>You can also align items with fixed or <code>auto</code> margins.</td>
+        </tr>
+        <tr>
+            <td><code><span class="block-axis">align</span>-content</code></td>
+            <td rowspan="6">Tracks in grid</td>
+            <td><span class="block-axis">Block</span></td>
+            <td rowspan="3">All</td>
+            <td rowspan="3"><code>start</code> (why grid items appear in top left)</td>
+            <td rowspan="3">
+                If an item spans multiple tracks then it may be stretch when track alignment changes.
+            </td>
+        </tr>
+        <tr>
+            <td><code><span class="inline-axis">justify</span>-content</code></td>
+            <td><span class="inline-axis">Inline</span></td>
+        </tr>
+        <tr>
+            <td><code><span class="both-axis">place</span>-content</code></td>
+            <td><span class="both-axis">Block and inline</span></td>
+        </tr>
+    </tbody>
+</table>
+<br/>
+<div class="aligning-example"></div>
+
 </body>
 <script src="../css-testing-component/lib/ace/src-noconflict/ace.js"></script>
 <script src="../css-testing-component/css-testing-component.js"></script>
@@ -301,6 +389,7 @@
 <script src="template-areas.js"></script>
 <script src="interaction-named-lines-areas.js"></script>
 <script src="auto-placement.js"></script>
+<script src="aligning.js"></script>
 <script src="../nav.js"></script>
 <script>createNav()</script>
 </html>
