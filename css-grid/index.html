@@ -153,7 +153,7 @@
 <ul>
     <li>
         Line names are defined like this: <code>grid-template-columns: [line-name-1] 1fr [line-name-2] 2fr [line-name-3]</code> <br/>
-        And referenced line this: <code>grid-column: line-name-1 line-name-3</code>
+        And referenced like this: <code>grid-column: line-name-1 line-name-3</code>
     </li>
     <li>You can give a line multiple names: <code>[line-name-1 line-name-2]</code></li>
 </ul>
@@ -168,10 +168,6 @@
     <li>Using <code>repeat</code> with a line name will cause multiple lines to use the given name.</li>
 </ul>
 
-<p class="example-description">
-    <b>Template and line name auto-detection</b> occurs if lines are named in a specific way. See the later section for
-    details.
-</p>
 <h5>Examples</h5>
 <div class="example-grid-named-lines"></div>
 
@@ -286,9 +282,10 @@
 </p>
 <ul>
     <li>
-        You can combine auto placement with <b>track spanning</b> if you set an end property to <code>span</code> and leave
-        the start property as auto. This will leave empty spaces if it can't fit. By default smaller items won't go
-        back and fill empty spaces if they can fit (unless <code>dense</code> is specified as described above).
+        You can combine auto placement with <b>track spanning</b> if you set an end property to <code>span</code> and
+        leave the start property as <code>auto</code>. This will leave empty spaces if it can't fit. By default smaller
+        items won't go back and fill empty spaces if they can fit (unless <code>dense</code> is specified as described
+        above).
     </li>
 </ul>
 <div class="example-auto-placement"></div>

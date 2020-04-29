@@ -82,7 +82,7 @@ createCSSTestingComponent({
 <ul>
 	<li>Column 1 expands to contain the <code>100px</code> grid item.</li>
 	<li>Column 2 does not go below <code>50px</code> even though the only grid item is smaller than that.</li>
-	<li>Column 3 takes up the remaining space, as its ideal <code>max-content</code> is wider than the what is left. Try 
+	<li>Column 3 takes up the remaining space, as its ideal <code>max-content</code> is wider than what is left. Try 
 	reducing the size of the first grid item and you'll see column 3 expand.<br/>
 	Note here that the fixed size tracks are being assigned space first (you can test that it's not based on column 
 	order by placing the text column first, you'll see it still is the column to flex). </li>
