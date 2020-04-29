@@ -241,6 +241,7 @@
     <li>When the explicit grid is full new grid tracks are created according to implicit grid definitions and these
         are filled up.</li>
 </ol>
+
 <p class="example-description">
     Here are some relevant properties:
 </p>
@@ -249,21 +250,21 @@
     <tr>
         <td style="white-space: nowrap;"><code>grid-auto-rows: 1fr</code></td>
         <td>
-            Defines implicit grid rows. Multiple tracks are supported and repeat once used (not supported in Firefox).
-            The default value is <code>auto</code>.
+            Defines <b>implicit grid rows</b>. Multiple tracks are supported and repeat once used (not supported in
+            Firefox). The default value is <code>auto</code>.
         </td>
     </tr>
     <tr>
         <td style="white-space: nowrap;"><code>grid-auto-columns: minmax(50px, auto)</code></td>
         <td>
-            Defines implicit grid columns. Multiple tracks are supported and repeat once used (not supported in Firefox).
-            The default value is <code>auto</code>.
+            Defines <b>implicit grid columns</b>. Multiple tracks are supported and repeat once used (not supported in
+            Firefox). The default value is <code>auto</code>.
         </td>
     </tr>
     <tr>
         <td style="white-space: nowrap;"><code>grid-auto-flow: [row | column] [dense]</code></td>
         <td>
-            Defines whether extra rows or columns are created when the explicit grid is full.
+            Defines whether <b>extra rows or columns</b> are created when the explicit grid is full.
             Defaults to <code>row</code>. <br/>
             If you specify <code>dense</code> then no empty gaps will be left is possible (defaults to
             <code>sparse</code> where empty spaces aren't back-filled).
@@ -271,23 +272,23 @@
     </tr>
     <tr>
         <td><code>order: 2</code></td>
-        <td>Can be used to control the order grid items are automatically placed in the grid.</td>
+        <td>Can be used to control the <b>order</b> grid items are automatically placed in the grid (defaults to
+            <code>0</code>). Items that have the same <code>order</code> are placed in DOM source order.</td>
+    </tr>
+    <tr>
+        <td>
+            <code>grid-column-start: auto</code><br/>
+            <code>grid-column-end: span 2</code><br/>
+        </td>
+        <td>You can combine auto placement with <b>track spanning</b> if you set an end property to <code>span</code> and
+            leave the start property as <code>auto</code>. This will leave empty spaces if it can't fit. By default smaller
+            items won't go back and fill empty spaces if they can fit (unless <code>dense</code> is specified as described
+            above).</td>
     </tr>
     </tbody>
 </table>
 <br/>
 
-<p class="example-description">
-    Others notes:
-</p>
-<ul>
-    <li>
-        You can combine auto placement with <b>track spanning</b> if you set an end property to <code>span</code> and
-        leave the start property as <code>auto</code>. This will leave empty spaces if it can't fit. By default smaller
-        items won't go back and fill empty spaces if they can fit (unless <code>dense</code> is specified as described
-        above).
-    </li>
-</ul>
 <div class="example-auto-placement"></div>
 
 </body>
