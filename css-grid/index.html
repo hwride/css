@@ -50,50 +50,68 @@
 <p class="example-description">
     The following things can be configured for grid tracks:
 </p>
-<ul>
-    <li><b>Properties</b>
-        <ul>
-            <li>Explicit grid
-                <ul>
-                    <li><code>grid-template-columns: &lt;column-defs&gt;</code></li>
-                    <li><code>grid-template-rows: &lt;column-defs&gt;</code></li>
-                </ul>
-            </li>
-            <li>Implicit grid
-                <ul>
-                    <li><code>grid-auto-columns: &lt;column-defs&gt;</code></li>
-                    <li><code>grid-auto-rows: &lt;column-defs&gt;</code></li>
-                </ul>
-            </li>
-        </ul>
-    </li>
-    <li><b>Track size</b>
-        <ul>
-            <li>Fixed: e.g. <code>px</code>.</li>
-            <li>Flexible
-                <ul>
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <code>grid-template-columns: &lt;column-defs&gt;</code><br/>
+                <code>grid-template-rows: &lt;column-defs&gt;</code>
+            </td>
+            <td><b>Explicit grid</b> track definitions.</td>
+        </tr>
+        <tr>
+            <td>
+                <code>grid-auto-columns: &lt;column-defs&gt;</code><br/>
+                <code>grid-auto-rows: &lt;column-defs&gt;</code>
+            </td>
+            <td><b>Implicit grid</b> track definitions.</td>
+        </tr>
+        <tr>
+            <td>
+                <code>grid-template-columns: 10px 20px</code>
+            </td>
+            <td><b>Fixed size</b> tracks.</td>
+        </tr>
+        <tr>
+            <td>
+                <code>grid-template-columns: 1fr 2fr</code><br/>
+                <code>grid-template-columns: minmax(20px, auto)</code>
+            </td>
+            <td>
+                <b>Flexible size</b> tracks can be defined with the following units:
+                <ul style="margin-bottom: 0;">
                     <li>
-                        <code>fr</code> is a special grid unit which means 1 fraction of available space.
+                        <code>fr</code> is a special grid unit which means 1 fraction of available space.<br/>
+                    </li>
+                    <li>
                         <code>%</code> can also be used.
                     </li>
-                    <li><code>minmax(&lt;min&gt;, &lt;max&gt;)</code> allows tracks to adjust based on content size, but
-                    not go above or below a certain range.</li>
+                    <li>
+                        <code>minmax(&lt;min&gt;, &lt;max&gt;)</code> allows tracks to adjust based on content size, but
+                        not go above or below a certain range.
+                    </li>
                 </ul>
-            </li>
-        </ul>
-    </li>
-    <li><b>Other utility functions</b>
-        <ul>
-            <li>The <code>repeat</code> utility function: allows you to repeat track listings a number of times, e.g.
-                <code>repeat(3, 1fr)</code>.</li>
-        </ul>
-    </li>
-    <li><b>Gutters/alleys</b>
-        <ul>
-            <li>Space between tracks can be set with <code>grid-gap: &lt;size&gt;</code></li>
-        </ul>
-    </li>
-</ul>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>grid-template-columns: repeat(3, 1fr)</code>
+            </td>
+            <td>
+                The <b>repeat</b> utility function allows you to repeat track listings a number of times.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>grid-gap: 15px</code>
+            </td>
+            <td>
+                Sets the <b>gap</b> (gutter/alley) between grid tracks.
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 <h3 id="explicit-grid-examples">Explicit grid examples</h3>
 <div class="example-grid-tracks"></div>
@@ -111,7 +129,7 @@
                 <code>grid-column-end: 3</code><br/>
                 <code>grid-column: &lt;grid-column-start&gt; / &lt;grid-column-end&gt;</code>
             </td>
-            <td>Column positions for a grid item.</td>
+            <td><b>Column positions</b> for a grid item.</td>
         </tr>
         <tr>
             <td>
@@ -119,22 +137,22 @@
                 <code>grid-row-end: 3</code><br/>
                 <code>grid-row: &lt;grid-row-start&gt; / &lt;grid-row-end&gt;</code>
             </td>
-            <td>Row positions for a grid item.</td>
+            <td><b>Row positions</b> for a grid item.</td>
         </tr>
         <tr>
             <!-- Using spacer spans to align text. This should work as font is fixed width. -->
             <td><code>grid-area: &lt;grid-row-start&gt; / &lt;grid-column-start&gt; / <br/>
                 <span style="display:inline-block; width: 11ch;"></span>&lt;grid-row-end&gt;
-                <span style="display:inline-block; width: 1ch;"></span> / &lt;grid-column-endt&gt;</code></td>
-            <td>Shorthand property for entire grid item area.</td>
+                <span style="display:inline-block; width: 1ch;"></span> / &lt;grid-column-end&gt;</code></td>
+            <td>Shorthand property for <b>entire grid item area</b>.</td>
         </tr>
         <tr>
             <td><code>grid-row: 2 / span 4</code></td>
-            <td><code>span</code> tells specifies that an item should span the given number of tracks.</td>
+            <td><b><code>span</code></b> tells specifies that an item should span the given number of tracks.</td>
         </tr>
         <tr>
             <td><code>grid-column: -1 / -2</code></td>
-            <td>Negative numbers start from the end track.</td>
+            <td><b>Negative numbers</b> start from the end track.</td>
         </tr>
     </tbody>
 </table>
@@ -181,31 +199,32 @@
     <tbody>
         <tr>
             <td style="white-space: nowrap"><code>grid-area: grid-area-name</code></td>
-            <td>Grid items are given a name with the <code>grid-area</code> property.</td>
+            <td><b>Grid items are given a name</b> with the <code>grid-area</code> property.</td>
         </tr>
         <tr>
             <td style="white-space: nowrap"><code>grid-template-areas:<br/>
                 &nbsp;&nbsp;"grid-area-name &nbsp;&nbsp;grid-area-name&nbsp;&nbsp;"<br/>
                 &nbsp;&nbsp;"grid-area-name-2 grid-area-name-2"<br/>
             </code></td>
-            <td>The grid container then has a template defined which references these named areas. Each row is a new
-            quoted line. Each name in a line is a column.</td>
+            <td>The grid container then has a <b>template</b> defined which references these named areas and positions the
+                corresponding items as defined in the template. Each row is a new quoted line. Each name in a line is a
+                column.</td>
         </tr>
         <tr>
             <td style="white-space: nowrap"><code>grid-template:<br/>
                 &nbsp;&nbsp;"grid-area-name grid-area-name" 40px<br/>
                 &nbsp;&nbsp;&nbsp;1fr &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1fr</code></td>
             <td>
-                An alternative to <code>grid-template-areas</code> which allows you also specify the row and column
-                definitions. The row definitions are at the end of each row and the column definitions are below each
-                column.
+                A <b>shorthand alternative</b> to <code>grid-template-areas</code> which allows you also specify the
+                row and column definitions. The row definitions are at the end of each row and the column definitions
+                are below each column.
             </td>
         </tr>
         <tr>
             <td style="white-space: nowrap"><code>grid: &lt;grid-template&gt;</code></td>
             <td>
-                Exactly the same as <code>grid-template</code>, but also resets implicit grid properties (for auto
-                placement).
+                Exactly the same as <code>grid-template</code>, but also <b>resets implicit grid properties</b> (for
+                auto placement).
             </td>
         </tr>
     </tbody>
