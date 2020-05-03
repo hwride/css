@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Normal flow examples</title>
+    <link rel="stylesheet" type="text/css" href="../css-testing-component/css-testing-component.css">
+    <link rel="stylesheet" type="text/css" href="../common.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+<h1>Normal flow examples</h1>
+<p class="example-description">
+    Reference: <a href="https://www.w3.org/TR/CSS22/visudet.html">CSS 2.2 Visual formatting model</a>
+</p>
+<ol>
+    <li>
+        <a href="#block-formatting-context">Block formatting context</a>
+        <ol>
+            <li><a href="#block-formatting-context-props">Width, height, padding, margin and border</a></li>
+            <li><a href="#anon-block-boxes">Anonymous block boxes</a></li>
+        </ol>
+    </li>
+    <li>
+        <a href="#inline-formatting-context">Inline formatting context</a>
+        <ol>
+            <li><a href="#inline-formatting-context-props">Width, height, padding, margin and border</a></li>
+            <li><a href="#nested-inline-boxes">Nested inline-level boxes</a></li>
+            <li><a href="#anon-inline-boxes">Anonymous inline boxes</a></li>
+            <li><a href="#atomic-inline-boxes">Atomic inline-level boxes</a></li>
+        </ol>
+    </li>
+</ol>
+
+<p class="example-description">
+    See <a href="../visual-formatting-model/index.html#normal-flow">visual formatting model</a> for a description of
+    these properties.
+</p>
+
+<h2 id="block-formatting-context">Block formatting context</h2>
+<p class="example-description">
+    Here <code>a</code> forms a block formatting context:
+</p>
+<div class="example-block-formatting-context"></div>
+
+<h3 id="block-formatting-context-props">Width, height, padding, margin and border</h3>
+<p class="example-description">
+    Width, height, padding, margin, and border apply in all directions to block-level elements. See:
+</p>
+<div class="example-block-formatting-context-props"></div>
+
+<h3 id="anon-block-boxes">Anonymous block boxes</h3>
+<p class="example-description">
+    Here <code>a</code> forms a block formatting context and <code>c</code> is wrapped in an anonymous block box:
+</p>
+<div class="example-anon-block-box"></div>
+
+<h2 id="inline-formatting-context">Inline formatting context</h2>
+<p class="example-description">
+    Here <code>a</code> forms an inline formatting context:
+</p>
+<div class="example-inline-formatting-context"></div>
+
+<h3 id="inline-formatting-context-props">Width, height, padding, margin and border</h3>
+<p class="example-description">
+    Width, height and vertical margins do not apply to inline-level elements. Border, padding and horizontal margins do
+    apply. Here <code>d</code> has all properties applied, notice which are ignored:
+</p>
+<div class="example-inline-formatting-context-props"></div>
+
+<h3 id="nested-inline-boxes">Nested inline-level boxes</h3>
+<p class="example-description">
+    The contents of a regular inline-level box will participate in the same inline formatting context as its parent.
+    E.g. here <code>d</code> is a grandchild of <code>a</code> but it still participates in <code>a</code>'s inline
+    formatting context:
+</p>
+<div class="example-nested-inline"></div>
+
+<h3 id="anon-inline-boxes">Anonymous inline boxes</h3>
+<p class="example-description">
+    Any text directly inside a block container is wrapped in an <strong>anonymous inline box</strong>. E.g. here "Some
+    text" and "some more text" are wrapped in anonymous inline boxes.
+</p>
+<div class="example-anon-inline"></div>
+
+<h3 id="atomic-inline-boxes">Atomic inline-level boxes</h3>
+<p class="example-description">
+    Notice here how text does not flow between lines for the <code>display: inline-block</code> element as it is an
+    <b>atomic inline-level box</b>:
+</p>
+<div class="example-inline-atomic"></div>
+</body>
+<script src="../css-testing-component/lib/ace/src-noconflict/ace.js"></script>
+<script src="../css-testing-component/css-testing-component.js"></script>
+<script src="../nav.js"></script>
+<script>createNav()</script>
+<script src="index.js"></script>
+</html>
