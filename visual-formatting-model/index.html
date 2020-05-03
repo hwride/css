@@ -130,7 +130,7 @@
         </p>
         <ul>
             <li>Lays boxes out vertically from the top of a <b>containing block</b>.</li>
-            <li>Margin space between blocks can collapse.</li>
+            <li>Margin space between blocks can <a href="../collapsing-margins/index.html">collapse</a>.</li>
             <li>Each boxes left edge touches the left edge of its <b>containing block</b> (with the exception where there is a left
                 floated element and the box establishes a new block formatting context).</li>
         </ul>
@@ -171,7 +171,7 @@
             <li>If multiple <b>inline-level boxes</b> can't fit in a line more lines are created which the boxes spill
                 into.</li>
             <li>A single <b>inline-level boxes</b> will be split across lines if it can be split (e.g. multiple words in
-                a single <b>inline-level box</b>) can be split.</li>
+                a single <b>inline-level box</b>), otherwise it will overflow.</li>
         </ul>
     </div>
     <img src="inline-formatting-context.png" />
@@ -437,7 +437,7 @@
                     A principal <b>table wrapper</b> box which is a <b>block container</b> AND establishes a <b>block
                     formatting context</b> (note this is different to above where <b>block boxes</b> don't establish a
                     <b>block formatting context</b> unless they have an <code>overflow</code> other than
-                    <code>auto</code>.<br/>
+                    <code>auto</code>).<br/>
                 </li>
                 <li>
                     A <b>table box</b> which is a child of the <b>table wrapper</b> which is <b>block-level</b> and
