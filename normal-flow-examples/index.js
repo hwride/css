@@ -9,8 +9,8 @@ createCSSTestingComponent({
     parent: document.querySelector('.example-block-formatting-context'),
     hiddenCSS,
     html: `<div class="a blue">
-    <div class="b red">b</div>
-    <div class="c green">c</div>
+    <div class="red">text</div>
+    <div class="green">text</div>
 </div>`,
     css: `
 .a {
@@ -22,15 +22,15 @@ createCSSTestingComponent({
     parent: document.querySelector('.example-block-formatting-context-props'),
     hiddenCSS,
     html: `<div class="a blue">
-    <div class="b red">b</div>
-    <div class="c green">c</div>
-    <div class="d aqua">d</div>
+    <div class="red">text</div>
+    <div class="b green">text</div>
+    <div class="aqua">text</div>
 </div>`,
     css: `
 .a {
   padding: 10px;
 }
-.c {
+.b {
   width: 100px;
   height: 100px;
   margin: 10px;
@@ -43,8 +43,8 @@ createCSSTestingComponent({
     parent: document.querySelector('.example-anon-block-box'),
     hiddenCSS,
     html: `<div class="a blue">
-    <div class="b red">b</div>
-    <span class="c green">c</span>
+    <div class="red">text</div>
+    <span class="green">text</span>
 </div>`,
     css: `
 .a {
@@ -57,25 +57,25 @@ createCSSTestingComponent({
     parent: document.querySelector('.example-inline-formatting-context'),
     hiddenCSS,
     html: `<div class="a blue">
-    <span class="b red">bbbb</span>
-    <span class="c green">
+    <span class="red">bbbb</span>
+    <span class="green">
         cccccc ccc cc
         ccccc cc cc ccc
     </span>
-    <span class="d aqua">
+    <span class="aqua">
         text text text
         cannotbesplitsooverflowsssssssssssss
         more text</span>
-    <span class="e pink">text text text text</span>
-    <span class="f red">bigger</span>
-    <span class="g green">fff fffff ff</span>
+    <span class="pink">text text text text</span>
+    <span class="b red">bigger</span>
+    <span class="green">fff fffff ff</span>
 </div>`,
     css: `
 .a {
   padding: 10px;
   width: 150px;
 }
-.f {
+.b {
   font-size: 2em; 
 }`,
 })
@@ -84,17 +84,17 @@ createCSSTestingComponent({
     parent: document.querySelector('.example-inline-formatting-context-props'),
     hiddenCSS,
     html: `<div class="a blue">
-    <span class="b red">bbb bbb bb</span>
-    <span class="c green">ccccc cc ccc</span>
-    <span class="d aqua">ddd ddd</span>
-    <span class="e pink">ee ee eeeeee eeee eeee ee</span>
+    <span class="red">text ttt tt</span>
+    <span class="green">text text text text</span>
+    <span class="b aqua">text text</span>
+    <span class="pink">tt text text text text</span>
 </div>`,
     css: `
 .a {
   padding: 10px;
   width: 150px;
 }
-.d {
+.b {
   width: 100px;
   height: 100px;
   margin: 10px;
@@ -107,18 +107,18 @@ createCSSTestingComponent({
     parent: document.querySelector('.example-nested-inline'),
     hiddenCSS,
     html: `<div class="a blue">
-  <span class="b red">b</span>
-  <span class="c green">c
-      <span class="d aqua">dddd</span>
+  <span class="red">text</span>
+  <span class="b green">text
+      <span class="aqua">text</span>
   </span>
-  <span class="e pink">e</span>
+  <span class="pink">text</span>
 </div>`,
     css: `
 .a {
   padding: 10px;
   width: 150px;
 }
-.c {
+.b {
   padding: 0 10px 0 10px;
 }`,
 })
@@ -128,7 +128,7 @@ createCSSTestingComponent({
     hiddenCSS,
     html: `<div class="a blue">
     Some text
-    <span class="b red">b</span>
+    <span class="red">text</span>
     some more text
 </div>`,
     css: `
@@ -141,20 +141,20 @@ createCSSTestingComponent({
     parent: document.querySelector('.example-inline-atomic'),
     hiddenCSS,
     html: `<div class="a blue">
-  <span class="b red">text text</span>
-  <span class="c green">text text</span>
-  <span class="d aqua">
+  <span class="red">text text</span>
+  <span class="green">text text</span>
+  <span class="b aqua">
     text text text text text
     text text text
   </span>
-  <span class="e pink">text text</span>
+  <span class="pink">text text</span>
 </div>`,
     css: `
 .a {
   padding: 10px;
   width: 150px;
 }
-.d {
+.b {
   display: inline-block;
 }`,
 })
