@@ -3,7 +3,8 @@ runTests({
 		testBasic,
 		testUpdate,
 		testTextAreHeights,
-		testButtons
+		testButtons,
+		testHiddenCSS
 	]
 })
 
@@ -33,8 +34,8 @@ async function testBasic() {
 	assert(getIframeHTML(cssTestingComponent) === options.html.trim())
 
 	// iframe style should be correct
-	assert(getIframeResetCSS(cssTestingComponent).includes('margin: 0'))
-	assert(getIframeCustomCSS(cssTestingComponent) === options.css.trim())
+	assert(getIframeCSS(cssTestingComponent, 'reset').includes('margin: 0'))
+	assert(getIframeCSS(cssTestingComponent, 'custom') === options.css.trim())
 }
 
 async function testUpdate() {
@@ -49,7 +50,7 @@ async function testUpdate() {
 	// should update on change of CSS text area
 	const newCSSValue = 'span { color: dodgerblue; }'
 	setCSSTextAreaValue(cssTestingComponent, newCSSValue)
-	assert(getIframeCustomCSS(cssTestingComponent) === newCSSValue)
+	assert(getIframeCSS(cssTestingComponent, 'custom') === newCSSValue)
 }
 
 async function testTextAreHeights() {
@@ -110,6 +111,20 @@ async function testButtons() {
 	assert(getDescription(cssTestingComponent) === '')
 }
 
+async function testHiddenCSS() {
+	addTestTitle('Hidden CSS')
+	const options = getDefaultOptions({
+		hiddenCSS: `
+.my-div {
+  background: green !important;
+}`
+	})
+	const cssTestingComponent = await createCSSTestingComponent(options)
+
+	// iframe style should be correct
+	assert(getIframeCSS(cssTestingComponent, 'hidden').trim() === options.hiddenCSS.trim())
+}
+
 /* Utility functions */
 function addTestTitle(title) {
 	const titleEl = document.createElement('h3')
@@ -123,11 +138,8 @@ function getIframeDocument(cssTestingComponent) {
 function getIframeHTML(cssTestingComponent) {
 	return getIframeDocument(cssTestingComponent).querySelector('body').innerHTML
 }
-function getIframeResetCSS(cssTestingComponent) {
-	return getIframeDocument(cssTestingComponent).querySelector('head style[data-name="reset"]').innerHTML
-}
-function getIframeCustomCSS(cssTestingComponent) {
-	return getIframeDocument(cssTestingComponent).querySelector('head style[data-name="custom"]').innerHTML
+function getIframeCSS(cssTestingComponent, name) {
+	return getIframeDocument(cssTestingComponent).querySelector(`head style[data-name="${name}"]`).innerHTML
 }
 function getHTMLTextAreaValue(cssTestingComponent) {
 	return cssTestingComponent.htmlEditor.getValue()

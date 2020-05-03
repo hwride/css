@@ -1,30 +1,32 @@
+const hiddenCSS = `
+  .blue { background: dodgerblue; }
+  .red { background: salmon; }
+  .green { background: lightgreen; }
+  .aqua { background: aquamarine; }
+  .pink { background: hotpink; }
+`
 createCSSTestingComponent({
     parent: document.querySelector('.example-block-formatting-context'),
+    hiddenCSS,
     html: `<div class="a blue">
     <div class="b red">b</div>
     <div class="c green">c</div>
 </div>`,
     css: `
-.blue { background: dodgerblue; }
-.red { background: salmon; }
-.green { background: lightgreen; }
 .a {
   padding: 10px;
-}`,
+}`
 })
 
 createCSSTestingComponent({
     parent: document.querySelector('.example-block-formatting-context-props'),
+    hiddenCSS,
     html: `<div class="a blue">
     <div class="b red">b</div>
     <div class="c green">c</div>
     <div class="d aqua">d</div>
 </div>`,
     css: `
-.blue { background: dodgerblue; }
-.red { background: salmon; }
-.green { background: lightgreen; }
-.aqua { background: aquamarine; }
 .a {
   padding: 10px;
 }
@@ -39,14 +41,12 @@ createCSSTestingComponent({
 
 createCSSTestingComponent({
     parent: document.querySelector('.example-anon-block-box'),
+    hiddenCSS,
     html: `<div class="a blue">
     <div class="b red">b</div>
     <span class="c green">c</span>
 </div>`,
     css: `
-.blue { background: dodgerblue; }
-.red { background: salmon; }
-.green { background: lightgreen; }
 .a {
   padding: 10px;
 }
@@ -55,6 +55,7 @@ createCSSTestingComponent({
 
 createCSSTestingComponent({
     parent: document.querySelector('.example-inline-formatting-context'),
+    hiddenCSS,
     html: `<div class="a blue">
     <span class="b red">bbbb</span>
     <span class="c green">
@@ -70,11 +71,6 @@ createCSSTestingComponent({
     <span class="g green">fff fffff ff</span>
 </div>`,
     css: `
-.blue { background: dodgerblue; }
-.red { background: salmon; }
-.green { background: lightgreen; }
-.aqua { background: aquamarine; }
-.pink { background: hotpink; }
 .a {
   padding: 10px;
   width: 150px;
@@ -86,6 +82,7 @@ createCSSTestingComponent({
 
 createCSSTestingComponent({
     parent: document.querySelector('.example-inline-formatting-context-props'),
+    hiddenCSS,
     html: `<div class="a blue">
     <span class="b red">bbb bbb bb</span>
     <span class="c green">ccccc cc ccc</span>
@@ -93,11 +90,6 @@ createCSSTestingComponent({
     <span class="e pink">ee ee eeeeee eeee eeee ee</span>
 </div>`,
     css: `
-.blue { background: dodgerblue; }
-.red { background: salmon; }
-.green { background: lightgreen; }
-.aqua { background: aquamarine; }
-.pink { background: hotpink; }
 .a {
   padding: 10px;
   width: 150px;
@@ -113,6 +105,7 @@ createCSSTestingComponent({
 
 createCSSTestingComponent({
     parent: document.querySelector('.example-nested-inline'),
+    hiddenCSS,
     html: `<div class="a blue">
   <span class="b red">b</span>
   <span class="c green">c
@@ -121,11 +114,6 @@ createCSSTestingComponent({
   <span class="e pink">e</span>
 </div>`,
     css: `
-.blue { background: dodgerblue; }
-.red { background: salmon; }
-.green { background: lightgreen; }
-.aqua { background: aquamarine; }
-.pink { background: hotpink; }
 .a {
   padding: 10px;
   width: 150px;
@@ -137,14 +125,13 @@ createCSSTestingComponent({
 
 createCSSTestingComponent({
     parent: document.querySelector('.example-anon-inline'),
+    hiddenCSS,
     html: `<div class="a blue">
     Some text
     <span class="b red">b</span>
     some more text
 </div>`,
     css: `
-.blue { background: dodgerblue; }
-.red { background: salmon; }
 .a {
   padding: 10px;
 }`,
@@ -152,6 +139,7 @@ createCSSTestingComponent({
 
 createCSSTestingComponent({
     parent: document.querySelector('.example-inline-atomic'),
+    hiddenCSS,
     html: `<div class="a blue">
   <span class="b red">text text</span>
   <span class="c green">text text</span>
@@ -162,11 +150,6 @@ createCSSTestingComponent({
   <span class="e pink">text text</span>
 </div>`,
     css: `
-.blue { background: dodgerblue; }
-.red { background: salmon; }
-.green { background: lightgreen; }
-.aqua { background: aquamarine; }
-.pink { background: hotpink; }
 .a {
   padding: 10px;
   width: 150px;

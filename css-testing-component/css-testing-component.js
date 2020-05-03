@@ -16,6 +16,7 @@
  * @param options.parent Parent element to append the CSS test component to.
  * @param options.html Default HTML that should be used.
  * @param options.css Default CSS that should be used.
+ * @param options.hiddenCSS CSS that you want included but not displayed in the editor panel.
  * @param options.description Default description to be displayed.
  * @param {[{label, description, html, css}]} options.buttons Buttons which can switch content in the component.
  *
@@ -64,7 +65,14 @@ function createCSSTestingComponent(options) {
 			// For some reason setting the iframe content doesn't work properly on Firefox 74 unless you tick the event queue
 			// once. For this reason set all initial iframe content here.
 			setTimeout(() => {
-				addResetStylesToIframe(iframeEl)
+				addStyleTagToIframe(iframeEl, 'reset', `
+  body {
+    margin: 0;
+  }
+`)
+				if(options.hiddenCSS) {
+					addStyleTagToIframe(iframeEl, 'hidden', options.hiddenCSS)
+				}
 
 				// Creating the text areas adds inital HTML and CSS to the iframe.
 				const htmlEditor = createHTMLEditor(inputWrapperEl, iframeEl, initialHTML, options.htmlMaxLines)
@@ -100,15 +108,12 @@ function createCSSTestingComponent(options) {
 		return iframeEl
 	}
 
-	function addResetStylesToIframe(iframeEl) {
-		const iframeResetStylesTag = iframeEl.contentWindow.document.createElement('style')
-		iframeResetStylesTag.dataset.name = 'reset'
-		iframeResetStylesTag.innerHTML = `
-  body {
-    margin: 0;
-  }
-`
-		iframeEl.contentWindow.document.querySelector('head').append(iframeResetStylesTag)
+	function addStyleTagToIframe(iframeEl, name, content) {
+		const iframeStylesTag = iframeEl.contentWindow.document.createElement('style')
+		iframeStylesTag.dataset.name = name
+		iframeStylesTag.innerHTML = content
+		iframeEl.contentWindow.document.querySelector('head').append(iframeStylesTag)
+		return iframeStylesTag
 	}
 
 	function createCSSTestComponentWrapper(parent) {
@@ -157,10 +162,7 @@ function createCSSTestingComponent(options) {
 
 	function createCSSEditor(parentEl, iframeEl, initialCSS, maxLines) {
 		// Create a style tag inside the iframe we will update with our styles.
-		const iframeCustomStyleTag = iframeEl.contentWindow.document.createElement('style')
-		iframeCustomStyleTag.dataset.name = 'custom'
-		iframeEl.contentWindow.document.querySelector('head').append(iframeCustomStyleTag)
-
+		const iframeCustomStyleTag = addStyleTagToIframe(iframeEl, 'custom', initialCSS)
 		return createEditor(parentEl, iframeEl, 'ace/mode/css', initialCSS, maxLines, newValue => {
 			iframeCustomStyleTag.innerHTML = newValue
 		})
