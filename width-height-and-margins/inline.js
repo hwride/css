@@ -63,9 +63,11 @@ createCSSTestingComponent({
 createCSSTestingComponent({
 	parent: document.querySelector('.example-inline-vertical-props'),
 	html: `<div>
-  Text text text text text text text text text text text text text text text 
-	<span class="vertical-props">Text</span>
-	text text text text text text text text text text text text text text text
+  Text text text text text text text
+  text text text text text text text
+  <span class="vertical-props">text</span>
+  text text text text text text text
+  text text text text text text text
 </div>`,
 	css: `
 .vertical-props {

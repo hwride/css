@@ -1,3 +1,12 @@
+/* Set width of input text areas */
+.example-grid-named-lines .css-testing-component__editor {
+    width: 55ch;
+}
+.example-interaction-named-lines-areas .css-testing-component__editor {
+    width: 52ch;
+}
+
+/* Aligning */
 .align-table td:nth-child(1),
 .align-table td:nth-child(2),
 .align-table td:nth-child(3) {
