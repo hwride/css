@@ -49,7 +49,7 @@
 
 <h3 id="anon-block-boxes">Anonymous block boxes</h3>
 <p class="example-description">
-    Here <code>a</code> forms a block formatting context and <code>c</code> is wrapped in an anonymous block box:
+    Here <code>a</code> forms a block formatting context and <code>b</code> is wrapped in an anonymous block box:
 </p>
 <div class="example-anon-block-box"></div>
 
@@ -62,14 +62,14 @@
 <h3 id="inline-formatting-context-props">Width, height, padding, margin and border</h3>
 <p class="example-description">
     Width, height and vertical margins do not apply to inline-level elements. Border, padding and horizontal margins do
-    apply. Here <code>d</code> has all properties applied, notice which are ignored:
+    apply. Here <code>b</code> has all properties applied, notice which are ignored:
 </p>
 <div class="example-inline-formatting-context-props"></div>
 
 <h3 id="nested-inline-boxes">Nested inline-level boxes</h3>
 <p class="example-description">
     The contents of a regular inline-level box will participate in the same inline formatting context as its parent.
-    E.g. here <code>d</code> is a grandchild of <code>a</code> but it still participates in <code>a</code>'s inline
+    E.g. here <code>c</code> is a grandchild of <code>a</code> but it still participates in <code>a</code>'s inline
     formatting context:
 </p>
 <div class="example-nested-inline"></div>

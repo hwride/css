@@ -44,7 +44,7 @@ createCSSTestingComponent({
     hiddenCSS,
     html: `<div class="a blue">
     <div class="red">text</div>
-    <span class="green">text</span>
+    <span class="b green">text</span>
 </div>`,
     css: `
 .a {
@@ -109,7 +109,7 @@ createCSSTestingComponent({
     html: `<div class="a blue">
   <span class="red">text</span>
   <span class="b green">text
-      <span class="aqua">text</span>
+      <span class="c aqua">text</span>
   </span>
   <span class="pink">text</span>
 </div>`,
