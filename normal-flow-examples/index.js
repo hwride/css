@@ -42,15 +42,35 @@ createCSSTestingComponent({
 createCSSTestingComponent({
     parent: document.querySelector('.example-anon-block-box'),
     hiddenCSS,
+    description: `Here <code>a</code> forms a block formatting context, and <code>b</code> and <code>c</code> are
+wrapped in an anonymous block box. Note how they are wrapped in a single block box rather than separate ones so remain
+on the same line.`,
     html: `<div class="a blue">
     <div class="red">text</div>
     <span class="b green">text</span>
+    <span class="c aqua">text</span>
 </div>`,
     css: `
 .a {
   padding: 10px;
 }
 `,
+    buttons: [{
+        label: 'Block and inline siblings',
+        reset: true
+    }, {
+        label: 'Inline with child that is block',
+        description: `Inline boxes that have block-level children are broken around the block-level boxes, one on each 
+side and enclosed in anonymous block-level boxes. The block-level box becomes a sibling of these anonymous block-level boxes.`,
+        html: `<div class="a blue">
+    <div class="red">text</div>
+    <span class="b green">
+        text
+        <div class="c aqua">text</div>
+        text
+    </span>
+</div>`
+    }]
 })
 
 createCSSTestingComponent({
