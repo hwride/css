@@ -1,3 +1,10 @@
+.box-generation-terms {
+	text-align: left;
+}
+.box-generation-terms th {
+	white-space: nowrap;
+}
+
 .formatting-context-container {
 	display: flex;
 	align-items: flex-start;

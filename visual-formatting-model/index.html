@@ -36,7 +36,7 @@
         <a href="#positioning-schemes">Positioning schemes</a>
         <ol>
             <li><a href="#display-forced-block-level">Forced block-level display values</a></li>
-            <li><a href="#normal-flow-foratting-context-established">When are block, inline and table formatting contexts established?</a></li>
+            <li><a href="#normal-flow-formatting-context-established">When are block, inline and table formatting contexts established?</a></li>
         </ol>
     </li>
 </ol>
@@ -54,7 +54,7 @@
 </p>
 
 <h3 id="box-generation-terms">Terms</h3>
-<table style="text-align: left;">
+<table class="box-generation-terms">
     <tbody>
         <tr>
             <th>Containing block</th>
@@ -67,26 +67,21 @@
             details.</td>
         </tr>
         <tr>
-            <th>Block-level element</th>
-            <td>Generates a principal <b>block-level box</b>.</td>
-        </tr>
-        <tr>
             <th>Block-level box</th>
             <td>Participates in a <b>block formatting context</b>.</td>
         </tr>
         <tr>
             <th>Block container box</th>
-            <td>All <b>block-level boxes</b> except tables or the <b>principal box</b> of a replaced element. <br/>
-                Establishes a <b>block</b> or <b>inline formatting context</b> if all children are <b>block-level</b> or
-                <b>inline-level boxes</b>.</td>
-        </tr>
-        <tr>
-            <th>Block container element</th>
-            <td>Element whose <b>principal box</b> is a <b>block container</b>.</td>
+            <td>
+                Contains all <b>block-level boxes</b> which participate in a <b>block formatting context</b> or
+                all <b>inline-level boxes</b> which participate in an <b>inline formatting context</b>.<br/>
+                All <b>block-level boxes</b> except tables or the <b>principal box</b> of a <b>replaced element</b> are
+                <b>block containers</b>.
+            </td>
         </tr>
         <tr>
             <th>Block box</th>
-            <td>Box that = <b>block-level</b> AND a <b>block container</b>.</td>
+            <td>Box that is <b>block-level</b> AND a <b>block container</b>.</td>
         </tr>
         <tr>
             <th>Anonymous block box</th>
@@ -98,25 +93,27 @@
                 for more details.</td>
         </tr>
         <tr>
-            <th>Inline-level element</th>
-            <td>Do not form new blocks of content but lines.</td>
-        </tr>
-        <tr>
             <th>Inline-level box</th>
-            <td>Participate in an <b>inline formatting context</b>.</td>
+            <td>Participates in an <b>inline formatting context</b>.</td>
         </tr>
         <tr>
             <th>Inline box</th>
-            <td><b>Inline-level</b> and whose contents participates in its containing <b>inline formatting context</b>.</td>
-        </tr>
-        <tr>
-            <th>Atomic inline-level box</th>
-            <td><b>Inline-level boxes</b> that aren't <b>inline boxes</b>, i.e. contents doesn't participate in its
-                containing <b>inline formatting context</b>.</td>
+            <td>Box that is <b>inline-level</b> and whose contents participates the same <b>inline formatting context</b>
+                as the box iteself.</td>
         </tr>
         <tr>
             <th>Line box</th>
             <td>Contains <b>inline-level</b> boxes in a single line. More are created when the line is too wide.</td>
+        </tr>
+        <tr>
+            <th>Atomic inline-level box</th>
+            <td><b>Inline-level boxes</b> that aren't <b>inline boxes</b>, i.e. whose contents doesn't participate in
+                its containing <b>inline formatting context</b>.</td>
+        </tr>
+        <tr>
+            <th>Replaced element</th>
+            <td>An element whose content is outside the scope of the CSS formatting model, e.g. images or iframes. May
+            have intrinsic dimensions (width, height or ratio) which are used in some layout calcuations.</td>
         </tr>
     </tbody>
 </table>
@@ -402,7 +399,7 @@
         </tbody>
     </table>
 
-<h3 id="normal-flow-foratting-context-established">When are block, inline and table formatting contexts established?</h3>
+<h3 id="normal-flow-formatting-context-established">When are block, inline and table formatting contexts established?</h3>
 <table>
     <thead>
     <tr>
