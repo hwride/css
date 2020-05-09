@@ -24,6 +24,11 @@
         <ol>
             <li><a href="#normal-flow-block-formatting-context">Block formatting context</a></li>
             <li><a href="#normal-flow-inline-formatting-context">Inline formatting context</a></li>
+            <li>
+                <a href="#normal-flow-formatting-context-established">
+                    When are block, inline and table formatting contexts established?
+                </a>
+            </li>
         </ol>
     </li>
     <li>
@@ -36,22 +41,25 @@
         <a href="#positioning-schemes">Positioning schemes</a>
         <ol>
             <li><a href="#display-forced-block-level">Forced block-level display values</a></li>
-            <li><a href="#normal-flow-formatting-context-established">When are block, inline and table formatting contexts established?</a></li>
         </ol>
     </li>
 </ol>
 
 <h2 id="introduction">Introduction</h2>
 <p class="example-description">
-    In CSS 2.2 elements generate <b>boxes</b>, these are laid out in certain <b>formatting contexts</b> and
-    <b>positioning schemes</b>.
+    In CSS 2.2 elements <a href="#box-generation"><b>generate boxes</b></a>, these are laid out in certain
+    <a href="#normal-flow"><b>formatting context</b></a> and <a href="#positioning-schemes"><b>positioning schemes</b></a>.
 </p>
-<p class="example-description">
-    The type of <b>box</b> that is generated determines what <b>formatting context</b> an
-    element is positioned in and can be controlled with the <code>display</code> property.<br/>
-    The <b>positioning scheme</b> of a box is determined by the values of an element's <code>position</code> and
-    <code>float</code> properties, and this can also change the type of <b>box</b> that is generated.
-</p>
+<ul>
+    <li>
+        The type of <b>box</b> that is generated determines what <b>formatting context</b> an element is positioned in
+        and can be controlled with the <code>display</code> property.<br/>
+    </li>
+    <li>
+        The <b>positioning scheme</b> of a box is determined by the values of an element's <code>position</code> and
+        <code>float</code> properties, and this can also change the type of <b>box</b> that is generated.
+    </li>
+</ul>
 
 <h3 id="box-generation-terms">Terms</h3>
 <table class="box-generation-terms">
@@ -187,6 +195,60 @@
 <p class="example-description">
     See <a href="../normal-flow-examples/index.html#inline-formatting-context">here</a> for some live examples.
 </p>
+
+<h3 id="normal-flow-formatting-context-established">When are block, inline and table formatting contexts established?</h3>
+<table>
+    <thead>
+    <tr>
+        <th>Formatting context</th>
+        <th>Established by</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            Block
+        </td>
+        <td>
+            <ul style="margin: 0;">
+                <li><b>Block boxes</b> with <code>overflow</code> other than <code>visible</code> (e.g.
+                    <code>display: block</code>).</li>
+                <li><b>Block containers</b> that aren't <b>block-level</b> (e.g. <code>inline-block</code>).</li>
+                <li>Floats.</li>
+                <li>Absolutely positioned elements.</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Inline
+        </td>
+        <td>
+            <b>Block containers</b> that contain only <b>inline-level</b> children.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Table
+        </td>
+        <td>
+            Elements that are <code>display: table</code> or <code>display: inline-table</code> generate:<br/>
+            <ul style="margin: 0;">
+                <li>
+                    A principal <b>table wrapper</b> box which is a <b>block container</b> AND establishes a <b>block
+                    formatting context</b> (note this is different to above where <b>block boxes</b> don't establish a
+                    <b>block formatting context</b> unless they have an <code>overflow</code> other than
+                    <code>auto</code>).<br/>
+                </li>
+                <li>
+                    A <b>table box</b> which is a child of the <b>table wrapper</b> which is <b>block-level</b> and
+                    establishes a <b>table formatting context.</b>
+                </li>
+            </ul>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 <h2 id="box-generation">Box generation</h2>
 <p class="example-description">
@@ -370,92 +432,36 @@
 
 <h3 id="display-forced-block-level">Forced block-level display values</h3>
 <table>
-        <thead>
-        <tr>
-            <th>Initial value</th>
-            <th>Final value</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>
-                <code>block</code><br/>
-                <code>table</code><br/>
-                <code>table-cell</code><br/>
-                <code>list-item</code><br/>
-                <code>none</code>
-            </td>
-            <td>As specified</td>
-        </tr>
-        <tr>
-            <td>
-                <code>inline</code><br/>
-                <code>inline-block</code><br/>
-                <code>table</code> descendants except <code>table-cell</code><br/>
-            </td>
-            <td><code>block</code></td>
-        </tr>
-        <tr>
-            <td>
-                <code>inline-table</code><br/>
-            </td>
-            <td><code>table</code></td>
-        </tr>
-        </tbody>
-    </table>
-
-<h3 id="normal-flow-formatting-context-established">When are block, inline and table formatting contexts established?</h3>
-<table>
     <thead>
     <tr>
-        <th>Formatting context</th>
-        <th>Established by</th>
+        <th>Initial value</th>
+        <th>Final value</th>
     </tr>
     </thead>
     <tbody>
     <tr>
         <td>
-            Block
+            <code>block</code><br/>
+            <code>table</code><br/>
+            <code>table-cell</code><br/>
+            <code>list-item</code><br/>
+            <code>none</code>
         </td>
-        <td>
-            <ul style="margin: 0;">
-                <li><b>Block boxes</b> with <code>overflow</code> other than <code>visible</code> (e.g.
-                    <code>display: block</code>).</li>
-                <li><b>Block containers</b> that aren't <b>block-level</b> (e.g. <code>inline-block</code>).</li>
-                <li>Floats.</li>
-                <li>Absolutely positioned elements.</li>
-            </ul>
-
-
-        </td>
+        <td>As specified</td>
     </tr>
     <tr>
         <td>
-            Inline
+            <code>inline</code><br/>
+            <code>inline-block</code><br/>
+            <code>table</code> descendants except <code>table-cell</code><br/>
         </td>
-        <td>
-            <b>Block containers</b> that contain only <b>inline-level</b> children.
-        </td>
+        <td><code>block</code></td>
     </tr>
     <tr>
         <td>
-            Table
+            <code>inline-table</code><br/>
         </td>
-        <td>
-            Elements that are <code>display: table</code> or <code>display: inline-table</code> generate:<br/>
-            <ul style="margin: 0;">
-                <li>
-                    A principal <b>table wrapper</b> box which is a <b>block container</b> AND establishes a <b>block
-                    formatting context</b> (note this is different to above where <b>block boxes</b> don't establish a
-                    <b>block formatting context</b> unless they have an <code>overflow</code> other than
-                    <code>auto</code>).<br/>
-                </li>
-                <li>
-                    A <b>table box</b> which is a child of the <b>table wrapper</b> which is <b>block-level</b> and
-                    establishes a <b>table formatting context.</b>
-                </li>
-            </ul>
-        </td>
+        <td><code>table</code></td>
     </tr>
     </tbody>
 </table>
