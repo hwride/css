@@ -5,18 +5,14 @@
     <link rel="stylesheet" type="text/css" href="../common.css">
     <link rel="stylesheet" type="text/css" href="../css-testing-component/css-testing-component.css">
     <style>
-        table, th, td {
-            border-collapse: collapse;
-            border: 1px solid black;
-        }
-        td {
-            max-width: 15em;
-        }
         .yes {
             color: green;
         }
         .no {
             color: red;
+        }
+        td:first-child {
+            white-space: nowrap;
         }
     </style>
 </head>
@@ -53,8 +49,10 @@
     <tr>
         <th rowspan="2">Property</th>
         <th colspan="4">Supported values</th>
-        <th rowspan="2">Can have negative value?</th>
-        <th rowspan="2">Notes</th>
+        <th rowspan="2">Can have negative value</th>
+        <th rowspan="2">Initial value</th>
+        <th rowspan="2">Percentages based on</th>
+        <th rowspan="2">Other notes</th>
     </tr>
     <tr>
         <th><code>length</code></th>
@@ -71,17 +69,20 @@
         <td class="yes">Yes</td>
         <td></td>
         <td class="yes">Yes</td>
-        <td><code>%</code> values are based off the <b>width</b> of the element's
-            <a href="../containing-block/index.html">containing block</a>.</td>
+        <td><code>0</code></td>
+        <td>width of <a href="../containing-block/index.html">containing block</a></td>
+        <td></td>
     </tr>
     <tr>
-        <td><code>border</code></td>
+        <td><code>border-width</code></td>
         <td class="yes">Yes</td>
         <td class="no">No</td>
         <td class="no">No</td>
         <td><code>thin</code>, <code>medium</code>, <code>thick</code></td>
         <td class="no">No</td>
-        <td></td>
+        <td><code>medium</code></td>
+        <td>n/a</td>
+        <td>If <code>border-style</code> is not set then <code>border-width</code> becomes 0.</td>
     </tr>
     <tr>
         <td><code>padding</code></td>
@@ -90,8 +91,9 @@
         <td class="no">No</td>
         <td></td>
         <td class="no">No</td>
-        <td><code>%</code> values are based off the <b>width</b> of the element's
-            <a href="../containing-block/index.html">containing block</a>.</td>
+        <td><code>0</code></td>
+        <td>width of <a href="../containing-block/index.html">containing block</a></td>
+        <td></td>
     </tr>
     <tr>
         <td>
@@ -103,6 +105,8 @@
         <td class="yes">Yes</td>
         <td></td>
         <td class="no">No</td>
+        <td><code>auto</code></td>
+        <td>width or height of <a href="../containing-block/index.html">containing block</a></td>
         <td><code>width</code> and <code>height</code> refers to the content area of an element, this is the area inside
             the padding (see <a href="../box-model/index.html">box model</a>).</td>
     </tr>
@@ -113,6 +117,8 @@
         <td class="yes">Yes</td>
         <td></td>
         <td class="yes">Yes</td>
+        <td><code>auto</code></td>
+        <td>width or height of <a href="../containing-block/index.html">containing block</a></td>
         <td></td>
     </tr>
     </tbody>
