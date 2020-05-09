@@ -310,7 +310,8 @@
         <li>If there are multiple <code>auto</code>s including <code>width</code> then <code>width</code>
         becomes shrink-to-fit.</li>
         <li>If there are still multiple <code>auto</code>s then <code>left</code> (if <code>ltr</code>) gets
-            set to the static position.</li>
+            set to the static position. <b>Note the static position is the default</b> as <code>left</code>,
+            <code>right</code>, and <code>width</code> all default to <code>auto</code>.</li>
         <li>The final <code>auto</code> gets set according to the equation. This can include becoming negative for
             <code>left</code> or <code>right</code>. <code>width</code> can't go below shrink to fit.</li>
     </ol>

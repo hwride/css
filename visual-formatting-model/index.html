@@ -174,8 +174,9 @@
             <li>The height of a <b>line box</b> is determined by line height calculations and can vary between lines.</li>
             <li>If multiple <b>inline-level boxes</b> can't fit in a line more lines are created which the boxes spill
                 into.</li>
-            <li>A single <b>inline-level boxes</b> will be split across lines if it can be split (e.g. multiple words in
-                a single <b>inline-level box</b>), otherwise it will overflow.</li>
+            <li>If a single <b>inline-level box</b> can't fit into a single <b>line box</b> then it will be split across
+                lines if it can be split (e.g. multiple words in a single <b>inline-level box</b>), otherwise it will
+                overflow.</li>
         </ul>
     </div>
     <img src="inline-formatting-context.png" />
@@ -416,7 +417,7 @@
         </td>
         <td>
             <ul style="margin: 0;">
-                <li><b>Block boxes</b> with <code>overflow</code> other than <code>auto</code> (e.g.
+                <li><b>Block boxes</b> with <code>overflow</code> other than <code>visible</code> (e.g.
                     <code>display: block</code>).</li>
                 <li><b>Block containers</b> that aren't <b>block-level</b> (e.g. <code>inline-block</code>).</li>
                 <li>Floats.</li>
