@@ -48,7 +48,7 @@
 <h2 id="introduction">Introduction</h2>
 <p class="example-description">
     In CSS 2.2 elements <a href="#box-generation"><b>generate boxes</b></a>, these are laid out in certain
-    <a href="#normal-flow"><b>formatting context</b></a> and <a href="#positioning-schemes"><b>positioning schemes</b></a>.
+    <a href="#normal-flow"><b>formatting contexts</b></a> and <a href="#positioning-schemes"><b>positioning schemes</b></a>.
 </p>
 <ul>
     <li>
@@ -64,6 +64,27 @@
 <h3 id="box-generation-terms">Terms</h3>
 <table class="box-generation-terms">
     <tbody>
+        <tr>
+            <th>Formatting context</th>
+            <td>
+                A context where a set of related boxes are laid out according to rules for the particular type
+                of <b>formatting context</b>. A box can:
+                <ul>
+                    <li>
+                        Continue using the existing <b>formatting context</b>.
+                    </li>
+                    <li>
+                        Establish an <b>independent formatting context</b>, this is a new <b>formatting context</b>
+                        which does not interact with its containing <b>formatting context</b>.
+                    </li>
+                    <li>
+                        Establish a new <b>formatting context</b> which co-exists with the existing
+                        <b>formatting context</b>. E.g. an <b>inline formatting context</b> will interact with its
+                        containing <b>block formatting context</b>.
+                    </li>
+                </ul>
+            </td>
+        </tr>
         <tr>
             <th>Containing block</th>
             <td>Many things in CSS are calculated according to an element's containing block. It is always some ancestor

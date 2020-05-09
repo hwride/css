@@ -4,6 +4,9 @@
 .box-generation-terms th {
 	white-space: nowrap;
 }
+.box-generation-terms ul {
+	margin: 0;
+}
 
 .formatting-context-container {
 	display: flex;
