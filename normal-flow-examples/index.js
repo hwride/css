@@ -59,11 +59,22 @@ on the same line.`,
         label: 'Block and inline siblings',
         reset: true
     }, {
-        label: 'Inline with child that is block',
+        label: 'Mixed children where inline has block child',
         description: `Inline boxes that have block-level children are broken around the block-level boxes, one on each 
 side and enclosed in anonymous block-level boxes. The block-level box becomes a sibling of these anonymous block-level boxes.`,
         html: `<div class="a blue">
     <div class="red">text</div>
+    <span class="b green">
+        text
+        <div class="c aqua">text</div>
+        text
+    </span>
+</div>`
+    }, {
+        label: 'Inline children where inline has block child',
+        description: ``,
+        html: `<div class="a blue">
+    <span class="red">text</span>
     <span class="b green">
         text
         <div class="c aqua">text</div>
