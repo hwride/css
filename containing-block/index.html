@@ -3,6 +3,7 @@
 <head>
     <title>Containing block</title>
     <link rel="stylesheet" type="text/css" href="../common.css">
+    <link rel="stylesheet" type="text/css" href="../css-testing-component/css-testing-component.css">
     <style>
         .absolute-test-el {
             position: absolute;
@@ -21,119 +22,66 @@
     Reference: <a href="https://www.w3.org/TR/CSS22/visudet.html#containing-block-details">CSS 2.2 Visual formatting
     model details - Definition of "containing block"</a>
 </p>
+<ol>
+    <li><a href="#initial-containing-block">Initial containing block</a></li>
+    <li><a href="#static-relative-sticky">Elements with position: static, relative & sticky</a></li>
+    <li><a href="#fixed">Elements with position: fixed</a></li>
+    <li><a href="#absolute">Elements with position: absolute</a></li>
+</ol>
+
 <p class="example-description">
     Many properties in CSS are calculated according to a box's containing block. How to calculate this block is
     described here.
 </p>
 
-<h2>position: static, relative & sticky</h2>
+<h2 id="initial-containing-block">Initial containing block</h2>
+<p class="example-description">
+    The <b>initial containing block</b> has the position and size of the viewport. The root element's containing
+    block is the initial containing block.
+</p>
+<div class="example-initial-containing-block"></div>
+
+<h2 id="static-relative-sticky">Elements with position: static, relative & sticky</h2>
 <p class="example-description">
     For elements with a <code>position</code> of <code>static</code>, <code>relative</code> or <code>sticky</code> the
-    containing block is formed by the edge of the content box of the nearest block container ancestor.
+    containing block is formed by the nearest ancestor which either:
 </p>
+<ul>
+    <li>Is a <a href="../visual-formatting-model/index.html#box-generation-terms">block container</a></li>
+    <li>
+        <a href="../visual-formatting-model/index.html#normal-flow-formatting-context-established">
+            Establishes a formatting context</a> (note anything that establishes a block or inline formatting context
+        is always a block container, so this criteria doesn't apply. This applies for things like table, grid, flex or
+        ruby perhaps?)
+    </li>
+</ul>
+<div class="example-static-relative-sticky"></div>
 
-<div class="a" style="width: 800px; padding: 30px;">a
-    <div class="css-prop">width: 800px; padding: 30px;</div>
+<h2 id="fixed">Elements with position: fixed</h2>
+<p class="example-description">
+    For elements with a <code>position</code> of <code>fixed</code> the containing block is the initial containing block:
+</p>
+<div class="example-fixed"></div>
 
-    <div class="b" style="width: 75%;">aa
-        <div class="css-prop">width: 75%;</div>
-    </div>
-    <div class="c" style="position: relative; width: 75%">ab
-        <div class="css-prop">position: relative; width: 75%</div>
-    </div>
-</div>
-
-<h2>position: absolute</h2>
+<h2 id="absolute">Elements with position: absolute</h2>
 <p class="example-description">
     For elements with a <code>position</code> of <code>absolute</code>, the containing block is formed by the nearest
-    ancestor that has a position of <code>absolute</code>, <code>relative</code> or <code>fixed</code>.
-
-    For the following examples the block we're testing is green, semi transparent, has a dashed red border and set
-    to <code>top: 0; bottom: 0; left: 0; right: 0;</code>.
+    ancestor that has a position of <code>absolute</code>, <code>relative</code> or <code>fixed</code>. There are two
+    situations:
 </p>
-
-<div class="example-abs-block">
-    <h3>position: absolute with block ancestor</h3>
-    <p class="example-description">
-        The containing block is the edge of the padding box of the ancestor.
-    </p>
-
-    <div class="a" style="position: relative; width: 800px; padding: 30px;">a
-        <div class="css-prop">position: relative; width: 800px; padding: 30px;</div>
-
-    <div class="b" style="width: 600px;">b
-        <div class="css-prop">width: 600px;</div>
-
-            <div class="c absolute-test-el"></div>
-        </div>
-    </div>
-</div>
-
-<h3>position: absolute with inline ancestor</h3>
-<p class="example-description">
-    The containing block is the bounding box around the padding boxes of the first and last inline boxes generated for
-    the ancestor.
-</p>
-
-<h4>Parent is containing block</h4>
-<p class="example-description">
-    Here is an example where the the parent is the containing block:
-</p>
-
-<span class="a" style="width: 800px; padding: 0 30px 0 30px;">
-    <span class="css-prop">position: relative; padding: 30px;</span>
-    <span class="e" style="padding: 0 20px 0 20px"><span class="css-prop">padding: 20px;</span></span>
-
-    <span class="b" style="position: relative; padding: 0 30px 0 30px;">
-        <span class="css-prop">position: relative; padding: 30px;</span>
-        <span class="c absolute-test-el"></span>
-    </span>
-    <span class="d">dddddddd</span>
-</span>
-
-<h4>Grandparent is containing block</h4>
-<p class="example-description">
-    Here is an example where the grandparent is the containing block and has its own padding and multiple children:
-</p>
-<span class="a" style="position: relative; width: 800px; padding: 0 30px 0 30px;">
-    <span class="css-prop">position: relative; padding: 30px;</span>
-    <span class="e" style="padding: 0 20px 0 20px"><span class="css-prop">padding: 20px;</span></span>
-
-    <span class="b">
-        bbbbbbbbbb
-
-        <span class="c absolute-test-el"></span>
-    </span>
-    <span class="d">dddddddd</span>
-</span>
-<p class="example-description" style="margin-top: 10px;">
-    It seems to show the containing block is around the padding box around the ancestor, as opposed to the padding
-    boxes of its children. Does "first and the last inline boxes generated for that element" not actually refer to the
-    children but to the ancestor itself?
-
-    The <a href="http://test.csswg.org/suites/css21_dev/20110323/html4/containing-block-031.htm">W3 test page</a> seem
-    to be failing for this as well, perhaps there is a bug?
-</p>
-
-<h4>Containing block split over multiple lines</h4>
-<p class="example-description">
-    If the inline element is split across multiple lines the containing block is undefined. On Chrome 80 the containing
-    box appears to be the height of all line boxes, and the width up to the last line box. On Firefox 72 it appears to
-    be the first line box. See:
-</p>
-<div style="width: 250px">
-    <span class="a" style="position: relative; padding: 0 30px 0 30px;">
-        <span class="e" style="padding: 0 20px 0 20px"><span class="css-prop">padding: 20px;</span></span>
-
-        <span class="b">
-            bbbbbbbbbbbbb
-            <span class="c absolute-test-el"></span>
-        </span>
-        <span class="d">cccccccccccc</span>
-    </span>
-</div>
-<div style="height: 100px;"></div>
+<ol>
+    <li>
+        The ancestor is an inline element, then the containing block is the bounding block around the padding of the
+        first and last inline boxes generated for the element. If the inline box spans multiple lines the containing
+        block is undefined.
+    </li>
+    <li>All other cases the containing block is formed by the padding edge of the ancestor.</li>
+</ol>
+<div class="example-absolute"></div>
 </body>
+<script src="../css-testing-component/lib/ace/src-noconflict/ace.js"></script>
+<script src="../css-testing-component/css-testing-component.js"></script>
 <script src="../nav.js"></script>
 <script>createNav()</script>
+<script src="index.js"></script>
 </html>
