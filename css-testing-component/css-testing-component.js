@@ -32,7 +32,14 @@
 function createCSSTestingComponent(options) {
 	const CURSOR_START_POSITION = -1 // -1 = start of text
 
+	validate();
 	return create()
+
+	function validate() {
+		if(!options.parent) {
+			throw new Error('CSS testing component must be provided with a parent')
+		}
+	}
 
 	function create() {
 		return new Promise(function(resolve) {
@@ -188,8 +195,8 @@ function createCSSTestingComponent(options) {
 			buttonEl.addEventListener('click', () => {
 				// Note HTML and CSS don't have to be provided to allow a button to change only one field but leave the last
 				// value there. This is not the same for description where we want an empty description to be cleared.
-				if(buttonHTML) htmlEditor.setValue(buttonHTML.trim(), CURSOR_START_POSITION)
-				if(buttonCSS) cssEditor.setValue(buttonCSS.trim(), CURSOR_START_POSITION)
+				if(buttonHTML != null) htmlEditor.setValue(buttonHTML.trim(), CURSOR_START_POSITION)
+				if(buttonCSS != null) cssEditor.setValue(buttonCSS.trim(), CURSOR_START_POSITION)
 				descriptionEl.innerHTML = buttonDescription ? buttonDescription : ''
 			})
 		})
