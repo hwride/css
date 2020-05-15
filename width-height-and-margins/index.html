@@ -4,6 +4,7 @@
     <title>Width, height and margins</title>
     <link rel="stylesheet" type="text/css" href="../common.css">
     <link rel="stylesheet" type="text/css" href="../css-testing-component/css-testing-component.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
     <style>
         .yes {
             color: green;
@@ -41,6 +42,7 @@
             <li><a href="#absolute-height">Height and vertical margins</a>
         </ul>
     </li>
+    <li><a href="#replaced">Replaced elements</a></li>
 </ul>
 
 <h2>Comparison of box model properties</h2>
@@ -336,7 +338,6 @@
     </ol>
     <div class="example-absolute-width-no-auto"></div>
 
-
     <h3 id="absolute-height">Height and vertical margins</h3>
     <p class="example-description">
         The logic for calculating the vertical properties of <code>absolute</code> elements is basically the same as
@@ -360,6 +361,20 @@
     <div class="example-absolute-height-no-auto"></div>
 </div>
 
+<div id="replaced">
+    <h2>Replaced elements</h2>
+    <p class="example-description">
+        These are elements such as images whose formatting is outside the scope of CSS, see
+        <a href="../visual-formatting-model/index.html#box-generation-terms-replaced">here</a> for more details.
+        They can have an intrinsic height, weight and ratio. Essentially <code>auto</code> values are replaced to try
+        and satisfy these intrinsic dimensions.
+    </p>
+    <p class="example-description">
+        The rest of the calculations are basically as normal according to the box and position of that element.
+    </p>
+    <div class="example-replaced"></div>
+</div>
+
 <!-- Relative positioning: see 9.4.3 for values of left and right -->
 </body>
 <script src="../css-testing-component/lib/ace/src-noconflict/ace.js"></script>
@@ -367,6 +382,7 @@
 <script src="block.js"></script>
 <script src="inline.js"></script>
 <script src="absolute.js"></script>
+<script src="replaced.js"></script>
 <script src="../nav.js"></script>
 <script>createNav()</script>
 </html>

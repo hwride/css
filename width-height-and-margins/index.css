@@ -1,0 +1,3 @@
+.example-replaced .css-testing-component__input-and-iframe-row {
+    min-height: 180px; /* Ensure the iframe is at least as tall as the image used in this example. */
+}
