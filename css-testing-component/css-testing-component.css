@@ -31,6 +31,9 @@
 .css-testing-component__editor:first-child {
 	border-bottom: none; /* Stop double border between editors. */
 }
+.css-testing-component__editor:last-child {
+	flex-grow: 1; /* Make sure the last editor fills the remaining space. */
+}
 
 /* iframe */
 /* The iframe will not behave as a flex item and fit the height of its flex container (because it's a replaced
