@@ -1,6 +1,9 @@
 /* Block width */
 createCSSTestingComponent({
-	parent: document.querySelector('.example-block-one-auto'),
+	parent: document.querySelector('.example-block-width'),
+	description: `If there is exactly 1 property with a value of <code>auto</code> its actual value follows from the 
+equation. E.g. here <code>margin-left</code> is <code>auto</code> so it shrinks and <code>margin-right</code> stays at
+<code>50px</code>. If you make width <code>auto</code> and <code>margin-right: 50px</code> then the width will shrink.`,
 	html: '<div class="block"></div>',
 	css: `
 .block {
@@ -11,25 +14,18 @@ createCSSTestingComponent({
   padding: 0 50px 0 50px;
   border-left: 10px solid red;
   border-right: 10px solid red;
-}`})
-
-createCSSTestingComponent({
-	parent: document.querySelector('.example-block-border-padding-width-large'),
-	html: '<div class="block"></div>',
-	css: `
-.block {
-  background: dodgerblue;
-  height: 50px;
-  width: auto;
-  padding: 0 120px 0 120px;
-  border: 10px solid red;
-  margin: auto;
-}`})
-
-createCSSTestingComponent({
-	parent: document.querySelector('.example-block-over-constrained'),
-	html: '<div class="block"></div>',
-	css: `
+}`,
+	buttons: [{
+		label: 'One auto',
+		reset: true
+	}, {
+		label: 'Over-constrained',
+		description: `If all of the values have a computed value other than <code>auto</code> they are 
+"over-constrained". In this case <code>margin-right</code> (if <code>ltr</code>) is changed to <code>auto</code> to make 
+the equation balance. See below how the actual value for <code>margin-right</code> is less than the <code>50px</code> it
+is set to.`,
+		html: '<div class="block"></div>',
+		css: `
 .block {
   background: dodgerblue;
   height: 50px;
@@ -38,60 +34,109 @@ createCSSTestingComponent({
   padding: 0 50px 0 50px;
   border-left: 10px solid red;
   border-right: 10px solid red;
-}`})
-
-createCSSTestingComponent({
-	parent: document.querySelector('.example-block-width-auto'),
-	html: '<div class="block"></div>',
-	css: `
+}`
+	}, {
+		label: 'Total width > containing block width',
+		description: `If <code>margin + border + padding + width > width of containing block</code> then 
+<code>auto</code> values become zero until the equation is balanced. First <code>margin</code> is set to zero, if the 
+equation still doesn't balance then <code>width</code> is set to zero. Here both <code>margin</code> and 
+<code>width</code> end up being zero.`,
+		html: '<div class="block"></div>',
+		css: `
+.block {
+  background: dodgerblue;
+  height: 50px;
+  width: auto;
+  padding: 0 120px 0 120px;
+  border: 10px solid red;
+  margin: auto;
+}`
+	}, {
+		label: 'Width override other autos',
+		description: `If <code>width</code> is <code>auto</code> any other <code>auto</code> values become zero and 
+<code>width</code> follows from the equation. Notice here how there are no margins.`,
+		html: '<div class="block"></div>',
+		css: `
 .block {
   background: dodgerblue;
   height: 50px;
   width: auto;
   margin: 0 auto 0 auto;
-}`})
-
-createCSSTestingComponent({
-	parent: document.querySelector('.example-block-margin-auto'),
-	html: '<div class="block"></div>',
-	css: `
+}`
+	}, {
+		label: 'auto margins',
+		description: `If <code>margin-left</code> and <code>margin-right</code> are <code>auto</code> the element 
+centers itself in the containing block.`,
+		html: '<div class="block"></div>',
+		css: `
 .block {
   background: dodgerblue;
   height: 50px;
   width: 50px;
   margin: auto;
-}`})
+}`
+	}]
+})
 
 /* Block height */
 createCSSTestingComponent({
-	parent: document.querySelector('.example-block-vertical-margin-auto'),
+	parent: document.querySelector('.example-block-height'),
+	description: `Blocks can be given a fixed <code>height</code>.`,
 	html: '<div class="block"></div>',
 	css: `
 .block {
   background: dodgerblue;
   height: 50px;
+}`,
+	buttons: [{
+		label: 'Fixed height',
+		reset: true
+	}, {
+		label: 'Fixed margins',
+		html: `<div class="block"></div>
+<div class="block-2"></div>`,
+		css: `
+.block {
+  background: dodgerblue;
+  height: 50px;
+  margin: 20px 0 20px 0;
+}
+.block-2 {
+  background: green;
+  height: 20px;
+}`
+	}, {
+		label: 'auto margins become zero',
+		html: '<div class="block"></div>',
+		css: `
+.block {
+  background: dodgerblue;
+  height: 50px;
   margin: auto 0 auto 0;
-}`})
-
-createCSSTestingComponent({
-	parent: document.querySelector('.example-block-height-inline'),
-	html: `<div class="block">
+}`
+	}, {
+		label: 'auto height - 1) Inline formatting context',
+		description: `If the block creates an inline formatting context then to the bottom edge of the last line box.`,
+		html: `<div class="block">
   Text text text text text text text text text text text text text text text text
 </div>`,
-	css: `
+		css: `
 .block {
   background: dodgerblue;
   height: auto;
   width: 10em;
-}`})
-
-createCSSTestingComponent({
-	parent: document.querySelector('.example-block-height-block-no-bottom-margin-collapse'),
-	html: `<div class="block">
+}`
+	}, {
+		label: 'auto height - 2) Block formatting context - last child around margin',
+		description: `If that last child's bottom margin doesn't collapse with the element's margin then the height 
+extends to the bottom of that last child's bottom margin. This can happen for example if the parent element has padding 
+meaning no margin collapsing will happen between the parent and child's bottom margin, as below. Notice how the last 
+child's margin is included in the parent's height.`,
+		html: `<div class="block">
   <div></div>
   <div></div>
 </div>`,
-	css: `
+		css: `
 .block {
   background: dodgerblue;
   height: auto;
@@ -107,16 +152,18 @@ createCSSTestingComponent({
 }
 .block > div:last-child {
   margin-bottom: 20px;
-}
-`})
-
-createCSSTestingComponent({
-	parent: document.querySelector('.example-block-height-block-no-top-margin-collapse'),
-	html: `<div class="block">
+}`
+	}, {
+		label: 'auto height - 3) Block formatting context - last child around border',
+		description: `If the margin of the last child does collapse, then the height extends to the end of the border of 
+the last child which has non-zero for border, padding or height. It does not include margin as the above example. Notice 
+here both children have margins and neither margin is enclosed by the height of the parent. Also notice the final child
+actually appears outside the height of the containing block as per the rule.`,
+		html: `<div class="block">
   <div></div>
   <div></div>
 </div>`,
-	css: `
+		css: `
 .block {
   background: dodgerblue;
   height: auto;
@@ -135,22 +182,23 @@ createCSSTestingComponent({
   border: 0;
   padding: 0;
   outline: 1px dashed red;
-}
-`})
-
-createCSSTestingComponent({
-	parent: document.querySelector('.example-block-height-zero'),
-	html: `<div class="block">
+}`
+	}, {
+		label: 'auto height - 4) Zero height',
+		description: `If a block has no children, or its children have no border, padding or height, then the block will 
+have zero height.`,
+		html: `<div class="block">
   <div class="child"></div>
   <div class="child"></div>
 </div>`,
-	css: `
+		css: `
 .block {
   background: dodgerblue;
   height: auto;
   width: 10em;
-}
-`})
+}`
+	}]
+})
 
 /* Block percentage width and height */
 /* These examples do not seem to work properly in the iframe. The 100% height stretches to the whole iframe even when

@@ -137,96 +137,15 @@
     <p class="example-description">
         If all fixed values add up to a size greater than the size of the containing block then the block will overflow.
     </p>
-
-    <h4>One auto value resolves from the equation</h4>
-    <p class="example-description">
-        If there is exactly 1 property with a value of <code>auto</code> its actual value follows from the equation. E.g.
-        here <code>margin-left</code> is <code>auto</code> so it shrinks and <code>margin-right</code> stays at
-        <code>50px</code>. If you make width <code>auto</code> and <code>margin-right: 50px</code> then the width will
-        shrink.
-    </p>
-    <div class="example-block-one-auto"></div>
-
-    <h4>Over-constrained values changes a margin to auto</h4>
-    <p class="example-description">
-        If all of the values have a computed value other than <code>auto</code> they are "over-constrained". In this case
-        <code>margin-right</code> (if <code>ltr</code>) is changed to <code>auto</code> to make the equation balance. See
-        below how the actual value for <code>margin-right</code> is less than the <code>50px</code> it is set to.
-    </p>
-    <div class="example-block-over-constrained"></div>
-
-    <h4>Total width > containing block changes autos to zero</h4>
-    <p class="example-description">
-        If <code>margin + border + padding + width > width of containing block</code> then <code>auto</code> values become
-        zero until the equation is balanced. First <code>margin</code> is set to zero, if the equation still
-        doesn't balance then <code>width</code> is set to zero. Here both <code>margin</code> and <code>width</code> end
-        up being zero.
-    </p>
-    <div class="example-block-border-padding-width-large"></div>
-
-    <h4>Width overrides other autos</h4>
-    <p class="example-description">
-        If <code>width</code> is <code>auto</code> any other <code>auto</code> values become zero and <code>width</code>
-        follows from the equation. Notice here how there are no margins:
-    </p>
-    <div class="example-block-width-auto"></div>
-
-    <h4>Auto is shared between margins</h4>
-    <p class="example-description">
-        If <code>margin-left</code> and <code>margin-right</code> are <code>auto</code> the element centers itself in the
-        containing block.
-    </p>
-    <div class="example-block-margin-auto"></div>
+    <div class="example-block-width"></div>
 
     <h3 id="block-height">Height and vertical margins</h3>
     <p class="example-description">
-        These rules apply when <code>overflow</code> is <code>visible</code>, or when it's not <code>visible</code> but has
-        been propagated to the viewport.
+        Block boxes height will are set to a fixed height, or if <code>auto</code> will essentially be tall enough to
+        wrap their content. These rules apply when<code>overflow</code> is <code>visible</code>, or when it's not
+        <code>visible</code> but has been propagated to the viewport.
     </p>
-
-    <h4>Auto margins become zero</h4>
-    <p class="example-description">
-        If <code>margin</code>s are <code>auto</code> they become zero.
-    </p>
-    <div class="example-block-vertical-margin-auto"></div>
-
-    <h4>Auto height</h4>
-    <p class="example-description">
-        If <code>height</code> is <code>auto</code> the height is computed as the distance between the element's top content edge and
-        the first applicable of the following:
-    </p>
-
-    <h4>1) Inline formatting context - last line if there are lines</h4>
-    <p class="example-description">
-        If the block creates an inline formatting context then to the bottom edge of the last line box.
-    </p>
-    <div class="example-block-height-inline"></div>
-
-    <h4>2) Block formatting context - margin of last in-flow child, if the bottom margins doesn't collapse</h4>
-    <p class="example-description">
-        If that last child's bottom margin doesn't collapse with the element's margin then the height extends to the bottom
-        of that last child's bottom margin. This can happen for example if the parent element has padding meaning no
-        margin collapsing will happen between the parent and child's bottom margin, as below. Notice how the last child's
-        margin is included in the parent's height.
-    </p>
-    <div class="example-block-height-block-no-bottom-margin-collapse"></div>
-
-    <h4>
-        3) Block formatting context - border of last in-flow child which has non-zero for border, padding or height
-    </h4>
-    <p class="example-description">
-        If the margin of the last child does collapse, then the height extends to the end of the border of the last child
-        which has non-zero for border, padding or height. It does not include margin as the above example. Notice here both
-        children have margins and neither margin is enclosed by the height of the parent. Also notice the final child
-        actually appears outside the height of the containing block as per the rule.
-    </p>
-    <div class="example-block-height-block-no-top-margin-collapse"></div>
-
-    <h4>4) Otherwise zero</h4>
-    <p class="example-description">
-        If a block has no children, or its children have no border, padding or height, then the block will have zero height.
-    </p>
-    <div class="example-block-height-zero"></div>
+    <div class="example-block-height"></div>
 
     <h3 id="block-percent-width-height">Percentage width and height</h3>
     <p class="example-description">
