@@ -52,7 +52,7 @@ equation still doesn't balance then <code>width</code> is set to zero. Here both
   margin: auto;
 }`
 	}, {
-		label: 'Width override other autos',
+		label: '[Default] Width override other autos',
 		description: `If <code>width</code> is <code>auto</code> any other <code>auto</code> values become zero and 
 <code>width</code> follows from the equation. Notice here how there are no margins.`,
 		html: '<div class="block"></div>',
@@ -115,7 +115,7 @@ createCSSTestingComponent({
   margin: auto 0 auto 0;
 }`
 	}, {
-		label: 'auto height - 1) Inline formatting context',
+		label: '[Default] auto height - 1) Inline formatting context',
 		description: `If the block creates an inline formatting context then to the bottom edge of the last line box.`,
 		html: `<div class="block">
   Text text text text text text text text text text text text text text text text
@@ -127,7 +127,7 @@ createCSSTestingComponent({
   width: 10em;
 }`
 	}, {
-		label: 'auto height - 2) Block formatting context - last child around margin',
+		label: '[Default] auto height - 2) Block formatting context - last child around margin',
 		description: `If that last child's bottom margin doesn't collapse with the element's margin then the height 
 extends to the bottom of that last child's bottom margin. This can happen for example if the parent element has padding 
 meaning no margin collapsing will happen between the parent and child's bottom margin, as below. Notice how the last 
@@ -154,7 +154,7 @@ child's margin is included in the parent's height.`,
   margin-bottom: 20px;
 }`
 	}, {
-		label: 'auto height - 3) Block formatting context - last child around border',
+		label: '[Default] auto height - 3) Block formatting context - last child around border',
 		description: `If the margin of the last child does collapse, then the height extends to the end of the border of 
 the last child which has non-zero for border, padding or height. It does not include margin as the above example. Notice 
 here both children have margins and neither margin is enclosed by the height of the parent. Also notice the final child
@@ -184,7 +184,7 @@ actually appears outside the height of the containing block as per the rule.`,
   outline: 1px dashed red;
 }`
 	}, {
-		label: 'auto height - 4) Zero height',
+		label: '[Default] auto height - 4) Zero height',
 		description: `If a block has no children, or its children have no border, padding or height, then the block will 
 have zero height.`,
 		html: `<div class="block">

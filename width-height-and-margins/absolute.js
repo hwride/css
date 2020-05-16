@@ -228,7 +228,7 @@ to <code>width</code> which did go below shrink-to-fit on iOS.`,
 				bottom: 'auto'
 			})
 		}, {
-			label: 'Top, bottom and height are auto - rules 1.1, 1.2, 1.3, 1.4',
+			label: '[Default] Top, bottom and height are auto - rules 1.1, 1.2, 1.3, 1.4',
 			description: `<code>height</code> becomes shrink-to-fit, then <code>top</code> gets set to the static position 
 	and we solve for <code>bottom</code>.`,
 			html: absBaseHTML,

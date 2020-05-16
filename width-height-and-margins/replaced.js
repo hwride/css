@@ -7,7 +7,7 @@ and width.`,
 		html: imgHTML,
 		css: ``,
 		buttons: [{
-			label: 'Basic image',
+			label: '[Default] Basic image',
 			reset: true
 		}, {
 			label: 'Image with set width',
