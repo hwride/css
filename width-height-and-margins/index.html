@@ -149,37 +149,14 @@
 
     <h3 id="block-percent-width-height">Percentage width and height</h3>
     <p class="example-description">
-        Width and height can be set using % values. They are a percentage of the width/height of the element's containing block.
+        Width and height can be set using % values. They are a percentage of the width/height of the
+        element's <a href="../containing-block/index.html">containing block</a>.
     </p>
-    <div class="block" style="background: dodgerblue; width: 600px; height: 100px; padding: 10px; font-family: monospace; font-size: .9em;">
-        height: 100px;
-        <div style="background: red; width: 50%; height: 75%;">width: 50%; height: 75%;</div>
-    </div>
-
-    <h4>% height reverts to auto if the containing block has no set height</h4>
     <p class="example-description">
-        When a element has a percent height and it's containing block has no set height then the element reverts to an
-        <code>auto</code> height. This does not apply to width where percent still takes an effect. Note the height and width
-        of the final two blocks:
+        If the containing block has no fixed <code>height</code> then the element's <code>height</code> changes to
+        <code>auto</code>. This does not apply to <code>width</code>.
     </p>
-    <div class="block" style="background: dodgerblue; width: 600px; padding: 10px; font-family: monospace; font-size: .9em;">
-        height: auto;
-        <div style="background: red; height: 50px">height: 50px</div>
-        <div style="background: green; height: 100%">height: 100%</div>
-        <div style="background: gold; height: 20px; width: 50%">width: 50%</div>
-    </div>
-
-    <p class="example-description">
-        Here is an example where the grandparent does has a fixed height. Note the grandchild is still using a height of
-        <code>auto</code>.
-    </p>
-    <div class="block" style="background: dodgerblue; width: 600px; height: 100px; padding: 10px; font-family: monospace; font-size: .9em;">
-        height: 100px;
-        <div style="background: red;">
-            height: auto;
-            <div style="background: green; height: 100%">height: 100%</div>
-        </div>
-    </div>
+    <div class="example-block-percent"></div>
 </div>
 
 <div id="inline">

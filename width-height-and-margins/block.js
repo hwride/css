@@ -201,65 +201,71 @@ have zero height.`,
 })
 
 /* Block percentage width and height */
-/* These examples do not seem to work properly in the iframe. The 100% height stretches to the whole iframe even when
-the containing block has a height of auto. Leaving the code in case this can be debugged later. */
-/* createCSSTestingComponent({
+ createCSSTestingComponent({
 	parent: document.querySelector('.example-block-percent'),
-	html: `<div class="block">
+	 description: `Here <code>parent</code> is the containing block.`,
+	html: `<div class="parent">
   <div></div>
 </div>`,
 	css: `
-.block {
+.parent {
   background: dodgerblue;
   width: 230px;
   height: 100px;
 }
-.block > div {
+.parent > div {
   background: red;
   width: 50%;
   height: 75%;
 }
-`})
-
-createCSSTestingComponent({
-	parent: document.querySelector('.example-block-percent-revert-auto'),
-	html: `<div class="block">
-  <div></div>
-  <div></div>
-  <div></div>
+`,
+ 	buttons: [{
+ 		label: 'Percent width and height',
+		reset: true
+	}, {
+		label: 'Containing block has no set height',
+		description: `Note here:
+<ul>
+	<li><code>b</code> has <code>height: 100%</code> set which reverts to <code>auto</code> (which is a used value of 
+	zero as it has no content, so we don't see it).</li>
+	<li><code>c</code> has <code>width: 50%</code> which still applies.</li>
+</ul>`,
+		html: `<div class="parent">
+  <div class="a"></div>
+  <div class="b"></div>
+  <div class="c"></div>
 </div>`,
-	css: `
-.block {
+		css: `
+.parent {
   background: dodgerblue;
+  padding: 10px;
 }
-.block > div:nth-child(1) {
+.a {
   background: red;
   height: 50px;
 }
-.block > div:nth-child(2) {
+.b {
   background: green;
   height: 100%;
 }
-.block > div:nth-child(3) {
+.c {
   background: gold;
   height: 20px;
   width: 50%;
-}
-`})
-
-createCSSTestingComponent({
-	parent: document.querySelector('.example-block-percent-revert-auto-grandparent-fixed'),
-	html: `<div class="grandparent">
+}`
+	}, {
+		label: 'Containing block has no set height, grandparent does',
+		description: `Here is an example where the containing block has no fixed height but the grandparent does. Note 
+the grandchild is still using a height of <code>auto</code>.`,
+		html: `<div class="grandparent">
   <div class="parent">
     <div class="child"></div>
   </div>
 </div>`,
-	css: `
-.block {
-  background: dodgerblue;
-}
+		css: `
 .grandparent {
-  background: red;
+  background: dodgerblue;
+  padding: 10px;
   height: 100px;
 }
 .parent {
@@ -269,6 +275,6 @@ createCSSTestingComponent({
 .child {
   background: gold;
   height: 100%;
-}
-`})
-*/
+}`
+	}]
+ })

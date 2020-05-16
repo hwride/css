@@ -69,9 +69,14 @@ function createCSSTestingComponent(options) {
 			const descriptionEl = createDescription(options.description)
 			cssTestingComponentEl.append(descriptionEl)
 
-			// For some reason setting the iframe content doesn't work properly on Firefox 74 unless you tick the event queue
-			// once. For this reason set all initial iframe content here.
+			// For some reason setting the iframe content doesn't work properly on Firefox 74 unless you tick the event
+			// queue once. For this reason set all initial iframe content here.
 			setTimeout(() => {
+				// Set the doctype to ensure proper rendering.
+				iframeEl.contentDocument.open();
+				iframeEl.contentDocument.write("<!doctype html>");
+				iframeEl.contentDocument.close();
+
 				addStyleTagToIframe(iframeEl, 'reset', `
   body {
     margin: 0;
