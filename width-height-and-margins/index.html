@@ -136,7 +136,7 @@
     <h2>Block</h2>
     <h3 id="block-width">Width and horizontal margins</h3>
     <p class="example-description">
-        For block boxes the equation that must be balanced is:
+        For block boxes width the equation that must be balanced is:
         <code>margin + border + padding + width = width of containing block</code>.
         This essentially happens by replacing <code>auto</code> values appropriately.
     </p>
@@ -147,9 +147,9 @@
 
     <h3 id="block-height">Height and vertical margins</h3>
     <p class="example-description">
-        Block boxes height will are set to a fixed height, or if <code>auto</code> will essentially be tall enough to
-        wrap their content. These rules apply when <code>overflow</code> is <code>visible</code>, or when it's not
-        <code>visible</code> but has been propagated to the viewport.
+        Block boxes height will can be set to a fixed height, or if <code>auto</code> will essentially be tall enough to
+        wrap their content. There are slightly different wrapping rules that apply when <code>overflow</code> is not
+        <code>visible</code> or has not been propagated to the viewport.
     </p>
     <div class="example-block-height"></div>
 
