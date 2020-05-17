@@ -35,7 +35,7 @@ height is calculated from the intrinsic ratio of the image as only the width is 
 		}, {
 			label: 'Inline',
 			description: `Notice how the text appears alongside the image as you'd expect for inline elements (images 
-are inline by default). This is demonstrating that regular box rules are applying to the replaced element even thought 
+are inline by default). This is demonstrating that regular box rules are applying to the replaced element even though 
 width and height calculations are different.`,
 			html: imgHTML + '\ntext',
 			css: ``,

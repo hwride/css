@@ -30,18 +30,8 @@
             <li><a href="#block-percent-width-height">Percentage width and height</a>
         </ul>
     </li>
-    <li><a href="#inline">Inline</a>
-        <ul>
-            <li><a href="#inline-width">Width and horizontal margins</a>
-            <li><a href="#inline-height">Height and vertical margins</a>
-        </ul>
-    </li>
-    <li><a href="#inline-block">Inline-block</a>
-        <ul>
-<!--            <li><a href="#inline-block-width">Width and horizontal margins</a>-->
-<!--            <li><a href="#inline-height">Height and vertical margins</a>-->
-        </ul>
-    </li>
+    <li><a href="#inline">Inline</a></li>
+    <li><a href="#inline-block">Inline-block</a></li>
     <li><a href="#absolute">Absolute</a>
         <ul>
             <li><a href="#absolute-width">Width and horizontal margins</a>
@@ -134,20 +124,23 @@
 
 <div id="block">
     <h2>Block</h2>
+    <p class="example-description">
+        Block boxes can have a fixed or <code>auto</code> width and height. If <code>auto</code> horizontal
+        properties will add up to the width on the <a href="../containing-block/index.html">containing block</a>, and
+        height will wrap the block's contents. Details below:
+    </p>
+
     <h3 id="block-width">Width and horizontal margins</h3>
     <p class="example-description">
         For block boxes width the equation that must be balanced is:
         <code>margin + border + padding + width = width of containing block</code>.
         This essentially happens by replacing <code>auto</code> values appropriately.
     </p>
-    <p class="example-description">
-        If all fixed values add up to a size greater than the size of the containing block then the block will overflow.
-    </p>
     <div class="example-block-width"></div>
 
     <h3 id="block-height">Height and vertical margins</h3>
     <p class="example-description">
-        Block boxes height will can be set to a fixed height, or if <code>auto</code> will essentially be tall enough to
+        Block boxes height can be set to a fixed height, or if <code>auto</code> will essentially be tall enough to
         wrap their content. There are slightly different wrapping rules that apply when <code>overflow</code> is not
         <code>visible</code> or has not been propagated to the viewport.
     </p>
@@ -167,17 +160,27 @@
 
 <div id="inline">
     <h2>Inline</h2>
-    <h3 id="inline-width">Width and horizontal margins</h3>
-    <div class="example-inline-width"></div>
-
-    <h3 id="inline-height">Height and vertical margins</h3>
-    <div class="example-inline-height"></div>
+    <p class="example-description">
+        The <code>width</code> and <code>height</code> properties don't  apply for inline boxes.
+    </p>
+    <p>
+        Width is essentially shrink-to-fit.
+        Horizontal <code>margin</code>, <code>border</code> and <code>padding</code> apply, though become zero if
+        <code>auto</code>.
+    </p>
+    <p class="example-description">
+        Height is determined by the element's font size.
+        Vertical <code>border</code> and <code>padding</code> apply but they don't affect the size of lines so may
+        overlap other lines. Vertical <code>margin</code> does not apply.
+    </p>
+    <div class="example-inline"></div>
 </div>
 
 <div id="inline-block">
     <h2>Inline block</h2>
     <p class="example-description">
-        Inline-block elements can have a fixed width, height, margin, padding and borders as block elements can.
+        Inline-block elements are inline-level elements that can have a fixed <code>width</code>,
+        <code>height</code>, <code>margin</code>, <code>padding</code> and <code>border</code> as block elements can.
     </p>
     <p class="example-description">
         If <code>width</code> is <code>auto</code> it will be shrink-to-fit.
@@ -190,18 +193,19 @@
 
 <div id="absolute">
     <h2>Absolute</h2>
-    <h3 id="absolute-width">Width and horizontal margins</h3>
-
     <p class="example-description">
-        The <strong>static position</strong> of an element refers to the position it would have had if it had been laid
-        out in normal flow.
+        Absolute positioned elements are removed from normal flow and positioned relative to their
+        <a href="../containing-block/index.html">containing block</a> with the <code>top</code>, <code>bottom</code>,
+        <code>left</code> and <code>right</code> properties.
     </p>
+
+    <h3 id="absolute-width">Width and horizontal margins</h3>
     <p class="example-description">
-        The equation that is balanced for <code>absolute</code> elements is:
+        The equation that must be balanced is:
         <code>left + margin + border + padding + width + right = width of static-position containing block</code>.
     </p>
     <p class="example-description">
-        The following rules apply for resoling <code>auto</code> values:
+        The following rules apply:
     </p>
 
     <ol>
@@ -211,7 +215,8 @@
                 <li>If <code>width && (left || right)</code> are <code>auto</code> then
                     <code>width</code> becomes shrink-to-fit.</li>
                 <li>If <code>left && right</code> are <code>auto</code> then <code>left</code>
-                    (if <code>ltr</code>) gets set to the static position. <b>Note this is the default</b> as
+                    (if <code>ltr</code>) gets set to the <b>static position</b>. This is the position the element would
+                    have had if it had been laid out in normal flow. <b>Note this is the default</b> as
                     <code>left</code>,<code>right</code>, and <code>width</code> all default to <code>auto</code>.</li>
                 <li>The final <code>auto</code> gets set according to the equation. This can include becoming negative for
                     <code>left</code> or <code>right</code>. <code>width</code> sometimes stops at shrink-to-fit or
