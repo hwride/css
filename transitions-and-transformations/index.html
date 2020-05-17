@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html lang="en-GBc">
+<head>
+    <title>Transitions and transformations</title>
+    <link rel="stylesheet" type="text/css" href="../common.css">
+    <link rel="stylesheet" type="text/css" href="../css-testing-component/css-testing-component.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+<h1>Transitions and transformations</h1>
+<ul>
+    <li><a href="#transitions">Transitions</a></li>
+</ul>
+
+<h2 id="transitions">Transitions</h2>
+<p class="example-description">
+    CSS transitions allow you to have the change to a property value animate over time instead of apply immediately,
+    e.g. animating the change of width of an element. Relevant properties:
+</p>
+<table class="transition-properties">
+    <thead>
+        <tr>
+            <th>Property</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>transition-property: width</code></td>
+            <td><code>all</code></td>
+            <td>The property that wil be transitioned.</td>
+        </tr>
+        <tr>
+            <td><code>transition-duration: 1s</code></td>
+            <td><code>0</code> (nothing happens)</td>
+            <td>The time of the transition.</td>
+        </tr>
+        <tr>
+            <td><code>transition-timing-function: linear</code></td>
+            <td><code>ease</code></td>
+            <td>
+                The function used to transition. This can be a curve or steps. See
+                <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function">here</a> for
+                more details including useful examples of the different cubic and step functions.
+            </td>
+        </tr>
+        <tr>
+            <td><code>transition-delay: 0.5s</code></td>
+            <td><code>0</code></td>
+            <td>The delay before the transition starts. A negative value will treat the transition as already have run
+            for the given amount of time.</td>
+        </tr>
+        <tr>
+            <td style="white-space: nowrap">
+                <code>
+                    transition: &lt;transition-property&gt; &lt;transition-duration&gt; <br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;transition-timing function&gt; &lt;transition-delay&gt;
+                </code>
+            </td>
+            <td>As above</td>
+            <td>Shorthand property. Values can be left out.</td>
+        </tr>
+    </tbody>
+</table>
+<br/>
+<p class="example-description">
+    Note when the target state for a transition changes, animation will begin again with the current state as the start
+    state and the new target as the end state. This means if something is halfway through animating for example and its
+    state is set back to the original state, it will animate back twice as quickly as it only has to cover half the
+    distance.
+</p>
+<div class="example-transitions"></div>
+
+</body>
+<script src="../css-testing-component/lib/ace/src-noconflict/ace.js"></script>
+<script src="../css-testing-component/css-testing-component.js"></script>
+<script src="index.js"></script>
+<script src="../nav.js"></script>
+<script>createNav()</script>
+</html>
