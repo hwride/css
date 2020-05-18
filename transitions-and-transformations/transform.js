@@ -89,5 +89,25 @@ layout treats a transformed element as if it has not moved.`,
 	    translate(20px, 20px)
     	rotate(20deg);
 }`
+	}, {
+		label: 'Percentage',
+		description: `Note how the percentage value is using the size of the shape not including the margins. If it
+had included the margins it would have shifted beyond the green element as that has the same width as the margin.`,
+		html: `<div class="a"></div>
+<div class="b"></div>`,
+		css: `
+.a {
+	background: dodgerblue;
+	width: 10px;
+	height: 10px;
+	border: 5px solid red;
+	margin-left:; 100px;
+	transform: translateX(100%);
+}
+.b {
+    background: green;
+    height: 20px;
+    width: 100px;
+}`
 	}]
 })

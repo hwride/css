@@ -68,8 +68,8 @@
 <p class="example-description">
     Note when the target state for a transition changes, animation will begin again with the current state as the start
     state and the new target as the end state. This means if something is halfway through animating for example and its
-    state is set back to the original state, it will animate back twice as quickly as it only has to cover half the
-    distance.
+    state is set back to the original state, it will animate back half as quickly as it only has to cover half the
+    distance but will use the full transition duration.
 </p>
 <div class="example-transitions"></div>
 
@@ -90,7 +90,11 @@
         <tr>
             <td><code>transform: translate(30px, 20px) rotate(20deg);</code></td>
             <td><code>none</code></td>
-            <td>List of transform to apply in order to the element.</td>
+            <td>
+                List of transform to apply in order to the element.<br/>
+                Percentages refer to the size of the <b>bounding box</b>. This is the tightest fitting box that can
+                enclose an element and its descendants, not including the margins.
+            </td>
         </tr>
         <tr>
             <td><code>transform-origin: &lt;x-offset&gt; &lt;y-offset&gt; &lt;z-offset&gt;</code></td>
