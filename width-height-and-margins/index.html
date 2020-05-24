@@ -201,6 +201,9 @@
 
     <h3 id="absolute-width">Width and horizontal margins</h3>
     <p class="example-description">
+        The <b>static position</b> is the position an element would have had if it had been laid out in normal flow.
+    </p>
+    <p class="example-description">
         The equation that must be balanced is:
         <code>left + margin + border + padding + width + right = width of static-position containing block</code>.
     </p>
@@ -215,8 +218,7 @@
                 <li>If <code>width && (left || right)</code> are <code>auto</code> then
                     <code>width</code> becomes shrink-to-fit.</li>
                 <li>If <code>left && right</code> are <code>auto</code> then <code>left</code>
-                    (if <code>ltr</code>) gets set to the <b>static position</b>. This is the position the element would
-                    have had if it had been laid out in normal flow. <b>Note this is the default</b> as
+                    (if <code>ltr</code>) gets set to the static position. <b>Note this is the default</b> as
                     <code>left</code>,<code>right</code>, and <code>width</code> all default to <code>auto</code>.</li>
                 <li>The final <code>auto</code> gets set according to the equation. This can include becoming negative for
                     <code>left</code> or <code>right</code>. <code>width</code> sometimes stops at shrink-to-fit or

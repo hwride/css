@@ -50,7 +50,7 @@
   height: 50px;
   padding: 10px;
   border: 10px solid red;
-  margin: 0;
+  margin: auto;
 }`
 		}, {
 			label: 'auto height - inline formatting context, single line',
