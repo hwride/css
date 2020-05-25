@@ -1,10 +1,11 @@
 (function() {
 	createCSSTestingComponent({
 		parent: document.querySelector('.example-pseudo-elements'),
-		description: `Be default content for <code>::before</code> and <code>::after</code> is 
-<code>display: inline</code>.<br/>
+		description: `Content for <code>::before</code> and <code>::after</code> is 
+<code>display: inline</code> by default.<br/>
 <br/>
-Notice that the content is a child of its parent, it's not added before the parent but before the parent's content.<br/>
+Notice that the content is a child of the element, it's not added before the element but before the elements's 
+content.<br/>
 <br/>
 Notice as well that inherited styles apply to <code>::before</code> and <code>::after</code>.`,
 		html: `<div class="a">some text</div>`,
@@ -81,7 +82,7 @@ div::first-letter {
 		}, {
 			label: '::selection',
 			description: `Targets what has been selected by the user. Try selecting some text. Note only certain 
-properties can be set using this pseudo element, e.g. you can't set font-size. See
+properties can be set using this pseudo element, e.g. you can't set <code>font-size</code>. See
 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::selection">here</a>.`,
 			html: `<div>Text text text text text text</div>`,
 			css: `
