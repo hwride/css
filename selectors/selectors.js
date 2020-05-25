@@ -8,6 +8,13 @@
 	</span>
 </div>
 <span class="b">b</span>`
+	const siblingHTML = `<div>a
+	<span>aa</span>
+	<div>ab</div>
+	<span>ac</span>
+	<span>ad</span>
+</div>
+<span class="b">b</span>`
 
 	createCSSTestingComponent({
 		parent: document.querySelector('.example-selectors'),
@@ -68,17 +75,21 @@ div > div {
 	border: 2px solid red;
 }`
 		}, {
-			label: 'Sibling',
-			description: `This targets element's that are the next sibling after another element. Notice that <code>aa</code>
-is not targeted as it is before and not after a <code>div</code>.`,
-			html: `<div>a
-	<span>aa</span>
-	<div>ab</div>
-	<span>ac</span>
-</div>
-<span class="b">b</span>`,
+			label: 'Next following sibling',
+			description: `This targets element's that are the next following sibling after another element. Notice that 
+<code>aa</code> is not targeted as it is before and not after a <code>div</code>.`,
+			html: siblingHTML,
 			css: `
 div + span {
+	background: dodgerblue;
+	border: 2px solid red;
+}`
+		}, {
+			label: 'Following sibling',
+			description: `This targets element's that are any following sibling of another element.`,
+			html: siblingHTML,
+			css: `
+div ~ span {
 	background: dodgerblue;
 	border: 2px solid red;
 }`
