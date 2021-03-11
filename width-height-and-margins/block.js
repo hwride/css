@@ -223,7 +223,32 @@ have zero height.`,
  		label: 'Percent width and height',
 		reset: true
 	}, {
-		label: 'Containing block has no set height',
+	  label: 'Nested percent heights',
+	  description: `See you don't need a fixed height (for e.g. 200px) for the containing block's height, percentage
+heights also work. The child will be a further percentage of its parent.`,
+	  html: `<div class="parent">
+  <div>
+    <div></div>
+  </div>
+</div>`,
+	  css: `
+.parent {
+  background: dodgerblue;
+  width: 230px;
+  height: 100px;
+}
+.parent > div {
+  background: red;
+  width: 50%;
+  height: 75%;
+}
+.parent > div > div {
+  background: green;
+  width: 50%;
+  height: 75%;
+}`
+  }, {
+		label: 'Containing block has no set height or width',
 		description: `Note here:
 <ul>
 	<li><code>b</code> has <code>height: 100%</code> set which reverts to <code>auto</code> (which is a used value of 
@@ -276,5 +301,5 @@ the grandchild is still using a height of <code>auto</code>.`,
   background: gold;
   height: 100%;
 }`
-	}]
+  }]
  })
