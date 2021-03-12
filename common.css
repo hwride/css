@@ -42,6 +42,11 @@ table, th, td {
 	border: 1px solid black;
 }
 
+/* Some other core styles. */
+q {
+	font-style: italic;
+}
+
 /* Some predefined colours. */
 .yes {
 	color: green;

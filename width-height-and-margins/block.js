@@ -201,9 +201,9 @@ have zero height.`,
 })
 
 /* Block percentage width and height */
- createCSSTestingComponent({
+createCSSTestingComponent({
 	parent: document.querySelector('.example-block-percent'),
-	 description: `Here <code>parent</code> is the containing block.`,
+	description: `Here <code>parent</code> is the containing block.`,
 	html: `<div class="parent">
   <div></div>
 </div>`,
@@ -219,19 +219,19 @@ have zero height.`,
   height: 75%;
 }
 `,
- 	buttons: [{
- 		label: 'Percent width and height',
+	buttons: [{
+		label: 'Percent width and height',
 		reset: true
 	}, {
-	  label: 'Nested percent heights',
-	  description: `See you don't need a fixed height (for e.g. 200px) for the containing block's height, percentage
+		label: 'Nested percent heights',
+		description: `See you don't need a fixed height (for e.g. 200px) for the containing block's height, percentage
 heights also work. The child will be a further percentage of its parent.`,
-	  html: `<div class="parent">
+		html: `<div class="parent">
   <div>
     <div></div>
   </div>
 </div>`,
-	  css: `
+		css: `
 .parent {
   background: dodgerblue;
   width: 230px;
@@ -247,7 +247,7 @@ heights also work. The child will be a further percentage of its parent.`,
   width: 50%;
   height: 75%;
 }`
-  }, {
+	}, {
 		label: 'Containing block has no set height or width',
 		description: `Note here:
 <ul>
@@ -301,5 +301,61 @@ the grandchild is still using a height of <code>auto</code>.`,
   background: gold;
   height: 100%;
 }`
-  }]
- })
+	}]
+})
+
+/* Negative margins */
+createCSSTestingComponent({
+	parent: document.querySelector('.example-block-negative-margins'),
+	description: `Notice how content can be moved over other content.`,
+	html: `<div class="a"></div>
+<div class="b"></div>`,
+	css: `
+body {
+  padding: 50px;
+}
+.a {
+  background: dodgerblue;
+  height: 50px;
+  width: 50px;
+}
+.b {
+  background: red;
+  height: 50px;
+  width: 50px;
+  margin-left: -20px;
+  margin-top: -10px;
+}`,
+	buttons: [{
+		label: 'Negative margin',
+		reset: true
+	}, {
+		label: 'Negative margin - affecting other elements',
+		description: `Notice how other content is affected - the sibling element still flows next to the element with 
+negative margins. And notice how both these elements can be caused to actually overlap other elements with just negative
+margin.`,
+		html: `<div class="box a"></div>
+<div class="box b"></div>
+<div class="box c">test</div>`,
+		css: `
+body {
+  padding: 50px;
+}
+.box {
+  height: 50px;
+  width: 50px;
+}
+.a {
+  background: dodgerblue;
+}
+.b {
+  background: red;
+  margin-left: -20px;
+  margin-top: -70px;
+}
+.c {
+  background: green;
+  margin-left: 10px;
+}`
+	}]
+})
