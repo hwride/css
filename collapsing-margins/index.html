@@ -3,6 +3,7 @@
 <head>
     <title>Collapsing margins</title>
     <link rel="stylesheet" type="text/css" href="../common.css">
+    <link rel="stylesheet" type="text/css" href="../css-testing-component/css-testing-component.css">
 </head>
 <body>
 <h1>Collapsing margins</h1>
@@ -10,12 +11,14 @@
     Reference: <a href="https://www.w3.org/TR/CSS22/box.html#collapsing-margins">CSS 2.2 Box model - Collapsing margins</a>
 </p>
 <p class="example-description">
-    The top and bottom margins of the following two elements collapse and use the same space:
+    In CSS the margins of block elements can combine together "collapsing".
 </p>
-<div class="a" style="margin-bottom: 100px"><code>margin-bottom: 100px</code></div>
 
-<div class="b" style="margin-top: 100px"><code>margin-top: 100px</code></div>
+<div class="example-collapsing-margins"></div>
 </body>
+<script src="../css-testing-component/lib/ace/src-noconflict/ace.js"></script>
+<script src="../css-testing-component/css-testing-component.js"></script>
+<script src="./collapsing-margins.js"></script>
 <script src="../nav.js"></script>
 <script>createNav()</script>
 </html>
