@@ -359,3 +359,66 @@ body {
 }`
 	}]
 })
+
+/* Special width & height keywords */
+createCSSTestingComponent({
+	parent: document.querySelector('.example-block-special-width-height-keywords'),
+	description: `Picks the smallest size it can based on its content. Notice it causes the text to wrap to achieve 
+minimum size, but does not go smaller than a single word.`,
+	html: `<div class="a">
+	<div></div>
+	<div></div>
+</div>
+<div class="b">Some text</div>`,
+	css: `
+.a {
+  background: red;
+  width: min-content;
+  padding: 10px;
+}
+.a > div:nth-child(1) {
+  background: green;
+  width: 50px;
+  height: 50px;
+}
+.a > div:nth-child(2) {
+  background: gold;
+  width: 100px;
+  height: 50px;
+}
+
+.b {
+  background: dodgerblue;
+  width: min-content;
+}`,
+	buttons: [{
+		label: 'min-content',
+		reset: true
+	}, {
+		label: 'max-content',
+		description: `This will cause the width to be as wide as it needs to be to fit around all content. Notice how text
+does not get caused to line break even though this means the element is wider than its parent container.`,
+		html: `<div class="a">A long piece of text that is wider than the container</div>`,
+		css: `
+.a {
+  background: dodgerblue;
+  width: max-content;
+}`
+	}, {
+		label: 'fit-content',
+		description: `This behaves like <code>width: max-content</code> if the size is smaller than the parent. But if the
+size reaches the parent then it behaves like <code>width: auto</code>. In simpler terms: width will shrink to fit 
+content but never go over the width of the parent.`,
+		html: `<div class="a">Some text</div>
+<div class="b">Some text that is wider than the size of the parent</div>`,
+		css: `
+.a {
+  background: dodgerblue;
+  width: fit-content;
+}
+.b {
+  background: red;
+  width: fit-content;
+}`
+	}]
+})
