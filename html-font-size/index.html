@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>HTML font size</title>
+    <link rel="stylesheet" type="text/css" href="../common.css">
+    <link rel="stylesheet" type="text/css" href="../css-testing-component/css-testing-component.css">
+    <style>
+        .example-font-size-info {
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+<h1>HTML font size</h1>
+<p class="example-description">
+    Tests the effect of setting <code>font-size</code> on the root <code>&lt;html&gt;</code> element. Demonstrates that
+    setting a fixed <code>font-size</code> on the <code>&lt;html&gt;</code> element will overwrite any browser font size
+    settings (as opposed to say the browser applying an additional multiple to the <code>&lt;html&gt;</code>
+    <code>font-size</code> based on browser font size settings.
+</p>
+<p class="example-description">
+    For this reason avoid setting a fixed <code>font-size</code> on the <code>&lt;html&gt;</code> element.
+</p>
+<p class="example-description">
+    You can test this by looking at the results of the code examples below, then change your browser font size settings
+    and see what difference it makes.
+</p>
+
+<h3 id="default-html-font-size">Default HTML font size</h3>
+<p class="example-description">
+    Using the default <code>font-size</code> on the <code>&lt;html&gt;</code> element.
+</p>
+<div class="example-font-size-default"></div>
+<div class="example-font-size-info example-font-size-info-default"></div>
+
+<h3 id="fixed-html-font-size">Fixed HTML font size</h3>
+<p class="example-description">
+    Using a fixed <code>font-size: 10px</code> on the <code>&lt;html&gt;</code> element.
+</p>
+<div class="example-font-size-fixed"></div>
+<div class="example-font-size-info example-font-size-info-fixed"></div>
+</body>
+<script src="../css-testing-component/lib/ace/src-noconflict/ace.js"></script>
+<script src="../css-testing-component/css-testing-component.js"></script>
+<script src="html-font-size.js"></script>
+<script src="../nav.js"></script>
+<script>createNav()</script>
+</html>
