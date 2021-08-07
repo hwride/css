@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+    <title>Without viewport meta tag</title>
+    <link rel="stylesheet" type="text/css" href="../common.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <style>
+        .div-small {
+            width: 500px;
+            background: dodgerblue;
+        }
+        .div-big {
+            width: 900px;
+            background: salmon;
+        }
+    </style>
+</head>
+<body>
+<h1>Without viewport meta tag</h1>
+
+<div class="div-small">
+    This is 500px wide
+</div>
+<div class="div-big">
+    This is 900px wide
+</div>
+
+<p>
+    Without a viewport meta tag some mobile devices will render a webpage at a larger size (e.g. 980px), then scale it
+    down to the actual device size (e.g. 320px). This was done because originally web pages were not designed for
+    mobile, so if they had been rendered at the actual device size they would likely have looked all wrong/squashed etc.
+    Instead they were rendered at a more appropriate size for desktop and scaled down, this made them more likely to work.
+</p>
+
+</body>
+<script src="../nav.js"></script>
+<script>createNav()</script>
+</html>

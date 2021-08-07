@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+    <title>With viewport meta tag</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../common.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <style>
+        .div-small {
+            width: 500px;
+            background: dodgerblue;
+        }
+        .div-big {
+            width: 900px;
+            background: salmon;
+        }
+    </style>
+</head>
+<body>
+<h1>With viewport meta tag</h1>
+
+<div class="div-small">
+    This is 500px wide
+</div>
+<div class="div-big">
+    This is 900px wide
+</div>
+
+<p>
+    This page specifies the following tag:
+    <code>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </code>
+
+    This causes the following:
+</p>
+<ul>
+    <li>
+        <code>width=device-width</code>: This causes the browser to match the actual device width. Rather than being
+        rendered at a large desktop width and scaled down. This essentially means CSS pixel sizes are accurate.
+    </li>
+    <li>
+        <code>initial-scale=1</code>: This causes the browser to start the zoom at 1. One example where this is useful:
+        When you rotate an iPhone to landscape orientation, by default it will zoom in on the webpage which can look
+        odd. Using this property keeps the zoom level the same on rotation.
+    </li>
+</ul>
+
+</body>
+<script src="../nav.js"></script>
+<script>createNav()</script>
+</html>
