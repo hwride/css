@@ -32,7 +32,7 @@
             <code>color</code> has an initial value which is browser dependent.
             <br/>
             <br/>
-            Note: initial values defined in a properties definition table are not the same as the values assigned by
+            Note initial values defined in a properties definition table are not the same as the values assigned by
             user-agent stylesheets, the user-agent stylesheets are on top. E.g. the initial value of
             <code>display</code> is <code>inline</code>, but user-agent stylesheets will normally set this to
             <code>block</code> for <code>div</code>s.
@@ -67,7 +67,9 @@
             <br/>
             <br/>
 
-            A style origin is just the location that styles can come from. There are three types of style origin:
+            A style origin is just the location that styles can come from. There are three types of style origin, they
+            are listed below from bottom to top of the styles stack. The are reverted in reverse order, i.e. first
+            site origin, then user origin, then user-agent origin:
             <table style="margin-left: 4px; margin-bottom: 4px;">
                 <tr>
                     <td>User-agent origin</td>
