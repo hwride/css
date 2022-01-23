@@ -1,0 +1,64 @@
+* {
+	box-sizing: border-box;
+}
+
+:root {
+	--height-tester-width: 24px;
+	--height-tester-inline-padding: 4px;
+}
+
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.info {
+	margin-right: calc((var(--height-tester-inline-padding) * 5) + (var(--height-tester-width) * 4));
+	overflow: auto;
+}
+
+.prop-table {
+	margin-top: 16px;
+	margin-bottom: 16px;
+}
+
+.height-tester {
+	padding-top: 4px;
+	writing-mode: vertical-rl;
+	width: var(--height-tester-width);
+}
+
+.height100percent {
+	height: 100%;
+	display: inline-block;
+	background: dodgerblue;
+	position: absolute;
+	top: 0;
+	right: calc((var(--height-tester-inline-padding) * 4) + (var(--height-tester-width) * 3));
+}
+
+.height100vh {
+	height: 100vh;
+	display: inline-block;
+	background: salmon;
+	position: absolute;
+	top: 0;
+	right: calc((var(--height-tester-inline-padding) * 3) + (var(--height-tester-width) * 2));
+}
+
+.height100percent-fixed {
+	height: 100%;
+	position: fixed;
+	top: 0;
+	right: calc(var(--height-tester-inline-padding) * 2 + var(--height-tester-width));
+	background: dodgerblue;
+}
+
+.height100vh-fixed {
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	right: var(--height-tester-inline-padding);
+	background: salmon;
+}

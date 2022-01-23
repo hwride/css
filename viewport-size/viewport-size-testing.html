@@ -4,17 +4,21 @@
 	<title>Viewport size</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="../common.css">
-	<link rel="stylesheet" type="text/css" href="./index.css">
+	<link rel="stylesheet" type="text/css" href="viewport-size-testing.css">
 </head>
 <body>
 <h1>Viewport size</h1>
-<p class="example-description">
-	Test for the different viewport size settings.
-</p>
-<button class="re-calculate-values">Re-calculate values</button>
-<table class="prop-table"></table>
-<div class="height100vh"><code>height: 100vh;</code></div>
-<div class="height100percent"><code>height: 100%;</code></div>
+<div class="info">
+	<p class="example-description">
+		Test for the different viewport size settings.
+	</p>
+	<button class="re-calculate-values">Re-calculate values</button>
+	<table class="prop-table"></table>
+</div>
+<div class="height-tester height100vh"><code>height: 100vh; position: absolute;</code></div>
+<div class="height-tester height100percent"><code>height: 100%; position: absolute;</code></div>
+<div class="height-tester height100vh-fixed"><code>height: 100vh; position: fixed;</code></div>
+<div class="height-tester height100percent-fixed"><code>height: 100%; position: fixed;</code></div>
 </body>
 <script src="./viewport-size.js"></script>
 <script src="../nav.js"></script>
