@@ -16,6 +16,8 @@ html, body {
 .info {
 	margin-right: calc((var(--height-tester-inline-padding) * 5) + (var(--height-tester-width) * 4));
 	overflow: auto;
+	/* Make this element larger to ensure we have enough scroll to actually allow address bars to minimise. */
+	height: 200vh;
 }
 
 .prop-table {
@@ -35,7 +37,8 @@ html, body {
 	display: inline-block;
 	background: dodgerblue;
 	position: absolute;
-	top: 0;
+	/* Put these down far enough to we can see them fully after address bar minimising. */
+	top: 50vh;
 	right: calc((var(--height-tester-inline-padding) * 4) + (var(--height-tester-width) * 3));
 }
 
@@ -44,7 +47,7 @@ html, body {
 	display: inline-block;
 	background: salmon;
 	position: absolute;
-	top: 0;
+	top: 50vh;
 	right: calc((var(--height-tester-inline-padding) * 3) + (var(--height-tester-width) * 2));
 }
 
