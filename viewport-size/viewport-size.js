@@ -29,8 +29,10 @@ function renderTableContent() {
   addRowExpression('document.documentElement.getBoundingClientRect().height')
   addRowExpression('window.innerHeight')
   addRowExpression('window.outerHeight')
-  addRowKeyValue('(height: 100vh).clientHeight', document.querySelector('.height100vh').clientHeight)
   addRowKeyValue('(height: 100%).clientHeight', document.querySelector('.height100percent').clientHeight)
+  addRowKeyValue('(height: 100vh).clientHeight', document.querySelector('.height100vh').clientHeight)
+  addRowKeyValue('(fixed height: 100%).clientHeight', document.querySelector('.height100percent-fixed').clientHeight)
+  addRowKeyValue('(fixed height: 100vh).clientHeight', document.querySelector('.height100vh-fixed').clientHeight)
 }
 
 function addRowExpression(expression) {
