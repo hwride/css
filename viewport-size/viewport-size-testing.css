@@ -13,16 +13,25 @@ html, body {
 	padding: 0;
 }
 
+
+/** Info panel **/
 .info {
 	margin-right: calc((var(--height-tester-inline-padding) * 5) + (var(--height-tester-width) * 4));
 	overflow: auto;
-	/* Make this element larger to ensure we have enough scroll to actually allow address bars to minimise. */
-	height: 200vh;
+	position: fixed;
+	top: 70px;
 }
 
 .prop-table {
 	margin-top: 16px;
 	margin-bottom: 16px;
+}
+
+
+/** Actual testing content panel **/
+.height-forcer {
+	/* Make this element larger to ensure we have enough scroll to actually allow address bars to minimise. */
+	height: 200vh;
 }
 
 .height-tester {
