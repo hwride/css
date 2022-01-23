@@ -27,6 +27,7 @@ html, body {
 	padding-top: 4px;
 	writing-mode: vertical-rl;
 	width: var(--height-tester-width);
+	border: 3px solid green;
 }
 
 .height100percent {
