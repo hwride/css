@@ -28,11 +28,13 @@ function renderTableContent() {
   tbody.innerHTML = ''
   addRowSection('Width')
   addRowExpression('document.documentElement.clientWidth')
+  addRowExpression('window.visualViewport.width')
   addRowExpression('window.innerWidth')
   addRowExpression('window.outerWidth')
 
   addRowSection('Height')
   addRowExpression('document.documentElement.clientHeight')
+  addRowExpression('window.visualViewport.height')
   addRowExpression('window.innerHeight')
   addRowExpression('window.outerHeight')
   addRowKeyValue('(height: 100%).clientHeight', document.querySelector('.height100percent').clientHeight)
