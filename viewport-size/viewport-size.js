@@ -1,6 +1,22 @@
+import {addRowSection, addRowKeyValue, addRowExpression} from './util.js'
+
 main()
 
 function main() {
+  // Render table content for the first time.
+  initTable()
+  renderTableContent()
+
+  // Register button to re-calculate the table values.
+  document.querySelector('.re-calculate-values').addEventListener('click', renderTableContent);
+
+  // Update el sizes for the first time.
+  updateElSizes()
+  document.addEventListener('scroll', updateElSizes)
+  window.addEventListener('resize', updateElSizes)
+}
+
+function initTable() {
   const propTable = document.querySelector('.prop-table')
   propTable.innerHTML = `
 <thead>
@@ -11,16 +27,6 @@ function main() {
 </thead>
 <tbody></tbody>
 `
-  // Render table content for the first time.
-  renderTableContent()
-
-  // Register button to re-calculate the table values.
-  document.querySelector('.re-calculate-values').addEventListener('click', renderTableContent);
-
-  // Update el sizes for the first time.
-  updateElSizes()
-  document.addEventListener('scroll', updateElSizes)
-  window.addEventListener('resize', updateElSizes)
 }
 
 function renderTableContent() {
@@ -41,30 +47,6 @@ function renderTableContent() {
   addRowKeyValue('(height: 100vh).clientHeight', document.querySelector('.height100vh').clientHeight)
   addRowKeyValue('(fixed height: 100%).clientHeight', document.querySelector('.height100percent-fixed').clientHeight)
   addRowKeyValue('(fixed height: 100vh).clientHeight', document.querySelector('.height100vh-fixed').clientHeight)
-}
-
-function addRowExpression(expression) {
-  addRowKeyValue(expression, eval(expression));
-}
-
-function addRowKeyValue(key, value) {
-  addRow(`
-  <td><code>${key}</code></td>
-  <td><code>${value}</code></td>
-`);
-}
-
-function addRowSection(title) {
-  addRow(`<th colSpan='2'>${title}</th>`);
-}
-
-function addRow(content) {
-  const tbody = document.querySelector('tbody')
-  const tr = document.createElement('tr')
-  tr.innerHTML = `<tr>
-  ${content}
-</tr>`;
-  tbody.appendChild(tr)
 }
 
 function updateElSizes() {
