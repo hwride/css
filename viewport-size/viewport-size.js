@@ -26,12 +26,13 @@ function main() {
 function renderTableContent() {
   const tbody = document.querySelector('tbody')
   tbody.innerHTML = ''
+  addRowSection('Width')
   addRowExpression('document.documentElement.clientWidth')
-  addRowExpression('document.documentElement.getBoundingClientRect().width')
   addRowExpression('window.innerWidth')
   addRowExpression('window.outerWidth')
+
+  addRowSection('Height')
   addRowExpression('document.documentElement.clientHeight')
-  addRowExpression('document.documentElement.getBoundingClientRect().height')
   addRowExpression('window.innerHeight')
   addRowExpression('window.outerHeight')
   addRowKeyValue('(height: 100%).clientHeight', document.querySelector('.height100percent').clientHeight)
@@ -45,12 +46,22 @@ function addRowExpression(expression) {
 }
 
 function addRowKeyValue(key, value) {
+  addRow(`
+  <td><code>${key}</code></td>
+  <td><code>${value}</code></td>
+`);
+}
+
+function addRowSection(title) {
+  addRow(`<th colSpan='2'>${title}</th>`);
+}
+
+function addRow(content) {
   const tbody = document.querySelector('tbody')
   const tr = document.createElement('tr')
   tr.innerHTML = `<tr>
-    <td><code>${key}</code></td>
-    <td><code>${value}</code></td>
-  </tr>`
+  ${content}
+</tr>`;
   tbody.appendChild(tr)
 }
 
