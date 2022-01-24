@@ -16,10 +16,13 @@ html, body {
 
 /** Info panel **/
 .info {
-	margin-right: calc((var(--height-tester-inline-padding) * 5) + (var(--height-tester-width) * 4));
 	overflow: auto;
 	position: fixed;
 	top: 0;
+	bottom: 0;
+	left: 0;
+	right: calc((var(--height-tester-inline-padding) * 5) + (var(--height-tester-width) * 4));
+	border-right: 1px solid black;
 }
 
 .prop-table {
@@ -39,6 +42,8 @@ html, body {
 	writing-mode: vertical-rl;
 	width: var(--height-tester-width);
 	border: 3px solid green;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 .height100percent {
