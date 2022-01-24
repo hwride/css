@@ -25,6 +25,11 @@ html, body {
 	border-right: 1px solid black;
 }
 
+.re-calculate-values {
+	display: block;
+	margin-bottom: 8px;
+}
+
 .prop-table {
 	margin-top: 16px;
 	margin-bottom: 16px;

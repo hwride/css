@@ -10,10 +10,10 @@ function main() {
   // Register button to re-calculate the table values.
   document.querySelector('.re-calculate-values').addEventListener('click', renderTableContent);
 
-  // Update el sizes for the first time.
-  updateElSizes()
-  document.addEventListener('scroll', updateElSizes)
-  window.addEventListener('resize', updateElSizes)
+  // Update values for the first time and on change.
+  updateValues()
+  document.addEventListener('scroll', updateValues)
+  window.addEventListener('resize', updateValues)
 }
 
 function initTable() {
@@ -47,6 +47,14 @@ function renderTableContent() {
   addRowKeyValue('(height: 100vh).clientHeight', document.querySelector('.height100vh').clientHeight)
   addRowKeyValue('(fixed height: 100%).clientHeight', document.querySelector('.height100percent-fixed').clientHeight)
   addRowKeyValue('(fixed height: 100vh).clientHeight', document.querySelector('.height100vh-fixed').clientHeight)
+}
+
+function updateValues() {
+  updateElSizes()
+  const checkbox = document.querySelector('.dynamically-update-values')
+  if(checkbox.checked) {
+    renderTableContent()
+  }
 }
 
 function updateElSizes() {
