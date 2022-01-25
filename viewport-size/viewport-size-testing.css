@@ -50,10 +50,12 @@ html, body {
 }
 
 .height-tester {
-	padding-top: 4px;
 	writing-mode: vertical-rl;
 	width: var(--height-tester-width);
-	border: 3px solid green;
+	outline: 3px solid green;
+	/* Not including padding or border as even with box-sizing: border-box there were suspicious differences between
+	full height elements and the size of the window/root element. Suspect it might be due the former border and
+	padding. */
 	white-space: nowrap;
 	overflow: hidden;
 }
