@@ -53,6 +53,7 @@ html, body {
 	writing-mode: vertical-rl;
 	width: var(--height-tester-width);
 	outline: 3px solid green;
+    outline-offset: -3px; /* Have outline appear within the element so you can see the exact edges. */
 	/* Not including padding or border as even with box-sizing: border-box there were suspicious differences between
 	full height elements and the size of the window/root element. Suspect it might be due the former border and
 	padding. */
