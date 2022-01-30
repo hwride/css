@@ -31,7 +31,6 @@ function main() {
       },
     ]
   })
-
   document.querySelector('.info').appendChild(table)
 
   updateBody()
