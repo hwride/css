@@ -14,8 +14,14 @@ body {
 }
 
 .test-el {
+	width: 200px;
 	margin: 5px;
 	border: 5px solid salmon;
 	padding: 5px;
 	background: dodgerblue;
+}
+
+.box-sizing-label {
+	display: block;
+	margin-bottom: 8px;
 }

@@ -3,6 +3,16 @@ import {createKeyValueTable} from '../components/key-value-table/key-value-table
 main()
 
 function main() {
+  const updateTable = createTable()
+  initBoxSizingDropdown(updateTable)
+
+  // For debugging
+  window.updateTable = updateTable
+  window.getTestEl = getTestEl
+}
+
+/** Table **/
+function createTable() {
   const { table, updateBody } = createKeyValueTable({
     rows: [
       { section: 'General' },
@@ -32,12 +42,8 @@ function main() {
     ]
   })
   document.querySelector('.info').appendChild(table)
-
   updateBody()
-}
-
-function getTestEl() {
-  return document.querySelector('.test-el')
+  return updateBody
 }
 
 function getElStyleNoPx(style) {
@@ -46,4 +52,18 @@ function getElStyleNoPx(style) {
 
 function getElStyle(style) {
   return window.getComputedStyle(getTestEl())[style]
+}
+
+/** Box sizing dropdown **/
+function initBoxSizingDropdown(onChange) {
+  const dropdown = document.querySelector('.box-sizing-dropdown')
+  dropdown.addEventListener('change', function(evt) {
+    getTestEl().style.boxSizing = evt.target.value
+    onChange()
+  })
+}
+
+/** Utils **/
+function getTestEl() {
+  return document.querySelector('.test-el')
 }
