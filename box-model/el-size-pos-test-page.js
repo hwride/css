@@ -24,10 +24,14 @@ function createTable() {
 
       { section: 'Height' },
       { key: 'el.clientHeight', getValue: () => getTestEl().clientHeight },
+      { key: 'el.offsetHeight (includes borders)', getValue: () => getTestEl().offsetHeight },
+      { key: 'el.scrollHeight (scroll size including padding)', getValue: () => getTestEl().scrollHeight },
       { key: 'el.getBoundingClientRect().height', getValue: () => getTestEl().getBoundingClientRect().height },
 
       { section: 'Width' },
       { key: 'el.clientWidth', getValue: () => getTestEl().clientWidth },
+      { key: 'el.offsetWidth (includes borders)', getValue: () => getTestEl().offsetWidth },
+      { key: 'el.scrollWidth (scroll size including padding)', getValue: () => getTestEl().scrollWidth },
       { key: 'el.getBoundingClientRect().width', getValue: () => getTestEl().getBoundingClientRect().width },
 
       { section: 'Expressions' },
