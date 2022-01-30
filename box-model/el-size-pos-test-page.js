@@ -32,11 +32,11 @@ function createTable() {
 
       { section: 'Expressions' },
       {
-        key: 'clientHeight + (border * 2)',
+        key: 'clientHeight + (border * 2) ~= rect.height',
         getValue: () => getTestEl().clientHeight + (getElStyleNoPx('borderWidth') * 2)
       },
       {
-        key: 'clientWidth + (border * 2)',
+        key: 'clientWidth &nbsp;+ (border * 2) ~= rect.width',
         getValue: () => getTestEl().clientWidth + (getElStyleNoPx('borderWidth') * 2)
       },
     ]
