@@ -120,6 +120,34 @@ allow the content to be scrolled to.`,
   width: 100px;
 }`,
   }, {
+    label: 'Overflow of non-direct descendants',
+    description: `The content that overflow applies to is not just direct children, but any descendants. See here the
+child <code>.b</code> does not overflow itself, but the grandchild <code>.c</code> does due it being larger than 
+<code>.b</code> and <code>.b</code> having <code>overflow: visible</code> set. See how this still causes scrollbars on 
+its grandparent <code>.a</code>.
+<br/><br/>
+Try setting <code>overflow: hidden</code> on <code>.b</code> and notice scrollbars disappear on <code>.a</code>.`,
+    html: `<div class="a blue">
+    <div class="b red">
+        <div class="c green">
+    </div>
+</div>`,
+    css: `
+.a {
+  height: 100px;
+  padding: 20px;
+  overflow: auto;
+}
+.b {
+  height: 50px;
+  padding: 20px;
+  overflow: visible;
+}
+.c {
+  height: 200px;
+  width: 100px;
+}`,
+  }, {
     label: 'Overflow of position: relative',
     description: `You can still scroll to see elements that have been moved with <code>position: relative</code>.
 <br/><br/>
