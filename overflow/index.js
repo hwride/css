@@ -295,5 +295,35 @@ html {
   height: 2000px;
   width: 50px;
 }`,
+  }, {
+    label: 'html and body cannot overflow',
+    description: `<p>
+Not only do the <code>html</code> and <code>body</code> tags set overflow on the viewport, they 
+cannot actually overflow as elements themselves. See here how their size is set to less than the viewport and less
+than their content and they are set to <code>overflow: hidden</code>. But this has no effect on content that overflows 
+outside them and we can still see it. This is because their overflow exclusively controls viewport overflow.
+</p>
+<p>
+    Also note that the size of the elements does control the content layout even though it does not affect overflow.
+    You can only see body limiting size here, but the same applies to the <code>html</code> element. This is more of
+    a curiosity as it is unexpected to have content outside of your body tag.
+</p>`,
+    html: `test test test test test test test
+test test test test test test test 
+test test test test test test test`,
+    css: `
+html {
+  height: 100px;
+  width: 100px;
+  border: 5px solid dodgerblue;
+  background: lightblue;
+}
+body {
+  height: 50px;
+  width: 50px;
+  border: 5px solid salmon;
+  background: gold;
+}
+`,
   }]
 })
