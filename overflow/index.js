@@ -164,5 +164,45 @@ this is only the case if the ancestor is the containing block - remove the <code
   top: 100px;
   left: 50px;
 }`,
+  }, {
+    label: 'overflow on the root',
+    description: `Note how on the root element the overflow scrollbar actually appears on the viewport. Notice how
+margin and border are within the scrollbar unlike all other elements.`,
+    html: `<div class="a blue"></div>`,
+    css: `
+html {
+  border: 5px solid salmon;
+  margin: 5px;
+  padding: 5px;
+}
+.a {
+  height: 2000px;
+  width: 50px;
+}`,
+  }, {
+    label: 'overflow: visible on html tag',
+    description: `Setting overflow on the root element to <code>visible</code> actually makes it behave like 
+<code>auto</code>. This is actually the default value.`,
+    html: `<div class="a blue"></div>`,
+    css: `
+html {
+  overflow: visible;
+}
+.a {
+  height: 2000px;
+  width: 50px;
+}`,
+  }, {
+    label: 'overflow: hidden on html tag',
+    description: `This will successfully hide content.`,
+    html: `<div class="a blue"></div>`,
+    css: `
+html {
+  overflow: hidden;
+}
+.a {
+  height: 2000px;
+  width: 50px;
+}`,
   }]
 })
