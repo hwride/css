@@ -1,5 +1,5 @@
 import {updateElSizes} from './test-el-utils.js'
-import { createKeyValueTable } from '../components/key-value-table/key-value-table.js'
+import { createKeyValueTable } from '../../components/key-value-table/key-value-table.js'
 
 const eventsFired = {
   scroll: 0,
