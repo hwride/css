@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<title>Viewports</title>
+	<link rel="stylesheet" type="text/css" href="./viewports.css">
+</head>
+<body>
+ICB
+
+<div class="layout-viewport">Layout viewport</div>
+<div class="tall-el"></div>
+
+<!--
+Show initial containing block using outline. Can't use background as this applies to entire page not just the
+html element. Notice how the ICB never moves from the document origin, even when we scroll.
+
+Show the layout viewport using a <code>position: fixed</code> element. This is always fixed to the layout
+viewport. Notice how the layout viewport is always fixed to the viewport, so is visible regardless of scroll.
+
+Notice how the layout viewport and ICB are always the same size, just sometimes in different positions.
+-->
+</body>
+</html>

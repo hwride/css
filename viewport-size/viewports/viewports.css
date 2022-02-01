@@ -1,0 +1,35 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+html {
+  border: 5px dotted dodgerblue;
+  color: dodgerblue;
+  width: 100%;
+  height: 100%;
+}
+
+.layout-viewport {
+  position: fixed;
+  background: hsl(6deg 93% 71% / 50%);
+  outline: 5px solid hsl(0deg 100% 50% / 25%);
+  color: red;
+  outline-offset: -5px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  /* Center text */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tall-el {
+  height: 300vh;
+}
