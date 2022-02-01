@@ -194,7 +194,7 @@ this is only the case if the ancestor is the containing block - remove the <code
 }`,
   }, {
     label: 'overflow on html sets viewport overflow',
-    description: `Note how setting overflow on the root element actually sets it on the viewport. Notice how margin and
+    description: `Setting overflow on the root element actually sets it on the viewport. Notice how margin and
 border are within the scrollbar unlike all other elements, this is a special property of viewport overflow.`,
     html: `<div class="a blue"></div>`,
     css: `
@@ -208,60 +208,13 @@ html {
   width: 50px;
 }`,
   }, {
-    label: 'overflow on body to set viewport overflow',
-    description: `The <code>html</code> tag has <code>overflow: visible</code> by default. When no overflow value is 
-set on <code>html</code> but one exists on <code>body</code> that will instead by used as the viewport's overflow value.
-<br/><br/>
-Note how the border and padding show the overflow is still applied to the viewport.
-<br/><br/>
-Try setting the <code>html</code> to have <code>overflow: auto</code> to see how that would override the 
-<code>overflow</code> setting on the body tag.
-`,
-    html: `<div class="a blue"></div>`,
-    css: `
-html {
-  /*overflow: auto*/
-  border: 5px solid salmon;
-  margin: 5px;
-  padding: 5px;
-}
-body {
-  overflow: hidden;
-}
-.a {
-  height: 2000px;
-  width: 50px;
-}`,
-  }, {
-    label: 'overflow: visible on html tag',
-    description: `Setting overflow on the root element to <code>visible</code> actually makes it behave like 
-<code>auto</code>. This is actually the default value.`,
-    html: `<div class="a blue"></div>`,
-    css: `
-html {
-  overflow: visible;
-}
-.a {
-  height: 2000px;
-  width: 50px;
-}`,
-  }, {
-    label: 'overflow: hidden on html tag',
-    description: `This will successfully hide content.`,
-    html: `<div class="a blue"></div>`,
-    css: `
-html {
-  overflow: hidden;
-}
-.a {
-  height: 2000px;
-  width: 50px;
-}`,
-  }, {
-    label: 'Comparison viewport and other overflow',
+    label: 'Comparison viewport and element overflow',
     description: `Note:
 <ul>
-    <li>The border and margin are inside the scrollbar for viewport scroll.</li>
+    <li>
+        The border and margin are inside the scrollbar for viewport overflow but outside the scrollbar for element 
+        overflow.
+    </li>
     <li>
         The background colour for <code>html</code> also applies in the margins (the
         same applies if <code>body</code> is used.
@@ -291,6 +244,56 @@ html {
   width: 50px;
   background: dodgerblue;
   border: 5px solid lightblue;
+}`,
+  }, {
+    label: 'overflow on body can set viewport overflow',
+    description: `The <code>html</code> tag has <code>overflow: visible</code> by default. When no overflow value is 
+set on <code>html</code> but one exists on <code>body</code> that will instead by used as the viewport's overflow value.
+<br/><br/>
+Note how the border and padding show the overflow is still applied to the viewport.
+<br/><br/>
+Try setting the <code>html</code> to have <code>overflow: auto</code> to see how that would override the 
+<code>overflow</code> setting on the body tag.
+`,
+    html: `<div class="a blue"></div>`,
+    css: `
+html {
+  /*overflow: auto*/
+  border: 5px solid salmon;
+  margin: 5px;
+  padding: 5px;
+}
+body {
+  overflow: hidden;
+}
+.a {
+  height: 2000px;
+  width: 50px;
+}`,
+  }, {
+    label: 'overflow: visible on viewport',
+    description: `Setting overflow on the viewport (via the <code>html</code> tag in this case) to <code>visible</code>
+actually makes it behave like <code>auto</code>. <code>visible</code> is actually the default value.`,
+    html: `<div class="a blue"></div>`,
+    css: `
+html {
+  overflow: visible;
+}
+.a {
+  height: 2000px;
+  width: 50px;
+}`,
+  }, {
+    label: 'overflow: hidden on viewport',
+    description: `This will successfully hide content outside the viewport.`,
+    html: `<div class="a blue"></div>`,
+    css: `
+html {
+  overflow: hidden;
+}
+.a {
+  height: 2000px;
+  width: 50px;
 }`,
   }]
 })
