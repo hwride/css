@@ -6,17 +6,32 @@ body {
   font-family: sans-serif;
 }
 
-html {
-  border: 5px dotted dodgerblue;
-  color: dodgerblue;
-  width: 100%;
-  height: 100%;
+/* Prove here how setting the size of html and body to some small value doesn't have affect on the initial containing
+block, which always takes the size of the viewport. */
+html, body {
+  width: 50px;
+  height: 50px;
 }
 
+/* This shows the initial containing block because:
+ 1) An absolute positioned element is positioned relative to its containing block.
+ 2) The containing block of an absolute element is its nearest absolute, relative or fixed ancestor. Or where there is
+    none (as in this case), it is the initial containing block. */
+.initial-containing-block {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border: 5px dotted dodgerblue;
+  color: dodgerblue;
+}
+
+/* This shows the layout viewport simply because fixed elements are positioned relative to the layout viewport. */
 .layout-viewport {
   position: fixed;
   background: hsl(6deg 93% 71% / 50%);
-  outline: 5px solid hsl(0deg 100% 50% / 25%);
+  border: 5px dashed hsl(0deg 100% 50% / 25%);
   color: red;
   outline-offset: -5px;
   top: 0;
@@ -30,6 +45,7 @@ html {
   justify-content: center;
 }
 
+/* Create some height to allow scroll and show the layout viewport and ICB change positions on viewport scroll. */
 .tall-el {
   height: 300vh;
 }
