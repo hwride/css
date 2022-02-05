@@ -1,5 +1,5 @@
 /* Common navigation component for the doc pages */
-function createNav(homeHref = '/index.html') {
+function createNav(homeHref = '/css/index.html') {
 	const nav = document.createElement('nav')
 	nav.class = 'css-testing-nav'
 	nav.innerHTML = `
