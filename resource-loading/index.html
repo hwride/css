@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+    <title>Resource loading</title>
+
+    <script src="in-head-async.js" async></script>
+    <script src="in-head-defer.js" defer></script>
+    <script src="in-head.js"></script>
+</head>
+<body>
+<script src="start-of-body.js"></script>
+
+<h1>Resource loading</h1>
+<p>This page contains resources loaded with a variety of different loading modifiers.</p>
+
+<script src="end-of-body-async.js" async></script>
+<script src="end-of-body-defer.js" defer></script>
+<script src="end-of-body.js"></script>
+</body>
+</html>
