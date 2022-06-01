@@ -50,8 +50,8 @@ the first grid item causes the first grid column to expand to fit it.`,
 }`
 	}, {
 		label: 'Grid item fr + content overflow minmax fix',
-		description: `If you set the minimum width of a column to 0 using minmax, this causes the column to ignore the
-<code>min-content</code> size and cause columns to always be their defined fractional width.`,
+		description: `If you set the minimum width of a column to 0 using <code>minmax</code>, this causes the column to 
+ignore the <code>min-content</code> size and cause columns to always be their defined fractional width.`,
 			html: `<div class="grid-container">
   <div>Testttttttttttttttttttttttttttttttt</div><div></div><div></div>
   <div></div><div></div><div></div>
@@ -65,8 +65,8 @@ the first grid item causes the first grid column to expand to fit it.`,
   border: 1px solid black;
   height: 50px;
 }`
-	},  {
-		label: 'Grid item fr + content overflow minmax fix withs scroll',
+	}, {
+		label: 'Grid item fr + content overflow minmax fix with scroll',
 		description: `See you can apply overflow to allow the content to be seen.`,
 		html: `<div class="grid-container">
   <div>Testttttttttttttttttttttttttttttttt</div><div></div><div></div>
@@ -100,6 +100,25 @@ the first grid item causes the first grid column to expand to fit it.`,
 }
 .grid-container > div:first-child {
 	width: 150px;
+}`
+	}, {
+		label: 'Grid item fr + content overflow min-width fix',
+		description: `You can also apply this fix by setting <code>min-width</code> on the grid item itself.`,
+		html: `<div class="grid-container">
+  <div>Testttttttttttttttttttttttttttttttt</div><div></div><div></div>
+  <div></div><div></div><div></div>
+</div>`,
+		css: `.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.grid-container > div {
+  background: dodgerblue;
+  border: 1px solid black;
+  height: 50px;
+}
+.grid-container > div:first-child {
+  min-width: 0;
 }`
 	}]
 })
