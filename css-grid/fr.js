@@ -13,8 +13,24 @@ createCSSTestingComponent({
 }`,
 	description: '',
 	buttons: [{
-		label: '1fr 1fr 1fr',
+		label: 'Simple 1fr 1fr 1fr',
 		reset: true
+	}, {
+		label: 'Example showing fr uses available space',
+		description: `Notice how the fractional columns divide up available space, not the space of the entire grid`,
+		html: `<div class="grid-container">
+  <div></div><div></div><div></div>
+  <div></div><div></div><div></div>
+</div>`,
+		css: `.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 20px 1fr;
+}
+.grid-container > div {
+  background: dodgerblue;
+  border: 1px solid black;
+  height: 50px;
+}`
 	}, {
 		label: 'Grid item fr + content overflow',
 		description: `Notice how even though the template columns are defined to be <code>1fr</code> each, the content of

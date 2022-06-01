@@ -118,14 +118,27 @@
 <div class="example-grid-tracks"></div>
 
 <h2 id="the-fr-unit">The fr unit</h2>
-The <code>fr</code> unit's behaviour is a little more complicated than just 1 fraction of the available space.
+The <code>fr</code> unit's behaviour is a little more complicated than just 1 fraction of the space of the grid.
 
-There are some caveats to this:
+The important details are:
 <ol>
     <li>
-        If the <code>min-content</code> size of a grid item is greater than the configured fractional amount for a
-        column then the column size will expand to fit that content. In this case the defined fractional amount will
-        be different than actual columns size.
+        The fraction of the grid given by <code>1fr</code> isn't a fraction of the grid's total space, but a fraction
+        of the <strong>available space</strong>. This means if there's a fixed with column in there, any fractional
+        units will divide up the remaining space between themselves, rather than using a fractional size of the entire
+        grid.
+    </li>
+    <li>
+        <p>
+            <strong>Grid items can grow beyond their fractional size</strong>. If the <code>min-content</code> size of
+            a grid item is greater than the configured fractional amount for a column then the column size will expand
+            to fit that content. In this case the defined fractional amount will be different than actual columns size.
+        </p>
+        <p>
+            Note you can fix this by using the <code>minmax(0, 1fr)</code> function to set the minimum width of a column
+            to 0. This basically causes the grid to ignore <code>min-content</code> and always size to the given
+            fractional amount.
+        </p>
     </li>
 </ol>
 
