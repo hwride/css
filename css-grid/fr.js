@@ -58,12 +58,11 @@ Note you can apply overflow to allow the content to be seen. Try adding
 		},
 		{
 		label: 'Grid item fr + fixed width',
-		description: `Note how the first grid item has a fixed width greater than <code>1fr</code>, and this takes priority
-over the fractional width and the grid item expands to be larger than <code>1fr</code>.`,
+		description: `Note how even with a fixed width on the grid item the <code>minmax</code> fix still works.`,
 		html: getGridWithItems(6),
 		css: `.grid-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 .grid-container > div {
   background: dodgerblue;
