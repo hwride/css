@@ -16,6 +16,7 @@
             <li><a href="#explicit-grid-examples">Explicit grid examples</a></li>
         </ul>
     </li>
+    <li><a href="#the-fr-unit">The fr unit</a></li>
     <li><a href="#placing-items">Placing items</a>
         <ul>
             <li><a href="#grid-lines">Grid lines</a>
@@ -115,6 +116,23 @@
 
 <h3 id="explicit-grid-examples">Explicit grid examples</h3>
 <div class="example-grid-tracks"></div>
+
+<h2 id="the-fr-unit">The fr unit</h2>
+The <code>fr</code> unit's behaviour is a little more complicated than just 1 fraction of the available space.
+
+There are some caveats to this:
+<ol>
+    <li>
+        If the <code>min-content</code> size of a grid item is greater than the configured fractional amount for a
+        column then the column size will expand to fit that content. In this case the defined fractional amount will
+        be different than actual columns size.
+    </li>
+</ol>
+
+For columns it's more correct to say: the <code>fr</code> unit sets the minimum width of a track as a fraction of the
+available space.
+
+<div class="example-fr"></div>
 
 <h2 id="placing-items">Placing items</h2>
 <h3 id="grid-lines">Grid lines</h3>
@@ -404,6 +422,7 @@
 <script src="util.js"></script>
 <script src="simple.js"></script>
 <script src="grid-tracks.js"></script>
+<script src="fr.js"></script>
 <script src="grid-lines.js"></script>
 <script src="template-areas.js"></script>
 <script src="interaction-named-lines-areas.js"></script>
