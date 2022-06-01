@@ -48,21 +48,15 @@ the first grid item causes the first grid column to expand to fit it.`,
   border: 1px solid black;
   height: 50px;
 }`
-	},
-	{
+	}, {
 		label: 'Grid item fr + content overflow minmax fix',
 		description: `If you set the minimum width of a column to 0 using minmax, this causes the column to ignore the
-<code>min-content</code> size and cause columns to always be their defined fractional width.
-<br/><br/>
-Note you can apply overflow to allow the content to be seen. Try adding 
-<code>
-	.grid-container > div:first-child { overflow: auto }
-</code> to the CSS.`,
-		html: `<div class="grid-container">
+<code>min-content</code> size and cause columns to always be their defined fractional width.`,
+			html: `<div class="grid-container">
   <div>Testttttttttttttttttttttttttttttttt</div><div></div><div></div>
   <div></div><div></div><div></div>
 </div>`,
-			css: `.grid-container {
+		css: `.grid-container {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -71,8 +65,27 @@ Note you can apply overflow to allow the content to be seen. Try adding
   border: 1px solid black;
   height: 50px;
 }`
-		},
-		{
+	},  {
+		label: 'Grid item fr + content overflow minmax fix withs scroll',
+		description: `See you can apply overflow to allow the content to be seen.`,
+		html: `<div class="grid-container">
+  <div>Testttttttttttttttttttttttttttttttt</div><div></div><div></div>
+  <div></div><div></div><div></div>
+</div>`,
+		css: `.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.grid-container > div {
+  background: dodgerblue;
+  border: 1px solid black;
+  height: 50px;
+}
+.grid-container > div:first-child { 
+	overflow: auto; 
+}
+`
+	}, {
 		label: 'Grid item fr + fixed width',
 		description: `Note how even with a fixed width on the grid item the <code>minmax</code> fix still works.`,
 		html: getGridWithItems(6),
