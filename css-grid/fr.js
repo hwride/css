@@ -140,5 +140,22 @@ even setting any kind of minimum width.`,
 .grid-container > div:first-child {
 	width: 150px;
 }`
+	}, {
+		label: '1fr auto 1fr',
+		description: `When using <code>auto</code> and <code>fr</code> the <code>auto</code> column will take up its natural
+auto size and the <code>fr</code> columns take up the remaining space. This basically centers the central column here.`,
+		html: `<div class="grid-container">
+  <div></div><div>Central col</div><div></div>
+  <div></div><div></div><div></div>
+</div>`,
+		css: `.grid-container {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+}
+.grid-container > div {
+  background: dodgerblue;
+  border: 1px solid black;
+  height: 50px;
+}`
 	}]
 })
