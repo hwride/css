@@ -406,11 +406,30 @@ does not get caused to line break even though this means the element is wider th
 }`
 	}, {
 		label: 'fit-content',
-		description: `This behaves like <code>width: max-content</code> if the size is smaller than the parent. But if the
-size reaches the parent then it behaves like <code>width: auto</code>. In simpler terms: width will shrink to fit 
-content but never go over the width of the parent.`,
-		html: `<div class="a">Some text</div>
-<div class="b">Some text that is wider than the size of the parent</div>`,
+		description: `This will never let an element's size go below <code>min-content</code> or above 
+<code>max-content</code>. If it is between those two values it will be the size of the container. 
+
+Effectively it is: <code>clamp(min-content, container-size, max-content)</code>
+
+See above:
+<ol>
+	<li>
+		The blue child has a <code>max-content</code> smaller than the container. Notice how the width does not go above
+		<code>max-content</code>.
+	</li>
+	<li>
+		The red child has a <code>min-content</code> smaller than the container but a <code>max-content</code> larger than
+		the container. Notice how the width equals the size of the container.
+	</li>
+	<li>
+		The green child has a <code>min-content</code> larger than the container. Notice how it still doesn't break as
+		<code>fit-content</code> doesn't go below <code>min-content</code>.
+	</li>
+</ol>
+`,
+		html: `<div class="a">Child with max-content < parent</div>
+<div class="b">Child with max-content > parent, but min-content < parent</div>
+<div class="c">Child_with_min_content_>_parent_texttexttexttext</div>`,
 		css: `
 .a {
   background: dodgerblue;
@@ -418,6 +437,10 @@ content but never go over the width of the parent.`,
 }
 .b {
   background: red;
+  width: fit-content;
+}
+.c {
+  background: green;
   width: fit-content;
 }`
 	}]
