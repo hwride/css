@@ -415,33 +415,45 @@ See above:
 <ol>
 	<li>
 		The blue child has a <code>max-content</code> smaller than the container. Notice how the width does not go above
-		<code>max-content</code>.
+		<code>max-content</code>. This is different to <code>width: auto</code> as that stretches to width of the container.
 	</li>
 	<li>
 		The red child has a <code>min-content</code> smaller than the container but a <code>max-content</code> larger than
-		the container. Notice how the width equals the size of the container.
+		the container. Notice how the width equals the size of the container. This is effectively the same as 
+		<code>width: auto</code>.
 	</li>
 	<li>
 		The green child has a <code>min-content</code> larger than the container. Notice how it still doesn't break as
 		<code>fit-content</code> doesn't go below <code>min-content</code>.
+		<br/>
+		<br/>
+		Notice this is different to <code>width: auto</code>, because there the width is still the size of the container
+		and has not expanded to fit the content, unlike <code>fit-content</code>.
 	</li>
 </ol>
 `,
-		html: `<div class="a">Child with max-content < parent</div>
-<div class="b">Child with max-content > parent, but min-content < parent</div>
-<div class="c">Child_with_min_content_>_parent_texttexttexttext</div>`,
+		html: `<div class="a pair-start">Child with max-content < parent</div>
+<div class="a fit-content pair-end">Child with max-content < parent</div>
+
+<div class="b pair-start">Child with max-content > parent, but min-content < parent</div>
+<div class="b fit-content pair-end">Child with max-content > parent, but min-content < parent</div>
+
+<div class="c pair-start">Child_with_min_content_>_parent_texttexttexttext</div>
+<div class="c fit-content">Child_with_min_content_>_parent_texttexttexttext</div>`,
 		css: `
+.fit-content {
+  width: fit-content;
+}
 .a {
   background: dodgerblue;
-  width: fit-content;
 }
 .b {
   background: red;
-  width: fit-content;
 }
 .c {
   background: green;
-  width: fit-content;
-}`
+}
+.pair-start { margin-bottom: 4px; }
+.pair-end { margin-bottom: 16px; }`
 	}]
 })
