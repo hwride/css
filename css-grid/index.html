@@ -17,6 +17,7 @@
         </ul>
     </li>
     <li><a href="#the-fr-unit">The fr unit</a></li>
+    <li><a href="#auto-fill-auto-fit">auto-fill and auto-fit</a></li>
     <li><a href="#placing-items">Placing items</a>
         <ul>
             <li><a href="#grid-lines">Grid lines</a>
@@ -118,9 +119,11 @@
 <div class="example-grid-tracks"></div>
 
 <h2 id="the-fr-unit">The fr unit</h2>
-The <code>fr</code> unit's behaviour is a little more complicated than just 1 fraction of the space of the grid.
+<p class="example-description">
+    The <code>fr</code> unit's behaviour is a little more complicated than just 1 fraction of the space of the grid.
 
-The important details are:
+    The important details are:
+</p>
 <ol>
     <li>
         The fraction of the grid given by <code>1fr</code> isn't a fraction of the grid's total space, but a fraction
@@ -146,6 +149,39 @@ For columns it's more correct to say: the <code>fr</code> unit sets the minimum 
 available space.
 
 <div class="example-fr"></div>
+
+<h2 id="auto-fill-auto-fit">Fluid grids with auto-fill and auto-fit</h2>
+
+<p class="example-description">
+    The <code>auto-fill</code> and <code>auto-fit</code> properties can be used to create types of fluid grid.
+
+    They will automatically create columns depending on the configured sizes and the available space.
+
+    Some rules:
+</p>
+<ol>
+    <li>
+        The largest number of columns possible are created that won't cause an overflow of the grid container.
+        The size of these columns is as follows:
+        <ol>
+            <li>If the max track size is definite use that.</li>
+            <li>Otherwise use the min track sizing function.</li>
+        </ol>
+    </li>
+    <li>
+        If using a max track size of <code>fr</code> or <code>auto</code>, then any remaining space will be divided up
+        among the columns.
+    </li>
+</ol>
+
+The difference between <code>auto-fill</code> and <code>auto-fit</code> can be seen when the number of grid items
+is less than the number of automatically created tracks:
+<ol>
+    <li><code>auto-fill</code> will leave empty tracks there</li>
+    <li><code>auto-fit</code> will collapse empty tracks and divide space between tracks with defined grid items.</li>
+</ol>
+
+<div class="example-auto-fill-auto-fit"></div>
 
 <h2 id="placing-items">Placing items</h2>
 <h3 id="grid-lines">Grid lines</h3>
@@ -436,6 +472,7 @@ available space.
 <script src="simple.js"></script>
 <script src="grid-tracks.js"></script>
 <script src="fr.js"></script>
+<script src="auto-fill-auto-fit.js"></script>
 <script src="grid-lines.js"></script>
 <script src="template-areas.js"></script>
 <script src="interaction-named-lines-areas.js"></script>
