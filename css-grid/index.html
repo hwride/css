@@ -152,10 +152,10 @@ available space.
 
 <h2 id="auto-fill-auto-fit">Fluid grids with auto-fill and auto-fit</h2>
 
+<h3>General sizing algorithm</h3>
 <p class="example-description">
-    The <code>auto-fill</code> and <code>auto-fit</code> properties can be used to create types of fluid grid.
-
-    They will automatically create columns depending on the configured sizes and the available space.
+    The <code>auto-fill</code> and <code>auto-fit</code> properties can be used to automatically determine the number of
+    columns to use based on the available space and the configured column sizes.
 
     Some rules:
 </p>
@@ -174,12 +174,25 @@ available space.
     </li>
 </ol>
 
-The difference between <code>auto-fill</code> and <code>auto-fit</code> can be seen when the number of grid items
-is less than the number of automatically created tracks:
+<h3>auto-fill vs. auto-fit</h3>
+<p class="example-description">
+    The difference between <code>auto-fill</code> and <code>auto-fit</code> can be seen when the number of grid items
+    is less than the number of automatically created tracks:
+</p>
 <ol>
     <li><code>auto-fill</code> will leave empty tracks there</li>
     <li><code>auto-fit</code> will collapse empty tracks and divide space between tracks with defined grid items.</li>
 </ol>
+
+<h3>Differences from simple fixed column sizes</h3>
+<p class="example-description">
+The core difference between :<br/>
+    &nbsp;&nbsp;<code>repeat(3, minmax(30px, 1fr))</code><br/>
+and<br/>
+    &nbsp;&nbsp;<code>repeat(auto-fill, minmax(30px, 1fr))</code><br/>
+</p>
+
+is <code>auto-fill</code> automatically changes the number of columns used, where as the fixed one doesn't.
 
 <div class="example-auto-fill-auto-fit"></div>
 

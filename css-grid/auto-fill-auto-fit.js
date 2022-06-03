@@ -1,5 +1,4 @@
-const gridChildColCss = `
-.grid-container > div {
+const gridChildColCss = `.grid-container > div {
   background: dodgerblue;
   border: 1px solid black;
   height: 50px;
@@ -7,20 +6,60 @@ const gridChildColCss = `
 
 createCSSTestingComponent({
 	parent: document.querySelector('.example-auto-fill-auto-fit'),
-	html: `<div class="grid-container">
+	html: `<div class="grid-container grid-container-basic">
+  <div></div><div></div><div></div>
+  <div></div><div></div><div></div>
+</div>
+
+<div class="grid-container grid-container-auto-fill">
+  <div></div><div></div><div></div>
   <div></div><div></div><div></div>
 </div>`,
 	css: `
+.grid-container-basic {
+  grid-template-columns: repeat(3, 60px);
+  margin-bottom: 20px;
+}
+.grid-container-auto-fill {
+  grid-template-columns: repeat(auto-fill, minmax(10px, 60px));
+}
 .grid-container {
   display: grid;
   outline: 1px solid red;
-  grid-template-columns: repeat(3, 60px);
 }
 ${gridChildColCss}`,
-	description: '',
+	description: `Notice how extra columns are created for the <code>auto-fill</code> grid but not for the fixed column
+count grid.`,
 	buttons: [{
-		label: 'Basic repeated columns',
+		label: 'Fixed column count vs. auto-fill, fixed column sizes',
 		reset: true
+	}, {
+		label: 'Fixed column count vs. auto-fill, flexible column sizes',
+		description: `Notice how the min track size is used for determining how many tracks can fit into the grid when using
+<code>auto-fill</code>, so it ends up with an extra track compared to the fixed 3 column grid.`,
+
+		html: `<div class="grid-container grid-container-basic">
+  <div></div><div></div><div></div>
+  <div></div><div></div><div></div>
+</div>
+
+<div class="grid-container grid-container-auto-fill">
+  <div></div><div></div><div></div>
+  <div></div><div></div><div></div>
+</div>`,
+		css: `
+.grid-container-basic {
+  grid-template-columns: repeat(3, minmax(60px, 1fr));
+  margin-bottom: 20px;
+}
+.grid-container-auto-fill {
+  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+}
+.grid-container {
+  display: grid;
+  outline: 1px solid red;
+}
+${gridChildColCss}`
 	}, {
 		label: 'auto-fill definite max track size',
 		description: `Note here how the columns are created using the max track size as it is definite.`,
@@ -37,8 +76,8 @@ ${gridChildColCss}`,
 ${gridChildColCss}`
 	}, {
 		label: 'auto-fill indefinite max track size',
-		description: `Note here how the columns are created using the min track size as the max track size is indefinite.
-It's not permitted to have an indefinite min track size.`,
+		description: `Note here how the columns are created using the min track size as the max track size is indefinite
+(it's not permitted to have an indefinite min track size).`,
 		html: `<div class="grid-container">
   <div></div><div></div><div></div>
   <div></div><div></div><div></div>
@@ -52,7 +91,7 @@ It's not permitted to have an indefinite min track size.`,
 ${gridChildColCss}`
 	}, {
 		label: 'auto-fill indefinite max track size, remaining space divided',
-		description: `Here how the max track size is indefinite, so the number of columns to use is determined by
+		description: `Note here how the max track size is indefinite, so the number of columns to use is determined by
 the min track size. But the min track size of 51*3 = 153px, which is less than the width of the 200px grid. This
 demonstrates how the remaining space is divided between the columns when the max track size is indefinite.`,
 		html: `<div class="grid-container">
