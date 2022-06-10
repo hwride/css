@@ -74,5 +74,41 @@ because we can see the 3rd column wrap its words.`,
   border: 1px solid black;
   height: 50px;
 }`
+	}, {
+		label: 'Flexible max minmax, fr other tracks',
+		description: `Here we have used <code>fr</code> as the maximum for our <code>minmax</code> column. See in the first
+example how all columns take up the same width when their size is greater than their minimum size.
+<br/><br/>
+But see in the second example how a column won't go below its minimum size even with a maximum of <code>fr</code>, and
+remaining space is split among the other columns.`,
+		html: `<div class="grid-container grid-container-1">
+  <div></div><div>content</div><div>some content</div>
+  <div></div><div></div><div></div>
+</div>
+<div class="grid-container grid-container-2">
+  <div></div><div>content</div><div>some content</div>
+  <div></div><div></div><div></div>
+</div>`,
+		css: `
+.grid-container-1 {
+  display: grid;
+  outline: 1px solid red;
+  width: 200px;
+  grid-template-columns: 
+    minmax(50px, 1fr) 1fr 1fr;
+  margin-bottom: 10px
+}
+.grid-container-2 {
+  display: grid;
+  outline: 1px solid red;
+  width: 250px;
+  grid-template-columns: 
+    minmax(100px, 1fr) 1fr 1fr;
+}
+.grid-container > div {
+  background: dodgerblue;
+  border: 1px solid black;
+  height: 50px;
+}`
 	}]
 })
