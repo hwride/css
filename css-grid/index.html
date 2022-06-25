@@ -17,7 +17,7 @@
         </ul>
     </li>
     <li><a href="#the-fr-unit">The fr unit</a></li>
-    <li><a href="#minmax">minmax</a></li>
+    <li><a href="#minmax">minmax()</a></li>
     <li><a href="#auto-fill-auto-fit">auto-fill and auto-fit</a></li>
     <li><a href="#placing-items">Placing items</a>
         <ul>
@@ -149,9 +149,19 @@
 For columns it's more correct to say: the <code>fr</code> unit sets the minimum width of a track as a fraction of the
 available space.
 
+<h3>fr vs. %</h3>
+Why use the <code>fr</code> unit instead of <code>%</code>?
+<ul>
+    <li>The <code>fr</code> unit allows you to take up a fraction of remaining space, not just total space.</li>
+    <li>The <code>gap</code> property will work automatically with <code>fr</code>, but not with <code>%</code>.</li>
+</ul>
+
 <div class="example-fr"></div>
 
-<h2 id="minmax">minmax</h2>
+<h2 id="minmax">minmax()</h2>
+<p class="example-description">
+    The <code>minmax()</code> function allows you to set a minimum and maximum on a grid track.
+</p>
 
 <div class="example-minmax"></div>
 
