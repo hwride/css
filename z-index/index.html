@@ -2,78 +2,75 @@
         "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en-GB">
 <head>
-    <title>z-index test</title>
+    <title>Layered presentation - z-index and stacking</title>
     <link href="../common.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../css-testing-component/css-testing-component.css">
     <link href="style.css" rel="stylesheet">
 </head>
 <body>
-<h1>z-index</h1>
+<h1>Layered presentation - z-index and stacking</h1>
+<ul>
+    <li><a href="#references">References</a></li>
+    <li><a href="#stacking-context">Stacking context</a></li>
+    <li><a href="#default-ordering">Default ordering</a></li>
+    <li><a href="#z-index">z-index</a></li>
+    <li><a href="#examples">Examples</a></li>
+</ul>
+
+<h1 id="references">References</h1>
 <p class="example-description">
     Reference: <a href="https://www.w3.org/TR/CSS22/visuren.html#layers">CSS 2.2 Visual formatting
     model details - Layered presentation</a>
 </p>
 <p>
-    Some examples of how the stacking context and z-index work. Note:
+    You have some control over how elements are stacked with CSS.
+</p>
+
+<h2 id="stacking-context">Stacking context</h2>
+<p>
+    Stacking context is a core concept in CSS layering. Essentially elements in the same stacking context can
+    be configured to overlap each other in different ways with CSS rules such as z-index. Where as elements in
+    different stacking contexts have their layering controlled by their first ancestors that are in the same
+    stacking context.
+</p>
+
+<h3>What creates a new stacking context?</h3>
+<p>
+    There are many different things that can cause a new stacking context to be created, see
+    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context">here</a>.
+    Some examples:
 </p>
 <ul>
-    <li>
-        elements with a higher number appear in the DOM after elements with a lower number, e.g. <code>.d4</code> is
-        after <code>.d3</code>
-    </li>
-    <li>
-        child elements have an extra number appending to them, e.g. <code>.d11</code> is the first child of
-        <code>.d1</code>
-    </li>
+    <li>Root element of the document</li>
+    <li>Element with a position value of <code>absolute</code> or <code>relative</code> and z-index other than
+        <code>auto</code>.</li>
+    <li>Element with a position value of <code>fixed</code> or <code>sticky</code>.</li>
+    <li>Children of flex or grid containers with a z-index value other than <code>auto</code>.</li>
+    <li>Element with opacity valueless than 1.</li>
+    <li>Element with <code>transform</code>, <code>filter</code>, <code>perspective</code>, <code>clip-path</code>, etc.</li>
+    <li>Element with <code>isolation: isolate</code>.</li>
+    <li>Element with <code>container</code> value of <code>layout</code> or <code>paint</code>.</li>
 </ul>
 
-<h2>Default stacking without z-index</h2>
-<div class="test-container test-container-without-z-index">
-    <div class="d1">
-        position absolute
-    </div>
-    <div class="d2">
-        float: left
-    </div>
-    <div class="d3">
-        float: right
-    </div>
-    <div class="d4">
-        position: static
-    </div>
-</div>
+<h2 id="default-ordering">Default ordering</h2>
+<p>
+    By default elements will be positioned in their DOM order.
+</p>
 
-<h2 class="with-z-index">With z-index</h2>
-<div class="test-container test-container-with-z-index">
-    <div class="d1">
-        <div class="d11"></div>
-        <div class="d12"></div>
-    </div>
-    <div class="d2">
-        <div class="d21"></div>
-        <div class="d22"></div>
-    </div>
-    <div class="d3"></div>
-    <div class="d4"></div>
-</div>
+<h2 id="z-index">z-index</h2>
+<p>
+    Elements in the same stacking context can have how they stack controlled with the <code>z-index</code>
+    property. Note in a flow formatting context elements must be positioned to allow <code>z-index</code> to
+    have an effect.
+</p>
 
-<script type="text/javascript">
-    // Add class labels to all divs.
-    document.querySelectorAll('.test-container div').forEach(function(el) {
-        const classTitle = document.createElement('b');
-        classTitle.innerText = `.${el.className}`;
-        el.prepend(classTitle);
-    });
+<h2 id="examples">Examples</h2>
+<div class="examples-stacking"></div>
 
-    // // Add z-index to all divs.
-    document.querySelectorAll('.test-container-without-z-index div').forEach(function(el) {
-        el.prepend(document.createElement('br'));
-        el.append(`z-index: ${window.getComputedStyle(el).zIndex}`);
-    });
-    document.querySelectorAll('.test-container-with-z-index div').forEach(function(el) {
-        el.append(`z-index: ${window.getComputedStyle(el).zIndex}`);
-    });
-</script>
 </body>
 <script src="../nav.js"></script>
+<script src="../css-testing-component/lib/ace/src-noconflict/ace.js"></script>
+<script src="../css-testing-component/css-testing-component.js"></script>
+<script src="stacking.js"></script>
 <script>createNav()</script>
 </html>
