@@ -121,112 +121,128 @@ div {
   position: relative;
 }`
 	}, {
-		label: 'With z-index',
-		description: ``,
-		html: `<div class="test-container test-container-with-z-index">
-    <div class="d1">d1
-        <div class="d11">d11</div>
-        <div class="d12">d12</div>
-    </div>
-    <div class="d2">d2
-        <div class="d21">d21</div>
-        <div class="d22">d22</div>
-    </div>
-    <div class="d3">d3</div>
-    <div class="d4">d4</div>
+		label: 'z-index - basic',
+		description: `Note here how the stacking order has been completely changed by setting z-index values.`,
+		html: `<div class="a">a</div>
+<div class="b">b</div>
+<div class="c">c</div>`,
+		css: `
+div {
+  padding: 10px;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.a {
+  background: salmon;
+  z-index: 1;
+}
+.b {
+  background: green;
+  z-index: 2;
+  top: 40px;
+  left: 40px;
+}
+.c {
+  background: dodgerblue;
+  z-index: 0;
+  top: 7px;
+  left: 55px;
+}`
+	}, {
+		label: 'z-index - stacking of non-siblings',
+		description: `Note here how:
+ <ul>
+ 		<li>
+			a is behind both b and bb, due to natural dom ordering.
+		</li>
+		<li>
+			aa is in front of both b and bb, due to having a z-index of 1.
+		</li>
+</ul>
+
+<p>This shows how even if your ancestors stack one way, you can control stacking of descendents another way with
+<code>z-index</code>. This works because all these elements are in the same <b>stacking context</b>.</p>`,
+		html: `<div class="a">a
+	<div class="aa">aa</div>
+</div>
+<div class="b">b
+	<div class="bb">bb</div>
 </div>`,
 		css: `
-.test-container div {
-    border: 1px dotted black;
-    /* Setting this changes the z order in which things appear. As setting opacity creates a new stacking context. */
-    /*opacity: 0.95;*/
-    text-align: center;
+div {
+  padding: 10px;
+  border: 1px solid black;
+  text-align: center;
+  position: absolute;
+  height: 50px;
+  width: 50px;
 }
 
-.d1 { background: #6495ed; }
-.d2 { background: seagreen; }
-.d3 { background: coral; }
-.d4 { background: indianred; }
-
-h2.with-z-index {
-    clear: both;
-    margin-top: 4em;
+.a {
+  background: salmon;
+  margin-right: 50px;
+  height: 200px;
+}
+.aa {
+  background: red;
+  top: 40px;
+  z-index: 1;
+}
+.b {
+  background: green;
+  top: 15px;
+  left: 65px;
+  margin-right: 25px;
+}
+.bb {
+  background: lawngreen;
+  top: 50px;
+  left: -7px;
+}`
+	}, {
+		label: 'New stacking context with isolation: isolate',
+		description: `
+<p>Here the example is exactly the same as the "z-index - stacking of non-siblings" example, except
+we have applied an <code>isolation: isolate</code>. This creates a new stacking context, which means that any elements
+that are descendents in that new stacking context cannot break out of it, and will always be on the same "layer" as
+their ancestor that created the stacking context.</p>
+<p>The effect here is aa is no longer able to stack different than its parent a with b and bb, they both stack
+underneath, as that is what happened to a and a created a new stacking context.</p>`,
+		css: `
+div {
+  padding: 10px;
+  border: 1px solid black;
+  text-align: center;
+  position: absolute;
+  height: 50px;
+  width: 50px;
 }
 
-.test-container-with-z-index {
-    /* Make relative as all child divs will be absolutely positioned. */
-    position: relative;
-    font-family: monospace;
-    font-size: 12px;
+.a {
+  background: salmon;
+  margin-right: 50px;
+  height: 200px;
+  isolation: isolate;
 }
-.test-container-with-z-index div {
-    width: 250px;
-    height: 250px;
-    /* z-index only has an effect if an element is positioned. */
-    position: absolute;
-
-    /* Center text. */
-    display: inline-block;
-    line-height: 250px;
+.aa {
+  background: red;
+  top: 40px;
+  z-index: 1;
 }
-
-.test-container-with-z-index div > div {
-    height: 125px;
-    width: 125px;
-    line-height: 125px;
+.b {
+  background: green;
+  top: 15px;
+  left: 65px;
+  margin-right: 25px;
 }
-
-.test-container-with-z-index .d1 {
-    /* .d1 is placed above d2 because it has a higher z-index and is in the same stacking context. */
-    z-index: 1;
-}
-.test-container-with-z-index .d11 {
-    background: dodgerblue;
-    top: 85px;
-    left: 190px;
-    z-index: 1;
-}
-.test-container-with-z-index .d12 {
-    background: bisque;
-    top: 175px;
-    left: 80px;
-    /* .d12 appears above .d1 even though it has a lower z-index because children always appear above their parents when
-    the parent has a z-index set. TODO: Does this relate to the creation of a new stacking context? Consider. */
-    /* .d12 is placed above .d2 and .d3 even though it has a lower z-index. This is because d12's parent d1 has a
-    integer z-index which creates a new stacking context. All children in a new stacking context are treated the same as
-    the parent outside of that context. If you set .d1's z-index to auto you can see the difference. */
-    z-index: -1;
-}
-
-.test-container-with-z-index .d2 {
-    top: 150px;
-    left: 150px;
-}
-.test-container-with-z-index .d21 {
-    background: lawngreen;
-    top: -145px;
-    left: 95px;
-    /* If a parent has a z-index of auto it does not establish a new stacking context and its children will use the
-    existing stacking context. In this case that is the root stacking context. This is why .d21 appears above .d11
-    even though its parent does not, auto is a special case. */
-    z-index: 2;
-}
-.test-container-with-z-index .d22 {
-    background: green;
-    top: 60px;
-    left: 210px;
-    z-index: 1;
-}
-
-.test-container-with-z-index .d3 {
-    top: 290px;
-    left: 175px;
-    z-index: 0;
-}
-
-.test-container-with-z-index .d4 {
-    top: 450px;
-    left: 125px;
+.bb {
+  background: lawngreen;
+  top: 50px;
+  left: -7px;
 }`
 	}]
 })
