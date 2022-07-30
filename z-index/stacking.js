@@ -10,7 +10,7 @@ div {
   width: 50px;
   height: 50px;
   border: 3px solid red;
-  background: dodgerblue;
+  background: salmon;
   font-size: 32px;
   text-align: center;
 }
@@ -37,6 +37,7 @@ div {
   height: 50px;
   border: 3px solid red;
   background: dodgerblue;
+  background: salmon;
   font-size: 32px;
   text-align: center;
 }
@@ -60,7 +61,7 @@ div {
   width: 50px;
   height: 50px;
   border: 3px solid red;
-  background: dodgerblue;
+  background: salmon;
   font-size: 32px;
   text-align: center;
 }
@@ -107,21 +108,21 @@ div {
   position: absolute;
   width: 150px;
   height: 350px;
-  background-color: dodgerblue;
+  background: salmon;
 }
 
 .relative {
   position: relative;
   height: 80px;
   width: 450px;
-  background-color: salmon;
+  background: green;
 }
 
 .static {
   position: static;
   height: 80px;
   width: 450px;
-  background-color: green;
+  background: dodgerblue;
 }
 
 .a { top: 10px; left: 10px; }
