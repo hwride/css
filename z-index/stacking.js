@@ -76,77 +76,31 @@ div {
 }`,
 		description: `Notice how regardless of DOM order positioned elements are in front of non positioned elements.`
 	}, {
-		label: 'Flow vs. positioned layout stacking 2',
-		html: `<div class="a absolute">
- <strong>a</strong><br />
- position: absolute;
-</div>
-<div class="b relative">
-  <strong>b</strong><br />
-  position: relative;
-</div>
-<div class="c relative">
-  <strong>c</strong><br />
-  position: relative;
-</div>
-<div class="d absolute">
-  <strong>d</strong><br />
-  position: absolute;
-</div>
-<div class="e static">
-  <strong>e</strong><br />
-  position: static;
-</div>`,
+		label: 'Flow vs. positioned layout stacking with z-index',
+		html: `<div class="a">a</div>
+<div class="b">b</div>`,
 		css: `
 div {
-  padding: 10px;
-  border: 1px solid black;
+  width: 50px;
+  height: 50px;
+  border: 3px solid red;
+  background: salmon;
+  font-size: 32px;
   text-align: center;
 }
 
-.absolute {
-  position: absolute;
-  width: 150px;
-  height: 350px;
-  background: salmon;
-}
-
-.relative {
+.a {
   position: relative;
-  height: 80px;
-  width: 450px;
+}
+.b {
+  margin-top: -36px;
+  margin-left: 24px;
   background: green;
-}
-
-.static {
-  position: static;
-  height: 80px;
-  width: 450px;
-  background: dodgerblue;
-}
-
-.a { top: 10px; left: 10px; }
-.b { top: 70px; left: 20px; }
-.c { top: 20px; left: 50px; }
-.d { top: 10px; right: 10px; }
-.e {
-  margin-block-start: 10px;
-  margin-inline-start: 80px;
+  z-index: 10;
 }`,
-		description: `Note how:
-<ul>
-	<li>
-		a, b, c and d all stack in DOM order. This is because they all have a position other than static and no z-index,
-		so they just stack in DOM order.
-	</li>
-	<li>
-		e is underneath all the elements even though it's last in the DOM. This is because static elements are always 
-		positioned underneath positioned elements if z-index is not specified. 
-	</li>
-</ul>
-`,
+		description: `Notice how even with a z-index flow elements will not be placed above positioned elements.`
 	}, {
-			label: 'Positioned elements default stacking - descendants',
+			label: 'Flow and positioned stacking of cousin elements',
 			description: `Here aa is before b and c in the DOM. But note:
  <ul>
  		<li>
@@ -156,11 +110,11 @@ div {
 			aa is shown above b overriding DOM ordering. This is because b is <code>position: static</code> and aa is 
 			<code>position: absolute</code>. This happens even though the parent of aa is underneath b due to DOM ordering.
 			This shows how descendants of an element can overlap the same elements differently to their ancestors as long as 
-			they all share the same stacking context. 
+			they all share the same <b>stacking context</b>. 
 		</li>
 		<li>
-			aa is shown below c, which is after b in the DOM. Element c is <code>position: relative</code> and aa is 
-			<code>position: absolute</code>, so DOM ordering is applied in this case.
+			aa is shown below c, which is after b in the DOM. Element c and aa are both positioned so DOM ordering is applied 
+			in this case.
 		</li>
 `,
 			html: `<div class="a">a
@@ -227,7 +181,7 @@ div {
   left: 55px;
 }`
 	}, {
-		label: 'z-index - stacking of non-siblings',
+		label: 'z-index - stacking of cousin elements',
 		description: `Note here how:
  <ul>
  		<li>
@@ -280,10 +234,12 @@ div {
 	}, {
 		label: 'New stacking context with isolation: isolate',
 		description: `
-<p>Here the example is exactly the same as the "z-index - stacking of non-siblings" example, except
-we have applied an <code>isolation: isolate</code>. This creates a new stacking context, which means that any elements
-that are descendents in that new stacking context cannot break out of it, and will always be on the same "layer" as
-their ancestor that created the stacking context.</p>
+<p>
+	Here the example is exactly the same as the "z-index - stacking of non-siblings" example, except we have applied an
+ <code>isolation: isolate</code>. This creates a new <b>stacking context</b>, which means that any elements that are
+  descendents in that new stacking context cannot break out of it, and will always be on the same "layer" as their 
+  ancestor that created the stacking context.
+</p>
 <p>The effect here is aa is no longer able to stack different than its parent a with b and bb, they both stack
 underneath, as that is what happened to a and a created a new stacking context.</p>`,
 		css: `
