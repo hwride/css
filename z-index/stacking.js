@@ -1,24 +1,24 @@
 createCSSTestingComponent({
 	parent: document.querySelector('.examples-stacking'),
 	buttons: [{
-		label: 'Flow layout background vs. text',
+		label: 'Flow layout default stacking',
 		reset: true,
 		html: `<div class="a">a</div>
 <div class="b">b</div>`,
 		css: `
 div {
-    width: 50px;
-    height: 50px;
-    border: 3px solid;
-    background: silver;
-    font-size: 2rem;
-    text-align: center;
+  width: 50px;
+  height: 50px;
+  border: 3px solid red;
+  background: dodgerblue;
+  font-size: 32px;
+  text-align: center;
 }
 
 .b {
   margin-top: -36px;
   margin-left: 24px;
-  background: pink;
+  background: green;
 }`,
 		description: `Note here two things:
 <ol>
@@ -28,16 +28,16 @@ div {
 <p>Flow layout isn't really designed for decent layering, and you're better off with positioned layout.</p>
 `
 	}, {
-		label: 'Positioned layout background vs. text',
+		label: 'Positioned layout default stacking',
 		html: `<div class="a">a</div>
 <div class="b">b</div>`,
 		css: `
 div {
   width: 50px;
   height: 50px;
-  border: 3px solid;
-  background: silver;
-  font-size: 2rem;
+  border: 3px solid red;
+  background: dodgerblue;
+  font-size: 32px;
   text-align: center;
 }
 
@@ -47,12 +47,35 @@ div {
 .b {
   margin-top: -36px;
   margin-left: 24px;
-  background: pink;
+  background: green;
 }`,
 		description: `See how when both elements are positioned we don't get strange different layering of text and 
 background/borders as in flow layout.`
 	}, {
-		label: 'Positioned elements without z-index - siblings',
+		label: 'Flow vs. positioned layout stacking',
+		html: `<div class="a">a</div>
+<div class="b">b</div>`,
+		css: `
+div {
+  width: 50px;
+  height: 50px;
+  border: 3px solid red;
+  background: dodgerblue;
+  font-size: 32px;
+  text-align: center;
+}
+
+.a {
+  position: relative;
+}
+.b {
+  margin-top: -36px;
+  margin-left: 24px;
+  background: green;
+}`,
+		description: `Notice how regardless of DOM order positioned elements are in front of non positioned elements.`
+	}, {
+		label: 'Flow vs. positioned layout stacking 2',
 		html: `<div class="a absolute">
  <strong>a</strong><br />
  position: absolute;
@@ -121,8 +144,8 @@ div {
 	</li>
 </ul>
 `,
-	},{
-			label: 'Positioned elements without z-index - descendants',
+	}, {
+			label: 'Positioned elements default stacking - descendants',
 			description: `Here aa is before b and c in the DOM. But note:
  <ul>
  		<li>
