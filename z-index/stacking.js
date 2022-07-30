@@ -1,6 +1,59 @@
 createCSSTestingComponent({
 	parent: document.querySelector('.examples-stacking'),
-	html: `<div class="a absolute">
+	html: `<div class="a">a</div>
+<div class="b">b</div>`,
+	css: `
+div {
+    width: 50px;
+    height: 50px;
+    border: 3px solid;
+    background: silver;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.b {
+  margin-top: -36px;
+  margin-left: 24px;
+  background: pink;
+}`,
+	description: `Note here two things:
+<ol>
+	<li>DOM order controls which elements appears in front of the other.</li>
+	<li>The first element which is layered behind, but its text is in front of the background of the second element!</li>
+</ol>
+<p>Flow layout isn't really designed for decent layering, and you're better off with positioned layout.</p>
+`,
+	buttons: [{
+		label: 'Flow layout background vs. text',
+		reset: true
+	}, {
+		label: 'Positioned layout background vs. text',
+		html: `<div class="a">a</div>
+<div class="b">b</div>`,
+		css: `
+div {
+  width: 50px;
+  height: 50px;
+  border: 3px solid;
+  background: silver;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.a, .b {
+  position: relative;
+}
+.b {
+  margin-top: -36px;
+  margin-left: 24px;
+  background: pink;
+}`,
+		description: `See how when both elements are positioned we don't get strange different layering of text and 
+background/borders as in flow layout.`
+	}, {
+		label: 'Positioned elements without z-index - siblings',
+		html: `<div class="a absolute">
  <strong>a</strong><br />
  position: absolute;
 </div>
@@ -20,7 +73,7 @@ createCSSTestingComponent({
   <strong>e</strong><br />
   position: static;
 </div>`,
-	css: `
+		css: `
 div {
   padding: 10px;
   border: 1px solid black;
@@ -56,7 +109,7 @@ div {
   margin-block-start: 10px;
   margin-inline-start: 80px;
 }`,
-	description: `Note how:
+		description: `Note how:
 <ul>
 	<li>
 		a, b, c and d all stack in DOM order. This is because they all have a position other than static and no z-index,
@@ -68,12 +121,9 @@ div {
 	</li>
 </ul>
 `,
-	buttons: [{
-		label: 'Default stacking without z-index - siblings',
-		reset: true
-	}, {
-		label: 'Default stacking without z-index - descendants',
-		description: `Here aa is before b and c in the DOM. But note:
+	},{
+			label: 'Positioned elements without z-index - descendants',
+			description: `Here aa is before b and c in the DOM. But note:
  <ul>
  		<li>
 			a is shown underneath b due to normal DOM ordering.
@@ -89,12 +139,12 @@ div {
 			<code>position: absolute</code>, so DOM ordering is applied in this case.
 		</li>
 `,
-		html: `<div class="a">a
+			html: `<div class="a">a
 	<div class="aa relative">aa</div>
 </div>
 <div class="b">b</div>
 <div class="c relative">c</div>`,
-		css: `
+			css: `
 div {
   padding: 10px;
   border: 1px solid black;
@@ -120,7 +170,7 @@ div {
   background: dodgerblue;
   position: relative;
 }`
-	}, {
+}, {
 		label: 'z-index - basic',
 		description: `Note here how the stacking order has been completely changed by setting z-index values.`,
 		html: `<div class="a">a</div>
