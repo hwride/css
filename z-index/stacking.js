@@ -1,8 +1,11 @@
 createCSSTestingComponent({
 	parent: document.querySelector('.examples-stacking'),
-	html: `<div class="a">a</div>
+	buttons: [{
+		label: 'Flow layout background vs. text',
+		reset: true,
+		html: `<div class="a">a</div>
 <div class="b">b</div>`,
-	css: `
+		css: `
 div {
     width: 50px;
     height: 50px;
@@ -17,16 +20,13 @@ div {
   margin-left: 24px;
   background: pink;
 }`,
-	description: `Note here two things:
+		description: `Note here two things:
 <ol>
 	<li>DOM order controls which elements appears in front of the other.</li>
 	<li>The first element which is layered behind, but its text is in front of the background of the second element!</li>
 </ol>
 <p>Flow layout isn't really designed for decent layering, and you're better off with positioned layout.</p>
-`,
-	buttons: [{
-		label: 'Flow layout background vs. text',
-		reset: true
+`
 	}, {
 		label: 'Positioned layout background vs. text',
 		html: `<div class="a">a</div>

@@ -43,9 +43,17 @@ function createCSSTestingComponent(options) {
 
 	function create() {
 		return new Promise(function(resolve) {
-			const initialHTML = options.html ? options.html.trim() : ''
-			const initialCSS = options.css ? options.css.trim() : ''
-			const initialDescription = options.description ? options.description : ''
+			let initialHTML;
+			if(options.html) initialHTML = options.html.trim();
+			else if(options.buttons?.length > 0) initialHTML = options.buttons[0].html.trim();
+
+			let initialCSS;
+			if(options.css) initialCSS = options.css.trim();
+			else if(options.buttons?.length > 0) initialCSS = options.buttons[0].css.trim();
+
+			let initialDescription;
+			if(options.description) initialDescription = options.description;
+			else if(options.buttons?.length > 0) initialDescription = options.buttons[0].description;
 
 			const cssTestingComponentEl = createCSSTestComponentWrapper(options.parent)
 
