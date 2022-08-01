@@ -16,8 +16,8 @@ div {
 }
 
 .b {
-  margin-top: -36px;
-  margin-left: 24px;
+  margin-top: -50px;
+  margin-left: 27px;
   background: green;
 }`,
 		description: `Note here two things:
@@ -46,14 +46,14 @@ div {
   position: relative;
 }
 .b {
-  margin-top: -36px;
-  margin-left: 24px;
+  margin-top: -50px;
+  margin-left: 27px;
   background: green;
 }`,
 		description: `See how when both elements are positioned we don't get strange different layering of text and 
 background/borders as in flow layout.`
 	}, {
-		label: 'Flow vs. positioned layout stacking',
+		label: 'Flow vs. positioned layout default stacking',
 		html: `<div class="a">a</div>
 <div class="b">b</div>`,
 		css: `
@@ -70,8 +70,8 @@ div {
   position: relative;
 }
 .b {
-  margin-top: -36px;
-  margin-left: 24px;
+  margin-top: -50px;
+  margin-left: 27px;
   background: green;
 }`,
 		description: `Notice how regardless of DOM order positioned elements are in front of non positioned elements.`
@@ -93,12 +93,71 @@ div {
   position: relative;
 }
 .b {
-  margin-top: -36px;
-  margin-left: 24px;
+  margin-top: -50px;
+  margin-left: 27px;
   background: green;
   z-index: 10;
 }`,
 		description: `Notice how even with a z-index flow elements will not be placed above positioned elements.`
+	}, {
+		label: 'Flex vs. positioned layout default stacking',
+		html: `<div class="container">
+  <div class="a">a</div>
+  <div class="b">b</div>
+</div>`,
+		css: `
+.container {
+  display: flex;
+}
+
+.container > div {
+  width: 50px;
+  height: 50px;
+  border: 3px solid red;
+  font-size: 32px;
+  text-align: center;
+}
+
+.a {
+  position: relative;
+  background: salmon;
+}
+.b {
+  margin-top: 6px;
+  margin-left: -29px;
+  background: green;
+}`,
+		description: `Notice how positioned elements appear above non-positioned by default for flex items as well.`
+	}, {
+		label: 'Flex vs. positioned layout stacking with z-index',
+		html: `<div class="container">
+  <div class="a">a</div>
+  <div class="b">b</div>
+</div>`,
+		css: `
+.container {
+  display: flex;
+}
+
+.container > div {
+  width: 50px;
+  height: 50px;
+  border: 3px solid red;
+  font-size: 32px;
+  text-align: center;
+}
+
+.a {
+  position: relative;
+  background: salmon;
+}
+.b {
+  margin-top: 6px;
+  margin-left: -29px;
+  background: green;
+  z-index: 1;
+}`,
+		description: `But notice that you do not need to make a flex item positioned to have z-index have an effect.`
 	}, {
 			label: 'Flow and positioned stacking of cousin elements',
 			description: `Here aa is before b and c in the DOM. But note:
