@@ -159,6 +159,73 @@ div {
 }`,
 		description: `But notice that you do not need to make a flex item positioned to have z-index have an effect.`
 	}, {
+		label: 'Grid vs. positioned layout default stacking',
+		html: `<div class="container">
+  <div class="a">a</div>
+  <div class="b">b</div>
+</div>`,
+		css: `
+.container {
+  display: grid;
+  grid-template-columns: 28px 28px 27px;
+  grid-template-rows: 62px;
+}
+
+.container > div {
+  border: 3px solid red;
+  font-size: 32px;
+  text-align: center;
+}
+
+.a {
+  background: salmon;
+  position: relative;
+  grid-row: 1;
+  grid-column: 1 / 3;
+  margin-bottom: 6px;
+}
+.b {
+  background: green;
+  grid-row: 1;
+  grid-column: 2 / 4;
+  margin-top: 6px;
+}`,
+		description: `Notice how positioned elements appear above non-positioned by default for grid items as well.`
+	}, {
+		label: 'Grid vs. positioned layout stacking with z-index',
+		html: `<div class="container">
+  <div class="a">a</div>
+  <div class="b">b</div>
+</div>`,
+		css: `
+.container {
+  display: grid;
+  grid-template-columns: 28px 28px 27px;
+  grid-template-rows: 62px;
+}
+
+.container > div {
+  border: 3px solid red;
+  font-size: 32px;
+  text-align: center;
+}
+
+.a {
+  background: salmon;
+  position: relative;
+  grid-row: 1;
+  grid-column: 1 / 3;
+  margin-bottom: 6px;
+}
+.b {
+  background: green;
+  z-index: 1;
+  grid-row: 1;
+  grid-column: 2 / 4;
+  margin-top: 6px;
+}`,
+		description: `But notice that you do not need to make a grid item positioned to have z-index have an effect.`
+	}, {
 			label: 'Flow and positioned stacking of cousin elements',
 			description: `Here aa is before b and c in the DOM. But note:
  <ul>
