@@ -91,8 +91,9 @@ layout treats a transformed element as if it has not moved.`,
 }`
 	}, {
 		label: 'Percentage',
-		description: `Note how the percentage value is using the size of the shape not including the margins. If it
-had included the margins it would have shifted beyond the green element as that has the same width as the margin.`,
+		description: `Note how the percentage value is using the size of the shape including the margins. If it
+had included the margins it would been transformed a further 100px (margin) + 10px (width) = 110px, but it is only 
+transformed by 10px which is equal to the element's width.`,
 		html: `<div class="a"></div>
 <div class="b"></div>`,
 		css: `
@@ -101,7 +102,7 @@ had included the margins it would have shifted beyond the green element as that 
 	width: 10px;
 	height: 10px;
 	border: 5px solid red;
-	margin-left:; 100px;
+	margin-left: 100px;
 	transform: translateX(100%);
 }
 .b {
