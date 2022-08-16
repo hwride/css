@@ -1,13 +1,16 @@
 createCSSTestingComponent({
 	parent: document.querySelector('.example-transformations'),
-	html: `<div class="a"></div>`,
+	html: `<div class="a">Some text</div>`,
 	css: `
 .a {
 	background: dodgerblue;
 	width: 50px;
 	height: 50px;
-	transform: scale(5, 2);
+	transform: scale(3.5, 2);
+	margin: auto;
 }`,
+	description: `<p>Notice how the text also scales when <code>scale</code> is used.</p>
+<p>Also notice how scaling happens around the center, not scaling only down and right for example.</p>`,
 	buttons: [{
 		label: 'scale',
 		reset: true
