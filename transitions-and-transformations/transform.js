@@ -10,7 +10,10 @@ createCSSTestingComponent({
 	margin: auto;
 }`,
 	description: `<p>Notice how the text also scales when <code>scale</code> is used.</p>
-<p>Also notice how scaling happens around the center, not scaling only down and right for example.</p>`,
+<p>
+	Also notice how scaling happens around the center, not scaling only down and right for example. But this can be
+	changed with <code>transform-origin</code>. 
+</p>`,
 	buttons: [{
 		label: 'scale',
 		reset: true
