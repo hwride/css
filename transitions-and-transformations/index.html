@@ -78,6 +78,11 @@
     CSS transformations allow you to change the appearance of a rendered element. These changes have no effect on the
     rest of the page.
 </p>
+<p class="example-description">
+    Transformations effectively treat the element as a flat image, and perform transformations on that. This
+    means for example scaling will scale up text and may warp it with inconsistent ratios. This is why it can be so
+    useful for animations, the browser doesn't need to do any of the normal layout related calculations for transforms.
+</p>
 <table class="transition-properties">
     <thead>
         <tr>
