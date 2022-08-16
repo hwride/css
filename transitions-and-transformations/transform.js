@@ -42,6 +42,8 @@ layout treats a transformed element as if it has not moved.`,
 	height: 50px;
 	margin: 20px;
 	transform: rotate(30deg);
+	/* Below is another unit that can be used with rotate. */
+	/* transform: rotate(0.6turn); */
 }`
 	}, {
 		label: 'rotate - transform origin',
