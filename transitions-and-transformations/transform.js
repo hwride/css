@@ -110,5 +110,30 @@ transformed by 10px which is equal to the element's width.`,
     height: 20px;
     width: 100px;
 }`
+	}, {
+		label: 'Centering with absolute and translate',
+		description: `The fact that <code>translate</code> refers to an elements own size for percentages can be used as a
+useful mechanism for centering.`,
+		html: `<div class="a">
+	<div class="b">
+		Some <br/>
+		Content	
+	</div>
+</div>`,
+		css: `
+.a {
+  background: dodgerblue;
+  position: relative;
+  width: 150px;
+  height: 150px;
+}
+.b {
+  background: salmon;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+`
 	}]
 })
