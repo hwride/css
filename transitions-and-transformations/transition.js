@@ -91,5 +91,39 @@ transition properties.`,
 .a:hover {
 	width: 200px;
 }`
+	}, {
+		label: 'Flicker',
+		description: `Try hovering your mouse back and forth along the bottom of this element. You'll notice that the 
+element flickers up and down. This happens because as the element is hovered over the transform is applied, which pushes 
+it up so its no longer hovered, so the transform is removed, and repeat.`,
+		html: `<div class="a"></div>`,
+		css: `
+.a {
+	background: dodgerblue;
+	width: 50px;
+	height: 50px;
+	transition: transform 100ms;
+}
+.a:hover {
+	transform: translateY(-10px);
+}`
+	}, {
+		label: 'Flicker fix',
+		description: `A fix for the flicker problem is to add a wrapper element. Then apply the transform to a child
+of the wrapper when the wrapper is hovered. The wrapper never moves only the child, so you do not get the problem
+of the trigger element moving in and out of range.`,
+		html: `<div class="a-wrapper">
+	<div class="a"></div>
+</div>`,
+		css: `
+.a {
+	background: dodgerblue;
+	width: 50px;
+	height: 50px;
+	transition: transform 100ms;
+}
+.a-wrapper:hover .a {
+	transform: translateY(-10px);
+}`
 	}]
 })
