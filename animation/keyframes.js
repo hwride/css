@@ -81,6 +81,9 @@ ${basicKeyframe}
 }`
 	}, {
 		label: 'Multi-step',
+		description: `The % refers to how far through the animation the properties should be applied.
+Note you must specify the original state as 100% if you want there to be a transition back to that state. Try deleting
+the 100% part of the keyframe and see how it breaks the animation.`,
 		html: `<div class="a"></div>`,
 		css: `
 @keyframes loading-pulse {
