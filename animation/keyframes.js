@@ -122,5 +122,37 @@ the 100% part of the keyframe and see how it breaks the animation.`,
 	animation-iteration-count: infinite;
 	animation-timing-function: linear;
 }`
+	}, {
+		label: 'Multi-step - timing function',
+		description: `Note the timing function applies individually to each step of the keyframe, not across the entire
+animation. See here each step has the unique jumpiness of the custom cubic-bezier, as opposed to the entire loop.`,
+		html: `<div class="a"></div>`,
+		css: `
+@keyframes multi-step {
+	0% {
+		transform: translate(75px, 75px) 
+	}
+	25% {
+		transform: translate(0px, 75px) 
+	}
+	50% {
+		transform: translate(0px, 0px) 
+	}
+	75% {
+		transform: translate(75px, 0px) 
+	}
+	100% {
+		transform: translate(75px, 75px) 
+	}
+}
+.a {
+	background: dodgerblue;
+	width: 50px;
+	height: 50px;
+	margin: 50px;
+	animation: multi-step 2500ms;
+	animation-iteration-count: infinite;
+	animation-timing-function: cubic-bezier(.29, 1.01, 1, -0.68);
+}`
 	}]
 })
