@@ -39,9 +39,9 @@ ${basicKeyframe}
 }
 .a {
 	background: dodgerblue;
-	animation: multiple-props 1500ms;
 	width: 50px;
 	height: 50px;
+	animation: multiple-props 1500ms;
 }`
 	}, {
 		label: 'Custom timing function',
@@ -50,10 +50,10 @@ ${basicKeyframe}
 ${basicKeyframe}
 .a {
 	background: dodgerblue;
-	animation: up-left 1500ms;
-	animation-timing-function: cubic-bezier(.29, 1.01, 1, -0.68);
 	width: 50px;
 	height: 50px;
+	animation: up-left 1500ms;
+	animation-timing-function: cubic-bezier(.29, 1.01, 1, -0.68);
 }`
 	}, {
 		label: 'Multiple iterations',
@@ -62,10 +62,10 @@ ${basicKeyframe}
 ${basicKeyframe}
 .a {
 	background: dodgerblue;
-	animation: up-left 1500ms;
-	animation-iteration-count: 2;
 	width: 50px;
 	height: 50px;
+	animation: up-left 1500ms;
+	animation-iteration-count: 2;
 }`
 	}, {
 		label: 'Multiple iterations - infinite',
@@ -74,10 +74,50 @@ ${basicKeyframe}
 ${basicKeyframe}
 .a {
 	background: dodgerblue;
-	animation: up-left 1500ms;
-	animation-iteration-count: infinite;
 	width: 50px;
 	height: 50px;
+	animation: up-left 1500ms;
+	animation-iteration-count: infinite;
+}`
+	}, {
+		label: 'Multi-step',
+		html: `<div class="a"></div>`,
+		css: `
+@keyframes loading-pulse {
+	0% {
+		transform: 
+				translate(25px, 25px) 
+				scale(1);
+	}
+	25% {
+		transform: 
+				translate(0px, 25px) 
+				scale(1.1);
+	}
+	50% {
+		transform: 
+				translate(0px, 0px) 
+				scale(1.2);
+	}
+	75% {
+		transform: 
+				translate(25px, 0px) 
+				scale(1.1);
+	}
+	100% {
+		transform: 
+				translate(25px, 25px) 
+				scale(1);
+	}
+}
+.a {
+	background: dodgerblue;
+	width: 50px;
+	height: 50px;
+	margin: 50px;
+	animation: loading-pulse 750ms;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
 }`
 	}]
 })
