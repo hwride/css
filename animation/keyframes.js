@@ -1,3 +1,13 @@
+const basicKeyframe = `
+@keyframes up-left {
+	from {
+		transform: translate(100px, 100px);
+	}
+	to {
+		transform: translate(0, 0);
+	}
+}`;
+
 createCSSTestingComponent({
 	parent: document.querySelector('.example-keyframes'),
 	buttons: [{
@@ -6,14 +16,7 @@ createCSSTestingComponent({
 		description: `Click the button to trigger keyframe again.`,
 		reset: true,
 		css: `
-@keyframes up-left {
-	from {
-		transform: translate(100px, 100px);
-	}
-	to {
-		transform: translate(0, 0);
-	}
-}
+${basicKeyframe}
 .a {
 	background: dodgerblue;
 	width: 50px;
@@ -37,6 +40,42 @@ createCSSTestingComponent({
 .a {
 	background: dodgerblue;
 	animation: multiple-props 1500ms;
+	width: 50px;
+	height: 50px;
+}`
+	}, {
+		label: 'Custom timing function',
+		html: `<div class="a"></div>`,
+		css: `
+${basicKeyframe}
+.a {
+	background: dodgerblue;
+	animation: up-left 1500ms;
+	animation-timing-function: cubic-bezier(.29, 1.01, 1, -0.68);
+	width: 50px;
+	height: 50px;
+}`
+	}, {
+		label: 'Multiple iterations',
+		html: `<div class="a"></div>`,
+		css: `
+${basicKeyframe}
+.a {
+	background: dodgerblue;
+	animation: up-left 1500ms;
+	animation-iteration-count: 2;
+	width: 50px;
+	height: 50px;
+}`
+	}, {
+		label: 'Multiple iterations - infinite',
+		html: `<div class="a"></div>`,
+		css: `
+${basicKeyframe}
+.a {
+	background: dodgerblue;
+	animation: up-left 1500ms;
+	animation-iteration-count: infinite;
 	width: 50px;
 	height: 50px;
 }`
