@@ -20,5 +20,25 @@ createCSSTestingComponent({
 	height: 50px;
 	animation: up-left 1500ms;
 }`
+	}, {
+		label: 'Multiple properties',
+		html: `<div class="a"></div>`,
+		css: `
+@keyframes multiple-props {
+	from {
+		transform: translate(100px, 100px);
+		background: red;
+		border-radius: 100%;
+	}
+	to {
+		transform: translate(0, 0);
+	}
+}
+.a {
+	background: dodgerblue;
+	animation: multiple-props 1500ms;
+	width: 50px;
+	height: 50px;
+}`
 	}]
 })
