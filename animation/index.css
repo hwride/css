@@ -1,0 +1,8 @@
+.example-transitions .css-testing-component__editor {
+    width: 60ch;
+}
+
+.transition-properties td:first-child,
+.transition-properties td:nth-child(2) {
+    white-space: nowrap;
+}

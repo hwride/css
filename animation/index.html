@@ -1,17 +1,57 @@
 <!DOCTYPE HTML>
 <html lang="en-GBc">
 <head>
-    <title>Transitions and transformations</title>
+    <title>Animation</title>
     <link rel="stylesheet" type="text/css" href="../common.css">
     <link rel="stylesheet" type="text/css" href="../css-testing-component/css-testing-component.css">
     <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body>
-<h1>Transitions and transformations</h1>
+<h1>Animation</h1>
 <ul>
-    <li><a href="#transitions">Transitions</a></li>
     <li><a href="#transformations">Transformations</a></li>
+    <li><a href="#transitions">Transitions</a></li>
+    <li><a href="#keyframes">Keyframes</a></li>
 </ul>
+
+<h2 id="transformations">Transformations</h2>
+<p class="example-description">
+    CSS transformations allow you to change the appearance of a rendered element. These changes have no effect on the
+    rest of the page.
+</p>
+<p class="example-description">
+    Transformations effectively treat the element as a flat image, and perform transformations on that. This
+    means for example scaling will scale up text and may warp it with inconsistent ratios. This is why it can be so
+    useful for animations, the browser doesn't need to do any of the normal layout related calculations for transforms.
+</p>
+<table class="transition-properties">
+    <thead>
+    <tr>
+        <th>Property</th>
+        <th>Default</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>transform: translate(30px, 20px) rotate(20deg)</code></td>
+        <td><code>none</code></td>
+        <td>
+            List of transforms to apply to the element, in order.<br/>
+            Percentages refer to the size of the <b>bounding box</b>. This is the tightest fitting box that can
+            enclose an element and its descendants, not including the margins. Having percentage refer to a portion
+            of the element's own size is something unique to <code>transform</code>, and can be a powerful feature.
+        </td>
+    </tr>
+    <tr>
+        <td><code>transform-origin: &lt;x-offset&gt; &lt;y-offset&gt; &lt;z-offset&gt;</code></td>
+        <td><code>center</code></td>
+        <td>The origin point for transforms such as rotate and skew.</td>
+    </tr>
+    </tbody>
+</table>
+<br/>
+<div class="example-transformations"></div>
 
 <h2 id="transitions">Transitions</h2>
 <p class="example-description">
@@ -73,50 +113,19 @@
 </p>
 <div class="example-transitions"></div>
 
-<h2 id="transformations">Transformations</h2>
+<h2 id="keyframes">Keyframes</h2>
 <p class="example-description">
-    CSS transformations allow you to change the appearance of a rendered element. These changes have no effect on the
-    rest of the page.
+    Keyframes are another way to define animations.
 </p>
-<p class="example-description">
-    Transformations effectively treat the element as a flat image, and perform transformations on that. This
-    means for example scaling will scale up text and may warp it with inconsistent ratios. This is why it can be so
-    useful for animations, the browser doesn't need to do any of the normal layout related calculations for transforms.
-</p>
-<table class="transition-properties">
-    <thead>
-        <tr>
-            <th>Property</th>
-            <th>Default</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><code>transform: translate(30px, 20px) rotate(20deg)</code></td>
-            <td><code>none</code></td>
-            <td>
-                List of transforms to apply to the element, in order.<br/>
-                Percentages refer to the size of the <b>bounding box</b>. This is the tightest fitting box that can
-                enclose an element and its descendants, not including the margins. Having percentage refer to a portion
-                of the element's own size is something unique to <code>transform</code>, and can be a powerful feature.
-            </td>
-        </tr>
-        <tr>
-            <td><code>transform-origin: &lt;x-offset&gt; &lt;y-offset&gt; &lt;z-offset&gt;</code></td>
-            <td><code>center</code></td>
-            <td>The origin point for transforms such as rotate and skew.</td>
-        </tr>
-    </tbody>
-</table>
-<br/>
-<div class="example-transformations"></div>
+<div class="example-keyframes"></div>
+
 
 </body>
 <script src="../css-testing-component/lib/ace/src-noconflict/ace.js"></script>
 <script src="../css-testing-component/css-testing-component.js"></script>
 <script src="transition.js"></script>
 <script src="transform.js"></script>
+<script src="keyframes.js"></script>
 <script src="../nav.js"></script>
 <script>createNav()</script>
 </html>
