@@ -314,5 +314,45 @@ ${basicKeyframe}
     right: -11ch;
     top: 0;
 }`
+	}, {
+		label: 'Pausing',
+		description: `<p>
+	You can pause an animation with <code>animation-play-state</code>. When this is set to paused it will stop the
+	animation exactly where it is. This can be nicer than removing the animation property entirely, which would cause the
+	element revert to whatever its natural properties were.
+</p>
+<p>
+	Notice here how the pause-able animation stops exactly as it was when you hover over it. But the one where the 
+	animation is removed reverts to its original state when you hover over it.
+</p>`,
+		html: `<div class="animated pause-on-hover"></div>
+<div class="animated remove-on-hover"></div>`,
+		css: `
+@keyframes fade-in-out {
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+.animated {
+	background: dodgerblue;
+	width: 50px;
+	height: 50px;
+	animation: fade-in-out 1500ms;
+	animation-iteration-count: infinite;
+	margin-bottom: 8px;
+}
+.pause-on-hover:hover {
+	animation-play-state: paused;
+	/* The default animation-play-state = running */
+}
+.remove-on-hover:hover {
+	animation: unset;
+}`
 	}]
 })
