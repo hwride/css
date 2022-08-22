@@ -154,5 +154,28 @@ animation. See here each step has the unique jumpiness of the custom cubic-bezie
 	animation-iteration-count: infinite;
 	animation-timing-function: cubic-bezier(.29, 1.01, 1, -0.68);
 }`
+	}, {
+		label: 'Animation direction',
+		description: `<p>
+Normally animations will go from 0% to 100% then start again at 0% 
+(the default of <code>animation-direction: normal</code>). You can customize this to go from 100% to 0% with 
+<code>animation-direction: reverse</code>, or 0% to 100%, then back to 0% with
+<code>animation-direction: alternate</code>.
+</p>
+<p>
+	Note that when you use <code>animation-direction: alternate</code> the animation time is now split in half between
+	going back and forth, so if you want to maintain the same time in each direction you need to double the time.
+</p>`,
+		html: `<div class="a"></div>`,
+		css: `
+${basicKeyframe}
+.a {
+	background: dodgerblue;
+	width: 50px;
+	height: 50px;
+	animation: up-left 1500ms;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}`
 	}]
 })
