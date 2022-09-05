@@ -129,6 +129,17 @@
 </ul>
 <div class="example-keyframes"></div>
 
+<h2 id="accessibility">Accessibility</h2>
+<p class="example-description">
+    Users can specify if they prefer reduced motion in their operating system. We can detect this with a media query and
+    enable animations only if the user has not opted out.
+</p>
+<p class="example-description">
+    It is arguably better to have animations disabled by default, and only enable them if we detect the user hasn't
+    opted out. This ensures we err on the side of caution and have animations disabled if the browser/OS doesn't support
+    the <code>prefers-reduced-motion</code> media query.
+</p>
+<div class="example-accessibility"></div>
 
 </body>
 <script src="../css-testing-component/lib/ace/src-noconflict/ace.js"></script>
@@ -136,6 +147,7 @@
 <script src="transition.js"></script>
 <script src="transform.js"></script>
 <script src="keyframes.js"></script>
+<script src="accessibility.js"></script>
 <script src="../nav.js"></script>
 <script>createNav()</script>
 </html>
