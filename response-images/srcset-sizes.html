@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Response images with srcset and sizes</title>
+	<link rel="stylesheet" type="text/css" href="../common.css">
+	<style>
+		body {
+			max-width: none;
+			margin: 16px;
+		}
+		.example {
+			padding-block: 8px;
+		}
+		.example:not(:last-of-type) {
+			border-bottom: 1px solid black;
+		}
+		.info {
+			position: fixed;
+			bottom: 8px;
+			right: 8px;
+			background: rgba(0, 0, 255, 0.5);
+			padding: 8px;
+			border-radius: 8px;
+		}
+		.info table,
+		.info table td {
+			border: none;
+		}
+	</style>
+</head>
+<body>
+<h1>Response images with srcset and sizes</h1>
+<div class="main-content">
+	<div class="info">
+		<table>
+			<tr>
+				<td><code>window.devicePixelRatio</code></td><td><span class="device-pixel-ratio"></span></td>
+			</tr>
+			<tr>
+				<td><code>window.outerWidth</code></td><td><span class="window-outer-width"></span></td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="example">
+		<p>
+			Note that Chrome DevTools device emulator has size and device pixel ratio emulation.
+		</p>
+		<ul>
+			<li>Do device pixel ratio width descriptors round up, or to nearest?</li>
+			<li>Is device pixel ratio taken into account by srcset width descriptors?</li>
+		</ul>
+	</div>
+
+	<div class="example">
+		<h2 class="example-description">
+			Simple image with <code>src</code> attribute
+		</h2>
+		<pre>
+&lt;img alt="A test responsive image"
+     src="fallback.png" /&gt;
+		</pre>
+		<img alt="A test responsive image"
+				 src="fallback.png" />
+	</div>
+
+	<!-- Device pixel ratio -->
+	<div class="example">
+		<h2 class="example-description">
+			Image with <code>srcset</code> and display density descriptor.
+		</h2>
+		<pre>
+&lt;img alt="A test responsive image"
+      srcset="500x250.png 1x,
+              1000x250.png 2x,
+              1500x250.png 3x"
+      src="fallback.png" /&gt;
+		</pre>
+		<img alt="A test responsive image"
+				 srcset="500x250.png 1x,
+								 1000x250.png 2x,
+								 1500x250.png 3x"
+				 src="fallback.png" />
+	</div>
+
+	<!-- srcset with pixel widths-->
+	<div class="example">
+		<h2 class="example-description">
+			Image with <code>srcset</code> and pixel widths.
+		</h2>
+		<pre>
+&lt;img alt="A test responsive image"
+      srcset="250x250.png 250w,
+              500x250.png 500w,
+              1000x250.png 1000w,
+              1500x250.png 1500w"
+      src="fallback.png" /&gt;
+		</pre>
+		<!-- src is a fallback for older browsers -->
+		<!-- srcset: browser uses first condition that matches -->
+		<!-- sizes: it appears the media queries match the document width and not the window width, at least on Chrome -->
+		<img alt="A test responsive image"
+				 srcset="250x250.png 250w,
+								 500x250.png 500w,
+								 1000x250.png 1000w,
+								 1500x250.png 1500w"
+				 src="fallback.png" />
+	</div>
+
+	<!-- srcset and sizes-->
+	<div class="example">
+		<h2 class="example-description">
+			Image with <code>srcset</code> and <code>sizes</code> attribute
+		</h2>
+		<pre>
+&lt;img alt="A test responsive image"
+      srcset="250x250.png 250w,
+              500x250.png 500w,
+              1000x250.png 1000w,
+              1500x250.png 1500w"
+      sizes="(min-width: 1500px) 1500px,
+             (min-width: 1000px) 1000px,
+             (min-width: 500px) 500px,
+             (min-width: 250px) 250px,
+             100vw"
+      src="fallback.png" /&gt;
+		</pre>
+		<!-- src is a fallback for older browsers -->
+		<!-- srcset: browser uses first condition that matches -->
+		<!-- sizes: it appears the media queries match the document width and not the window width, at least on Chrome -->
+		<img alt="A test responsive image"
+				 srcset="250x250.png 250w,
+								 500x250.png 500w,
+								 1000x250.png 1000w,
+								 1500x250.png 1500w"
+				 sizes="(min-width: 1500px) 1500px,
+								(min-width: 1000px) 1000px,
+								(min-width: 500px) 500px,
+								(min-width: 250px) 250px,
+								100vw"
+				 src="fallback.png" />
+	</div>
+</div>
+</body>
+<script src="../nav.js"></script>
+<script>createNav()</script>
+<script src="srcset-sizes.js"></script>
+</html>
