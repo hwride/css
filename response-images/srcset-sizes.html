@@ -40,80 +40,86 @@
 </head>
 <body>
 <h1>Response images with srcset and sizes</h1>
-<div class="main-content">
-	<div class="info">
-		<table>
-			<tr>
-				<td><code>window.devicePixelRatio</code></td><td><span class="device-pixel-ratio"></span></td>
-			</tr>
-			<tr>
-				<td><code>window.outerWidth</code></td><td><span class="window-outer-width"></span></td>
-			</tr>
-			<tr>
-				<td><code>devicePixelRatio * outerWidth</code></td><td><span class="device-pixels"></span></td>
-			</tr>
-		</table>
-	</div>
+<div class="info">
+	<table>
+		<tr>
+			<td><code>window.devicePixelRatio</code></td><td><span class="device-pixel-ratio"></span></td>
+		</tr>
+		<tr>
+			<td><code>window.outerWidth</code></td><td><span class="window-outer-width"></span></td>
+		</tr>
+		<tr>
+			<td><code>devicePixelRatio * outerWidth</code></td><td><span class="device-pixels"></span></td>
+		</tr>
+	</table>
+</div>
 
-	<div class="example">
-		<p>
-			Note that Chrome DevTools device emulator has size and device pixel ratio emulation.
-		</p>
-		<ul>
-			<li>Do device pixel ratio width descriptors round up, or to nearest?</li>
-			<li>Is device pixel ratio taken into account by srcset width descriptors?</li>
-		</ul>
-	</div>
-
-	<div class="example">
-		<h2>
-			Simple image with <code>src</code> attribute
-		</h2>
-		<pre>
+<div class="example">
+	<h2>
+		Simple image with <code>src</code> attribute
+	</h2>
+	<pre>
 &lt;img alt="A test responsive image"
      src="fallback.png" /&gt;
 		</pre>
-		<img alt="A test responsive image"
-				 src="fallback.png" />
-	</div>
+	<img alt="A test responsive image"
+			 src="fallback.png" />
+</div>
 
-	<!-- Device pixel ratio -->
-	<div class="example">
-		<h2>
-			Image with <code>srcset</code> and display density descriptor.
-		</h2>
-		<p class="example-description">
-			The pixel density descriptor of <code>srcset</code> lets you tell the browser what image should be used
-			depending on the device pixel ratio. If there are 1x, 2x or 3x device pixels to CSS pixels then the corresponding
-			image will be chosen.
-		</p>
-		<p class="example-description">
-			You can see the device pixel ratio in the information in the bottom right of the screen under <code>devicePixelRatio</code>.
-		</p>
-		<p class="example-description">
-			Note that the actual number width of the device or window does not affect the calculation, only the device pixel
-			ratio.
-		</p>
-		<pre>
+<!-- Device pixel ratio -->
+<div class="example">
+	<h2>
+		Image with <code>srcset</code> and display density descriptor.
+	</h2>
+	<p class="example-description">
+		The pixel density descriptor of <code>srcset</code> lets you tell the browser what image should be used
+		depending on the device pixel ratio. If there are 1x, 2x or 3x device pixels to CSS pixels then the corresponding
+		image will be chosen.
+	</p>
+	<p class="example-description">
+		You can see the device pixel ratio in the information in the bottom right of the screen under <code>devicePixelRatio</code>.
+	</p>
+	<p class="example-description">
+		Note that the actual number width of the device or window does not affect the calculation, only the device pixel
+		ratio.
+	</p>
+	<pre>
 &lt;img alt="A test responsive image"
       srcset="500x250.png 1x,
               1000x250.png 2x,
               1500x250.png 3x"
       src="fallback.png" /&gt;
 		</pre>
-		<img alt="A test responsive image"
-				 srcset="500x250.png 1x,
-								 1000x250.png 2x,
-								 1500x250.png 3x"
-				 src="fallback.png" />
-	</div>
+	<img
+		src="fallback.png"
+		alt="A test responsive image"
+		srcset="
+			500x250.png 1x,
+			1000x250.png 2x,
+			1500x250.png 3x
+		" />
+</div>
 
-	<!-- srcset with pixel widths-->
-	<div class="example">
-		<h2>
-			Image with <code>srcset</code> and pixel widths.
-		</h2>
-		<pre>
+<!-- srcset with pixel widths-->
+<div class="example">
+	<h2>
+		Image with <code>srcset</code> and pixel widths.
+	</h2>
+	<p class="example-description">
+		Here <code>srcset</code> is used to define at images at different sizes. The format is:
+		<code>&lt;image-url&gt; &lt;width descriptor&gt;</code>. Width descriptor describes the pixel width of the source
+		image in pixels (even though it ends in a <code>w</code>).
+	</p>
+	<p class="example-description">
+		When <code>srcset</code> is used without <code>sizes</code>, it is assumed the image should fill the entire browser
+		width.
+	</p>
+	<p class="example-description">
+		Note that even when using width descriptors with <code>srcset</code>, the browser will try and take pixel density
+		into account. It will do this by selecting an image size according to device pixels rather than CSS pixels. You
+		can see this value in the info section as <code>devicePixelRatio * outerWidth</code>.
+	</p>
+	<pre>
 &lt;img alt="A test responsive image"
       srcset="250x250.png 250w,
               500x250.png 500w,
@@ -121,23 +127,35 @@
               1500x250.png 1500w"
       src="fallback.png" /&gt;
 		</pre>
-		<!-- src is a fallback for older browsers -->
-		<!-- srcset: browser uses first condition that matches -->
-		<!-- sizes: it appears the media queries match the document width and not the window width, at least on Chrome -->
-		<img alt="A test responsive image"
-				 srcset="250x250.png 250w,
+	<!-- src is a fallback for older browsers -->
+	<!-- srcset: browser uses first condition that matches -->
+	<!-- sizes: it appears the media queries match the document width and not the window width, at least on Chrome -->
+	<img alt="A test responsive image"
+			 srcset="250x250.png 250w,
 								 500x250.png 500w,
 								 1000x250.png 1000w,
 								 1500x250.png 1500w"
-				 src="fallback.png" />
-	</div>
+			 src="fallback.png" />
+</div>
 
-	<!-- srcset and sizes-->
-	<div class="example">
-		<h2>
-			Image with <code>srcset</code> and <code>sizes</code> attribute
-		</h2>
-		<pre>
+<!-- srcset and sizes-->
+<div class="example">
+	<h2>
+		Image with <code>srcset</code> and <code>sizes</code> attribute
+	</h2>
+	<p class="example-description">
+		When using the <code>sizes</code> attributes you are able to specify conditions about when each image should be
+		used yourself.
+	</p>
+	<p class="example-description">
+		An important thing to note is the <code>sizes</code> media conditions use CSS pixels, but the actual image size
+		chosen from <code>srcset</code> will continue to take pixel density into account.
+	</p>
+	<p class="example-description">
+		The statements in <code>sizes</code> are read first to last, and the first matching one will one. This means order
+		is important depending on how you write your media conditions.
+	</p>
+	<pre>
 &lt;img alt="A test responsive image"
       srcset="250x250.png 250w,
               500x250.png 500w,
@@ -150,21 +168,20 @@
              100vw"
       src="fallback.png" /&gt;
 		</pre>
-		<!-- src is a fallback for older browsers -->
-		<!-- srcset: browser uses first condition that matches -->
-		<!-- sizes: it appears the media queries match the document width and not the window width, at least on Chrome -->
-		<img alt="A test responsive image"
-				 srcset="250x250.png 250w,
+	<!-- src is a fallback for older browsers -->
+	<!-- srcset: browser uses first condition that matches -->
+	<!-- sizes: it appears the media queries match the document width and not the window width, at least on Chrome -->
+	<img alt="A test responsive image"
+			 srcset="250x250.png 250w,
 								 500x250.png 500w,
 								 1000x250.png 1000w,
 								 1500x250.png 1500w"
-				 sizes="(min-width: 1500px) 1500px,
+			 sizes="(min-width: 1500px) 1500px,
 								(min-width: 1000px) 1000px,
 								(min-width: 500px) 500px,
 								(min-width: 250px) 250px,
 								100vw"
-				 src="fallback.png" />
-	</div>
+			 src="fallback.png" />
 </div>
 </body>
 <script src="../nav.js"></script>
