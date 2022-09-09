@@ -92,14 +92,14 @@
 	</p>
 	<pre>
 &lt;img alt="A test responsive image"
+     src="fallback.png"
      srcset="500x250.png 1x,
              1000x250.png 2x,
-             1500x250.png 3x"
-     src="fallback.png" /&gt;
+             1500x250.png 3x" /&gt;
 		</pre>
 	<img
-		src="fallback.png"
 		alt="A test responsive image"
+		src="fallback.png"
 		srcset="
 			500x250.png 1x,
 			1000x250.png 2x,
@@ -128,21 +128,21 @@
 	</p>
 	<pre>
 &lt;img alt="A test responsive image"
+     src="fallback.png"
      srcset="250x250.png 250w,
              500x250.png 500w,
              1000x250.png 1000w,
-             1500x250.png 1500w"
-     src="fallback.png" /&gt;
+             1500x250.png 1500w" /&gt;
 		</pre>
 	<!-- src is a fallback for older browsers -->
 	<!-- srcset: browser uses first condition that matches -->
 	<!-- sizes: it appears the media queries match the document width and not the window width, at least on Chrome -->
 	<img alt="A test responsive image"
+			 src="fallback.png"
 			 srcset="250x250.png 250w,
 								 500x250.png 500w,
 								 1000x250.png 1000w,
-								 1500x250.png 1500w"
-			 src="fallback.png" />
+								 1500x250.png 1500w" />
 </div>
 
 <!-- srcset and sizes-->
@@ -164,6 +164,7 @@
 	</p>
 	<pre>
 &lt;img alt="A test responsive image"
+     src="fallback.png"
      srcset="250x250.png 250w,
              500x250.png 500w,
              1000x250.png 1000w,
@@ -172,13 +173,13 @@
             (min-width: 1000px) 1000px,
             (min-width: 500px) 500px,
             (min-width: 250px) 250px,
-            100vw"
-     src="fallback.png" /&gt;
+            100vw" /&gt;
 		</pre>
 	<!-- src is a fallback for older browsers -->
 	<!-- srcset: browser uses first condition that matches -->
 	<!-- sizes: it appears the media queries match the document width and not the window width, at least on Chrome -->
 	<img alt="A test responsive image"
+			 src="fallback.png"
 			 srcset="250x250.png 250w,
 								 500x250.png 500w,
 								 1000x250.png 1000w,
@@ -187,8 +188,7 @@
 								(min-width: 1000px) 1000px,
 								(min-width: 500px) 500px,
 								(min-width: 250px) 250px,
-								100vw"
-			 src="fallback.png" />
+								100vw" />
 </div>
 </body>
 <script src="../nav.js"></script>
