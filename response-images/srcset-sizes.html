@@ -23,7 +23,7 @@
 
 		.info {
 			position: fixed;
-			bottom: 8px;
+			top: 8px;
 			right: 8px;
 			background: rgba(30, 144, 255, 0.8);
 			padding: 8px;
@@ -49,7 +49,13 @@
 			<td><code>window.outerWidth</code></td><td><span class="window-outer-width"></span></td>
 		</tr>
 		<tr>
-			<td><code>devicePixelRatio * outerWidth</code></td><td><span class="device-pixels"></span></td>
+			<td><code>devicePixelRatio * outerWidth</code></td><td><span class="device-pixels-outer"></span></td>
+		</tr>
+		<tr>
+			<td><code>window.innerWidth</code></td><td><span class="window-inner-width"></span></td>
+		</tr>
+		<tr>
+			<td><code>devicePixelRatio * innerWidth</code></td><td><span class="device-pixels-inner"></span></td>
 		</tr>
 	</table>
 </div>
@@ -189,6 +195,187 @@
 								(min-width: 500px) 500px,
 								(min-width: 250px) 250px,
 								100vw" />
+</div>
+
+
+<div class="example">
+	<h2>
+		Results
+	</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Device</th>
+				<th>Device pixel ratio</th>
+				<th>outerWidth</th>
+				<th>innerWidth</th>
+				<th>Device pixels - inner</th>
+				<th>DPR image</th>
+				<th>srcset only image</th>
+				<th>srcset + sizes image</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>iPhone 11</td>
+				<td>2</td>
+				<td>414</td>
+				<td></td>
+				<td></td>
+				<td>1000x250</td>
+				<td>1000x250</td>
+				<td>500x250</td>
+			</tr>
+			<tr>
+				<td>mono e(7i) power</td>
+				<td>1.75</td>
+				<td>412</td>
+				<td></td>
+				<td></td>
+				<td>1000x250</td>
+				<td>1000x250</td>
+				<td>1000x250</td>
+			</tr>
+			<tr>
+				<th colspan="6">Windows 10 + Chrome 105</th>
+			</tr>
+			<tr>
+				<td>Windows 10 + Chrome 105</td>
+				<td>1</td>
+				<td>516</td>
+				<td></td>
+				<td></td>
+				<td>500x250</td>
+				<td>500x250</td>
+				<td>500x250</td>
+			</tr>
+			<tr>
+				<td>Windows 10 + Chrome 105</td>
+				<td>1</td>
+				<td>520</td>
+				<td></td>
+				<td></td>
+				<td>1000x250</td>
+				<td>1000x250</td>
+				<td>1000x250</td>
+			</tr>
+			<tr>
+				<td>Windows 10 + Chrome 105</td>
+				<td>1</td>
+				<td>1000</td>
+				<td></td>
+				<td></td>
+				<td>1000x250</td>
+				<td>1000x250</td>
+				<td>1000x250</td>
+			</tr>
+			<tr>
+				<td>Windows 10 + Chrome 105</td>
+				<td>1</td>
+				<td>1017</td>
+				<td></td>
+				<td></td>
+				<td>1500x250</td>
+				<td>1500x250</td>
+				<td>1500x250</td>
+			</tr>
+			<tr>
+				<td>Windows 10 + Chrome 105</td>
+				<td>1.25</td>
+				<td>2048</td>
+				<td></td>
+				<td></td>
+				<td>1500x250</td>
+				<td>1500x250</td>
+				<td>1500x250</td>
+			</tr>
+
+			<!-- Firefox -->
+			<tr>
+				<th colspan="6">Windows 10 + Firefox 104</th>
+			</tr>
+			<tr>
+				<td>Windows 10 + Firefox 104</td>
+				<td>1.2</td>
+				<td>426</td>
+				<td>416</td>
+				<td>499.2</td>
+				<td>1000x250</td>
+				<td>500x250</td>
+				<td>500x250</td>
+			</tr>
+			<tr>
+				<td>Windows 10 + Firefox 104</td>
+				<td>1.2</td>
+				<td>427</td>
+				<td>417</td>
+				<td>500.4</td>
+				<td>1000x250</td>
+				<td>1000x250</td>
+				<td>500x250</td>
+			</tr>
+			<tr>
+				<td>Windows 10 + Firefox 104</td>
+				<td>1.2</td>
+				<td>509</td>
+				<td>499</td>
+				<td>611</td>
+				<td>1000x250</td>
+				<td>1000x250</td>
+				<td>500x250</td>
+			</tr>
+			<tr>
+				<td>Windows 10 + Firefox 104</td>
+				<td>1.2</td>
+				<td>510</td>
+				<td>500</td>
+				<td>612</td>
+				<td>1000x250</td>
+				<td>1000x250</td>
+				<td>1000x250</td>
+			</tr>
+			<tr>
+				<td>Windows 10 + Firefox 104</td>
+				<td>1.2</td>
+				<td>842</td>
+				<td>833</td>
+				<td>999.59</td>
+				<td>1000x250</td>
+				<td>1000x250</td>
+				<td>1000x250</td>
+			</tr>
+			<tr>
+				<td>Windows 10 + Firefox 104</td>
+				<td>1.2</td>
+				<td>844</td>
+				<td>834</td>
+				<td>1000.8</td>
+				<td>1000x250</td>
+				<td>1500x250</td>
+				<td>1000x250</td>
+			</tr>
+			<tr>
+				<td>Windows 10 + Firefox 104</td>
+				<td>1.2</td>
+				<td>1009</td>
+				<td>999</td>
+				<td>1199</td>
+				<td>1000x250</td>
+				<td>1500x250</td>
+				<td>1000x250</td>
+			</tr>
+			<tr>
+				<td>Windows 10 + Firefox 104</td>
+				<td>1.2</td>
+				<td>1010</td>
+				<td>1000</td>
+				<td>1212</td>
+				<td>1000x250</td>
+				<td>1500x250</td>
+				<td>1500x250</td>
+			</tr>
+		</tbody>
+	</table>
 </div>
 </body>
 <script src="../nav.js"></script>
