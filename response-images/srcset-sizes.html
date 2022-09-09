@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Response images with srcset and sizes</title>
 	<link rel="stylesheet" type="text/css" href="../common.css">
 	<style>
@@ -19,7 +20,7 @@
 			position: fixed;
 			bottom: 8px;
 			right: 8px;
-			background: rgba(0, 0, 255, 0.5);
+			background: rgba(30, 144, 255, 0.8);
 			padding: 8px;
 			border-radius: 8px;
 		}
@@ -67,9 +68,21 @@
 
 	<!-- Device pixel ratio -->
 	<div class="example">
-		<h2 class="example-description">
+		<h2>
 			Image with <code>srcset</code> and display density descriptor.
 		</h2>
+		<p class="example-description">
+			The pixel density descriptor of <code>srcset</code> lets you tell the browser what image should be used
+			depending on the device pixel ratio. If there are 1x, 2x or 3x device pixels to CSS pixels then the corresponding
+			image will be chosen.
+		</p>
+		<p class="example-description">
+			You can see the device pixel ratio in the information in the bottom right of the screen under <code>devicePixelRatio</code>.
+		</p>
+		<p class="example-description">
+			Note that the actual number width of the device or window does not affect the calculation, only the device pixel
+			ratio.
+		</p>
 		<pre>
 &lt;img alt="A test responsive image"
       srcset="500x250.png 1x,
