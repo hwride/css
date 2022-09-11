@@ -47,3 +47,8 @@ body {
 .info tr td:first-child {
 	padding-right: var(--spacing-10);
 }
+
+/* Results */
+.results-table th {
+	padding: var(--spacing-10);
+}

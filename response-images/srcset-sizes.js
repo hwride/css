@@ -22,70 +22,7 @@ const headers = [
   { name: 'selectedImageSrcsetWidthDescriptor', label: 'srcset only image' },
   { name: 'selectedImageSrcsetPxSizes', label: 'srcset + sizes image' }
 ];
-const results = [{
-  device: 'iPhone 11 + Safari',
-  devicePixelRatio: '2',
-  innerWidth: '414',
-  devicePixelsInner: '828',
-  outerWidth: '414',
-  devicePixelsOuter: '828',
-  selectedImageSrcsetDpr: '1200x250',
-  selectedImageSrcsetWidthDescriptor: '1200x250',
-  selectedImageSrcsetPxSizes: '600x250',
-},{
-  device: 'iPhone 11 + Safari',
-  devicePixelRatio: '2',
-  innerWidth: '800',
-  devicePixelsInner: '1600',
-  outerWidth: '896',
-  devicePixelsOuter: '1762',
-  selectedImageSrcsetDpr: '1200x250',
-  selectedImageSrcsetWidthDescriptor: '1500x250',
-  selectedImageSrcsetPxSizes: '1200x250',
-}, {
-  header: 'Windows 10 + Chrome 105'
-}, {
-  device: 'Windows 10 + Chrome 105',
-  devicePixelRatio: '1',
-  innerWidth: '600',
-  devicePixelsInner: '600',
-  outerWidth: '616',
-  devicePixelsOuter: '616',
-  selectedImageSrcsetDpr: '600x250',
-  selectedImageSrcsetWidthDescriptor: '600x250',
-  selectedImageSrcsetPxSizes: '600x250',
-}, {
-  device: 'Windows 10 + Chrome 105',
-  devicePixelRatio: '1',
-  innerWidth: '601',
-  devicePixelsInner: '601',
-  outerWidth: '617',
-  devicePixelsOuter: '617',
-  selectedImageSrcsetDpr: '1200x250',
-  selectedImageSrcsetWidthDescriptor: '1200x250',
-  selectedImageSrcsetPxSizes: '1200x250',
-}, {
-  device: 'Windows 10 + Chrome 105',
-  devicePixelRatio: '1',
-  innerWidth: '1200',
-  devicePixelsInner: '1200',
-  outerWidth: '1216',
-  devicePixelsOuter: '1216',
-  selectedImageSrcsetDpr: '1200x250',
-  selectedImageSrcsetWidthDescriptor: '1200x250',
-  selectedImageSrcsetPxSizes: '1200x250',
-}, {
-  device: 'Windows 10 + Chrome 105',
-  devicePixelRatio: '1',
-  innerWidth: '1201',
-  devicePixelsInner: '1201',
-  outerWidth: '1217',
-  devicePixelsOuter: '1217',
-  selectedImageSrcsetDpr: '1500x250',
-  selectedImageSrcsetWidthDescriptor: '1500x250',
-  selectedImageSrcsetPxSizes: '1500x250',
-}];
-
+const headersWithoutDevice = headers.filter(header => header.name !== 'device');
 const resultsTable = document.querySelector('.results-table');
 const resultsThead = resultsTable.querySelector('thead');
 const resultsTbody = resultsTable.querySelector('tbody');
@@ -99,18 +36,28 @@ for(const header of headers) {
 resultsThead.appendChild(theadRow);
 
 // Populate table body.
+const resultsGroupedByDevice = new Map(); // Preserve insertion order.
 for(const result of results) {
-  if(result.header) {
-    const tr = document.createElement('tr');
-    tr.innerHTML = '<th colspan="9">' + result.header + '</th>';
-    resultsTbody.appendChild(tr);
-  } else {
+  if(!resultsGroupedByDevice.has(result.device)) {
+    resultsGroupedByDevice.set(result.device, []);
+  }
+  resultsGroupedByDevice.get(result.device).push(result);
+}
+for(const [device, deviceResults] of resultsGroupedByDevice) {
+  let isFirstRow = true;
+  for(const deviceResult of deviceResults) {
     const tr = document.createElement('tr');
     const appendTd = text => tr.innerHTML += '<td>' + text + '</td>';
 
+    // Add device with rowspan to the first row.
+    if(isFirstRow) {
+      isFirstRow = false;tr.innerHTML += `<th rowspan="${deviceResults.length}">${deviceResult.device}</th>`;
+    }
+
     // Get the column order according to headers.
-    for(const header of headers) {
-      appendTd(result[header.name]);
+    for(const header of headersWithoutDevice) {
+      const valueForHeader = deviceResult[header.name];
+      appendTd(valueForHeader);
     }
     resultsTbody.appendChild(tr);
   }
