@@ -18,9 +18,9 @@ const results = [{
   innerWidth: '414',
   devicePixelsInner: '828',
   devicePixelsOuter: '828',
-  selectedImageSrcsetDpr: '1000x250',
-  selectedImageSrcsetWidthDescriptor: '1000x250',
-  selectedImageSrcsetPxSizes: '500x250',
+  selectedImageSrcsetDpr: '1200x250',
+  selectedImageSrcsetWidthDescriptor: '1200x250',
+  selectedImageSrcsetPxSizes: '600x250',
 }, {
   header: 'Windows 10 + Chrome 105'
 }];
