@@ -17,6 +17,20 @@ body {
 	border-bottom: 1px solid black;
 }
 
+/* srcset sizes example */
+.srcset-src {
+	color: salmon;
+}
+.srcset-width-descriptor {
+	color: goldenrod;
+}
+.sizes-media-condition {
+	color: dodgerblue;
+}
+.sizes-source-size-value {
+	color: forestgreen;
+}
+
 /* Info panel */
 .info {
 	position: fixed;
