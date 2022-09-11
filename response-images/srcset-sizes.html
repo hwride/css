@@ -60,16 +60,21 @@
 	<h3>
 		Simple image with <code>src</code> attribute
 	</h3>
+	<figure>
+		<img alt="A test responsive image"
+			 src="300x250.png" />
+		<figcaption>
+			<pre>
+&lt;img alt="A test responsive image"
+     src="fallback.png" /&gt;
+			</pre>
+		</figcaption>
+	</figure>
+
 	<p class="example-description">
 		This is just a standard image with a <code>src</code> attribute. It will load exactly the image specified in
 		<code>src</code> and never any other.
 	</p>
-	<pre>
-&lt;img alt="A test responsive image"
-     src="fallback.png" /&gt;
-		</pre>
-	<img alt="A test responsive image"
-			 src="300x250.png" />
 </div>
 
 <!-- Pixel density descriptor -->
@@ -77,6 +82,26 @@
 	<h3>
 		Image with <code>srcset</code> and display density descriptor.
 	</h3>
+	<figure>
+		<img
+			alt="A test responsive image"
+			src="fallback.png"
+			srcset="
+			600x250.png 1x,
+			1200x250.png 2x,
+			1500x250.png 3x
+		" />
+		<figcaption>
+			<pre>
+&lt;img alt="A test responsive image"
+     src="fallback.png"
+     srcset="600x250.png 1x,
+             1200x250.png 2x,
+             1500x250.png 3x" /&gt;
+			</pre>
+		</figcaption>
+	</figure>
+
 	<p class="example-description">
 		The pixel density descriptor of <code>srcset</code> lets you tell the browser what image should be used
 		depending on the device pixel ratio. If there are 1x, 2x or 3x device pixels to CSS pixels then the corresponding
@@ -89,21 +114,6 @@
 		Note that the actual number width of the device or window does not affect the calculation, only the device pixel
 		ratio.
 	</p>
-	<pre>
-&lt;img alt="A test responsive image"
-     src="fallback.png"
-     srcset="600x250.png 1x,
-             1200x250.png 2x,
-             1500x250.png 3x" /&gt;
-		</pre>
-	<img
-		alt="A test responsive image"
-		src="fallback.png"
-		srcset="
-			600x250.png 1x,
-			1200x250.png 2x,
-			1500x250.png 3x
-		" />
 </div>
 
 <!-- srcset with pixel widths-->
@@ -111,6 +121,25 @@
 	<h3>
 		Image with <code>srcset</code> and pixel widths.
 	</h3>
+	<figure>
+		<img alt="A test responsive image"
+			 src="fallback.png"
+			 srcset="300x250.png 300w,
+									 600x250.png 600w,
+									 1200x250.png 1200w,
+									 1500x250.png 1500w" />
+		<figcaption>
+			<pre>
+&lt;img alt="A test responsive image"
+     src="fallback.png"
+     srcset="300x250.png 300w,
+             600x250.png 600w,
+             1200x250.png 1200w,
+             1500x250.png 1500w" /&gt;
+			</pre>
+		</figcaption>
+	</figure>
+
 	<p class="example-description">
 		Here <code>srcset</code> is used to define at images at different sizes. The format is:
 		<code>&lt;image-url&gt; &lt;width descriptor&gt;</code>. Width descriptor describes the pixel width of the source
@@ -134,23 +163,6 @@
 		into account. It will do this by selecting an image size according to device pixels rather than CSS pixels. You
 		can see this value in the info section as <code>devicePixelRatio * outerWidth</code>.
 	</p>
-	<pre>
-&lt;img alt="A test responsive image"
-     src="fallback.png"
-     srcset="300x250.png 300w,
-             600x250.png 600w,
-             1200x250.png 1200w,
-             1500x250.png 1500w" /&gt;
-		</pre>
-	<!-- src is a fallback for older browsers -->
-	<!-- srcset: browser uses first condition that matches -->
-	<!-- sizes: it appears the media queries match the document width and not the window width, at least on Chrome -->
-	<img alt="A test responsive image"
-			 src="fallback.png"
-			 srcset="300x250.png 300w,
-								 600x250.png 600w,
-								 1200x250.png 1200w,
-								 1500x250.png 1500w" />
 </div>
 
 <!-- srcset and sizes-->
@@ -158,9 +170,42 @@
 	<h3>
 		Image with <code>srcset</code> and <code>sizes</code> attribute
 	</h3>
+
+	<figure>
+	<!-- src is a fallback for older browsers -->
+	<!-- srcset: browser uses first condition that matches -->
+	<!-- sizes: it appears the media queries match the document width and not the window width, at least on Chrome -->
+		<img alt="A test responsive image"
+			 src="fallback.png"
+			 srcset="300x250.png 300w,
+									 600x250.png 600w,
+									 1200x250.png 1200w,
+									 1500x250.png 1500w"
+			 sizes="(min-width: 1500px) 1500px,
+									(min-width: 1200px) 1200px,
+									(min-width: 600px) 600px,
+									(min-width: 300px) 300px,
+									300px" />
+		<figcaption>
+			<pre>
+&lt;img alt="A test responsive image"
+     src="fallback.png"
+     srcset="<span class="srcset-src">300x250.png</span> <span class="srcset-width-descriptor">300w</span>,
+             <span class="srcset-src">600x250.png</span> <span class="srcset-width-descriptor">600w</span>,
+             <span class="srcset-src">1200x250.png</span> <span class="srcset-width-descriptor">1200w</span>,
+             <span class="srcset-src">1500x250.png</span> <span class="srcset-width-descriptor">1500w</span>"
+     sizes="<span class="sizes-media-condition">(min-width: 1500px)</span> <span class="sizes-source-size-value">1500px</span>,
+            <span class="sizes-media-condition">(min-width: 1200px)</span> <span class="sizes-source-size-value">1200px</span>,
+            <span class="sizes-media-condition">(min-width: 600px)</span> <span class="sizes-source-size-value">600px</span>,
+            <span class="sizes-media-condition">(min-width: 300px)</span> <span class="sizes-source-size-value">300px</span>,
+            <span class="sizes-source-size-value">300px</span>" /&gt;
+			</pre>
+		</figcaption>
+	</figure>
+
 	<p class="example-description">
 		When using the <code>sizes</code> attributes you are able to specify conditions about when each image should be
-		used yourself.
+		used.
 	</p>
 	<h4>Match order</h4>
 	<p class="example-description">
@@ -217,33 +262,6 @@
 			</ol>
 		</li>
 	</ol>
-	<pre>
-&lt;img alt="A test responsive image"
-     src="fallback.png"
-     srcset="<span class="srcset-src">300x250.png</span> <span class="srcset-width-descriptor">300w</span>,
-             <span class="srcset-src">600x250.png</span> <span class="srcset-width-descriptor">600w</span>,
-             <span class="srcset-src">1200x250.png</span> <span class="srcset-width-descriptor">1200w</span>,
-             <span class="srcset-src">1500x250.png</span> <span class="srcset-width-descriptor">1500w</span>"
-     sizes="<span class="sizes-media-condition">(min-width: 1500px)</span> <span class="sizes-source-size-value">1500px</span>,
-            <span class="sizes-media-condition">(min-width: 1200px)</span> <span class="sizes-source-size-value">1200px</span>,
-            <span class="sizes-media-condition">(min-width: 600px)</span> <span class="sizes-source-size-value">600px</span>,
-            <span class="sizes-media-condition">(min-width: 300px)</span> <span class="sizes-source-size-value">300px</span>,
-            <span class="sizes-source-size-value">300px</span>" /&gt;
-		</pre>
-	<!-- src is a fallback for older browsers -->
-	<!-- srcset: browser uses first condition that matches -->
-	<!-- sizes: it appears the media queries match the document width and not the window width, at least on Chrome -->
-	<img alt="A test responsive image"
-			 src="fallback.png"
-			 srcset="300x250.png 300w,
-								 600x250.png 600w,
-								 1200x250.png 1200w,
-								 1500x250.png 1500w"
-			 sizes="(min-width: 1500px) 1500px,
-								(min-width: 1200px) 1200px,
-								(min-width: 600px) 600px,
-								(min-width: 300px) 300px,
-								300px" />
 </div>
 <div class="info">
 	<table>
