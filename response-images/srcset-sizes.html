@@ -222,10 +222,10 @@
 		An important thing to note is the <code>sizes</code> media conditions use CSS pixels, but the actual image size
 		chosen from <code>srcset</code> will be chosen taking the pixel density of the device into account.
 	</p>
-	<h4>Worked example</h4>
+	<h4 id="srcset-sizes-worked-example">Worked example</h4>
 	<p class="example-description">
 		Above is an example image using <code>srcset</code> and <code>sizes</code>. Described here are the steps taken
-		by the browser to work out the final image to display, in this example for an iPhone 11.
+		by the browser to work out the final image to display, in this example for an iPhone 11 in portrait orientation.
 	</p>
 	<ol>
 		<li>
@@ -302,17 +302,23 @@
 	<h3>Notes</h3>
 	<ul class="results-notes">
 		<li>
-			<sup>1</sup> The moto e(7i) power reports a <code>innerWidth</code> larger than <code>outerWidth</code>.
-			This essentially appears to be an Android bug on mobile.
+			<sup class="iphone-sup-num"></sup> See the <a href="#srcset-sizes-worked-example">worked example</a> for
+			details on why this value was chosen.
 		</li>
 		<li>
-			<sup>2</sup> Windows + Chrome appears to change the selected image for the pixel density srcset example when
+			<sup class="moto-width-sup-num"></sup> The moto e(7i) power reports an <code>innerWidth</code> larger than
+			<code>outerWidth</code>. This essentially appears to be an Android bug on mobile.
+		</li>
+		<li>
+			<sup class="windows-dpr-sup-num"></sup> Windows + Chrome appears to change the selected image for the pixel
+			density srcset example when
 			the window size changes, even though the pixel density remains the same. This isn't what I'd expect and
 			doesn't seem to match the intention of pixel density descriptors.
 		</li>
 		<li>
-			<sup>3</sup> Between 601px and 1200px Windows + Chrome appears to select the 1200px image. I would have
-			expected the following:
+			<sup class="windows-srcset-sizes-sup-num"></sup> Between 601px and 1200px Windows + Chrome appears to select
+			the 1200px image. I would have expected it to select the 600px image up to a device width of 1199px. The
+			steps I would have expected to lead to this results are as follows:
 			<ol>
 				<li>
 					Find the matching media condition in <code>sizes</code>. The width of 601px matches

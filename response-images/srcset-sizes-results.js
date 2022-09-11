@@ -1,3 +1,15 @@
+let supNum = 1;
+const getSupNum = (selectorToReplace) => {
+  const text = `<sup>${supNum}</sup>`;
+  document.querySelector(selectorToReplace).innerHTML = supNum;
+  supNum += 1;
+  return text;
+}
+const iphoneSupNum = getSupNum('.iphone-sup-num');
+const motoWidthSupNum = getSupNum('.moto-width-sup-num');
+const windowsDprSupNum = getSupNum('.windows-dpr-sup-num');
+const windowsSrcSetSizesSupNum = getSupNum('.windows-srcset-sizes-sup-num');
+
 const results = [{
   device: 'iPhone 11 +<br/>Safari',
   devicePixelRatio: '2',
@@ -8,6 +20,7 @@ const results = [{
   selectedImageSrcsetDpr: '1200x250',
   selectedImageSrcsetWidthDescriptor: '1200x250',
   selectedImageSrcsetPxSizes: '600x250',
+  selectedImageSrcsetPxSizesAdditionalText: iphoneSupNum,
 }, {
   device: 'iPhone 11 +<br/>Safari',
   devicePixelRatio: '2',
@@ -22,10 +35,10 @@ const results = [{
   device: 'moto e(7i) power +<br/>Android 10 +<br/>Chrome 97',
   devicePixelRatio: '1.75',
   innerWidth: '656',
-  innerWidthAdditionalText: '<sup>1</sup>',
+  innerWidthAdditionalText: motoWidthSupNum,
   innerWidthStyle: 'error',
   devicePixelsInner: '1148',
-  devicePixelsInnerAdditionalText: '<sup>1</sup>',
+  devicePixelsInnerAdditionalText: motoWidthSupNum,
   devicePixelsInnerStyle: 'error',
   outerWidth: '412',
   devicePixelsOuter: '721',
@@ -51,11 +64,11 @@ const results = [{
   devicePixelsOuter: '617',
   selectedImageSrcsetDpr: '1200x250',
   selectedImageSrcsetDprStyle: 'warn',
-  selectedImageSrcsetDprAdditionalText: '<sup>2</sup>',
+  selectedImageSrcsetDprAdditionalText: windowsDprSupNum,
   selectedImageSrcsetWidthDescriptor: '1200x250',
   selectedImageSrcsetPxSizes: '1200x250',
   selectedImageSrcsetPxSizesStyle: 'warn',
-  selectedImageSrcsetPxSizesAdditionalText: '<sup>3</sup>',
+  selectedImageSrcsetPxSizesAdditionalText: windowsSrcSetSizesSupNum,
 }, {
   device: 'Windows 10 +<br/>Chrome 105',
   devicePixelRatio: '1',
@@ -65,7 +78,7 @@ const results = [{
   devicePixelsOuter: '1216',
   selectedImageSrcsetDpr: '1200x250',
   selectedImageSrcsetDprStyle: 'warn',
-  selectedImageSrcsetDprAdditionalText: '<sup>2</sup>',
+  selectedImageSrcsetDprAdditionalText: windowsDprSupNum,
   selectedImageSrcsetWidthDescriptor: '1200x250',
   selectedImageSrcsetPxSizes: '1200x250',
 }, {
@@ -77,9 +90,9 @@ const results = [{
   devicePixelsOuter: '1217',
   selectedImageSrcsetDpr: '1500x250',
   selectedImageSrcsetDprStyle: 'warn',
-  selectedImageSrcsetDprAdditionalText: '<sup>2</sup>',
+  selectedImageSrcsetDprAdditionalText: windowsDprSupNum,
   selectedImageSrcsetWidthDescriptor: '1500x250',
   selectedImageSrcsetPxSizes: '1500x250',
   selectedImageSrcsetPxSizesStyle: 'warn',
-  selectedImageSrcsetPxSizesAdditionalText: '<sup>3</sup>',
+  selectedImageSrcsetPxSizesAdditionalText: windowsSrcSetSizesSupNum,
 }];
