@@ -11,6 +11,17 @@ updateDeviceInfo()
 window.addEventListener('resize', updateDeviceInfo)
 
 /* Populate results table */
+const headers = [
+  { name: 'device', label: 'Device' },
+  { name: 'devicePixelRatio', label: 'Device pixel ratio' },
+  { name: 'innerWidth', label: 'innerWidth' },
+  { name: 'devicePixelsInner', label: 'Device pixels - inner' },
+  { name: 'outerWidth', label: 'outerWidth' },
+  { name: 'devicePixelsOuter', label: 'Device pixels - outer' },
+  { name: 'selectedImageSrcsetDpr', label: 'DPR image' },
+  { name: 'selectedImageSrcsetWidthDescriptor', label: 'srcset only image' },
+  { name: 'selectedImageSrcsetPxSizes', label: 'srcset + sizes image' }
+];
 const results = [{
   device: 'iPhone',
   devicePixelRatio: '2',
@@ -64,7 +75,20 @@ const results = [{
   selectedImageSrcsetWidthDescriptor: '1500x250',
   selectedImageSrcsetPxSizes: '1500x250',
 }];
-const resultsTbody = document.querySelector('.results-table tbody');
+
+const resultsTable = document.querySelector('.results-table');
+const resultsThead = resultsTable.querySelector('thead');
+const resultsTbody = resultsTable.querySelector('tbody');
+// Populate table header.
+const theadRow = document.createElement('tr');
+for(const header of headers) {
+  const th = document.createElement('th');
+  th.innerHTML = header.label;
+  theadRow.appendChild(th);
+}
+resultsThead.appendChild(theadRow);
+
+// Populate table body.
 for(const result of results) {
   if(result.header) {
     const tr = document.createElement('tr');
@@ -73,15 +97,11 @@ for(const result of results) {
   } else {
     const tr = document.createElement('tr');
     const appendTd = text => tr.innerHTML += '<td>' + text + '</td>';
-    appendTd(result.device);
-    appendTd(result.devicePixelRatio);
-    appendTd(result.innerWidth);
-    appendTd(result.devicePixelsInner);
-    appendTd(result.outerWidth);
-    appendTd(result.devicePixelsOuter);
-    appendTd(result.selectedImageSrcsetDpr);
-    appendTd(result.selectedImageSrcsetWidthDescriptor);
-    appendTd(result.selectedImageSrcsetPxSizes);
+
+    // Get the column order according to headers.
+    for(const header of headers) {
+      appendTd(result[header.name]);
+    }
     resultsTbody.appendChild(tr);
   }
 }
