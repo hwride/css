@@ -1,5 +1,5 @@
 const results = [{
-  device: 'iPhone 11 + Safari',
+  device: 'iPhone 11 +<br/>Safari',
   devicePixelRatio: '2',
   innerWidth: '414',
   devicePixelsInner: '828',
@@ -9,7 +9,7 @@ const results = [{
   selectedImageSrcsetWidthDescriptor: '1200x250',
   selectedImageSrcsetPxSizes: '600x250',
 }, {
-  device: 'iPhone 11 + Safari',
+  device: 'iPhone 11 +<br/>Safari',
   devicePixelRatio: '2',
   innerWidth: '800',
   devicePixelsInner: '1600',
@@ -19,7 +19,7 @@ const results = [{
   selectedImageSrcsetWidthDescriptor: '1500x250',
   selectedImageSrcsetPxSizes: '1200x250',
 }, {
-  device: 'moto e(7i) power + Chrome 97',
+  device: 'moto e(7i) power +<br/>Android 10 +<br/>Chrome 97',
   devicePixelRatio: '1.75',
   innerWidth: '656',
   devicePixelsInner: '1148',
@@ -29,7 +29,7 @@ const results = [{
   selectedImageSrcsetWidthDescriptor: '1200x250',
   selectedImageSrcsetPxSizes: '1200x250',
 }, {
-  device: 'Windows 10 + Chrome 105',
+  device: 'Windows 10 +<br/>Chrome 105',
   devicePixelRatio: '1',
   innerWidth: '600',
   devicePixelsInner: '600',
@@ -39,7 +39,7 @@ const results = [{
   selectedImageSrcsetWidthDescriptor: '600x250',
   selectedImageSrcsetPxSizes: '600x250',
 }, {
-  device: 'Windows 10 + Chrome 105',
+  device: 'Windows 10 +<br/>Chrome 105',
   devicePixelRatio: '1',
   innerWidth: '601',
   devicePixelsInner: '601',
@@ -49,7 +49,7 @@ const results = [{
   selectedImageSrcsetWidthDescriptor: '1200x250',
   selectedImageSrcsetPxSizes: '1200x250',
 }, {
-  device: 'Windows 10 + Chrome 105',
+  device: 'Windows 10 +<br/>Chrome 105',
   devicePixelRatio: '1',
   innerWidth: '1200',
   devicePixelsInner: '1200',
@@ -59,7 +59,7 @@ const results = [{
   selectedImageSrcsetWidthDescriptor: '1200x250',
   selectedImageSrcsetPxSizes: '1200x250',
 }, {
-  device: 'Windows 10 + Chrome 105',
+  device: 'Windows 10 +<br/>Chrome 105',
   devicePixelRatio: '1',
   innerWidth: '1201',
   devicePixelsInner: '1201',
