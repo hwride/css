@@ -46,11 +46,11 @@
 <ul>
 	<li>
 		How does rounding work for device pixel ratio and width descriptors with srcset?
-		Does it round up to ensure we never have an image too low resolution?
+		Does it round up to the nearest matching image ensure we never have an image too low resolution?
 	</li>
 	<li>
 		Why are the images below different rendered widths when the same image is picked? I.e. sometimes the picked
-		image is the 1500x250, but its rendered with is 500x250. This is when no width information is provided on HTML
+		image is the 1500x250, but its rendered with is 600x250. This is when no width information is provided on HTML
 		attributes or in the CSS, so why is it not the natural image size?
 	</li>
 </ul>
@@ -69,7 +69,7 @@
      src="fallback.png" /&gt;
 		</pre>
 	<img alt="A test responsive image"
-			 src="fallback.png" />
+			 src="300x250.png" />
 </div>
 
 <!-- Pixel density descriptor -->
@@ -92,16 +92,16 @@
 	<pre>
 &lt;img alt="A test responsive image"
      src="fallback.png"
-     srcset="500x250.png 1x,
-             1000x250.png 2x,
+     srcset="600x250.png 1x,
+             1200x250.png 2x,
              1500x250.png 3x" /&gt;
 		</pre>
 	<img
 		alt="A test responsive image"
 		src="fallback.png"
 		srcset="
-			500x250.png 1x,
-			1000x250.png 2x,
+			600x250.png 1x,
+			1200x250.png 2x,
 			1500x250.png 3x
 		" />
 </div>
@@ -137,9 +137,9 @@
 	<pre>
 &lt;img alt="A test responsive image"
      src="fallback.png"
-     srcset="250x250.png 250w,
-             500x250.png 500w,
-             1000x250.png 1000w,
+     srcset="300x250.png 300w,
+             600x250.png 600w,
+             1200x250.png 1200w,
              1500x250.png 1500w" /&gt;
 		</pre>
 	<!-- src is a fallback for older browsers -->
@@ -147,9 +147,9 @@
 	<!-- sizes: it appears the media queries match the document width and not the window width, at least on Chrome -->
 	<img alt="A test responsive image"
 			 src="fallback.png"
-			 srcset="250x250.png 250w,
-								 500x250.png 500w,
-								 1000x250.png 1000w,
+			 srcset="300x250.png 300w,
+								 600x250.png 600w,
+								 1200x250.png 1200w,
 								 1500x250.png 1500w" />
 </div>
 
@@ -173,14 +173,14 @@
 	<pre>
 &lt;img alt="A test responsive image"
      src="fallback.png"
-     srcset="250x250.png 250w,
-             500x250.png 500w,
-             1000x250.png 1000w,
+     srcset="300x250.png 300w,
+             600x250.png 600w,
+             1200x250.png 1200w,
              1500x250.png 1500w"
      sizes="(min-width: 1500px) 1500px,
-            (min-width: 1000px) 1000px,
-            (min-width: 500px) 500px,
-            (min-width: 250px) 250px,
+            (min-width: 1200px) 1200px,
+            (min-width: 600px) 600px,
+            (min-width: 300px) 300px,
             100vw" /&gt;
 		</pre>
 	<!-- src is a fallback for older browsers -->
@@ -188,14 +188,14 @@
 	<!-- sizes: it appears the media queries match the document width and not the window width, at least on Chrome -->
 	<img alt="A test responsive image"
 			 src="fallback.png"
-			 srcset="250x250.png 250w,
-								 500x250.png 500w,
-								 1000x250.png 1000w,
+			 srcset="300x250.png 300w,
+								 600x250.png 600w,
+								 1200x250.png 1200w,
 								 1500x250.png 1500w"
 			 sizes="(min-width: 1500px) 1500px,
-								(min-width: 1000px) 1000px,
-								(min-width: 500px) 500px,
-								(min-width: 250px) 250px,
+								(min-width: 1200px) 1200px,
+								(min-width: 600px) 600px,
+								(min-width: 300px) 300px,
 								100vw" />
 </div>
 <div class="info">
@@ -227,7 +227,7 @@
 		Here is a recording of the images that were loaded for various device, browser and window sizes combinations
 		for the examples above.
 	</p>
-	<table>
+	<table class="results-table">
 		<thead>
 			<tr>
 				<th>Device</th>
@@ -235,170 +235,13 @@
 				<th>outerWidth</th>
 				<th>innerWidth</th>
 				<th>Device pixels - inner</th>
+				<th>Device pixels - outer</th>
 				<th>DPR image</th>
 				<th>srcset only image</th>
 				<th>srcset + sizes image</th>
 			</tr>
 		</thead>
-		<tbody>
-			<tr>
-				<td>iPhone 11</td>
-				<td>2</td>
-				<td>414</td>
-				<td></td>
-				<td></td>
-				<td>1000x250</td>
-				<td>1000x250</td>
-				<td>500x250</td>
-			</tr>
-			<tr>
-				<td>mono e(7i) power + Chrome 97</td>
-				<td>1.75</td>
-				<td>412</td>
-				<td>574 (higher?)</td>
-				<td>1004.5</td>
-				<td>1000x250</td>
-				<td>1000x250</td>
-				<td>1000x250</td>
-			</tr>
-			<tr>
-				<th colspan="6">Windows 10 + Chrome 105</th>
-			</tr>
-			<tr>
-				<td>Windows 10 + Chrome 105</td>
-				<td>1</td>
-				<td>516</td>
-				<td></td>
-				<td></td>
-				<td>500x250</td>
-				<td>500x250</td>
-				<td>500x250</td>
-			</tr>
-			<tr>
-				<td>Windows 10 + Chrome 105</td>
-				<td>1</td>
-				<td>520</td>
-				<td></td>
-				<td></td>
-				<td>1000x250</td>
-				<td>1000x250</td>
-				<td>1000x250</td>
-			</tr>
-			<tr>
-				<td>Windows 10 + Chrome 105</td>
-				<td>1</td>
-				<td>1000</td>
-				<td></td>
-				<td></td>
-				<td>1000x250</td>
-				<td>1000x250</td>
-				<td>1000x250</td>
-			</tr>
-			<tr>
-				<td>Windows 10 + Chrome 105</td>
-				<td>1</td>
-				<td>1017</td>
-				<td></td>
-				<td></td>
-				<td>1500x250</td>
-				<td>1500x250</td>
-				<td>1500x250</td>
-			</tr>
-			<tr>
-				<td>Windows 10 + Chrome 105</td>
-				<td>1.25</td>
-				<td>2048</td>
-				<td></td>
-				<td></td>
-				<td>1500x250</td>
-				<td>1500x250</td>
-				<td>1500x250</td>
-			</tr>
-
-			<!-- Firefox -->
-			<tr>
-				<th colspan="6">Windows 10 + Firefox 104</th>
-			</tr>
-			<tr>
-				<td>Windows 10 + Firefox 104</td>
-				<td>1.2</td>
-				<td>426</td>
-				<td>416</td>
-				<td>499.2</td>
-				<td>1000x250</td>
-				<td>500x250</td>
-				<td>500x250</td>
-			</tr>
-			<tr>
-				<td>Windows 10 + Firefox 104</td>
-				<td>1.2</td>
-				<td>427</td>
-				<td>417</td>
-				<td>500.4</td>
-				<td>1000x250</td>
-				<td>1000x250</td>
-				<td>500x250</td>
-			</tr>
-			<tr>
-				<td>Windows 10 + Firefox 104</td>
-				<td>1.2</td>
-				<td>509</td>
-				<td>499</td>
-				<td>611</td>
-				<td>1000x250</td>
-				<td>1000x250</td>
-				<td>500x250</td>
-			</tr>
-			<tr>
-				<td>Windows 10 + Firefox 104</td>
-				<td>1.2</td>
-				<td>510</td>
-				<td>500</td>
-				<td>612</td>
-				<td>1000x250</td>
-				<td>1000x250</td>
-				<td>1000x250</td>
-			</tr>
-			<tr>
-				<td>Windows 10 + Firefox 104</td>
-				<td>1.2</td>
-				<td>842</td>
-				<td>833</td>
-				<td>999.59</td>
-				<td>1000x250</td>
-				<td>1000x250</td>
-				<td>1000x250</td>
-			</tr>
-			<tr>
-				<td>Windows 10 + Firefox 104</td>
-				<td>1.2</td>
-				<td>844</td>
-				<td>834</td>
-				<td>1000.8</td>
-				<td>1000x250</td>
-				<td>1500x250</td>
-				<td>1000x250</td>
-			</tr>
-			<tr>
-				<td>Windows 10 + Firefox 104</td>
-				<td>1.2</td>
-				<td>1009</td>
-				<td>999</td>
-				<td>1199</td>
-				<td>1000x250</td>
-				<td>1500x250</td>
-				<td>1000x250</td>
-			</tr>
-			<tr>
-				<td>Windows 10 + Firefox 104</td>
-				<td>1.2</td>
-				<td>1010</td>
-				<td>1000</td>
-				<td>1212</td>
-				<td>1000x250</td>
-				<td>1500x250</td>
-				<td>1500x250</td>
-			</tr>
+		<tbody>	
 		</tbody>
 	</table>
 </div>
