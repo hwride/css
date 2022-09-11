@@ -1,0 +1,35 @@
+body {
+	max-width: none;
+	margin: var(--spacing-20);
+}
+
+/* Examples */
+#examples {
+	margin-bottom: 0;
+}
+.example h3 {
+	margin-top: 0;
+}
+.example {
+	padding-block: var(--spacing-20);
+}
+.example:not(:last-of-type) {
+	border-bottom: 1px solid black;
+}
+
+/* Info panel */
+.info {
+	position: fixed;
+	top: var(--spacing-10);
+	right: var(--spacing-10);
+	background: rgba(30, 144, 255, 0.8);
+	padding: var(--spacing-10);
+	border-radius: var(--spacing-10);
+}
+.info table,
+.info table td {
+	border: none;
+}
+.info tr td:first-child {
+	padding-right: var(--spacing-10);
+}

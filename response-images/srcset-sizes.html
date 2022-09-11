@@ -5,72 +5,65 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Response images with srcset and sizes</title>
 	<link rel="stylesheet" type="text/css" href="../common.css">
-	<style>
-		body {
-			max-width: none;
-			margin: 16px;
-		}
-
-		h2 {
-			margin-top: 0;
-		}
-		.example {
-			padding-block: 8px;
-		}
-		.example:not(:last-of-type) {
-			border-bottom: 1px solid black;
-		}
-
-		.info {
-			position: fixed;
-			top: 8px;
-			right: 8px;
-			background: rgba(30, 144, 255, 0.8);
-			padding: 8px;
-			border-radius: 8px;
-		}
-		.info table,
-		.info table td {
-			border: none;
-		}
-		.info tr td:first-child {
-			padding-right: 8px;
-		}
-	</style>
+	<link rel="stylesheet" type="text/css" href="srcset-sizes.css">
 </head>
 <body>
 <h1>Response images with srcset and sizes</h1>
-<div class="info">
-	<table>
-		<tr>
-			<td><code>window.devicePixelRatio</code></td><td><span class="device-pixel-ratio"></span></td>
-		</tr>
-		<tr>
-			<td><code>window.outerWidth</code></td><td><span class="window-outer-width"></span></td>
-		</tr>
-		<tr>
-			<td><code>devicePixelRatio * outerWidth</code></td><td><span class="device-pixels-outer"></span></td>
-		</tr>
-		<tr>
-			<td><code>window.innerWidth</code></td><td><span class="window-inner-width"></span></td>
-		</tr>
-		<tr>
-			<td><code>devicePixelRatio * innerWidth</code></td><td><span class="device-pixels-inner"></span></td>
-		</tr>
-	</table>
-</div>
+<ul>
+	<li><a href="#references">References</a></li>
+	<li><a href="#general-notes">General notes</a></li>
+	<li><a href="#questions">Questions</a></li>
+	<li>
+		<a href="#examples">Examples</a>
+		<ul>
+			<li><a href="#simple-img">Simple image with src</a></li>
+			<li><a href="#srcset-pixel-density-descriptor">srcset with pixel density descriptors</a></li>
+			<li><a href="#srcset-width-descriptors">srcset with width descriptors</a></li>
+			<li><a href="#srcset-and-sizes">srcset and sizes</a></li>
+		</ul>
+	</li>
+	<li><a href="#results">Results</a></li>
+</ul>
 
-<div class="example">
-	<ul>
-		<li>How does rounding work for device pixel ratio and width descriptors?</li>
-		<li>Why are the images below different rendered widths when the same image is picked?</li>
-	</ul>
-</div>
+<h2 id="references">References</h2>
+<ul>
+	<li>
+		<a href="https://jakearchibald.com/2015/anatomy-of-responsive-images/">
+			Jake Archibald - The anatomy of responsive images
+		</a>
+	</li>
+	<li><a href="https://caniuse.com/srcset">caniuse - srcset and sizes</a></li>
+	<li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#attr-img-srcset">HTML specification</a></li>
+</ul>
 
-<div class="example">
-	<h2>
+<h2 id="general-notes">General notes</h2>
+<p class="example-description">
+	The zoom level can affect device pixel ratio. If you notice the device pixel ratio isn't what you expect check
+	if you're zoomed in.
+</p>
+
+<h2 id="questions">Questions</h2>
+<ul>
+	<li>
+		How does rounding work for device pixel ratio and width descriptors with srcset?
+		Does it round up to ensure we never have an image too low resolution?
+	</li>
+	<li>
+		Why are the images below different rendered widths when the same image is picked? I.e. sometimes the picked
+		image is the 1500x250, but its rendered with is 500x250. This is when no width information is provided on HTML
+		attributes or in the CSS, so why is it not the natural image size?
+	</li>
+</ul>
+
+<h2 id="examples">Examples</h2>
+<div id="simple-img" class="example">
+	<h3>
 		Simple image with <code>src</code> attribute
-	</h2>
+	</h3>
+	<p class="example-description">
+		This is just a standard image with a <code>src</code> attribute. It will load exactly the image specified in
+		<code>src</code> and never any other.
+	</p>
 	<pre>
 &lt;img alt="A test responsive image"
      src="fallback.png" /&gt;
@@ -79,11 +72,11 @@
 			 src="fallback.png" />
 </div>
 
-<!-- Device pixel ratio -->
-<div class="example">
-	<h2>
+<!-- Pixel density descriptor -->
+<div id="srcset-pixel-density-descriptor" class="example">
+	<h3>
 		Image with <code>srcset</code> and display density descriptor.
-	</h2>
+	</h3>
 	<p class="example-description">
 		The pixel density descriptor of <code>srcset</code> lets you tell the browser what image should be used
 		depending on the device pixel ratio. If there are 1x, 2x or 3x device pixels to CSS pixels then the corresponding
@@ -114,19 +107,28 @@
 </div>
 
 <!-- srcset with pixel widths-->
-<div class="example">
-	<h2>
+<div id="srcset-width-descriptors" class="example">
+	<h3>
 		Image with <code>srcset</code> and pixel widths.
-	</h2>
+	</h3>
 	<p class="example-description">
 		Here <code>srcset</code> is used to define at images at different sizes. The format is:
 		<code>&lt;image-url&gt; &lt;width descriptor&gt;</code>. Width descriptor describes the pixel width of the source
-		image in pixels (even though it ends in a <code>w</code>).
+		image.
 	</p>
+
+	<h3>Without sizes</h3>
 	<p class="example-description">
-		When <code>srcset</code> is used without <code>sizes</code>, it is assumed the image should fill the entire browser
-		width.
+		Some resources online say that when <code>srcset</code> is used without <code>sizes</code>, it is assumed the
+		image should fill the entire browser width. But according to the specification it is invalid to use
+		<code>srcset</code> with width descriptors without a <code>sizes</code> attribute:
 	</p>
+	<blockquote cite="https://html.spec.whatwg.org/multipage/embedded-content.html#attr-img-srcset">
+		If the <code>srcset</code> attribute is present and has any image candidate strings using a width
+		descriptor, the <code>sizes</code> attribute must also be present
+	</blockquote>
+
+	<h3>Pixel density</h3>
 	<p class="example-description">
 		Note that even when using width descriptors with <code>srcset</code>, the browser will try and take pixel density
 		into account. It will do this by selecting an image size according to device pixels rather than CSS pixels. You
@@ -152,10 +154,10 @@
 </div>
 
 <!-- srcset and sizes-->
-<div class="example">
-	<h2>
+<div id="srcset-and-sizes" class="example">
+	<h3>
 		Image with <code>srcset</code> and <code>sizes</code> attribute
-	</h2>
+	</h3>
 	<p class="example-description">
 		When using the <code>sizes</code> attributes you are able to specify conditions about when each image should be
 		used yourself.
@@ -196,12 +198,35 @@
 								(min-width: 250px) 250px,
 								100vw" />
 </div>
+<div class="info">
+	<table>
+		<tr>
+			<td><code>window.devicePixelRatio</code></td><td><span class="device-pixel-ratio"></span></td>
+		</tr>
+		<tr>
+			<td><code>window.outerWidth</code></td><td><span class="window-outer-width"></span></td>
+		</tr>
+		<tr>
+			<td><code>devicePixelRatio * outerWidth</code></td><td><span class="device-pixels-outer"></span></td>
+		</tr>
+		<tr>
+			<td><code>window.innerWidth</code></td><td><span class="window-inner-width"></span></td>
+		</tr>
+		<tr>
+			<td><code>devicePixelRatio * innerWidth</code></td><td><span class="device-pixels-inner"></span></td>
+		</tr>
+	</table>
+</div>
 
-
-<div class="example">
+<!-- Results -->
+<div id="results">
 	<h2>
 		Results
 	</h2>
+	<p class="example-description">
+		Here is a recording of the images that were loaded for various device, browser and window sizes combinations
+		for the examples above.
+	</p>
 	<table>
 		<thead>
 			<tr>

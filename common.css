@@ -1,3 +1,8 @@
+:root {
+	--spacing-10: 0.5rem;
+	--spacing-20: 1rem;
+}
+
 /* Core headings and sections: size and layout. */
 h1 {
 	font-size: 2em;
@@ -45,6 +50,10 @@ table, th, td {
 /* Some other core styles. */
 q {
 	font-style: italic;
+}
+blockquote {
+	background: lightgray;
+	padding: var(--spacing-10);
 }
 
 /* Some predefined colours. */
