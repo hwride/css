@@ -52,3 +52,6 @@ body {
 .results-table th {
 	padding: var(--spacing-10);
 }
+.results-table .section-end-row {
+	border-bottom: 2px solid black;
+}

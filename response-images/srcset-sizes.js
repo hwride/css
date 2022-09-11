@@ -43,22 +43,30 @@ for(const result of results) {
   }
   resultsGroupedByDevice.get(result.device).push(result);
 }
+let deviceIndex = 0;
 for(const [device, deviceResults] of resultsGroupedByDevice) {
-  let isFirstRow = true;
+  const isLastDevice = deviceIndex === resultsGroupedByDevice.size - 1;
+  let deviceResultIndex = 0;
   for(const deviceResult of deviceResults) {
+    const isFirstRow = deviceResultIndex === 0;
+    const isLastRow = deviceResultIndex === deviceResults.length - 1;
+
     const tr = document.createElement('tr');
-    const appendTd = text => tr.innerHTML += '<td>' + text + '</td>';
 
     // Add device with rowspan to the first row.
     if(isFirstRow) {
-      isFirstRow = false;tr.innerHTML += `<th rowspan="${deviceResults.length}">${deviceResult.device}</th>`;
+      tr.innerHTML += `<th rowspan="${deviceResults.length}" ${!isLastDevice ? 'class="section-end-row"' : ''}>
+    ${deviceResult.device}
+</th>`;
     }
 
     // Get the column order according to headers.
     for(const header of headersWithoutDevice) {
       const valueForHeader = deviceResult[header.name];
-      appendTd(valueForHeader);
+      tr.innerHTML += `<td ${isLastRow && !isLastDevice ? 'class="section-end-row"' : ''}>` + valueForHeader + '</td>'
     }
     resultsTbody.appendChild(tr);
+    deviceResultIndex++;
   }
+  deviceIndex++;
 }
