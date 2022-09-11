@@ -302,13 +302,39 @@
 	<h3>Notes</h3>
 	<ul class="results-notes">
 		<li>
-			<sup>1</sup> Windows + Chrome appears to change the selected image for the pixel density srcset example when
+			<sup>1</sup> The moto e(7i) power reports a <code>innerWidth</code> larger than <code>outerWidth</code>.
+			This essentially appears to be an Android bug on mobile.
+		</li>
+		<li>
+			<sup>2</sup> Windows + Chrome appears to change the selected image for the pixel density srcset example when
 			the window size changes, even though the pixel density remains the same. This isn't what I'd expect and
 			doesn't seem to match the intention of pixel density descriptors.
 		</li>
 		<li>
-			<sup>2</sup> The moto e(7i) power reports a <code>innerWidth</code> larger than <code>outerWidth</code>.
-			This essentially appears to be an Android bug on mobile.
+			<sup>3</sup> Between 601px and 1200px Windows + Chrome appears to select the 1200px image. I would have
+			expected the following:
+			<ol>
+				<li>
+					Find the matching media condition in <code>sizes</code>. The width of 601px matches
+					<code>(min-width: 600px) 600px</code>, so we want a 600px image.
+				</li>
+				<li>
+					<p>
+						Find the matching entry in <code>srcset</code>. The pixel density is 1x, so no need to multiply
+						our source size value. This means we want to find a width descriptor that matches 600px. The
+						entry <code>600x250.png 600w</code> matches 600px exactly, so I would expect the
+						<code>600x250.png</code> image to be used. But instead the 1200px image is selected.
+					</p>
+					<p>
+						Note that the iPhone 11 at a size of 800px selects the 1200px as well, but this is expected
+						because it has a pixel density of 2x (see worked example above for details).
+					</p>
+				</li>
+			</ol>
+			<p>
+				The same applies when <code>innerWidth</code> changes to 1201px, I'd expect the image selected to be
+				1200px.
+			</p>
 		</li>
 	</ul>
 </body>

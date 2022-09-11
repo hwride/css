@@ -56,8 +56,8 @@ body {
 	border-bottom: 2px solid black;
 }
 .results-table .style-warn {
-	background: goldenrod;
+	background: #ffcc00;
 }
 .results-table .style-error {
-	background: salmon;
+	background: #ff9966;
 }
