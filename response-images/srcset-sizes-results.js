@@ -22,7 +22,11 @@ const results = [{
   device: 'moto e(7i) power +<br/>Android 10 +<br/>Chrome 97',
   devicePixelRatio: '1.75',
   innerWidth: '656',
+  innerWidthAdditionalText: '<sup>2</sup>',
+  innerWidthStyle: 'error',
   devicePixelsInner: '1148',
+  devicePixelsInnerAdditionalText: '<sup>2</sup>',
+  devicePixelsInnerStyle: 'error',
   outerWidth: '412',
   devicePixelsOuter: '721',
   selectedImageSrcsetDpr: '1200x250',
@@ -46,6 +50,8 @@ const results = [{
   outerWidth: '617',
   devicePixelsOuter: '617',
   selectedImageSrcsetDpr: '1200x250',
+  selectedImageSrcsetDprStyle: 'warn',
+  selectedImageSrcsetDprAdditionalText: '<sup>1</sup>',
   selectedImageSrcsetWidthDescriptor: '1200x250',
   selectedImageSrcsetPxSizes: '1200x250',
 }, {
@@ -56,6 +62,8 @@ const results = [{
   outerWidth: '1216',
   devicePixelsOuter: '1216',
   selectedImageSrcsetDpr: '1200x250',
+  selectedImageSrcsetDprStyle: 'warn',
+  selectedImageSrcsetDprAdditionalText: '<sup>1</sup>',
   selectedImageSrcsetWidthDescriptor: '1200x250',
   selectedImageSrcsetPxSizes: '1200x250',
 }, {
@@ -66,6 +74,8 @@ const results = [{
   outerWidth: '1217',
   devicePixelsOuter: '1217',
   selectedImageSrcsetDpr: '1500x250',
+  selectedImageSrcsetDprStyle: 'warn',
+  selectedImageSrcsetDprAdditionalText: '<sup>1</sup>',
   selectedImageSrcsetWidthDescriptor: '1500x250',
   selectedImageSrcsetPxSizes: '1500x250',
 }];

@@ -55,3 +55,9 @@ body {
 .results-table .section-end-row {
 	border-bottom: 2px solid black;
 }
+.results-table .style-warn {
+	background: goldenrod;
+}
+.results-table .style-error {
+	background: salmon;
+}

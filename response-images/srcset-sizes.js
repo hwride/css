@@ -63,7 +63,27 @@ for(const [device, deviceResults] of resultsGroupedByDevice) {
     // Get the column order according to headers.
     for(const header of headersWithoutDevice) {
       const valueForHeader = deviceResult[header.name];
-      tr.innerHTML += `<td ${isLastRow && !isLastDevice ? 'class="section-end-row"' : ''}>` + valueForHeader + '</td>'
+      const td = document.createElement('td');
+      td.innerHTML = valueForHeader;
+
+      // Add extra text if defined.
+      const additionalText = deviceResult[header.name + 'AdditionalText'];
+      if(additionalText) {
+        td.innerHTML += additionalText;
+      }
+      
+      if(isLastRow && !isLastDevice) {
+        td.classList.add('section-end-row');
+      }
+
+      // Add style classes if defined.
+      const stylePropName = header.name + 'Style';
+      const style = deviceResult[stylePropName];
+      if(style != null) {
+        td.classList.add('style-' + style);
+      }
+
+      tr.appendChild(td);
     }
     resultsTbody.appendChild(tr);
     deviceResultIndex++;
