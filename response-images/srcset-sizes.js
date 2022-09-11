@@ -14,8 +14,8 @@ window.addEventListener('resize', updateDeviceInfo)
 const results = [{
   device: 'iPhone',
   devicePixelRatio: '2',
-  outerWidth: '414',
   innerWidth: '414',
+  outerWidth: '414',
   devicePixelsInner: '828',
   devicePixelsOuter: '828',
   selectedImageSrcsetDpr: '1200x250',
@@ -23,6 +23,46 @@ const results = [{
   selectedImageSrcsetPxSizes: '600x250',
 }, {
   header: 'Windows 10 + Chrome 105'
+}, {
+  device: 'Windows 10 + Chrome 105',
+  devicePixelRatio: '1',
+  innerWidth: '600',
+  outerWidth: '616',
+  devicePixelsInner: '600',
+  devicePixelsOuter: '616',
+  selectedImageSrcsetDpr: '600x250',
+  selectedImageSrcsetWidthDescriptor: '600x250',
+  selectedImageSrcsetPxSizes: '600x250',
+}, {
+  device: 'Windows 10 + Chrome 105',
+  devicePixelRatio: '1',
+  innerWidth: '601',
+  outerWidth: '617',
+  devicePixelsInner: '601',
+  devicePixelsOuter: '617',
+  selectedImageSrcsetDpr: '1200x250',
+  selectedImageSrcsetWidthDescriptor: '1200x250',
+  selectedImageSrcsetPxSizes: '1200x250',
+}, {
+  device: 'Windows 10 + Chrome 105',
+  devicePixelRatio: '1',
+  innerWidth: '1200',
+  outerWidth: '1216',
+  devicePixelsInner: '1200',
+  devicePixelsOuter: '1216',
+  selectedImageSrcsetDpr: '1200x250',
+  selectedImageSrcsetWidthDescriptor: '1200x250',
+  selectedImageSrcsetPxSizes: '1200x250',
+}, {
+  device: 'Windows 10 + Chrome 105',
+  devicePixelRatio: '1',
+  innerWidth: '1201',
+  outerWidth: '1217',
+  devicePixelsInner: '1201',
+  devicePixelsOuter: '1217',
+  selectedImageSrcsetDpr: '1500x250',
+  selectedImageSrcsetWidthDescriptor: '1500x250',
+  selectedImageSrcsetPxSizes: '1500x250',
 }];
 const resultsTbody = document.querySelector('.results-table tbody');
 for(const result of results) {
@@ -35,9 +75,9 @@ for(const result of results) {
     const appendTd = text => tr.innerHTML += '<td>' + text + '</td>';
     appendTd(result.device);
     appendTd(result.devicePixelRatio);
-    appendTd(result.outerWidth);
     appendTd(result.innerWidth);
     appendTd(result.devicePixelsInner);
+    appendTd(result.outerWidth);
     appendTd(result.devicePixelsOuter);
     appendTd(result.selectedImageSrcsetDpr);
     appendTd(result.selectedImageSrcsetWidthDescriptor);

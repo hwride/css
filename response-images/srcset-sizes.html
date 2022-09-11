@@ -297,9 +297,9 @@
 			<tr>
 				<th>Device</th>
 				<th>Device pixel ratio</th>
-				<th>outerWidth</th>
 				<th>innerWidth</th>
 				<th>Device pixels - inner</th>
+				<th>outerWidth</th>
 				<th>Device pixels - outer</th>
 				<th>DPR image</th>
 				<th>srcset only image</th>
@@ -310,6 +310,14 @@
 		</tbody>
 	</table>
 </div>
+	<h3>Notes</h3>
+	<ul class="results-notes">
+		<li>
+			Windows + Chrome appears to change the selected image for the pixel density srcset example when the
+			window size changes, even though the pixel density remains the same. This isn't what I'd expect and doesn't
+			seem to match the intention of pixel density descriptors.
+		</li>
+	</ul>
 </body>
 <script src="../nav.js"></script>
 <script>createNav()</script>
