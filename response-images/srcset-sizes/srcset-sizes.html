@@ -62,18 +62,12 @@
 <h2 id="questions">Questions</h2>
 <ul>
 	<li>
-		How does rounding work for device pixel ratio and width descriptors with srcset?
-		Does it round up to the nearest matching image ensure we never have an image too low resolution?
-	</li>
-	<li>
 		Why are the images below different rendered widths when the same image is picked? I.e. sometimes the picked
 		image is the 1500x1500, but its rendered with is 600x600. This is when no width information is provided on HTML
-		attributes or in the CSS, so why is it not the natural image size?
+		attributes or in the CSS, so why is it not the natural image size? Some of this is to do with DPI scaling.
 	</li>
 	<li>
-		Which parts of <code>srcset</code> and <code>sizes</code> are suggestions vs. enforced? I've read something
-		about <code>&lt;picture&gt;</code> element being enforced, but <code>srcset</code> and <code>sizes</code>
-		being more suggestions.
+		Add notes about the fact <code>srcset</code> is a suggestion and not enforced like <code>picture</code>.
 	</li>
 </ul>
 
