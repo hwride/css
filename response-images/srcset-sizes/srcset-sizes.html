@@ -101,6 +101,12 @@
 		<a href="srcset-width-srcset-sizes.html#srcset-sizes-worked-example">worked example</a> for
 		details on why this value was chosen.
 	</li>
+	<li>
+		<sup class="moto-srcset-sizes-sup-num"></sup> The moto e(7i) power + Samsung Internet
+		selects a 1200px image for <code>srcset</code> and <code>sizes</code>. Here what I'd actually expect is:
+		<code>(min-width: 300px) 300px</code> matches. 300 CSS pixels * 1.75 DPR = 525 device pixels.
+		Match the <code>600x600.png 600w</code> image. This is what both Chrome and Firefox do.
+	</li>
 </ul>
 </body>
 <script src="../../nav.js"></script>
