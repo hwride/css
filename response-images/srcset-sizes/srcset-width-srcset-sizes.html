@@ -91,7 +91,16 @@
 <p class="example-description">
 	When <code>srcset</code> is used with <code>sizes</code> the width of the image element on the page is
 	set according to the source size descriptor of the matching <code>sizes entry</code>. E.g. if the
-	entry <code>(min-width: 600px) 600px</code> matches, the image will be 600 CSS pixels wide.
+	entry <code>(min-width: 600px) 600px</code> matches, the image will be 600 CSS pixels wide. Note this will
+	apply regardless of the actual size of the source image, as the browser essentially trusts you've given it
+	correct information in the <code>sizes</code> attribute, so won't override that even if the actual image has a
+	different size, it essentially replaces the intrinsic dimensions of the image.
+</p>
+
+<h4>Pixel density</h4>
+<p class="example-description">
+	Note that when the pixel density is taken into account when the browser decides how wide to render an
+	image selected using <code>srcset</code> and <code>sizes</code>. It will attem
 </p>
 
 <h2 id="srcset-sizes-worked-example">Worked example</h2>
