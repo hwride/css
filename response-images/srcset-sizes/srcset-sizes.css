@@ -55,6 +55,9 @@
 .results-table th {
 	padding: var(--spacing-10);
 }
+.results-table tbody th {
+	white-space: nowrap;
+}
 .results-table .section-end-row {
 	border-bottom: 2px solid black;
 }
