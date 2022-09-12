@@ -70,6 +70,9 @@
 .results-table .odd-row {
 	background: #e1e1e1;
 }
+.results-table  .results-table-highlight td {
+	background: lightblue;
+}
 
 .results-notes {
 	list-style-type: none;

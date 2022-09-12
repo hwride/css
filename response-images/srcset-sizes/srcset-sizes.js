@@ -32,6 +32,8 @@ for(const result of results) {
   resultsGroupedByDevice.get(result.device).push(result);
 }
 let deviceIndex = 0;
+const allRows = [];
+const rowsByInnerWidth = new Map();
 for(const [device, deviceResults] of resultsGroupedByDevice) {
   const isLastDevice = deviceIndex === resultsGroupedByDevice.size - 1;
   let deviceResultIndex = 0;
@@ -40,6 +42,21 @@ for(const [device, deviceResults] of resultsGroupedByDevice) {
     const isLastRow = deviceResultIndex === deviceResults.length - 1;
 
     const tr = document.createElement('tr');
+    allRows.push(tr);
+    const innerWidth = deviceResult.innerWidth;
+    if(!rowsByInnerWidth.has(innerWidth)) rowsByInnerWidth.set(innerWidth, []);
+    rowsByInnerWidth.get(innerWidth).push({
+      tr,
+      deviceResult
+    });
+
+    // When hovering a row, add class to other rows with matching innerWidth.
+    tr.addEventListener('mouseover', function() {
+      const matchingRows = rowsByInnerWidth.get(innerWidth);
+      console.log('mouseover ', matchingRows)
+      allRows.forEach(row => row.classList.remove('results-table-highlight'));
+      matchingRows.forEach(rowInfo => rowInfo.tr.classList.add('results-table-highlight'));
+    })
     // Mark odd rows of each device section for styling.
     // Don't mark even rows as that captures the rowspan device cell which we don't want to style.
     if(deviceResultIndex % 2 !== 0) tr.classList.add('odd-row');
