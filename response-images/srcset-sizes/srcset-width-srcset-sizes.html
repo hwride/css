@@ -50,22 +50,44 @@
 	When using the <code>sizes</code> attributes you are able to specify conditions about when each image should be
 	used.
 </p>
-<h4>Match order</h4>
+
+<h2>Match order</h2>
 <p class="example-description">
 	The statements in <code>sizes</code> are read first to last, and the first matching one will one. This means order
 	is important depending on how you write your media conditions.
 </p>
-<h5>Fallback</h5>
+<h3>Fallback</h3>
 <p class="example-description">
 	The final entry in <code>sizes</code> doesn't have a condition, it's just a source size value. It is a fallback
 	and is used if none of the media conditions match.
 </p>
-<h4>CSS pixels, device pixels and pixel density</h4>
+
+<h2>Rounding</h2>
 <p class="example-description">
-	An important thing to note is the <code>sizes</code> media conditions use CSS pixels, but the actual image size
-	chosen from <code>srcset</code> will be chosen taking the pixel density of the device into account.
+	If no image in <code>srcset</code> has a width descriptor that exactly matches an image then generally the
+	browser will round up to the next largest. This essentially errs on ensuring the image always looks good vs.
+	choosing the smallest image.
 </p>
-<h4 id="srcset-sizes-worked-example">Worked example</h4>
+
+<h2>CSS pixels, device pixels and pixel density</h2>
+<p class="example-description">
+	Note the following about different parts of <code>srcset</code> and <code>sizes</code>:
+</p>
+<ul>
+	<li>
+		In <code>sizes</code> the media condition and the source size descriptor of each entry are both in CSS pixels.
+	</li>
+	<li>
+		In <code>srcset</code> the width descriptor is in device pixels.
+	</li>
+</ul>
+<p class="example-description">
+	When going from the <code>sizes</code> source size descriptor to find the matching <code>srcset</code>
+	width descriptor a conversion happens between CSS pixels and device pixels. This conversion takes the pixel
+	density/device pixel ratio into account. See the worked example below for more details.
+</p>
+
+<h2 id="srcset-sizes-worked-example">Worked example</h2>
 <p class="example-description">
 	Above is an example image using <code>srcset</code> and <code>sizes</code>. Described here are the steps taken
 	by the browser to work out the final image to display, in this example for an iPhone 11 in portrait orientation.

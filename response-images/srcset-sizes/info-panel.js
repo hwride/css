@@ -2,16 +2,16 @@ const infoPanelHtml = `
 <div class="info">
 	<table>
 		<tr>
+			<td><code>window.devicePixelRatio</code></td>
+			<td><span class="device-pixel-ratio"></span></td>
+		</tr>
+		<tr>
 			<td><code>window.innerWidth</code></td>
 			<td><span class="window-inner-width"></span></td>
 		</tr>
 		<tr>
 			<td><code>devicePixelRatio * innerWidth</code></td>
 			<td><span class="device-pixels-inner"></span></td>
-		</tr>
-		<tr>
-			<td><code>window.devicePixelRatio</code></td>
-			<td><span class="device-pixel-ratio"></span></td>
 		</tr>
 		<tr>
 			<td><code>window.outerWidth</code></td>
