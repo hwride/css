@@ -82,7 +82,6 @@
 	<h2>
 		Results
 	</h2>
-	<div style="color: red; font-size: 3rem">NOTE THESE RESULTS ARE OUT OF DATE NOW AND NEED RE-DOING</div>
 	<p class="example-description">
 		Here is a recording of the images that were loaded for various device, browser and window sizes combinations
 		for the examples above.
@@ -101,65 +100,9 @@
 <h3>Notes</h3>
 <ul class="results-notes">
 	<li>
-		<sup class="iphone-sup-num"></sup> See the <a href="#srcset-sizes-worked-example">worked example</a> for
+		<sup class="iphone-sup-num"></sup> See the
+		<a href="srcset-width-srcset-sizes.html#srcset-sizes-worked-example">worked example</a> for
 		details on why this value was chosen.
-	</li>
-	<li>
-		<sup class="moto-width-sup-num"></sup> The moto e(7i) power reports an <code>innerWidth</code> larger than
-		<code>outerWidth</code>. This essentially appears to be an Android bug on mobile.
-	</li>
-	<li>
-		<p>
-			<sup class="windows-dpr-sup-num"></sup> Windows + Chrome appears to change the selected image for the pixel
-			density srcset example when the window size changes, even though the pixel density remains the same. This isn't
-			what I'd expect and doesn't seem to match the intention of pixel density descriptors.
-		</p>
-		<p>
-			Note Firefox maintains a consistent DPR based image at all windows sizes which seems correct.
-		</p>
-	</li>
-	<li>
-		<sup class="windows-srcset-sizes-sup-num"></sup>
-		Some combinations of browser and device seem to be selecting the wrong image for <code>srcset</code> +
-		<code>sizes</code> test image. For example on Windows + Chrome, with a device width between
-		601px and 1200px, it appears to select the 1200px image. But I would have expected it to select the 600px image up
-		to a device width of 1199px. Reasoning as follows:
-		<ol>
-			<li>
-				Find the matching media condition in <code>sizes</code>. The width of 601px matches
-				<code>(min-width: 600px) 600px</code>, so we want a 600px image.
-			</li>
-			<li>
-				<p>
-					Find the matching entry in <code>srcset</code>. The pixel density is 1x, so no need to multiply
-					our source size value. This means we want to find a width descriptor that matches 600px. The
-					entry <code>600x600.png 600w</code> matches 600px exactly, so I would expect the
-					<code>600x600.png</code> image to be used. But instead the 1200px image is selected.
-				</p>
-				<p>
-					Note that the iPhone 11 at a size of 800px selects the 1200px as well, but this is expected
-					because it has a pixel density of 2x (see worked example above for details).
-				</p>
-			</li>
-		</ol>
-		<p>
-			The same apparently buggy logic seems to apply for the following as well:
-		</p>
-		<ul>
-			<li>
-				Windows 10 + Chrome when <code>innerWidth</code> changes to 1201px. Here I'd expect:
-				<code>(min-width: 1200px) 1200px</code> matches. 1200 CSS pixels * 1 DPR = 1200 device pixels.
-				Match the <code>1200x1200.png 1200w</code> image.
-			</li>
-			<li>
-				The moto e(7i) power at an <code>outerWidth</code> of 412px. Here I'd expect:
-				<code>(min-width: 300px) 300px</code> matches. 300 CSS pixels * 1.75 DPR = 525 device pixels.
-				Match the <code>600x600.png 600w</code> image.
-			</li>
-		</ul>
-		<p>
-			Note that the iPhone 11 and Windows 10 + Firefox seem to have the correct behaviour here.
-		</p>
 	</li>
 </ul>
 </body>

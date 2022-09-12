@@ -6,9 +6,6 @@ const getSupNum = (selectorToReplace) => {
   return text;
 }
 const iphoneSupNum = getSupNum('.iphone-sup-num');
-const motoWidthSupNum = getSupNum('.moto-width-sup-num');
-const windowsDprSupNum = getSupNum('.windows-dpr-sup-num');
-const windowsSrcSetSizesSupNum = getSupNum('.windows-srcset-sizes-sup-num');
 
 const results = [
   // iPhone 11 + Safari
@@ -36,26 +33,41 @@ const results = [
 },
 
   // moto e(7i) power + Chrome
-  {
+{
   device: 'moto e(7i) power +<br/>Android 10 +<br/>Chrome 97',
   devicePixelRatio: '1.75',
-  innerWidth: '656',
-  innerWidthAdditionalText: motoWidthSupNum,
-  innerWidthStyle: 'error',
-  devicePixelsInner: '1148',
-  devicePixelsInnerAdditionalText: motoWidthSupNum,
-  devicePixelsInnerStyle: 'error',
+  innerWidth: '412',
+  devicePixelsInner: '721',
   outerWidth: '412',
   devicePixelsOuter: '721',
   selectedImageSrcsetDpr: '1200x1200',
   selectedImageSrcsetWidthDescriptor: '1200x1200',
-  selectedImageSrcsetPxSizes: '1200x1200',
-    selectedImageSrcsetPxSizesStyle: 'warn',
-    selectedImageSrcsetPxSizesAdditionalText: windowsSrcSetSizesSupNum,
+  selectedImageSrcsetPxSizes: '600x600',
+},
+{
+  device: 'moto e(7i) power +<br/>Android 10 +<br/>Firefox 96',
+  devicePixelRatio: '1.765',
+  innerWidth: '408',
+  devicePixelsInner: '720',
+  outerWidth: '411',
+  devicePixelsOuter: '725',
+  selectedImageSrcsetDpr: '1200x1200',
+  selectedImageSrcsetWidthDescriptor: '1200x1200',
+  selectedImageSrcsetPxSizes: '600x600',
 },
 
   // Windows 10 + Chrome
-  {
+{
+  device: 'Windows 10 +<br/>Chrome 105',
+  devicePixelRatio: '1',
+  innerWidth: '599',
+  devicePixelsInner: '599',
+  outerWidth: '615',
+  devicePixelsOuter: '615',
+  selectedImageSrcsetDpr: '600x600',
+  selectedImageSrcsetWidthDescriptor: '600x600',
+  selectedImageSrcsetPxSizes: '300x300',
+}, {
   device: 'Windows 10 +<br/>Chrome 105',
   devicePixelRatio: '1',
   innerWidth: '600',
@@ -72,13 +84,19 @@ const results = [
   devicePixelsInner: '601',
   outerWidth: '617',
   devicePixelsOuter: '617',
-  selectedImageSrcsetDpr: '1200x1200',
-  selectedImageSrcsetDprStyle: 'warn',
-  selectedImageSrcsetDprAdditionalText: windowsDprSupNum,
+  selectedImageSrcsetDpr: '600x600',
   selectedImageSrcsetWidthDescriptor: '1200x1200',
-  selectedImageSrcsetPxSizes: '1200x1200',
-  selectedImageSrcsetPxSizesStyle: 'warn',
-  selectedImageSrcsetPxSizesAdditionalText: windowsSrcSetSizesSupNum,
+  selectedImageSrcsetPxSizes: '600x600',
+}, {
+  device: 'Windows 10 +<br/>Chrome 105',
+  devicePixelRatio: '1',
+  innerWidth: '1199',
+  devicePixelsInner: '1199',
+  outerWidth: '1215',
+  devicePixelsOuter: '1215',
+  selectedImageSrcsetDpr: '600x600',
+  selectedImageSrcsetWidthDescriptor: '1200x1200',
+  selectedImageSrcsetPxSizes: '600x600',
 }, {
   device: 'Windows 10 +<br/>Chrome 105',
   devicePixelRatio: '1',
@@ -86,9 +104,7 @@ const results = [
   devicePixelsInner: '1200',
   outerWidth: '1216',
   devicePixelsOuter: '1216',
-  selectedImageSrcsetDpr: '1200x1200',
-  selectedImageSrcsetDprStyle: 'warn',
-  selectedImageSrcsetDprAdditionalText: windowsDprSupNum,
+  selectedImageSrcsetDpr: '600x600',
   selectedImageSrcsetWidthDescriptor: '1200x1200',
   selectedImageSrcsetPxSizes: '1200x1200',
 }, {
@@ -98,16 +114,43 @@ const results = [
   devicePixelsInner: '1201',
   outerWidth: '1217',
   devicePixelsOuter: '1217',
-  selectedImageSrcsetDpr: '1500x1500',
-  selectedImageSrcsetDprStyle: 'warn',
-  selectedImageSrcsetDprAdditionalText: windowsDprSupNum,
+  selectedImageSrcsetDpr: '600x600',
+  selectedImageSrcsetWidthDescriptor: '1500x1500',
+  selectedImageSrcsetPxSizes: '1200x1200',
+}, {
+  device: 'Windows 10 +<br/>Chrome 105',
+  devicePixelRatio: '1',
+  innerWidth: '1499',
+  devicePixelsInner: '1499',
+  outerWidth: '1217',
+  devicePixelsOuter: '1217',
+  selectedImageSrcsetDpr: '600x600',
+  selectedImageSrcsetWidthDescriptor: '1500x1500',
+  selectedImageSrcsetPxSizes: '1200x1200',
+}, {
+  device: 'Windows 10 +<br/>Chrome 105',
+  devicePixelRatio: '1',
+  innerWidth: '1500',
+  devicePixelsInner: '1500',
+  outerWidth: '1515',
+  devicePixelsOuter: '1515',
+  selectedImageSrcsetDpr: '600x600',
   selectedImageSrcsetWidthDescriptor: '1500x1500',
   selectedImageSrcsetPxSizes: '1500x1500',
-  selectedImageSrcsetPxSizesStyle: 'warn',
-  selectedImageSrcsetPxSizesAdditionalText: windowsSrcSetSizesSupNum,
 },
 
   // Windows 10 + Firefox
+  {
+    device: 'Windows 10 +<br/>Firefox 104',
+    devicePixelRatio: '1',
+    innerWidth: '599',
+    devicePixelsInner: '599',
+    outerWidth: '611',
+    devicePixelsOuter: '611',
+    selectedImageSrcsetDpr: '600x600',
+    selectedImageSrcsetWidthDescriptor: '600x600',
+    selectedImageSrcsetPxSizes: '300x300',
+  },
   {
     device: 'Windows 10 +<br/>Firefox 104',
     devicePixelRatio: '1',
