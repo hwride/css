@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Response images with srcset and sizes</title>
+	<link rel="stylesheet" type="text/css" href="../../common.css">
+	<link rel="stylesheet" type="text/css" href="srcset-sizes.css">
+</head>
+<body class="example-page">
+<h1>Image with <code>srcset</code> and <code>sizes</code> attribute</h1>
+
+<figure class="example-img-figure">
+	<!-- src is a fallback for older browsers -->
+	<!-- srcset: browser uses first condition that matches -->
+	<!-- sizes: it appears the media queries match the document width and not the window width, at least on Chrome -->
+	<img alt="A test responsive image"
+			 src="fallback.png"
+			 srcset="300x300.png 300w,
+									 600x600.png 600w,
+									 1200x1200.png 1200w,
+									 1500x1500.png 1500w"
+			 sizes="(min-width: 1500px) 1500px,
+									(min-width: 1200px) 1200px,
+									(min-width: 600px) 600px,
+									(min-width: 300px) 300px,
+									300px"/>
+	<figcaption>
+			<pre>
+&lt;img alt="A test responsive image"
+     src="fallback.png"
+     srcset="<span class="srcset-src">300x300.png</span> <span class="srcset-width-descriptor">300w</span>,
+             <span class="srcset-src">600x600.png</span> <span class="srcset-width-descriptor">600w</span>,
+             <span class="srcset-src">1200x1200.png</span> <span class="srcset-width-descriptor">1200w</span>,
+             <span class="srcset-src">1500x1500.png</span> <span class="srcset-width-descriptor">1500w</span>"
+     sizes="<span class="sizes-media-condition">(min-width: 1500px)</span> <span
+				class="sizes-source-size-value">1500px</span>,
+            <span class="sizes-media-condition">(min-width: 1200px)</span> <span
+				class="sizes-source-size-value">1200px</span>,
+            <span class="sizes-media-condition">(min-width: 600px)</span> <span
+				class="sizes-source-size-value">600px</span>,
+            <span class="sizes-media-condition">(min-width: 300px)</span> <span
+				class="sizes-source-size-value">300px</span>,
+            <span class="sizes-source-size-value">300px</span>" /&gt;
+			</pre>
+	</figcaption>
+</figure>
+
+<p class="example-description">
+	When using the <code>sizes</code> attributes you are able to specify conditions about when each image should be
+	used.
+</p>
+<h4>Match order</h4>
+<p class="example-description">
+	The statements in <code>sizes</code> are read first to last, and the first matching one will one. This means order
+	is important depending on how you write your media conditions.
+</p>
+<h5>Fallback</h5>
+<p class="example-description">
+	The final entry in <code>sizes</code> doesn't have a condition, it's just a source size value. It is a fallback
+	and is used if none of the media conditions match.
+</p>
+<h4>CSS pixels, device pixels and pixel density</h4>
+<p class="example-description">
+	An important thing to note is the <code>sizes</code> media conditions use CSS pixels, but the actual image size
+	chosen from <code>srcset</code> will be chosen taking the pixel density of the device into account.
+</p>
+<h4 id="srcset-sizes-worked-example">Worked example</h4>
+<p class="example-description">
+	Above is an example image using <code>srcset</code> and <code>sizes</code>. Described here are the steps taken
+	by the browser to work out the final image to display, in this example for an iPhone 11 in portrait orientation.
+</p>
+<ol>
+	<li>
+		Work out the entry from <code>sizes</code> that matches:
+		<ol>
+			<li>The width of an iPhone 11 in CSS pixels is 414.</li>
+			<li>Going down the <code>sizes</code> list from the top, the first condition to match is
+				<code class="sizes-media-condition">min-width: 300px</code>.
+			</li>
+			<li>
+				This has a source size value (the right-hand size) of
+				<code class="sizes-source-size-value">300px</code> which is the desired width
+				of the image in CSS pixels.
+			</li>
+		</ol>
+	</li>
+	<li>
+		Work out that entry from <code>srcset</code> that matches:
+		<ol>
+			<li>
+				First work out what the desired image size in device pixels. We do this by multiplying the source
+				size value we just worked out by the device's pixel density, which for iPhone 11 is 2. In this case
+				that's:
+				<i style="display: block; margin-left: var(--spacing-20)">
+					<span class="sizes-source-size-value">300px</span> (CSS pixels) * 2 (pixel density) =
+					600px (device pixels)
+				</i>
+			</li>
+			<li>
+				The <code>srcset</code> attribute is then consulted to find the closest matching image. In this case
+				there is a width descriptor of <code class="srcset-width-descriptor">600w</code> which matches 600px
+				exactly. This results in the corresponding <code class="srcset-src">600x600.png</code> image being
+				chosen.
+			</li>
+		</ol>
+	</li>
+</ol>
+</body>
+
+<script src="../../nav.js"></script>
+<script>createNav()</script>
+<script src="info-panel.js"></script>
+</html>

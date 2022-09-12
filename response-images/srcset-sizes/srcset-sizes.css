@@ -1,4 +1,4 @@
-body {
+.example-page {
 	max-width: none;
 	margin: var(--spacing-20);
 }
@@ -15,6 +15,9 @@ body {
 }
 .example:not(:last-of-type) {
 	border-bottom: 1px solid black;
+}
+.example-img-figure {
+	margin: 0;
 }
 
 /* srcset sizes example */

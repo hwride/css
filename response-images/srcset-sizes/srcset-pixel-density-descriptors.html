@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Response images with srcset and sizes</title>
+	<link rel="stylesheet" type="text/css" href="../../common.css">
+	<link rel="stylesheet" type="text/css" href="srcset-sizes.css">
+</head>
+<body class="example-page">
+<h1>Image with <code>srcset</code> and pixel density descriptors</h1>
+<figure class="example-img-figure">
+	<img
+		alt="A test responsive image"
+		src="fallback.png"
+		srcset="
+		600x600.png 1x,
+		1200x1200.png 2x,
+		1500x1500.png 3x
+	"/>
+	<figcaption>
+		<pre>
+&lt;img alt="A test responsive image"
+     src="fallback.png"
+     srcset="600x600.png 1x,
+             1200x1200.png 2x,
+             1500x1500.png 3x" /&gt;
+		</pre>
+	</figcaption>
+</figure>
+
+<p class="example-description">
+	The pixel density descriptor of <code>srcset</code> lets you tell the browser what image should be used
+	depending on the device pixel ratio. If there are 1x, 2x or 3x device pixels to CSS pixels then the corresponding
+	image will be chosen.
+</p>
+<p class="example-description">
+	You can see the device pixel ratio in the information in the bottom right of the screen under
+	<code>devicePixelRatio</code>.
+</p>
+<p class="example-description">
+	Note that the actual number width of the device or window does not affect the calculation, only the device pixel
+	ratio.
+</p>
+</body>
+
+<script src="../../nav.js"></script>
+<script>createNav()</script>
+<script src="info-panel.js"></script>
+</html>

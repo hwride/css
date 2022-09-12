@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Response images with srcset and sizes</title>
+	<link rel="stylesheet" type="text/css" href="../../common.css">
+	<link rel="stylesheet" type="text/css" href="srcset-sizes.css">
+</head>
+<body>
+<h1>Response images with srcset and sizes</h1>
+<ul>
+	<li><a href="#references">References</a></li>
+	<li><a href="#general-notes">General notes</a></li>
+	<li><a href="#examples">Examples</a></li>
+	<li><a href="#questions">Questions</a></li>
+	<li><a href="#results">Results</a></li>
+</ul>
+
+<h2 id="references">References</h2>
+<ul>
+	<li>
+		<a href="https://jakearchibald.com/2015/anatomy-of-responsive-images/">
+			Jake Archibald - The anatomy of responsive images
+		</a>
+	</li>
+	<li><a href="https://caniuse.com/srcset">caniuse - srcset and sizes</a></li>
+	<li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#attr-img-srcset">HTML specification</a></li>
+	<li>
+		<a href="https://bugs.chromium.org/p/chromium/issues/detail?id=788105">
+			Chromium bug discussing the Blink engine implementation of choosing from srcset
+		</a>
+	</li>
+</ul>
+
+<h2 id="general-notes">General notes</h2>
+<ul>
+	<li>
+		DevTools device size and DPR emulation can give inaccurate results when testing responsive images. You're better
+		off testing by resizing the actual browser window and getting real devices with different DPRs.
+	</li>
+	<li>
+		The zoom level can affect device pixel ratio. If you notice the device pixel ratio isn't what you expect check
+		if you're zoomed in.
+	</li>
+	<li>
+		If you use the multiple responsive images on the same page, and they load the same images, it appears that Chrome
+		will cache the results and re-use them if possible. For example if you had an image with this srcset:
+		<code>srcset="600x600.png 1x, 1200x1200.png 2x, 1500x1500.png 3x"</code> on a device with a DPR of 1, you would
+		expect it to load the 600x600.png image. But, if another image has loaded 1500x1500.png, that will be used instead,
+		presumably as it is higher quality and is loaded anyway for the other image.
+	</li>
+</ul>
+
+<h2 id="examples">Examples</h2>
+<ul>
+	<li><a href="srcset-pixel-density-descriptors.html">Image with <code>srcset</code> and pixel density descriptor</a></li>
+	<li><a href="srcset-width-descriptors.html">Image with <code>srcset</code> and pixel widths</a></li>
+	<li><a href="srcset-width-srcset-sizes.html">Image with <code>srcset</code> and <code>sizes</code> attribute</a></li>
+</ul>
+
+<h2 id="questions">Questions</h2>
+<ul>
+	<li>
+		How does rounding work for device pixel ratio and width descriptors with srcset?
+		Does it round up to the nearest matching image ensure we never have an image too low resolution?
+	</li>
+	<li>
+		Why are the images below different rendered widths when the same image is picked? I.e. sometimes the picked
+		image is the 1500x1500, but its rendered with is 600x600. This is when no width information is provided on HTML
+		attributes or in the CSS, so why is it not the natural image size?
+	</li>
+	<li>
+		Which parts of <code>srcset</code> and <code>sizes</code> are suggestions vs. enforced? I've read something
+		about <code>&lt;picture&gt;</code> element being enforced, but <code>srcset</code> and <code>sizes</code>
+		being more suggestions.
+	</li>
+</ul>
+
+<!-- Results -->
+<div id="results">
+	<h2>
+		Results
+	</h2>
+	<div style="color: red; font-size: 3rem">NOTE THESE RESULTS ARE OUT OF DATE NOW AND NEED RE-DOING</div>
+	<p class="example-description">
+		Here is a recording of the images that were loaded for various device, browser and window sizes combinations
+		for the examples above.
+	</p>
+	<p class="example-description">
+		Known bugs are marked in red. Suspected bugs or confusing results are marked in yellow.
+	</p>
+	<table class="results-table">
+		<thead>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+</div>
+
+<h3>Notes</h3>
+<ul class="results-notes">
+	<li>
+		<sup class="iphone-sup-num"></sup> See the <a href="#srcset-sizes-worked-example">worked example</a> for
+		details on why this value was chosen.
+	</li>
+	<li>
+		<sup class="moto-width-sup-num"></sup> The moto e(7i) power reports an <code>innerWidth</code> larger than
+		<code>outerWidth</code>. This essentially appears to be an Android bug on mobile.
+	</li>
+	<li>
+		<p>
+			<sup class="windows-dpr-sup-num"></sup> Windows + Chrome appears to change the selected image for the pixel
+			density srcset example when the window size changes, even though the pixel density remains the same. This isn't
+			what I'd expect and doesn't seem to match the intention of pixel density descriptors.
+		</p>
+		<p>
+			Note Firefox maintains a consistent DPR based image at all windows sizes which seems correct.
+		</p>
+	</li>
+	<li>
+		<sup class="windows-srcset-sizes-sup-num"></sup>
+		Some combinations of browser and device seem to be selecting the wrong image for <code>srcset</code> +
+		<code>sizes</code> test image. For example on Windows + Chrome, with a device width between
+		601px and 1200px, it appears to select the 1200px image. But I would have expected it to select the 600px image up
+		to a device width of 1199px. Reasoning as follows:
+		<ol>
+			<li>
+				Find the matching media condition in <code>sizes</code>. The width of 601px matches
+				<code>(min-width: 600px) 600px</code>, so we want a 600px image.
+			</li>
+			<li>
+				<p>
+					Find the matching entry in <code>srcset</code>. The pixel density is 1x, so no need to multiply
+					our source size value. This means we want to find a width descriptor that matches 600px. The
+					entry <code>600x600.png 600w</code> matches 600px exactly, so I would expect the
+					<code>600x600.png</code> image to be used. But instead the 1200px image is selected.
+				</p>
+				<p>
+					Note that the iPhone 11 at a size of 800px selects the 1200px as well, but this is expected
+					because it has a pixel density of 2x (see worked example above for details).
+				</p>
+			</li>
+		</ol>
+		<p>
+			The same apparently buggy logic seems to apply for the following as well:
+		</p>
+		<ul>
+			<li>
+				Windows 10 + Chrome when <code>innerWidth</code> changes to 1201px. Here I'd expect:
+				<code>(min-width: 1200px) 1200px</code> matches. 1200 CSS pixels * 1 DPR = 1200 device pixels.
+				Match the <code>1200x1200.png 1200w</code> image.
+			</li>
+			<li>
+				The moto e(7i) power at an <code>outerWidth</code> of 412px. Here I'd expect:
+				<code>(min-width: 300px) 300px</code> matches. 300 CSS pixels * 1.75 DPR = 525 device pixels.
+				Match the <code>600x600.png 600w</code> image.
+			</li>
+		</ul>
+		<p>
+			Note that the iPhone 11 and Windows 10 + Firefox seem to have the correct behaviour here.
+		</p>
+	</li>
+</ul>
+</body>
+<script src="../../nav.js"></script>
+<script>createNav()</script>
+<script src="srcset-sizes-results.js"></script>
+<script src="srcset-sizes.js"></script>
+</html>

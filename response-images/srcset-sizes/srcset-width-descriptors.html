@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Response images with srcset and sizes</title>
+	<link rel="stylesheet" type="text/css" href="../../common.css">
+	<link rel="stylesheet" type="text/css" href="srcset-sizes.css">
+</head>
+<body class="example-page">
+<h1>Image with <code>srcset</code> and pixel widths</h1>
+<figure class="example-img-figure">
+	<img alt="A test responsive image"
+			 src="fallback.png"
+			 srcset="300x300.png 300w,
+							 600x600.png 600w,
+							 1200x1200.png 1200w,
+							 1500x1500.png 1500w"/>
+	<figcaption>
+			<pre>
+&lt;img alt="A test responsive image"
+     src="fallback.png"
+     srcset="300x300.png 300w,
+             600x600.png 600w,
+             1200x1200.png 1200w,
+             1500x1500.png 1500w" /&gt;
+			</pre>
+	</figcaption>
+</figure>
+
+<p class="example-description">
+	Here <code>srcset</code> is used to define at images at different sizes. The format is:
+	<code>&lt;image-url&gt; &lt;width descriptor&gt;</code>. Width descriptor describes the pixel width of the source
+	image.
+</p>
+
+<h3>Without sizes</h3>
+<p class="example-description">
+	Some resources online say that when <code>srcset</code> is used without <code>sizes</code>, it is assumed the
+	image should fill the entire browser width. This seems to be the de-facto behaviour. But note that according to the
+	specification it is invalid to use<code>srcset</code> with width descriptors without a <code>sizes</code> attribute:
+</p>
+<blockquote cite="https://html.spec.whatwg.org/multipage/embedded-content.html#attr-img-srcset">
+	If the <code>srcset</code> attribute is present and has any image candidate strings using a width
+	descriptor, the <code>sizes</code> attribute must also be present
+</blockquote>
+
+<h3>Pixel density</h3>
+<p class="example-description">
+	Note that even when using width descriptors with <code>srcset</code>, the browser will try and take pixel density
+	into account. It will do this by selecting an image size according to device pixels rather than CSS pixels. You
+	can see this value in the info section as <code>devicePixelRatio * outerWidth</code>.
+</p>
+</body>
+
+<script src="../../nav.js"></script>
+<script>createNav()</script>
+<script src="info-panel.js"></script>
+</html>
