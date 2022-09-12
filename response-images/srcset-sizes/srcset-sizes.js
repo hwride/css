@@ -56,7 +56,10 @@ for(const [device, deviceResults] of resultsGroupedByDevice) {
       console.log('mouseover ', matchingRows)
       allRows.forEach(row => row.classList.remove('results-table-highlight'));
       matchingRows.forEach(rowInfo => rowInfo.tr.classList.add('results-table-highlight'));
-    })
+    });
+    tr.addEventListener('mouseout', function() {
+      allRows.forEach(row => row.classList.remove('results-table-highlight'));
+    });
     // Mark odd rows of each device section for styling.
     // Don't mark even rows as that captures the rowspan device cell which we don't want to style.
     if(deviceResultIndex % 2 !== 0) tr.classList.add('odd-row');
