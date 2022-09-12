@@ -1,4 +1,6 @@
-const infoPanelHtml = `
+(() => {
+
+  const infoPanelHtml = `
 <div class="info">
 	<table>
 		<tr>
@@ -24,16 +26,29 @@ const infoPanelHtml = `
 	</table>
 </div>
 `;
-document.body.innerHTML += infoPanelHtml;
+  document.body.innerHTML += infoPanelHtml;
+  const infoPanelUpdateFuncs = [];
+  window.addInfoPanelSection = (name, value, updateFunc) => {
+    const infoPanel = document.querySelector('.info table');
+    infoPanel.innerHTML += `<tr>
+	<td>${name}</td>
+	<td>${value}</td>
+</tr>`;
+    updateFunc(); // Run for first time.
+    infoPanelUpdateFuncs.push(updateFunc);
+  }
 
-/* Hook up device info panel */
-function updateDeviceInfo() {
-  document.querySelector('.device-pixel-ratio').innerHTML = window.devicePixelRatio;
-  document.querySelector('.window-outer-width').innerHTML = window.outerWidth;
-  document.querySelector('.window-inner-width').innerHTML = window.innerWidth;
-  document.querySelector('.device-pixels-outer').innerHTML = window.devicePixelRatio * window.outerWidth;
-  document.querySelector('.device-pixels-inner').innerHTML = window.devicePixelRatio * window.innerWidth;
-}
-updateDeviceInfo()
+  /* Hook up device info panel */
+  function updateDeviceInfo() {
+    document.querySelector('.device-pixel-ratio').innerHTML = window.devicePixelRatio;
+    document.querySelector('.window-outer-width').innerHTML = window.outerWidth;
+    document.querySelector('.window-inner-width').innerHTML = window.innerWidth;
+    document.querySelector('.device-pixels-outer').innerHTML = window.devicePixelRatio * window.outerWidth;
+    document.querySelector('.device-pixels-inner').innerHTML = window.devicePixelRatio * window.innerWidth;
+    infoPanelUpdateFuncs.forEach(hook => hook())
+  }
 
-window.addEventListener('resize', updateDeviceInfo)
+  updateDeviceInfo()
+
+  window.addEventListener('resize', updateDeviceInfo)
+})();
