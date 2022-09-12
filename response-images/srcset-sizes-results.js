@@ -10,7 +10,9 @@ const motoWidthSupNum = getSupNum('.moto-width-sup-num');
 const windowsDprSupNum = getSupNum('.windows-dpr-sup-num');
 const windowsSrcSetSizesSupNum = getSupNum('.windows-srcset-sizes-sup-num');
 
-const results = [{
+const results = [
+  // iPhone 11 + Safari
+  {
   device: 'iPhone 11 +<br/>Safari',
   devicePixelRatio: '2',
   innerWidth: '414',
@@ -31,7 +33,10 @@ const results = [{
   selectedImageSrcsetDpr: '1200x250',
   selectedImageSrcsetWidthDescriptor: '1500x250',
   selectedImageSrcsetPxSizes: '1200x250',
-}, {
+},
+
+  // moto e(7i) power + Chrome
+  {
   device: 'moto e(7i) power +<br/>Android 10 +<br/>Chrome 97',
   devicePixelRatio: '1.75',
   innerWidth: '656',
@@ -45,6 +50,8 @@ const results = [{
   selectedImageSrcsetDpr: '1200x250',
   selectedImageSrcsetWidthDescriptor: '1200x250',
   selectedImageSrcsetPxSizes: '1200x250',
+    selectedImageSrcsetPxSizesStyle: 'warn',
+    selectedImageSrcsetPxSizesAdditionalText: windowsSrcSetSizesSupNum,
 },
 
   // Windows 10 + Chrome

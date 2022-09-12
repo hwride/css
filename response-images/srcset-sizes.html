@@ -303,6 +303,9 @@
 		Here is a recording of the images that were loaded for various device, browser and window sizes combinations
 		for the examples above.
 	</p>
+	<p class="example-description">
+		Known bugs are marked in red. Suspected bugs or confusing results are marked in yellow.
+	</p>
 	<table class="results-table">
 		<thead>
 		</thead>
@@ -331,9 +334,11 @@
 		</p>
 	</li>
 	<li>
-		<sup class="windows-srcset-sizes-sup-num"></sup> Between 601px and 1200px Windows + Chrome appears to select
-		the 1200px image. I would have expected it to select the 600px image up to a device width of 1199px. The
-		steps I would have expected to lead to this results are as follows:
+		<sup class="windows-srcset-sizes-sup-num"></sup>
+		Some combinations of browser and device seem to be selecting the wrong image for <code>srcset</code> +
+		<code>sizes</code> test image. For example on Windows + Chrome, with a device width between
+		601px and 1200px, it appears to select the 1200px image. But I would have expected it to select the 600px image up
+		to a device width of 1199px. Reasoning as follows:
 		<ol>
 			<li>
 				Find the matching media condition in <code>sizes</code>. The width of 601px matches
@@ -353,11 +358,22 @@
 			</li>
 		</ol>
 		<p>
-			The same applies when <code>innerWidth</code> changes to 1201px, I'd expect the image selected to be
-			1200px.
+			The same apparently buggy logic seems to apply for the following as well:
 		</p>
+		<ul>
+			<li>
+				Windows 10 + Chrome when <code>innerWidth</code> changes to 1201px. Here I'd expect:
+				<code>(min-width: 1200px) 1200px</code> matches. 1200 CSS pixels * 1 DPR = 1200 device pixels.
+				Match the <code>1200x250.png 1200w</code> image.
+			</li>
+			<li>
+				The moto e(7i) power at an <code>outerWidth</code> of 412px. Here I'd expect:
+				<code>(min-width: 300px) 300px</code> matches. 300 CSS pixels * 1.75 DPR = 525 device pixels.
+				Match the <code>600x250.png 600w</code> image.
+			</li>
+		</ul>
 		<p>
-			Note that Firefox has what seems like the correct behaviour here.
+			Note that the iPhone 11 and Windows 10 + Firefox seem to have the correct behaviour here.
 		</p>
 	</li>
 </ul>
