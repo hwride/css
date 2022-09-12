@@ -61,6 +61,9 @@ body {
 .results-table .style-error {
 	background: #ff9966;
 }
+.results-table .odd-row {
+	background: #e1e1e1;
+}
 
 .results-notes {
 	list-style-type: none;

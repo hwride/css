@@ -52,6 +52,9 @@ for(const [device, deviceResults] of resultsGroupedByDevice) {
     const isLastRow = deviceResultIndex === deviceResults.length - 1;
 
     const tr = document.createElement('tr');
+    // Mark odd rows of each device section for styling.
+    // Don't mark even rows as that captures the rowspan device cell which we don't want to style.
+    if(deviceResultIndex % 2 !== 0) tr.classList.add('odd-row');
 
     // Add device with rowspan to the first row.
     if(isFirstRow) {
@@ -71,7 +74,7 @@ for(const [device, deviceResults] of resultsGroupedByDevice) {
       if(additionalText) {
         td.innerHTML += additionalText;
       }
-      
+
       if(isLastRow && !isLastDevice) {
         td.classList.add('section-end-row');
       }
