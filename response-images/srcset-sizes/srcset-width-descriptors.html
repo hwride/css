@@ -3,12 +3,12 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Response images with srcset and sizes</title>
+	<title>Image with srcset and width descriptors, but no sizes</title>
 	<link rel="stylesheet" type="text/css" href="../../common.css">
 	<link rel="stylesheet" type="text/css" href="srcset-sizes.css">
 </head>
 <body class="example-page">
-<h1>Image with <code>srcset</code> and pixel widths</h1>
+<h1>Image with <code>srcset</code> and width descriptors, but no sizes</h1>
 <figure class="example-img-figure">
 	<img alt="A test responsive image"
 			 src="fallback.png"
@@ -37,12 +37,12 @@
 <h3>Without sizes</h3>
 <p class="example-description">
 	Some resources online say that when <code>srcset</code> is used without <code>sizes</code>, it is assumed the
-	image should fill the entire browser width. This seems to be the de-facto behaviour. But note that according to the
-	specification it is invalid to use<code>srcset</code> with width descriptors without a <code>sizes</code> attribute:
+	image should fill the entire browser width, and this seems to be the de-facto behaviour. But note that according to
+	the specification it is invalid to use <code>srcset</code> with width descriptors without a <code>sizes</code> attribute:
 </p>
 <blockquote cite="https://html.spec.whatwg.org/multipage/embedded-content.html#attr-img-srcset">
 	If the <code>srcset</code> attribute is present and has any image candidate strings using a width
-	descriptor, the <code>sizes</code> attribute must also be present
+	descriptor, the <code>sizes</code> attribute must also be present...
 </blockquote>
 
 <h3>Pixel density</h3>

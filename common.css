@@ -98,3 +98,10 @@ body {
 		max-width: 1200px;
 	}
 }
+
+.code-block {
+	display: block;
+	margin-block: var(--spacing-10);
+	padding: var(--spacing-20);
+	background: #e1e1e1;
+}

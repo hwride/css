@@ -13,7 +13,6 @@
 	<li><a href="#references">References</a></li>
 	<li><a href="#general-notes">General notes</a></li>
 	<li><a href="#examples">Examples</a></li>
-	<li><a href="#questions">Questions</a></li>
 	<li><a href="#results">Results</a></li>
 </ul>
 
@@ -44,6 +43,11 @@
 		if you're zoomed in.
 	</li>
 	<li>
+		The OS settings can affect the device pixel ratio. For example in Windows under "Display / Scale & Layout /
+		Change the size of text, apps, and other items" you can set the text size to be greater than 100%. This causes
+		the device pixel ratio to increase a proportionate amount.
+	</li>
+	<li>
 		If you use the multiple responsive images on the same page, and they load the same images, it appears that Chrome
 		will cache the results and re-use them if possible. For example if you had an image with this srcset:
 		<code>srcset="600x600.png 1x, 1200x1200.png 2x, 1500x1500.png 3x"</code> on a device with a DPR of 1, you would
@@ -55,8 +59,8 @@
 <h2 id="examples">Examples</h2>
 <ul>
 	<li><a href="srcset-pixel-density-descriptors.html">Image with <code>srcset</code> and pixel density descriptor</a></li>
-	<li><a href="srcset-width-descriptors.html">Image with <code>srcset</code> and pixel widths</a></li>
 	<li><a href="srcset-width-srcset-sizes.html">Image with <code>srcset</code> and <code>sizes</code> attribute</a></li>
+	<li><a href="srcset-width-descriptors.html">Image with <code>srcset</code> and width descriptors, but no sizes</a></li>
 </ul>
 
 <!-- Results -->

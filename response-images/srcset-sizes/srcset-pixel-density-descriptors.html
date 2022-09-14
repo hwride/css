@@ -42,6 +42,22 @@
 	Note that the actual width of the device or window does not affect the calculation, only the device pixel
 	ratio.
 </p>
+
+<h3>Image element width</h3>
+<p class="example-description">
+	The width of the image element take the pixel density account when determining its size. The equation is:
+	<code class="code-block">image element width = width of the source image / pixel density</code>
+	For the examples above:
+</p>
+<ul>
+	<li>The 600x600.png has a pixel density of 1x, 600/1 = 600 CSS pixels.</li>
+	<li>The 1200x1200.png has a pixel density of 2x, 1200/2 = 600 CSS pixels.</li>
+	<li>
+		The 1500x1500.png has a pixel density of 3x, 1500/3 = 500 CSS pixels. Note how 1500 isn't actually 3x the
+		pixel density, so this actually a mistake. But it's a good demonstration of how the image width takes pixel
+		density into account.
+	</li>
+</ul>
 </body>
 
 <script src="../../nav.js"></script>
