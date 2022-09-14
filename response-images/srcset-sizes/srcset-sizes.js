@@ -53,7 +53,6 @@ for(const [device, deviceResults] of resultsGroupedByDevice) {
     // When hovering a row, add class to other rows with matching innerWidth.
     tr.addEventListener('mouseover', function() {
       const matchingRows = rowsByInnerWidth.get(innerWidth);
-      console.log('mouseover ', matchingRows)
       allRows.forEach(row => row.classList.remove('results-table-highlight'));
       matchingRows.forEach(rowInfo => rowInfo.tr.classList.add('results-table-highlight'));
     });
