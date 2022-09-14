@@ -6,9 +6,24 @@
 	<title>Response images with srcset and sizes</title>
 	<link rel="stylesheet" type="text/css" href="../../common.css">
 	<link rel="stylesheet" type="text/css" href="srcset-sizes.css">
+	<script src="../../common/headers.js"></script>
 </head>
 <body class="example-page">
 <h1>Image with <code>srcset</code> and <code>sizes</code> attribute</h1>
+
+<ol>
+	<li>
+		<a href="#match-order">Match order</a>
+		<ol>
+			<li><a href="#match-order">Fallback</a></li>
+		</ol>
+	</li>
+	<li><a href="#rounding">Rounding</a></li>
+	<li><a href="#dpr">CSS pixels, device pixels and pixel density</a></li>
+	<li><a href="#art-direction">Art direction?</a></li>
+	<li><a href="#img-el-width">Image element width</a></li>
+	<li><a href="#srcset-sizes-worked-example">Worked example</a></li>
+</ol>
 
 <figure class="example-img-figure">
 	<!-- src is a fallback for older browsers -->
@@ -47,29 +62,31 @@
 </figure>
 
 <p class="example-description">
-	When using the <code>sizes</code> attributes you are able to specify conditions about when each image should be
-	used.
+	When using the <code>sizes</code> attributes you are able to specify what size of the image that should be used
+	in CSS pixels by defining matching media conditions. The intention is you as the author know exactly how an image
+	will be used, and if you know for example that at certain viewports the image will only be 300px wide, or
+	<code>33vw</code>, you define this. The browser will then be able to pick smaller images in some cases saving size.
 </p>
 
-<h2>Match order</h2>
+<h2 id="match-order">Match order</h2>
 <p class="example-description">
 	The statements in <code>sizes</code> are read first to last, and the first matching one will one. This means order
 	is important depending on how you write your media conditions.
 </p>
-<h3>Fallback</h3>
+<h3 id="fallback">Fallback</h3>
 <p class="example-description">
 	The final entry in <code>sizes</code> doesn't have a condition, it's just a source size value. It is a fallback
 	and is used if none of the media conditions match.
 </p>
 
-<h2>Rounding</h2>
+<h2 id="rounding">Rounding</h2>
 <p class="example-description">
 	If no image in <code>srcset</code> has a width descriptor that exactly matches an image then generally the
 	browser will round up to the next largest. This essentially errs on ensuring the image always looks good vs.
 	choosing the smallest image.
 </p>
 
-<h2>CSS pixels, device pixels and pixel density</h2>
+<h2 id="dpr">CSS pixels, device pixels and pixel density</h2>
 <p class="example-description">
 	Note the following about different parts of <code>srcset</code> and <code>sizes</code>:
 </p>
@@ -87,7 +104,32 @@
 	density/device pixel ratio into account. See the worked example below for more details.
 </p>
 
-<h3>Image element width</h3>
+<h2 id="art-direction">Art direction?</h2>
+<p class="example-description">
+	It might seem like you could use the media conditions in <code>sizes</code> to control art direction. For example
+	you might specify that on devices that were less than 300px you use a square image, but on devices that are larger
+	than this you'll use a rectangular image. This won't work for two reasons:
+</p>
+<ul>
+	<li>
+		<b>Pixel density corrections by the browser</b>. As described in the <a href="#dpr">pixel density</a> section
+		above,
+		the browser will choose different images if there is a higher pixel density, even if the screen size in CSS
+		pixels is identical. For example if you had the example image at the top of the page, and you were on a 300px
+		device. On a 1x DPI device the browser might select the 300px image, but on a 2x device it might select the
+		600px image. If you'd made your 600px image a rectangle, this wouldn't be correct on mobile.
+	</li>
+	<li>
+		<b><code>srcset</code> values are only suggestions</b>. The browser can decide to download a different image than
+		the one that might have matched exactly, for example it might download a smaller image if network conditions
+		are poor.
+	</li>
+</ul>
+<p class="example-description">
+	If you want art direction, the solution is to use the <code>&lt;picture&gt;</code> element.
+</p>
+
+<h2 id="img-el-width">Image element width</h2>
 <p class="example-description">
 	When <code>srcset</code> is used with <code>sizes</code> the width of the image element on the page is
 	set according to the source size descriptor of the matching <code>sizes entry</code>. E.g. if the
@@ -95,13 +137,7 @@
 	apply regardless of the actual size of the source image, as the browser essentially trusts you've given it
 	correct information in the <code>sizes</code> attribute, so won't override that even if the actual image has a
 	different size, it essentially replaces the intrinsic dimensions of the image.
-</p>
-
-<h4>Pixel density</h4>
-<p class="example-description">
-	Note that when the pixel density is taken into account when the browser decides how wide to render an
-	image selected using <code>srcset</code> and <code>sizes</code>. It will attem
-</p>
+</p>>
 
 <h2 id="srcset-sizes-worked-example">Worked example</h2>
 <p class="example-description">
