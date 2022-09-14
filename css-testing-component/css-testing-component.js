@@ -43,15 +43,15 @@ function createCSSTestingComponent(options) {
 
 	function create() {
 		return new Promise(function(resolve) {
-			let initialHTML;
+			let initialHTML = '';
 			if(options.html) initialHTML = options.html.trim();
 			else if(options.buttons?.length > 0) initialHTML = options.buttons[0].html.trim();
 
-			let initialCSS;
+			let initialCSS = '';
 			if(options.css) initialCSS = options.css.trim();
 			else if(options.buttons?.length > 0) initialCSS = options.buttons[0].css.trim();
 
-			let initialDescription;
+			let initialDescription = '';
 			if(options.description) initialDescription = options.description;
 			else if(options.buttons?.length > 0) initialDescription = options.buttons[0].description;
 
