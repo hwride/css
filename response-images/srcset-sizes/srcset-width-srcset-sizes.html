@@ -62,11 +62,58 @@
 </figure>
 
 <p class="example-description">
-	When using the <code>sizes</code> attributes you are able to specify what size of the image that should be used
-	in CSS pixels by defining matching media conditions. The intention is you as the author know exactly how an image
-	will be used, and if you know for example that at certain viewports the image will only be 300px wide, or
-	<code>33vw</code>, you define this. The browser will then be able to pick smaller images in some cases saving size.
+	When using the <code>sizes</code> attributes you are able to specify the size an image will be (in CSS pixels) when
+	used on the page in different scenarios. You do this by defining
+	<code>&lt;media-condition&gt; &lt;image-size&gt;</code> in
+	<code>sizes</code>. The intention is you as the author know exactly how an image will be used, and if you know
+	that an image will only be 300px or <code>33vw</code> wide in certain cases, you can tell the browser this.
+	The browser can then choose to download a smaller image from <code>srcset</code> than it would have otherwise.
+	Because if you don't tell it how big the image will be, it assumes worst case scenario, that the image will be
+	the full width of the viewport.
 </p>
+
+<h2 id="srcset-sizes-worked-example">Worked example</h2>
+<p class="example-description">
+	Above is an example image using <code>srcset</code> and <code>sizes</code>. Described here are the steps taken
+	by the browser to work out the final image to display, in this example for an iPhone 11 in portrait orientation.
+</p>
+
+<ol>
+	<li>
+		Work out the entry from <code>sizes</code> that matches:
+		<ol>
+			<li>The width of an iPhone 11 in CSS pixels is 414.</li>
+			<li>Going down the <code>sizes</code> list from the top, the first condition to match is
+				<code class="sizes-media-condition">min-width: 300px</code>.
+			</li>
+			<li>
+				This has a source size value (the right-hand size) of
+				<code class="sizes-source-size-value">300px</code> which is the desired width
+				of the image in CSS pixels.
+			</li>
+		</ol>
+	</li>
+	<li>
+		Work out that entry from <code>srcset</code> that matches:
+		<ol>
+			<li>
+				First work out what the desired image size in device pixels. We do this by multiplying the source
+				size value we just worked out by the device's pixel density, which for iPhone 11 is 2. In this case
+				that's:
+				<i style="display: block; margin-left: var(--spacing-20)">
+					<span class="sizes-source-size-value">300px</span> (CSS pixels) * 2 (pixel density) =
+					600px (device pixels)
+				</i>
+			</li>
+			<li>
+				The <code>srcset</code> attribute is then consulted to find the closest matching image. In this case
+				there is a width descriptor of <code class="srcset-width-descriptor">600w</code> which matches 600px
+				exactly. This results in the corresponding <code class="srcset-src">600x600.png</code> image being
+				chosen.
+			</li>
+		</ol>
+	</li>
+</ol>
 
 <h2 id="match-order">Match order</h2>
 <p class="example-description">
@@ -138,48 +185,6 @@
 	correct information in the <code>sizes</code> attribute, so won't override that even if the actual image has a
 	different size, it essentially replaces the intrinsic dimensions of the image.
 </p>
-
-<h2 id="srcset-sizes-worked-example">Worked example</h2>
-<p class="example-description">
-	Above is an example image using <code>srcset</code> and <code>sizes</code>. Described here are the steps taken
-	by the browser to work out the final image to display, in this example for an iPhone 11 in portrait orientation.
-</p>
-<ol>
-	<li>
-		Work out the entry from <code>sizes</code> that matches:
-		<ol>
-			<li>The width of an iPhone 11 in CSS pixels is 414.</li>
-			<li>Going down the <code>sizes</code> list from the top, the first condition to match is
-				<code class="sizes-media-condition">min-width: 300px</code>.
-			</li>
-			<li>
-				This has a source size value (the right-hand size) of
-				<code class="sizes-source-size-value">300px</code> which is the desired width
-				of the image in CSS pixels.
-			</li>
-		</ol>
-	</li>
-	<li>
-		Work out that entry from <code>srcset</code> that matches:
-		<ol>
-			<li>
-				First work out what the desired image size in device pixels. We do this by multiplying the source
-				size value we just worked out by the device's pixel density, which for iPhone 11 is 2. In this case
-				that's:
-				<i style="display: block; margin-left: var(--spacing-20)">
-					<span class="sizes-source-size-value">300px</span> (CSS pixels) * 2 (pixel density) =
-					600px (device pixels)
-				</i>
-			</li>
-			<li>
-				The <code>srcset</code> attribute is then consulted to find the closest matching image. In this case
-				there is a width descriptor of <code class="srcset-width-descriptor">600w</code> which matches 600px
-				exactly. This results in the corresponding <code class="srcset-src">600x600.png</code> image being
-				chosen.
-			</li>
-		</ol>
-	</li>
-</ol>
 </body>
 
 <script src="../../nav.js"></script>
