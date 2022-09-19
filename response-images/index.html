@@ -11,32 +11,12 @@
 <body>
 <h1>Response images with srcset and sizes</h1>
 <ul>
-    <li><a href="#references">References</a></li>
+    <li><a href="#docs-and-examples">Documentation and examples</a></li>
     <li><a href="#general-and-testing-notes">General and testing notes</a></li>
-    <li><a href="#examples">Examples</a></li>
-    <li><a href="#srcset-sizes-test-results">Results from <code>srcset</code> and <code>sizes</code> testing</a></li>
+    <li><a href="#references">References</a></li>
 </ul>
 
-<h2 id="references">References</h2>
-<ul>
-    <li>
-        <a href="https://jakearchibald.com/2015/anatomy-of-responsive-images/">
-            Jake Archibald - The anatomy of responsive images
-        </a>
-    </li>
-    <li><a href="https://caniuse.com/srcset">caniuse - srcset and sizes</a> (supported in all latest browsers)</li>
-    <li><a href="https://caniuse.com/picture">caniuse - picture</a> (supported in all latest browsers)</li>
-    <li><a href="https://caniuse.com/webp">caniuse - WebP</a> (supported in all latest browsers)</li>
-    <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#attr-img-srcset">HTML specification</a>
-    </li>
-    <li>
-        <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=788105">
-            Chromium bug discussing the Blink engine implementation of choosing from srcset
-        </a>
-    </li>
-</ul>
-
-<h2 id="examples">Documentation and examples</h2>
+<h2 id="docs-and-examples">Documentation and examples</h2>
 <ul>
     <li><a href="max-width/max-width.html">Using <code>max-width: 100%</code> for responsive images</a></li>
     <li>
@@ -48,6 +28,11 @@
                 <code>sizes</code> attribute</a></li>
             <li><a href="srcset-sizes/srcset-width-descriptors.html"><code>srcset</code> with width
                 descriptors, but no sizes</a></li>
+            <li>
+                <a href="srcset-sizes/test-results.html">
+                    Results from <code>srcset</code> and sizes testing
+                </a>
+            </li>
         </ul>
     </li>
     <li>
@@ -85,35 +70,22 @@
     </li>
 </ul>
 
-<!-- Results -->
-<div id="srcset-sizes-test-results">
-    <h2>
-        Results from <code>srcset</code> and <code>sizes</code> testing
-    </h2>
-    <p class="example-description">
-        Here is a recording of the images that were loaded for various device, browser and window sizes combinations
-        for the examples above.
-    </p>
-    <table class="results-table">
-        <thead>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-</div>
-
-<h3>Notes</h3>
-<ul class="results-notes">
+<h2 id="references">References</h2>
+<ul>
     <li>
-        <sup class="iphone-sup-num"></sup> See the
-        <a href="srcset-sizes/srcset-width-srcset-sizes.html#srcset-sizes-worked-example">worked example</a> for
-        details on why this value was chosen.
+        <a href="https://jakearchibald.com/2015/anatomy-of-responsive-images/">
+            Jake Archibald - The anatomy of responsive images
+        </a>
+    </li>
+    <li><a href="https://caniuse.com/srcset">caniuse - srcset and sizes</a> (supported in all latest browsers)</li>
+    <li><a href="https://caniuse.com/picture">caniuse - picture</a> (supported in all latest browsers)</li>
+    <li><a href="https://caniuse.com/webp">caniuse - WebP</a> (supported in all latest browsers)</li>
+    <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#attr-img-srcset">HTML specification</a>
     </li>
     <li>
-        <sup class="moto-srcset-sizes-sup-num"></sup> The moto e(7i) power + Samsung Internet
-        selects a 1200px image for <code>srcset</code> and <code>sizes</code>. Here what I'd actually expect is:
-        <code>(min-width: 300px) 300px</code> matches. 300 CSS pixels * 1.75 DPR = 525 device pixels.
-        Match the <code>600x600.png 600w</code> image. This is what both Chrome and Firefox do.
+        <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=788105">
+            Chromium bug discussing the Blink engine implementation of choosing from srcset
+        </a>
     </li>
 </ul>
 </body>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Response images with srcset and sizes</title>
+    <link rel="stylesheet" type="text/css" href="../../common/common.css">
+    <link rel="stylesheet" type="text/css" href="srcset-sizes.css">
+    <script src="../../common/headers.js"></script>
+</head>
+<body>
+<h1>Test results for <code>srcset</code> and <code>sizes</code></h1>
+
+<!-- Results -->
+<div id="srcset-sizes-test-results">
+    <p class="example-description">
+        Here is a recording of the images that were loaded for various device, browser and window sizes combinations
+        for the examples above.
+    </p>
+    <table class="results-table">
+        <thead>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<h3>Notes</h3>
+<ul class="results-notes">
+    <li>
+        <sup class="iphone-sup-num"></sup> See the
+        <a href="srcset-width-srcset-sizes.html#srcset-sizes-worked-example">worked example</a> for
+        details on why this value was chosen.
+    </li>
+    <li>
+        <sup class="moto-srcset-sizes-sup-num"></sup> The moto e(7i) power + Samsung Internet
+        selects a 1200px image for <code>srcset</code> and <code>sizes</code>. Here what I'd actually expect is:
+        <code>(min-width: 300px) 300px</code> matches. 300 CSS pixels * 1.75 DPR = 525 device pixels.
+        Match the <code>600x600.png 600w</code> image. This is what both Chrome and Firefox do.
+    </li>
+</ul>
+</body>
+<script src="../../common/nav.js"></script>
+<script src="../responsive-images-nav.js"></script>
+<script src="srcset-sizes-results.js"></script>
+<script src="srcset-sizes.js"></script>
+</html>
