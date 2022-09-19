@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Response images with picture</title>
+    <link rel="stylesheet" type="text/css" href="../../common/common.css">
+    <link rel="stylesheet" type="text/css" href="../srcset-sizes/srcset-sizes.css">
+    <script src="../../common/headers.js"></script>
+</head>
+<body>
+<h1>Response images with <code>picture</code></h1>
+<figure class="example-img-figure">
+    <picture>
+        <!-- First <source> matching wins. -->
+        <source media="(max-width: 800px)"
+                srcset="f1-focused-800.jpg 800w,
+                        f1-focused-1406.jpg 1406w"
+                sizes="(min-width: 530px) calc(100vw - 96px),
+                       100vw">
+        <!-- Fallback if no <source>s match -->
+        <img alt="A test responsive image"
+             src="../srcset-sizes/fallback.png"
+             srcset="../srcset-sizes/300x300.png 300w,
+                     ../srcset-sizes/600x600.png 600w,
+                     ../srcset-sizes/1200x1200.png 1200w"
+             sizes="(min-width: 1200px) 1200px,
+                    (min-width: 600px) 600px,
+                    (min-width: 300px) 300px,
+                    300px"/>
+    </picture>
+
+    <figcaption>
+		<pre>
+&lt;img alt="A test responsive image"
+     src="fallback.png"
+     srcset="600x600.png 1x,
+             1200x1200.png 2x,
+             1500x1500.png 3x" /&gt;
+		</pre>
+    </figcaption>
+</figure>
+</body>
+
+<script src="../../common/nav.js"></script>
+<script src="../responsive-images-nav.js"></script>
+<script src="../srcset-sizes/info-panel.js"></script>
+<script src="../srcset-sizes/info-panel-image-width-section.js"></script>
+</html>
