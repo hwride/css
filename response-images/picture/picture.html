@@ -7,39 +7,132 @@
     <link rel="stylesheet" type="text/css" href="../../common/common.css">
     <link rel="stylesheet" type="text/css" href="../srcset-sizes/srcset-sizes.css">
     <script src="../../common/headers.js"></script>
+    <style>
+        .example-img {
+            width: 80vw;
+        }
+        @media only screen and (min-width: 600px) {
+            .example-img {
+                width: 50vw;
+            }
+        }
+    </style>
 </head>
 <body>
 <h1>Response images with <code>picture</code></h1>
 <figure class="example-img-figure">
     <picture>
         <!-- First <source> matching wins. -->
-        <source media="(max-width: 800px)"
-                srcset="f1-focused-800.jpg 800w,
-                        f1-focused-1406.jpg 1406w"
-                sizes="(min-width: 530px) calc(100vw - 96px),
-                       100vw">
+        <source media="(min-width: 600px)"
+                srcset="desktop-600x300.png 600w,
+                        desktop-1200x600.png 1200w"
+                sizes="50vw">
         <!-- Fallback if no <source>s match -->
-        <img alt="A test responsive image"
-             src="../srcset-sizes/fallback.png"
-             srcset="../srcset-sizes/300x300.png 300w,
-                     ../srcset-sizes/600x600.png 600w,
-                     ../srcset-sizes/1200x1200.png 1200w"
-             sizes="(min-width: 1200px) 1200px,
-                    (min-width: 600px) 600px,
-                    (min-width: 300px) 300px,
-                    300px"/>
+        <img class="example-img"
+             alt="A test responsive image"
+             src="mobile-1200x1200.png"
+             srcset="mobile-600x600.png 600w,
+                     mobile-1200x1200.png 1200w"
+             sizes="80vw"/>
     </picture>
 
     <figcaption>
 		<pre>
-&lt;img alt="A test responsive image"
-     src="fallback.png"
-     srcset="600x600.png 1x,
-             1200x1200.png 2x,
-             1500x1500.png 3x" /&gt;
+&lt;picture&gt;
+    &lt;source media="(min-width: 600px)"
+               srcset="desktop-600x300.png  600w,
+                       desktop-1200x600.png 1200w"
+               sizes="50vw"&gt;
+    &lt;img alt="A test responsive image"
+            src="mobile-1200x1200.png"
+            srcset="mobile-600x600.png   600w,
+                    mobile-1200x1200.png 1200w"
+            sizes="80vw"/&gt;
+&lt;/picture&gt;
 		</pre>
     </figcaption>
 </figure>
+
+<p class="example-description">
+    The <code>&lt;picture&gt;</code> element adds a number of features to your responsive images:
+</p>
+<ul>
+    <li>
+        The ability to control the image that is shown depending on media conditions. This allows control of art
+        direction.
+    </li>
+    <li>
+        The ability to define fallbacks image file formats. This allows you supply efficient image formats for browsers
+        that support them, and fallback to other image formats for other browsers.
+    </li>
+</ul>
+<p class="example-description">
+    The syntax inside <code>&lt;source&gt;</code> elements is the same as when using <code>srcset</code> and
+    <code>sizes</code> in a regular <code>&lt;img&gt;</code>.
+</p>
+
+<h2 id="srcset-sizes-worked-example">Worked example</h2>
+<p class="example-description">
+    Above is an example image using the <code>&lt;picture&gt;</code> element. Described here are the steps taken
+    by the browser to work out the final image to display, in this example for an iPhone 11 in portrait orientation.
+</p>
+
+<ol>
+    <li>
+        Work out the entry from the <code>&lt;picture&gt;</code> <code>&lt;source&gt;</code>s that matches:
+        <ol>
+            <li>The width of an iPhone 11 in CSS pixels is 414.</li>
+            <li>Going down the <code>&lt;source&gt;</code>s list from the top, none of the conditions match.</li>
+            <li>So use the fallback <code>&lt;img&gt;</code>.</li>
+        </ol>
+    </li>
+    <li>
+        Work out the entry from <code>sizes</code> that matches:
+        <ol>
+            <li>The width of an iPhone 11 in CSS pixels is 414.</li>
+            <li>
+                Sizes specifies that on mobile the image with take up 80% of the viewport width. This is equal to
+                484 * 80% = 331 CSS pixels for the source size value.
+            </li>
+        </ol>
+    </li>
+    <li>
+        Work out that entry from <code>srcset</code> that matches:
+        <ol>
+            <li>
+                First work out what the desired image size in device pixels. We do this by multiplying the source
+                size value we just worked out by the device's pixel density, which for iPhone 11 is 2. In this case
+                that's <span class="sizes-source-size-value">331px</span> (CSS pixels) * 2 (pixel density) =
+                662px (device pixels).
+            </li>
+            <li>
+                The <code>srcset</code> attribute is then consulted to find the closest matching image. In this case
+                there is a width descriptor of <code class="srcset-width-descriptor">1200w</code> which is the smallest
+                image which fits the size. This results in the corresponding
+                <code class="srcset-src">1200x1200.png</code> image being chosen.
+            </li>
+        </ol>
+    </li>
+</ol>
+
+<h2 id="art-direction">Art direction</h2>
+<p class="example-description">
+    Unlike <code>srcset</code> values which are only suggestions and the browser may not obey,
+    <code>&lt;picture&gt;</code> <code>&lt;source&gt;</code>s must be obeyed by the browser. This means it's safe to
+    use for art direction.
+</p>
+
+<h2 id="match-order">Match order</h2>
+<p class="example-description">
+    The first matching <code>&lt;source&gt;</code> element in <code>&lt;picture&gt;</code> wins. This means order
+    is important depending on how you write your media conditions.
+</p>
+<h3 id="fallback">Fallback</h3>
+<p class="example-description">
+    The final entry in <code>&lt;picture&gt;</code> is an <code>&lt;img&gt;</code>. If none of the
+    <code>&lt;source&gt;</code> elements match, or if the browser doesn't support <code>&lt;picture&gt;</code>, then
+    this fallback <code>&lt;img&gt;</code> is used.
+</p>
 </body>
 
 <script src="../../common/nav.js"></script>
