@@ -1,5 +1,5 @@
 (function() {
-	const imgHTML = `<img src="../response-images/lemur.png">`
+	const imgHTML = `<img src="../response-images/max-width/lemur.png">`
 	createCSSTestingComponent({
 		parent: document.querySelector('.example-replaced'),
 		description: `Notice how without styles the image has a default height and width, this is its intrinsic height
