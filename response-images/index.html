@@ -12,9 +12,9 @@
 <h1>Response images with srcset and sizes</h1>
 <ul>
     <li><a href="#references">References</a></li>
-    <li><a href="#general-notes">General notes</a></li>
+    <li><a href="#general-and-testing-notes">General and testing notes</a></li>
     <li><a href="#examples">Examples</a></li>
-    <li><a href="#results">Results</a></li>
+    <li><a href="#srcset-sizes-test-results">Results from <code>srcset</code> and <code>sizes</code> testing</a></li>
 </ul>
 
 <h2 id="references">References</h2>
@@ -36,33 +36,7 @@
     </li>
 </ul>
 
-<h2 id="general-notes">General notes</h2>
-<ul>
-    <li>
-        DevTools device size and DPR emulation can give inaccurate results when testing responsive images. You're better
-        off testing by resizing the actual browser window and getting real devices with different DPRs.
-    </li>
-    <li>
-        The zoom level can affect device pixel ratio. If you notice the device pixel ratio isn't what you expect check
-        if you're zoomed in.
-    </li>
-    <li>
-        The OS settings can affect the device pixel ratio. For example in Windows under "Display / Scale & Layout /
-        Change the size of text, apps, and other items" you can set the text size to be greater than 100%. This causes
-        the device pixel ratio to increase a proportionate amount.
-    </li>
-    <li>
-        If you use the multiple responsive images on the same page, and they load the same images, it appears that
-        Chrome
-        will cache the results and re-use them if possible. For example if you had an image with this srcset:
-        <code>srcset="600x600.png 1x, 1200x1200.png 2x, 1500x1500.png 3x"</code> on a device with a DPR of 1, you would
-        expect it to load the 600x600.png image. But, if another image has loaded 1500x1500.png, that will be used
-        instead,
-        presumably as it is higher quality and is loaded anyway for the other image.
-    </li>
-</ul>
-
-<h2 id="examples">Examples</h2>
+<h2 id="examples">Documentation and examples</h2>
 <ul>
     <li><a href="max-width/max-width.html">Using <code>max-width: 100%</code> for responsive images</a></li>
     <li>
@@ -78,15 +52,43 @@
     </li>
     <li>
         <code>picture</code>
+        <ul>
+            <li><a href="picture/picture.html">Art direction</a></li>
+            <li><a href="picture/picture-with-image-type-fallbacks.html">Multiple image types support</a></li>
+        </ul>
     </li>
-    <li><a href="picture/picture.html">Art direction</a></li>
-    <li><a href="picture/picture-with-image-type-fallbacks.html">Multiple image types support</a></li>
+</ul>
+
+<h2 id="general-and-testing-notes">General notes</h2>
+<ul>
+    <li>
+        The zoom level can affect device pixel ratio. If you notice the device pixel ratio isn't what you expect check
+        if you're zoomed in.
+    </li>
+    <li>
+        The OS settings can affect the device pixel ratio. For example in Windows under "Display / Scale & Layout /
+        Change the size of text, apps, and other items" you can set the text size to be greater than 100%. This causes
+        the device pixel ratio to increase a proportionate amount.
+    </li>
+    <li>
+        DevTools device size and DPR emulation can give inaccurate results when testing responsive images. You're better
+        off testing by resizing the actual browser window and getting real devices with different DPRs.
+    </li>
+    <li>
+        If you use the multiple responsive images on the same page, and they load the same images, it appears that
+        Chrome
+        will cache the results and re-use them if possible. For example if you had an image with this srcset:
+        <code>srcset="600x600.png 1x, 1200x1200.png 2x, 1500x1500.png 3x"</code> on a device with a DPR of 1, you would
+        expect it to load the 600x600.png image. But, if another image has loaded 1500x1500.png, that will be used
+        instead,
+        presumably as it is higher quality and is loaded anyway for the other image.
+    </li>
 </ul>
 
 <!-- Results -->
-<div id="results">
+<div id="srcset-sizes-test-results">
     <h2>
-        Results
+        Results from <code>srcset</code> and <code>sizes</code> testing
     </h2>
     <p class="example-description">
         Here is a recording of the images that were loaded for various device, browser and window sizes combinations
