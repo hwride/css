@@ -1,0 +1,27 @@
+.example-img {
+    width: 80vw;
+}
+@media only screen and (min-width: 600px) {
+    .example-img {
+        width: 50vw;
+    }
+}
+
+.source-srcset-600w {
+    color: salmon;
+}
+.source-srcset-1200w {
+    color: goldenrod;
+}
+.source-sizes {
+    color: dodgerblue;
+}
+.img-srcset-600w {
+    color: mediumpurple;
+}
+.img-srcset-1200w {
+    color: forestgreen;
+}
+.img-sizes {
+    color: hotpink;
+}

@@ -6,20 +6,23 @@
     <title>Response images with picture</title>
     <link rel="stylesheet" type="text/css" href="../../common/common.css">
     <link rel="stylesheet" type="text/css" href="../srcset-sizes/srcset-sizes.css">
+    <link rel="stylesheet" type="text/css" href="picture.css">
     <script src="../../common/headers.js"></script>
-    <style>
-        .example-img {
-            width: 80vw;
-        }
-        @media only screen and (min-width: 600px) {
-            .example-img {
-                width: 50vw;
-            }
-        }
-    </style>
 </head>
 <body>
 <h1>Response images with <code>picture</code></h1>
+
+<ol>
+    <li>
+        <a href="#match-order">Match order</a>
+        <ol>
+            <li><a href="#match-order">Fallback</a></li>
+        </ol>
+    </li>
+    <li><a href="#art-direction">Art direction</a></li>
+    <li><a href="#worked-examples">Worked examples</a></li>
+</ol>
+
 <figure class="example-img-figure">
     <picture>
         <!-- First <source> matching wins. -->
@@ -40,14 +43,14 @@
 		<pre>
 &lt;picture&gt;
     &lt;source media="(min-width: 600px)"
-               srcset="desktop-600x300.png  600w,
-                       desktop-1200x600.png 1200w"
-               sizes="50vw"&gt;
+            srcset="<span class="source-srcset-600w">desktop-600x300.png   600w</span>,
+                    <span class="source-srcset-1200w">desktop-1200x600.png 1200w</span>"
+            sizes="<span class="source-sizes">50vw</span>"&gt;
     &lt;img alt="A test responsive image"
-            src="mobile-1200x1200.png"
-            srcset="mobile-600x600.png   600w,
-                    mobile-1200x1200.png 1200w"
-            sizes="80vw"/&gt;
+         src="mobile-1200x1200.png"
+         srcset="<span class="img-srcset-600w">mobile-600x600.png   600w</span>,
+                 <span class="img-srcset-1200w">mobile-1200x1200.png 1200w</span>"
+         sizes="<span class="img-sizes">80vw</span>"/&gt;
 &lt;/picture&gt;
 		</pre>
     </figcaption>
@@ -71,55 +74,15 @@
     <code>sizes</code> in a regular <code>&lt;img&gt;</code>.
 </p>
 
-<h2 id="srcset-sizes-worked-example">Worked example</h2>
-<p class="example-description">
-    Above is an example image using the <code>&lt;picture&gt;</code> element. Described here are the steps taken
-    by the browser to work out the final image to display, in this example for an iPhone 11 in portrait orientation.
-</p>
-
-<ol>
-    <li>
-        Work out the entry from the <code>&lt;picture&gt;</code> <code>&lt;source&gt;</code>s that matches:
-        <ol>
-            <li>The width of an iPhone 11 in CSS pixels is 414.</li>
-            <li>Going down the <code>&lt;source&gt;</code>s list from the top, none of the conditions match.</li>
-            <li>So use the fallback <code>&lt;img&gt;</code>.</li>
-        </ol>
-    </li>
-    <li>
-        Work out the entry from <code>sizes</code> that matches:
-        <ol>
-            <li>The width of an iPhone 11 in CSS pixels is 414.</li>
-            <li>
-                Sizes specifies that on mobile the image with take up 80% of the viewport width. This is equal to
-                484 * 80% = 331 CSS pixels for the source size value.
-            </li>
-        </ol>
-    </li>
-    <li>
-        Work out that entry from <code>srcset</code> that matches:
-        <ol>
-            <li>
-                First work out what the desired image size in device pixels. We do this by multiplying the source
-                size value we just worked out by the device's pixel density, which for iPhone 11 is 2. In this case
-                that's <span class="sizes-source-size-value">331px</span> (CSS pixels) * 2 (pixel density) =
-                662px (device pixels).
-            </li>
-            <li>
-                The <code>srcset</code> attribute is then consulted to find the closest matching image. In this case
-                there is a width descriptor of <code class="srcset-width-descriptor">1200w</code> which is the smallest
-                image which fits the size. This results in the corresponding
-                <code class="srcset-src">1200x1200.png</code> image being chosen.
-            </li>
-        </ol>
-    </li>
-</ol>
-
 <h2 id="art-direction">Art direction</h2>
 <p class="example-description">
-    Unlike <code>srcset</code> values which are only suggestions and the browser may not obey,
-    <code>&lt;picture&gt;</code> <code>&lt;source&gt;</code>s must be obeyed by the browser. This means it's safe to
-    use for art direction.
+    Media conditions specified in <code>&lt;picture&gt;</code> <code>&lt;source&gt;</code>s must be obeyed, this means
+    it's safe to use <code>&lt;picture&gt;</code> for art direction. This includes using images of different intended
+    sizes and aspect ratios in different <code>&lt;source&gt;</code>s.
+</p>
+<p class="example-description">
+    (Note this is in contrast to<a href="../srcset-sizes/srcset-width-srcset-sizes.html#art-direction">
+        <code>srcset</code> values which are only suggestions</a> and the browser may not always use as specified.)
 </p>
 
 <h2 id="match-order">Match order</h2>
@@ -133,6 +96,86 @@
     <code>&lt;source&gt;</code> elements match, or if the browser doesn't support <code>&lt;picture&gt;</code>, then
     this fallback <code>&lt;img&gt;</code> is used.
 </p>
+
+<h2 id="worked-examples">Worked examples</h2>
+<h3 id="worked-examples-mobile">Worked example for mobile - iPhone 11</h3>
+<ol>
+    <li>
+        Work out the entry from the <code>&lt;picture&gt;</code> <code>&lt;source&gt;</code>s that matches:
+        <ol>
+            <li>The width of an iPhone 11 in portrait orientation is 414 CSS pixels.</li>
+            <li>Going down the <code>&lt;source&gt;</code>s list from the top, none of the conditions match.</li>
+            <li>So use the fallback <code>&lt;img&gt;</code>.</li>
+        </ol>
+    </li>
+    <li>
+        Work out the entry from <code>sizes</code> that matches:
+        <ol>
+            <li>The width of an iPhone 11 in CSS pixels is 414.</li>
+            <li>
+                Sizes specifies that on mobile the image with take up
+                <span class="source-sizes">80% of the viewport width</span>. This is equal to
+                484 * 80% = 331 CSS pixels for the source size value.
+            </li>
+        </ol>
+    </li>
+    <li>
+        Work out that entry from <code>srcset</code> that matches:
+        <ol>
+            <li>
+                First work out what the desired image size in device pixels. We do this by multiplying the source
+                size value we just worked out by the device's pixel density, which for iPhone 11 is 2. In this case
+                that's 331px (CSS pixels) * 2 (pixel density) = 662px (device pixels).
+            </li>
+            <li>
+                The <code>srcset</code> attribute is then consulted to find the closest matching image. In this case
+                there is a width descriptor of <code class="img-srcset-1200w">1200w</code> which is the smallest
+                image which fits the size. This results in the corresponding
+                <code class="img-srcset-1200w">1200x1200.png</code> image being chosen.
+            </li>
+        </ol>
+    </li>
+</ol>
+
+<h3 id="worked-examples-desktop">Worked example for desktop - Windows + Chrome</h3>
+<ol>
+    <li>
+        Work out the entry from the <code>&lt;picture&gt;</code> <code>&lt;source&gt;</code>s that matches:
+        <ol>
+            <li>The width of the Chrome window on this desktop is 1000 CSS pixels.</li>
+            <li>
+                Going down the <code>&lt;source&gt;</code>s list from the top the first one matches, so we'll use that.
+            </li>
+        </ol>
+    </li>
+    <li>
+        Work out the entry from <code>sizes</code> that matches:
+        <ol>
+            <li>The width of the Chrome window on this desktop is 1000 CSS pixels.</li>
+            <li>
+                Sizes specifies that on mobile the image with take up
+                <span class="img-sizes">50% of the viewport width</span>. This is equal to
+                1000 * 80% = 500 CSS pixels for the source size value.
+            </li>
+        </ol>
+    </li>
+    <li>
+        Work out that entry from <code>srcset</code> that matches:
+        <ol>
+            <li>
+                First work out what the desired image size in device pixels. We do this by multiplying the source
+                size value we just worked out by the device's pixel density, which for this machine is 1. In this case
+                that means that CSS pixels equals the device pixels, so 500 device pixels.
+            </li>
+            <li>
+                The <code>srcset</code> attribute is then consulted to find the closest matching image. In this case
+                there is a width descriptor of <code class="source-srcset-600w">600w</code> which is the smallest
+                image which fits the size. This results in the corresponding
+                <code class="source-srcset-600w">600x300.png</code> image being chosen.
+            </li>
+        </ol>
+    </li>
+</ol>
 </body>
 
 <script src="../../common/nav.js"></script>
