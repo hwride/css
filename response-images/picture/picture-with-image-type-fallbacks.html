@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Multiple image types support with picture</title>
+    <link rel="stylesheet" type="text/css" href="../../common/common.css">
+    <link rel="stylesheet" type="text/css" href="../srcset-sizes/srcset-sizes.css">
+    <link rel="stylesheet" type="text/css" href="picture.css">
+    <script src="../../common/headers.js"></script>
+</head>
+<body>
+<h1>Multiple image types support with <code>picture</code></h1>
+
+<figure class="example-img-figure">
+    <picture>
+        <source type="image/webp"
+                media="(min-width: 600px)"
+                srcset="desktop-600x300.webp 600w,
+                        desktop-1200x600.webp 1200w"
+                sizes="50vw">
+        <source type="image/png"
+                media="(min-width: 600px)"
+                srcset="desktop-600x300.png 600w,
+                        desktop-1200x600.png 1200w"
+                sizes="50vw">
+        <source type="image/webp"
+                srcset="mobile-600x600.webp 600w,
+                        mobile-1200x1200.webp 1200w"
+                sizes="80vw">
+        <img class="example-img"
+             alt="A test responsive image"
+             src="mobile-1200x1200.png"
+             srcset="mobile-600x600.png 600w,
+                     mobile-1200x1200.png 1200w"
+             sizes="80vw"/>
+    </picture>
+
+    <figcaption>
+		<pre>
+&lt;picture&gt;
+    <span class="comment">&lt;!-- Here are the desktop entries --&gt;</span>
+    &lt;source type="image/webp"
+            media="(min-width: 600px)"
+            srcset="desktop-600x300.webp 600w,
+                    desktop-1200x600.webp 1200w"
+            sizes="50vw"&gt;
+    &lt;source type="image/png"
+            media="(min-width: 600px)"
+            srcset="desktop-600x300.png 600w,
+                    desktop-1200x600.png 1200w"
+            sizes="50vw"&gt;
+
+    <span class="comment">&lt;!-- Here are the mobile entries --&gt;</span>
+    <span class="comment">&lt;!-- Note the PNG version is handled by the fallback img. --&gt;</span>
+    &lt;source type="image/webp"
+            srcset="mobile-600x600.webp 600w,
+                    mobile-1200x1200.webp 1200w"
+            sizes="80vw"&gt;
+    &lt;img class="example-img"
+         alt="A test responsive image"
+         src="mobile-1200x1200.png"
+         srcset="mobile-600x600.png 600w,
+                 mobile-1200x1200.png 1200w"
+         sizes="80vw"/&gt;
+&lt;/picture&gt;
+		</pre>
+    </figcaption>
+</figure>
+
+<p class="example-description">
+    You can configure support for multiple image types by using the <code>type</code> attribute on
+    <code>&lt;source&gt;</code> elements. The value should be the MIME type of the image, then the values in
+    <code>srcset</code> should contain those types of images. The browser will only ues a <code>&lt;source&gt;</code>
+    if it supports the image type.
+</p>
+
+<p class="example-description">
+    The <code>type</code> attribute works in conjunction with the <code>media</code> attribute. This mean you need
+    to provide all the different combinations you want to use of devices and image types.
+</p>
+
+<h2 id="match-order">Match order</h2>
+<p class="example-description">
+    Remember that the first matching <code>&lt;source&gt;</code> will be used, so specify the most efficient image
+    formats first.
+</p>
+
+</body>
+
+<script src="../../common/nav.js"></script>
+<script src="../responsive-images-nav.js"></script>
+<script src="../srcset-sizes/info-panel.js"></script>
+<script src="../srcset-sizes/info-panel-image-width-section.js"></script>
+</html>
