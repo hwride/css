@@ -258,7 +258,7 @@ Try setting the <code>html</code> to have <code>overflow: auto</code> to see how
     html: `<div class="a blue"></div>`,
     css: `
 html {
-  /*overflow: auto*/
+  /*overflow: auto;*/
   border: 5px solid salmon;
   margin: 5px;
   padding: 5px;
@@ -299,14 +299,19 @@ html {
     label: 'html and body cannot overflow',
     description: `<p>
 Not only do the <code>html</code> and <code>body</code> tags set overflow on the viewport, they 
-cannot actually overflow as elements themselves. See here how their size is set to less than the viewport and less
-than their content and they are set to <code>overflow: hidden</code>. But this has no effect on content that overflows 
-outside them and we can still see it. This is because their overflow exclusively controls viewport overflow.
+don't set overflow on themselves like a regular element would. See here how their size is set to less than the viewport 
+and less
+than their content, and the <code>body</code> is set to <code>overflow: hidden</code>. But this does not actually
+cause the body to hide overflow and it's still visible. But note if you set <code>overflow</code> on both  
+<code>html</code> and <code>body</code> it seems to work.
 </p>
 <p>
     Also note that the size of the elements does control the content layout even though it does not affect overflow.
-    You can only see body limiting size here, but the same applies to the <code>html</code> element. This is more of
-    a curiosity as it is unexpected to have content outside of your body tag.
+    You can only see body limiting size here, but the same applies to the <code>html</code> element.
+</p>
+<p>
+    This example is more of a curiosity as you generally wouldn't want to fix your <code>html</code> and <code>body</code>
+    tags in size like this.
 </p>`,
     html: `test test test test test test test
 test test test test test test test 
@@ -323,6 +328,7 @@ body {
   width: 50px;
   border: 5px solid salmon;
   background: gold;
+  overflow: hidden;
 }
 `,
   }]
