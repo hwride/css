@@ -3,73 +3,25 @@
 <head>
     <title>Scroll effects</title>
     <link rel="stylesheet" type="text/css" href="../common/common.css">
-    <link rel="stylesheet" type="text/css" href="../css-testing-component/css-testing-component.css">
 	<script src="../common/headers.js"></script>
 </head>
 <body>
 <h1>Scroll effects</h1>
 
-<h2 id="accessibility">Using Intersection Observer and CSS transitions</h2>
-<p class="example-description">
-    The basic approach is as follows:
-</p>
-<ol>
-    <li>Use <a href="https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API">
-        Intersection Observer</a> to detect when elements scroll into and out of the page.</li>
-    <li>When an element is visible on the page add a CSS class to it.</li>
-    <li>Apply CSS animations, transitions and transforms to animate the elements when the appear/disappear.</li>
-</ol>
+<h2 id="examples">Examples</h2>
 
 <p class="example-description">
-    Here is an element which fades in as it appears on the screen:
+    Below are examples using plain JavaScript and CSS to implement some scroll effects. Though in real applications you
+    will likely be better off using something like
+    <a href="https://www.framer.com/motion/scroll-animations">Framer Motion</a> or
+    <a href="https://react-spring.dev/docs/utilities/use-scroll">React Spring</a>.
 </p>
-<div class="example-scroll-effect">
-    <div class="filler"></div>
-    <div class="animated-block"></div>
-    <div class="filler"></div>
-</div>
-<style>
-    .example-scroll-effect {
-        height: 200px;
-        width: 300px;
-        overflow: auto;
-    }
-    .example-scroll-effect .filler {
-        height: 800px;
-    }
-    .example-scroll-effect .animated-block {
-        background: dodgerblue;
-        margin: auto;
-        width: 50px;
-        height: 100px;
-        opacity: 0;
-        transition: opacity .75s;
-    }
-    .example-scroll-effect .animated-block.visible {
-        opacity: 1;
-    }
-</style>
-<script>
-    let observer = new IntersectionObserver((entries) => {
-      for(const entry of entries) {
-        if(entry.intersectionRatio > 0.25) {
-          entry.target.classList.add('visible')
-        } else {
-          entry.target.classList.remove('visible')
-        }
-      }
-    }, {
-      root: document.querySelector(".example-scroll-effect"),
-      threshold: [0, 0.25, 0.5, 0.75, 1]
-    });
-    const animatedBlock = document.querySelector('.animated-block')
-    observer.observe(animatedBlock)
-</script>
+<ul>
+    <li><a href="basic/scroll-basic.html">Basic use of intersection observer to add scroll effect</a></li>
+    <li><a href="scroll-sticky-text/scroll-sticky-text.html">Sync sticky content area to other scrolling content</a></li>
+</ul>
 
 </body>
-<script src="../css-testing-component/lib/ace/src-noconflict/ace.js"></script>
-<script src="../css-testing-component/css-testing-component.js"></script>
-<script src="scroll-effect.js"></script>
 <script src="../common/nav.js"></script>
 <script>createNav()</script>
 </html>

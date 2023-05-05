@@ -1,0 +1,52 @@
+.sync-container {
+    --padding: 20px;
+    position: relative;
+    margin-block-start: 50px;
+    border: 1px solid gray;
+    padding: var(--padding);
+}
+
+.sync-el {
+    position: sticky;
+    bottom: var(--padding);
+    margin-top: auto;
+    height: 200px;
+    background: white;
+    border: 1px solid black;
+    transition: background .5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sync-el.red {
+    background: red;
+}
+.sync-el.green {
+    background: green;
+}
+.sync-el.blue {
+    background: blue;
+}
+
+.sync-text {
+    margin-bottom: 100px;
+}
+.red-text {
+    color: red;
+}
+.green-text {
+    color: green;
+}
+.blue-text {
+    color: blue;
+}
+
+.spacer {
+    height: 600px;
+    background: lightskyblue;
+    border: 2px dashed gray;
+    margin-block: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

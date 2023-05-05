@@ -1,0 +1,19 @@
+.example-scroll-effect {
+    height: 200px;
+    width: 300px;
+    overflow: auto;
+}
+.example-scroll-effect .filler {
+    height: 800px;
+}
+.example-scroll-effect .animated-block {
+    background: dodgerblue;
+    margin: auto;
+    width: 50px;
+    height: 100px;
+    opacity: 0;
+    transition: opacity .75s;
+}
+.example-scroll-effect .animated-block.visible {
+    opacity: 1;
+}

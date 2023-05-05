@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+    <title>Scroll effect basic</title>
+    <link rel="stylesheet" type="text/css" href="../../common/common.css">
+    <link rel="stylesheet" type="text/css" href="scroll-basic.css">
+	<script src="../../common/headers.js"></script>
+</head>
+<body>
+<h1>Scroll effect basic</h1>
+
+<h2 id="accessibility">Using Intersection Observer and CSS transitions</h2>
+<p class="example-description">
+    The basic approach is as follows:
+</p>
+<ol>
+    <li>Use <a href="https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API">
+        Intersection Observer</a> to detect when elements scroll into and out of the page.</li>
+    <li>When an element is visible on the page add a CSS class to it.</li>
+    <li>Apply CSS animations, transitions and transforms to animate the elements when the appear/disappear.</li>
+</ol>
+
+<p class="example-description">
+    Here is an element which fades in as it appears on the screen:
+</p>
+<div class="example-scroll-effect">
+    <div class="filler"></div>
+    <div class="animated-block"></div>
+    <div class="filler"></div>
+</div>
+
+</body>
+<script src="scroll-basic.js"></script>
+<script src="../../common/nav.js"></script>
+<script>
+    createNav(undefined, [{
+        href: '/css/scroll-effects/index.html',
+        label: 'Scroll effects'
+    }])
+</script>
+</html>

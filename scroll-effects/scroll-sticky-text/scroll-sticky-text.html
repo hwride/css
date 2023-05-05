@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+    <title>Scroll basic</title>
+    <link rel="stylesheet" type="text/css" href="../../common/common.css">
+    <link rel="stylesheet" type="text/css" href="scroll-sticky-text.css">
+	<script src="../../common/headers.js"></script>
+</head>
+<body>
+<h1>Scroll sticky text</h1>
+
+<p class="example-description">
+    This example shows how we can have an element which comes into view and sticks there, changing content synchronised
+    with text that scrolls above it. This is achieved by:
+</p>
+<ol>
+    <li>Have a defined area on the page which contains our text and synced content area.</li>
+    <li>
+        Make the synced content area sticky, this will ensure:
+        <ol>
+            <li>It will stick to the bottom being displayed even after other content has scrolled</li>
+            <li>But when the entire section is scrolling out of view, it wil scroll with it.</li>
+        </ol>
+        Overall this means we don't need to tie our scroll trigger behaviour to the document scroll, so even if we move
+        the scroll sync section around later, it will still work.
+    </li>
+    <li>
+        Use <a href="https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API">
+        Intersection Observer</a> to detect when text scrolls into and out of our content area. Use the
+        <code>rootMargin</code> property on Intersection Observer to trigger intersection only when text scrolls above
+        our synced content area.
+    </li>
+    <li>
+        When text is visible, change what is displayed in our synced content area.
+    </li>
+</ol>
+<p class="example-description">
+    See below:
+</p>
+
+<div class="spacer">Spacer to add more scroll</div>
+
+<div class="sync-container">
+    <h2>Product colours</h2>
+    <p class="sync-text red-sync-text">
+        Introducing the colour <span class="red-text">red</span>
+    </p>
+
+    <p class="sync-text green-sync-text">
+        We also have <span class="green-text">green</span> in our catalogue
+    </p>
+
+    <p class="sync-text blue-sync-text">
+        Premium members get access to <span class="blue-text">blue</span>
+    </p>
+    <div class="sync-el"></div>
+</div>
+
+<div class="spacer">Spacer to add more scroll</div>
+
+</body>
+<script src="scroll-sticky-text.js"></script>
+<script src="../../common/nav.js"></script>
+<script>
+    createNav(undefined, [{
+        href: '/css/scroll-effects/index.html',
+        label: 'Scroll effects'
+    }])
+</script>
+</html>
