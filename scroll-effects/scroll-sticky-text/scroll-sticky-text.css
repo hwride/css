@@ -8,7 +8,7 @@
 
 .sync-el {
     position: sticky;
-    bottom: var(--padding);
+    bottom: 0;
     margin-top: auto;
     height: 200px;
     background: white;

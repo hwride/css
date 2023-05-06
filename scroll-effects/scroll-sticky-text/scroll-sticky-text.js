@@ -27,7 +27,7 @@ let observer = new IntersectionObserver((entries) => {
   }
 }, {
   root: document.querySelector(".example-scroll-effect"),
-  rootMargin: '0px 0px -240px 0px',
+  rootMargin: '0px 0px -200px 0px',
   threshold: [0, 0.25, 0.5, 0.75, 1]
 });
 [...syncTextsMap.keys()].forEach(syncText => observer.observe(syncText))
