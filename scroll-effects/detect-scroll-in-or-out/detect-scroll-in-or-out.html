@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+    <title>Detect scroll in or auto</title>
+    <link rel="stylesheet" type="text/css" href="../../common/common.css">
+    <link rel="stylesheet" type="text/css" href="./detect-scroll-in-or-out.css">
+	<script src="../../common/headers.js"></script>
+</head>
+<body>
+<h1>Detect scroll in or auto</h1>
+<p class="example-description">
+    In the basic <a href="../basic/scroll-basic.html">animate element as it appears on the screen example</a> we use
+    <a href="https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API">
+        Intersection Observer</a> to detect when an element scrolls into and out of view.
+    We apply our in-view CSS styles when an <code>intersectionRatio</code> of <code>0.25</code> is detected.
+    This basically means when the element is at least 25% visible on the screen then we apply our fade in animation, and
+    when it's less than 25% visible we apply our fade out animation.
+</p>
+<p class="example-description">
+    Because of the way this logic is setup we have some un-symmetry in our animation. When the element scrolls into view,
+    we start animating when 25% of it is visible, and it continues to animate as the rest of it scrolls into view and
+    down the rest of the screen, meaning you get a while to see the whole animation.
+<p>
+<p class="example-description">
+    But as it uses the same logic, when the element scrolls out of view it only starts when 25% of the element is
+    remaining on the screen. You barely get a chance to see any of the animation happen before it's off the screen.
+</p>
+<p class="example-description">
+    Now this might be the kind of behaviour your want. But if you want to give your fade out animations more of a chance
+    to be seen we can fix this. We do this by adding an additional check for whether an element is scrolling into view
+    or out of view, and adjust our ratio checks appropriately. In this case we change our ratio check when we're
+    scrolling out of view, and start the animation when 75% or less of the element is remaining on the screen. This
+    let you see more of the fade out animation. Compare this to the <a href="../basic/scroll-basic.html">first example</a>.
+</p>
+<div class="example-scroll-effect">
+    <div class="filler"></div>
+    <div class="animated-block"></div>
+    <div class="filler"></div>
+</div>
+
+</body>
+<script src="./detect-scroll-in-or-out.js"></script>
+<script src="../../common/nav.js"></script>
+<script>
+    createNav(undefined, [{
+        href: '/css/scroll-effects/index.html',
+        label: 'Scroll effects'
+    }])
+</script>
+</html>
