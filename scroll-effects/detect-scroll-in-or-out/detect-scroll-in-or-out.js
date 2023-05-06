@@ -1,34 +1,46 @@
 let previousEntry
 let observer = new IntersectionObserver((entries) => {
+  // You could make this work for multiple entries, but for this POC we will assume 1.
   if(entries.length > 1) throw new Error('Only expected 1 entry but got: ' + entries.length)
   if(entries.length !== 1) return
+
   const entry = entries[0]
 
-  const scrollDirection =
-    (previousEntry &&
-      (entry.boundingClientRect.top > previousEntry.boundingClientRect.top)) ?
-    'up' :
-    'down'
-  let visibility
-  if(entry.intersectionRatio === 1) visibility = 'full'
-  else if(entry.intersectionRatio > 0.25) visibility = 'partial'
-  else visibility = 'none'
-  console.log('scrollDirection: ' + scrollDirection + ', visible: ' + visibility)
+  let elVisibility
+  if(entry.intersectionRatio === 1) elVisibility = 'full'
+  else if(entry.intersectionRatio > 0) elVisibility = 'partial'
+  else elVisibility = 'none'
 
-  let display
-  if(visibility === 'none') {
-    display = false
-  } else if(visibility === 'full') {
-    display = true
-  } else if(visibility === 'partial') {
-    const partialPosition = entry.boundingClientRect.top === entry.intersectionRect.top ? 'bottom' : 'top';
-    if(scrollDirection === 'down') {
-      display = partialPosition === 'bottom'
+  let applyVisibleClass
+  if(elVisibility === 'none') {
+    applyVisibleClass = false
+  } else if(elVisibility === 'full') {
+    applyVisibleClass = true
+  } else if(elVisibility === 'partial') {
+    if(previousEntry == null) {
+      // If we've loaded the page already partially selected so have not yet scrolled then previous entry will be null.
+      // In this case err on the side of caution and make the element visible.
+      applyVisibleClass = true;
     } else {
-      display = partialPosition === 'top'
+      // Otherwise decide whether to make the element visible according to whether the element is scrolling into or out
+      // of view.
+      const scrollDirection = entry.boundingClientRect.top > previousEntry.boundingClientRect.top ?
+        'up' :
+        'down';
+      const atEdge = entry.boundingClientRect.top === entry.intersectionRect.top ? 'bottom' : 'top';
+
+      const enteringOrLeaving =
+        (scrollDirection === 'down' && atEdge === 'bottom') ||
+        (scrollDirection === 'up' && atEdge === 'top') ?
+          'entering' :
+          'leaving'
+
+      const intersectionRatioToUse = enteringOrLeaving === 'entering' ? 0.25 : 0.75;
+      applyVisibleClass = entry.intersectionRatio > intersectionRatioToUse
     }
   }
-  if(display) {
+
+  if(applyVisibleClass) {
     entry.target.classList.add('visible')
   } else {
     entry.target.classList.remove('visible')
