@@ -29,6 +29,8 @@
 }
 
 .sync-text {
+    margin-inline: auto;
+    width: fit-content;
     margin-bottom: 250px;
 }
 .red-text {
