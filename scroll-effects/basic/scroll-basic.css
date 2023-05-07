@@ -1,6 +1,7 @@
 .example-scroll-effect {
     height: 400px;
     overflow: auto;
+    border: 1px solid gray;
 }
 .example-scroll-effect .filler {
     height: 800px;
