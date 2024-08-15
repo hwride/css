@@ -13,6 +13,8 @@
     <li><a href="#transformations">Transformations</a></li>
     <li><a href="#transitions">Transitions</a></li>
     <li><a href="#keyframes">Keyframes</a></li>
+    <li><a href="#accessibility">Accessibility</a></li>
+    <li><a href="#animate-height">Animate height</a></li>
 </ul>
 
 <h2 id="transformations">Transformations</h2>
@@ -142,6 +144,41 @@
 </p>
 <div class="example-accessibility"></div>
 
+
+<h2 id="animate-height">Animate height</h2>
+<p class="example-description">
+    Some examples for how to animate height.
+</p>
+<div class="example-animate-height"></div>
+
+<h3 id="animate-height-0-auto-max-height">Animate height from 0 to auto with max-height</h3>
+<div class="animate-height-0-auto-max-height"></div>
+<p class="example-description">
+    Note that you must set <code>max-height</code> to a value greater than the content size for this to work.
+</p>
+<div class="example">
+    <button class="mh-button" style="margin-bottom: 8px">Expand</button>
+    <div class="mh-a">This is some text that will dynamically determine content size.</div>
+    <script>
+        document.querySelector('.mh-button').addEventListener('click', () => {
+            const aEl = document.querySelector('.mh-a')
+            aEl.classList.toggle('expanded')
+        })
+    </script>
+</div>
+<style>
+    .mh-a {
+        background: dodgerblue;
+        width: 100px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 1s;
+    }
+    .mh-a.expanded {
+        max-height: 100px;
+    }
+</style>
+
 </body>
 <script src="../css-testing-component/lib/ace/src-noconflict/ace.js"></script>
 <script src="../css-testing-component/css-testing-component.js"></script>
@@ -149,6 +186,7 @@
 <script src="transform.js"></script>
 <script src="keyframes.js"></script>
 <script src="accessibility.js"></script>
+<script src="animate-height.js"></script>
 <script src="../common/nav.js"></script>
 <script>createNav()</script>
 </html>
