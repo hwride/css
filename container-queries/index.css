@@ -1,0 +1,8 @@
+/* Set width of input text areas */
+.example-property-defaulting .css-testing-component__editor {
+    width: 57ch;
+}
+
+.example-property-defaulting .css-testing-component__iframe-wrapper {
+    width: 40ch;
+}

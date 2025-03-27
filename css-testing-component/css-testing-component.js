@@ -74,7 +74,7 @@ function createCSSTestingComponent(options) {
 			inputAndIframeRow.prepend(inputWrapperEl)
 
 			// Create description row.
-			const descriptionEl = createDescription(options.description)
+			const descriptionEl = createDescription(initialDescription)
 			cssTestingComponentEl.append(descriptionEl)
 
 			// For some reason setting the iframe content doesn't work properly on Firefox 74 unless you tick the event
